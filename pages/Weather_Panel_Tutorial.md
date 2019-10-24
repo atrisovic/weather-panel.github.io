@@ -333,10 +333,8 @@ We can run a fixed effects estimation on the county-level data for estimating th
 Bin
 Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $$K=6$$ temp bins are: $$<-5^\circ C$$, $$-5^\circ C-5^\circ C$$, $$5^\circ C-15^\circ C$$, $$15^\circ C-25^\circ C$$, $$25^\circ C-35^\circ C$$ and $$>35^\circ C$$.
 As defined earlier, the grid $$\theta$$ temperature is $$T_{\theta i t}$$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:
-```
-$$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \{{T_{\theta i t} \in k}\}$$ 
-```
-$$\forall k \in \{1,2,...,6\}$$
+
+$$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$ $$\forall k \in \{1,2,...,6\}$$
 
 where $$\psi_{\theta}$$ is the weight assigned to the $$\theta$$ grid. The aggregate transformation is as below:
 
