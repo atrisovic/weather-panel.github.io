@@ -22,20 +22,9 @@
 # See the links below for an example.
 
 # Top-level page
-- title: Home
-  url: /intro
-  not_numbered: true
-
 - title: Getting started
   url: /1_getting-started
   not_numbered: true
-  expand_sections: true
-  sections:
-  - title: Create your book
-  - title: Build HTML for each page of your book
-  - title: Build and publish your book online
-  - title: Frequently Asked Questions (FAQ)
-  - title: How-to and advanced topics
 
 - title: Using Weather and Climate Data
   url: /2_using-weather-and-climate-data
@@ -51,29 +40,29 @@
 
 # External link
 - title: GitHub repository
-  url: https://github.com/jupyter/jupyter-book
+  url: https://github.com/atrisovic/weather-panel.github.io 
   external: true
   not_numbered: true
 
 # Adds a searchbar link
-- title: Search
-  search: true
+#- title: Search
+#  search: true
 
 # Divider for meta-pages and content page
 - divider: true
 
 # Add a header and sample content section
-- header: Demo textbook
+#- header: Demo textbook
 
 # A chapter w/ a collection of sections beneath it
-- title: Features and customization
-  url: /features/features
-  not_numbered: true
-  expand_sections: true
-  sections:
-  - title: Markdown files
-    url: /features/markdown
-    not_numbered: true
-  - title: Jupyter notebooks
-    url: /features/notebooks
-    not_numbered: true
+#- title: Features and customization
+#  url: /features/features
+#  not_numbered: true
+#  expand_sections: true
+#  sections:
+#  - title: Markdown files
+#    url: /features/markdown
+#    not_numbered: true
+#  - title: Jupyter notebooks
+#    url: /features/notebooks
+#    not_numbered: true
