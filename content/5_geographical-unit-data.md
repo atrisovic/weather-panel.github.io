@@ -7,7 +7,7 @@ Geographical units are necessary for conducting location-specific economic analy
 
  When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation[https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf].
 
- Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, Global Administrative Regions[https://gadm.org], offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
+ Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, (Global Administrative Regions)[https://gadm.org], offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
 
 
 ## Finding and preparing a shapefile
@@ -23,7 +23,7 @@ Despite its name indicating a singular file, a shapefile is actually a collectio
     states.dbf
 
 
-Technical description for shapefiles can be found at: https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf
+Technical description for shapefiles can be found (*HERE*)[https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf]
 
 
 ## Software

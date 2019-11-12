@@ -26,8 +26,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//5_geographical-unit-data.html",
   "headline": "Generating geographical unit data",
-  "datePublished": "2019-11-12T15:26:12-05:00",
-  "dateModified": "2019-11-12T15:26:12-05:00",
+  "datePublished": "2019-11-12T17:50:18-05:00",
+  "dateModified": "2019-11-12T17:50:18-05:00",
   "description": "        5. Generating geographical unit data Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area o...",
   "author": {
     "@type": "Person",
@@ -436,6 +436,8 @@ initFunction(initPrint)
           href="/1_getting-started.html"
         >
           
+            1.
+          
           Getting started
         </a>
 
@@ -457,7 +459,7 @@ initFunction(initPrint)
           href="/2_using-weather-and-climate-data.html"
         >
           
-            1.
+            2.
           
           Using Weather and Climate Data
         </a>
@@ -480,7 +482,7 @@ initFunction(initPrint)
           href="/3_reduced-form-specification.html"
         >
           
-            2.
+            3.
           
           Developing a reduced-form specification
         </a>
@@ -503,7 +505,7 @@ initFunction(initPrint)
           href="/4_weighting-schemes.html"
         >
           
-            3.
+            4.
           
           Weighting schemes
         </a>
@@ -526,7 +528,7 @@ initFunction(initPrint)
           href="/5_geographical-unit-data.html"
         >
           
-            4.
+            5.
           
           Generating geographical unit data
         </a>
@@ -611,7 +613,7 @@ initFunction(initPrint)
 <h1 id="5.-Generating-geographical-unit-data">5. Generating geographical unit data<a class="anchor-link" href="#5.-Generating-geographical-unit-data"> </a></h1><p>Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries[<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">https://ec.europa.eu/eurostat/web/cities/spatial-units</a>].</p>
 <p>Administrative units in economics analyses are typically politically defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. Besides, politically defined regions are also more relevant for policy-makers.</p>
 <p>When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation[<a href="https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf">https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf</a>].</p>
-<p>Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, Global Administrative Regions[<a href="https://gadm.org">https://gadm.org</a>], offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.</p>
+<p>Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, (Global Administrative Regions)[<a href="https://gadm.org">https://gadm.org</a>], offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.</p>
 <h2 id="Finding-and-preparing-a-shapefile">Finding and preparing a shapefile<a class="anchor-link" href="#Finding-and-preparing-a-shapefile"> </a></h2><p>A shapefile stores nontopological geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a set of vector coordinates. Shapefiles can support point, line, and area features. Area features are represented as closed loop, double-digitized polygons [technical guide]. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.</p>
 <p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code>.shp</code>, <code>.shx</code> and <code>.dbf</code>. There may be additional files like <code>.prj</code> with the shape file’s projection information. All files must have the same name, for example:</p>
 
@@ -621,7 +623,7 @@ states.dbf
 
 
 </code></pre>
-<p>Technical description for shapefiles can be found at: <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a></p>
+<p>Technical description for shapefiles can be found (<em>HERE</em>)[<a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a>]</p>
 <h2 id="Software">Software<a class="anchor-link" href="#Software"> </a></h2><p>The shapefile format is a commonly used to capture geospatial vector-data in geographic information system (GIS) software. QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is a proprietary software for working with maps and geographic data.</p>
 <h2 id="Creating-shapefiles">Creating shapefiles<a class="anchor-link" href="#Creating-shapefiles"> </a></h2><p>Shapefiles can be created with these methods [<a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a>]:</p>
 <ol>
@@ -712,8 +714,8 @@ shapefile=readShapePoly("/my_shapefile.shp")
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/features/features.html">
-      Features and customization <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="">
+       <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

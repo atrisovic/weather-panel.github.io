@@ -24,7 +24,6 @@
 # Top-level page
 - title: Getting started
   url: /1_getting-started
-  not_numbered: true
 
 - title: Using Weather and Climate Data
   url: /2_using-weather-and-climate-data

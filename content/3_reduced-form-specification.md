@@ -40,12 +40,10 @@ We use one/many/combination of different functional forms for weather variables 
 
 https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152
 
-- Polynomial
+- (Polynomial)[https://en.wikipedia.org/wiki/Polynomial_regression]
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
-
-https://en.wikipedia.org/wiki/Polynomial_regression
 
 - Restricted Cubic Spline
     1. Fitting a piecewise polynomial function between pre-specified knots
