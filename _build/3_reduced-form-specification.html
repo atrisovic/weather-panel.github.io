@@ -66,7 +66,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 </ul>
 <p><a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152</a></p>
 <ul>
-<li><p>(Polynomial)[<a href="https://en.wikipedia.org/wiki/Polynomial_regression">https://en.wikipedia.org/wiki/Polynomial_regression</a>]</p>
+<li><p><a href="https://en.wikipedia.org/wiki/Polynomial_regression">Polynomial</a></p>
 <ol>
 <li>Fitting an n-degree polynomial function for weather variables</li>
 <li>More poly degrees provide better data fitting</li>
@@ -104,22 +104,22 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 <li><em>Transformation-before-aggregation:</em> When an economic process is occurring at the grid level, we need to first do estimation at the grid level. Here, we need to do the required transformation of our weather variables at the grid level, run our estimation procedure on those transformed variables, and then aggregate grid-level estimates using weighted averaging method. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Therefore, we need to estimate the effect of temperature on mortality at the grid level first, and then take population-weighted average of grid-level effects for the grids that are inside the selected county boundaries</li>
 </ul>
 <p><strong>Mathematical formulation for transformation-before-aggregation method</strong>
-Consider a grid $$\theta$$ located in county $$i$$ with $$T_{\theta it}$$ as its temperature at time $$t$$. We want to generate an aggregate temperature transformation, $$f(T_{it}^k)$$, for county $$i$$ at time $$t$$, after aggregating over the grids $$\theta \in \Theta$$, where $$\Theta$$ denotes the set of grids that are located inside county $$i$$.</p>
-<p>Here, $$k\in\{1,2,...,K\}$$ denotes the $$k^{th}$$ term of transformation. For example, in case of $$K$$-degree polynomial transformation, it will be $$K$$ polynomial terms, and in case of $$K$$-bins transformation, it will be $$K$$ temperature bins. So, we can write:</p>
-$$f(T_{it}^k)=g(T_{\theta it})$$<p>where, $$g(.)$$ denotes the transformation mapping on the grid-level temperature data.</p>
-<p>Once we have $$f(T_{it}^k)$$ for each  $$k\in\{1,2,...,K\}$$, we can use them to generate the full nonlinear transformation $$F(T_{it})$$, associating $$\beta^k$$ parameter with $$k^{th}$$ term of transformation. We have:</p>
-$$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$<p>The coefficients, $$\beta^k \,\forall k\in \{1,2,...,K\}$$ are estimated using an appropriate estimation technique for generating the response functions.</p>
-<p>Suppose we want a model for estimating the effect of temperature on human mortality $$Y_{it}$$.</p>
+Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.</p>
+<p>Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:</p>
+$$f(T_{it}^k)=g(T_{\theta it})$$<p>where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.</p>
+<p>Once we have $f(T_{it}^k)$ for each  $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:</p>
+$$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$<p>The coefficients, $\beta^k \,\forall k\in \{1,2,...,K\}$ are estimated using an appropriate estimation technique for generating the response functions.</p>
+<p>Suppose we want a model for estimating the effect of temperature on human mortality $Y_{it}$.</p>
 $$Y_{it}=\sum_{k\in \{1,2,...,K\}} \beta^k*T_{it}^k + \alpha_i + \zeta_t + \varepsilon_{it}$$<p>We can run a fixed effects estimation on the county-level data for estimating the coefficients, and then generate the response functions for different counties in our data. As pointed out in the cross-validation section, it is important to check for internal validity and the external validity after the estimation is over.</p>
 <p>Bin
-Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $$K=6$$ temp bins are: $$&lt;-5^\circ C$$, $$-5^\circ C-5^\circ C$$, $$5^\circ C-15^\circ C$$, $$15^\circ C-25^\circ C$$, $$25^\circ C-35^\circ C$$ and $$&gt;35^\circ C$$.
-As defined earlier, the grid $$\theta$$ temperature is $$T_{\theta i t}$$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:</p>
+Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $K=6$ temp bins are: $&lt;-5^\circ C$, $-5^\circ C-5^\circ C$, $5^\circ C-15^\circ C$, $15^\circ C-25^\circ C$, $25^\circ C-35^\circ C$ and $&gt;35^\circ C$.
+As defined earlier, the grid $\theta$ temperature is $T_{\theta i t}$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:</p>
 $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$<p>$$\forall k \in \{1,2,...,6\}$$</p>
-<p>where $$\psi_{\theta}$$ is the weight assigned to the $$\theta$$ grid. The aggregate transformation is as below:</p>
-$$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$<p>Polynomial
-Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining polynomial terms, namely $$T_{\theta i t}^2$$, $$T_{\theta i t}^3$$ and $$T_{\theta i t}^4$$, by raising original $$T_{\theta i t}$$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under a county. So, we have:</p>
+<p>where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:</p>
+$$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$<p>Polynomial</p>
+<p>Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining polynomial terms, namely $$T_{\theta i t}^2$$, $$T_{\theta i t}^3$$ and $$T_{\theta i t}^4$$, by raising original $$T_{\theta i t}$$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under a county. So, we have:</p>
 $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta}*T_{\theta i t}^k$$<p>$$\forall k \in \{1,2,3,4\}$$</p>
-<p>where $$\psi_{\theta}$$ is the weight assigned to the $$\theta$$ grid. The aggregate transformation is as below:</p>
+<p>where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:</p>
 $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$<p>Restricted Cubic Spline
 For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots. The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $$\theta$$ temperature be $$T_{\theta i t}$$. Let us do this exercise for $$n$$ knots, placed at $$t_1&lt;t_2&lt;...&lt;t_n$$, then for $$T_{\theta i t}$$, which is a continuous variable, we have a set of $$(n-2)$$ new variables. We have:</p>
 $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$<p>$$\forall k \in \{1,2,...,n-2\}$$</p>

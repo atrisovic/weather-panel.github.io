@@ -10,7 +10,7 @@ Welcome to the weather panel data regression tutorial! This tutorial will walk y
 
 We assume a knowledge of econometrics and basic experience with one econometrics-ready programming language (Stata, R, Matlab, Julia, python).
 
-You should also go through **Sol Hsiang's Climate Impacts Tutorial reading lis****t** to understand the principles of weather regressions:
+You should also go through **Sol Hsiang's Climate Impacts Tutorial reading list** to understand the principles of weather regressions:
 
 
 1. [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3)  (*what is the physical problem?*)
@@ -26,5 +26,5 @@ The following tutorial complements these papers with more practical advice.
 - Point data
 - Gridded data
 - Region data. Geographic unit. “data regions”
-- $$T_{it}$$: any weather variable for data region $$i$$ in reporting period $$t$$.
-- $$T_{ps}$$: Pixel-level weather for pixel $$p$$, at a native resolution indexed by $$s$$.
+- $T_{it}$: any weather variable for data region $i$ in reporting period $t$.
+- $T_{ps}$: Pixel-level weather for pixel $p$, at a native resolution indexed by $s$.

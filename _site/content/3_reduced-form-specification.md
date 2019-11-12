@@ -40,7 +40,7 @@ We use one/many/combination of different functional forms for weather variables 
 
 https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152
 
-- (Polynomial)[https://en.wikipedia.org/wiki/Polynomial_regression]
+- [Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
@@ -76,42 +76,43 @@ Weather data products are generally available in *gridded* form, developed after
 - *Transformation-before-aggregation:* When an economic process is occurring at the grid level, we need to first do estimation at the grid level. Here, we need to do the required transformation of our weather variables at the grid level, run our estimation procedure on those transformed variables, and then aggregate grid-level estimates using weighted averaging method. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Therefore, we need to estimate the effect of temperature on mortality at the grid level first, and then take population-weighted average of grid-level effects for the grids that are inside the selected county boundaries
 
 **Mathematical formulation for transformation-before-aggregation method**
-Consider a grid $$\theta$$ located in county $$i$$ with $$T_{\theta it}$$ as its temperature at time $$t$$. We want to generate an aggregate temperature transformation, $$f(T_{it}^k)$$, for county $$i$$ at time $$t$$, after aggregating over the grids $$\theta \in \Theta$$, where $$\Theta$$ denotes the set of grids that are located inside county $$i$$.
+Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.
 
-Here, $$k\in\{1,2,...,K\}$$ denotes the $$k^{th}$$ term of transformation. For example, in case of $$K$$-degree polynomial transformation, it will be $$K$$ polynomial terms, and in case of $$K$$-bins transformation, it will be $$K$$ temperature bins. So, we can write:
+Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:
 
 $$f(T_{it}^k)=g(T_{\theta it})$$
 
-where, $$g(.)$$ denotes the transformation mapping on the grid-level temperature data.
+where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.
 
-Once we have $$f(T_{it}^k)$$ for each  $$k\in\{1,2,...,K\}$$, we can use them to generate the full nonlinear transformation $$F(T_{it})$$, associating $$\beta^k$$ parameter with $$k^{th}$$ term of transformation. We have:
+Once we have $f(T_{it}^k)$ for each  $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:
 
 $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
 
-The coefficients, $$\beta^k \,\forall k\in \{1,2,...,K\}$$ are estimated using an appropriate estimation technique for generating the response functions.
+The coefficients, $\beta^k \,\forall k\in \{1,2,...,K\}$ are estimated using an appropriate estimation technique for generating the response functions.
 
-Suppose we want a model for estimating the effect of temperature on human mortality $$Y_{it}$$.
+Suppose we want a model for estimating the effect of temperature on human mortality $Y_{it}$.
 
 $$Y_{it}=\sum_{k\in \{1,2,...,K\}} \beta^k*T_{it}^k + \alpha_i + \zeta_t + \varepsilon_{it}$$
 
 We can run a fixed effects estimation on the county-level data for estimating the coefficients, and then generate the response functions for different counties in our data. As pointed out in the cross-validation section, it is important to check for internal validity and the external validity after the estimation is over.
 
 Bin
-Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $$K=6$$ temp bins are: $$<-5^\circ C$$, $$-5^\circ C-5^\circ C$$, $$5^\circ C-15^\circ C$$, $$15^\circ C-25^\circ C$$, $$25^\circ C-35^\circ C$$ and $$>35^\circ C$$.
-As defined earlier, the grid $$\theta$$ temperature is $$T_{\theta i t}$$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:
+Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $K=6$ temp bins are: $<-5^\circ C$, $-5^\circ C-5^\circ C$, $5^\circ C-15^\circ C$, $15^\circ C-25^\circ C$, $25^\circ C-35^\circ C$ and $>35^\circ C$.
+As defined earlier, the grid $\theta$ temperature is $T_{\theta i t}$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:
 
 $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$ $$\forall k \in \{1,2,...,6\}$$
 
-where $$\psi_{\theta}$$ is the weight assigned to the $$\theta$$ grid. The aggregate transformation is as below:
+where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:
 
 $$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
 
 Polynomial
+
 Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining polynomial terms, namely $$T_{\theta i t}^2$$, $$T_{\theta i t}^3$$ and $$T_{\theta i t}^4$$, by raising original $$T_{\theta i t}$$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under a county. So, we have:
 
 $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta}*T_{\theta i t}^k$$ $$\forall k \in \{1,2,3,4\}$$
 
-where $$\psi_{\theta}$$ is the weight assigned to the $$\theta$$ grid. The aggregate transformation is as below:
+where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:
 
 $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
 

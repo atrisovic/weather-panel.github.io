@@ -7,7 +7,7 @@ Geographical units are necessary for conducting location-specific economic analy
 
  When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation[https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf].
 
- Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, (Global Administrative Regions)[https://gadm.org], offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
+ Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, [Global Administrative Regions](https://gadm.org), offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
 
 
 ## Finding and preparing a shapefile
@@ -83,7 +83,7 @@ Matching observations by name can be annoyingly time-consuming. These problems e
 
 Here are some suggestions for dealing with the mess that is political geography:
 
-First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use ISO alpha-3 codes if possible (https://www.nationsonline.org/oneworld/country_code_list.htm).
+First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use (ISO alpha-3 codes)[https://www.nationsonline.org/oneworld/country_code_list.htm] if possible.
 
 Second, use fuzzy string matching. However, in this case you will need to inspect all of the matches to make sure that they are correct.
 
