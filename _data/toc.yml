@@ -24,6 +24,7 @@
 # Top-level page
 - title: Getting started
   url: /1_getting-started
+  not_numbered: true
 
 - title: Using Weather and Climate Data
   url: /2_using-weather-and-climate-data
@@ -36,6 +37,9 @@
 
 - title:  Generating geographical unit data
   url: /5_geographical-unit-data
+
+- title: Suggestions for work organization 
+  url: /6_suggestions
 
 # External link
 - title: GitHub repository

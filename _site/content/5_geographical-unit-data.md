@@ -1,11 +1,11 @@
 # 5. Generating geographical unit data
 
 
-Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries[1](https://ec.europa.eu/eurostat/web/cities/spatial-units).
+Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries[[1]](https://ec.europa.eu/eurostat/web/cities/spatial-units).
 
  Administrative units in economics analyses are typically politically defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. Besides, politically defined regions are also more relevant for policy-makers.
 
- When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation[2](https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf).
+ When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation[[2]](https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf).
 
  Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, [Global Administrative Regions](https://gadm.org), offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
 
@@ -32,7 +32,7 @@ The shapefile format is a commonly used to capture geospatial vector-data in geo
 
 ## Creating shapefiles
 
-Shapefiles can be created with these methods [3](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf):
+Shapefiles can be created with these methods[[3]](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf):
 
 
 1. “Export to a shapefile” from programs like ARC/INFO, Spatial Database Engine, GIS, ArcView etc.
@@ -88,14 +88,4 @@ First, try to perform all merging on abbreviation codes rather than names. At th
 Second, use fuzzy string matching. However, in this case you will need to inspect all of the matches to make sure that they are correct.
 
 Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as `<dataset>2canonical` and `canonical2<dataset2>`.
-
-# Suggestions when producing a panel dataset
-
-1. Keep your code and your data separate. A typical file organization will be:
-    - code/ - all of your analysis
-    - sources/ - the original data files, along with information so you can find them again
-    - data/ - merged datasets and intermediate results
-    - figures/ - formatted figures and LaTeX tables.
-
-2. If you aren’t sure what predictors you will need, create your dataset with a lot of possible predictors and decide later. Often merging together your panel dataset is laborious, and you do not want to do it more times than necessary.
 

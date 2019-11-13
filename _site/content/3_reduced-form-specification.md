@@ -29,6 +29,7 @@ Choice of weather variables depends on the question we are trying to answer. For
 - Ocean currents
 - Soil erosion and salinity
 - Plant productivity
+
 ## Common functional forms (pros, cons, and methods)
 
 We use one/many/combination of different functional forms for weather variables for generating reduced form results. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below:
@@ -61,11 +62,13 @@ https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf
 http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf
 
 ## Cross-validation
+
 - Cross-validation exercise can be done to check the *internal validity* and the *external validity* of the model estimates
 - For checking internal validity, the model can be run on a subset of the dataset. For example, running country-wise regressions or running regressions on *k* partitions of data (k-fold cross validation) instead of running a full-sample global regression
 - For gauging external validity, model is run on some new dataset that has not been not used in estimating the model parameters. For example, predicting response for a new country using global regression model estimates, and comparing it to the actual observations
 - Although cross-validation exercise is not universally performed by researchers, but good papers have at least a section discussing the internal and the external validity of their models
 - Sometimes, researchers tend to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly this it can perform even in very simple cases
+
 ## Fixed Effects Regression
 
 
@@ -78,7 +81,8 @@ Weather data products are generally available in *gridded* form, developed after
 
 When an economic process is occurring at the grid level, we need to first do estimation at the grid level. Here, we need to do the required transformation of our weather variables at the grid level, run our estimation procedure on those transformed variables, and then aggregate grid-level estimates using weighted averaging method. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Therefore, we need to estimate the effect of temperature on mortality at the grid level first, and then take population-weighted average of grid-level effects for the grids that are inside the selected county boundaries
 
-**Mathematical formulation for transformation-before-aggregation method**
+### Mathematical formulation for transformation-before-aggregation method
+
 Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.
 
 Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:
@@ -110,7 +114,7 @@ where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate
 
 $$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
 
-Polynomial
+#### Polynomial
 
 Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining polynomial terms, namely $T_{\theta i t}^2$, $T_{\theta i t}^3$ and $T_{\theta i t}^4$, by raising original $T_{\theta i t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under a county. So, we have:
 
@@ -120,7 +124,7 @@ where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate
 
 $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
 
-Restricted Cubic Spline
+#### Restricted Cubic Spline
 
 For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots. The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$ temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:
 
@@ -130,14 +134,15 @@ where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.
 
 And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated polynomial of degree 3, which is defined as follows:
 
-$$\nabla^3_+=\nabla^3_+$$ if $$\nabla^3_+>0$$
-$$\nabla^3_+=0$$ if $$\nabla^3_+<0$$
+$\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$
+
+$\nabla^3_+=0$ if $\nabla^3_+<0$
 
 The aggregate transformation is as below:
 
 $$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$
 
-Linear Spline
+#### Linear Spline
 
 Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method, we get:
 
@@ -149,8 +154,9 @@ where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.
 
 And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:
 
-$$\nabla_+=\nabla_+$$ if $$\nabla_+>0$$
-$$\nabla_+=0$$ if $$\nabla_+<0$$
+$\nabla_+=\nabla_+$ if $\nabla_+>0$
+
+$\nabla_+=0$ if $\nabla_+<0$
 
 The aggregate transformation is as below:
 
