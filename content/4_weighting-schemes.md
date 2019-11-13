@@ -20,9 +20,9 @@ In the second case, the phenomenon occurs at a data region level, in response to
 
 In either case, the weighting scheme is the same:
 
-    $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i$$
+$$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i$$
 
-where $$w_p$$ is the weight for pixel $$p$$, and $$P(i)$$ is the set of pixels in data region $$i$$.
+where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.
 
 ## Kinds of weight schemes and data sources
 
@@ -36,12 +36,14 @@ Weighting data files come in a wide range of file formats, since any gridded dat
     - The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.
 
 
-    Based on this information, you can calculate which grid cell any point on the globe falls into:
-        $$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right)$$, $$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$
-    where $$x_0, y_0$$ is lower-left corner point. If the center of the lower-left cell was given, $$x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$$, $$y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$$.
+Based on this information, you can calculate which grid cell any point on the globe falls into:
+
+$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right)$$, $$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$
+
+where $x_0, y_0$ is lower-left corner point. If the center of the lower-left cell was given, $x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$, $y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$.
 
 
-    For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.
+For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.
 
 
 3. Projections are a way to map points on the globe (in latitude-longitude space) to a point in a flat x, y space. While this is important for visualizing maps, it can just be a nuisance for gridded datasets. The most common “projection” for gridded datasets is an equirectangular projection, and we have been assuming this above. This is variously referred to as `1`, `ll`, `WGS 84`, and `EPSG: 4326` (techically, WGS 84 species how latitude and longitude are defined, and EPSG:4326 specifies a drawing scheme where x = longitude and y = latitude). However, you will sometimes enounter grids in terms of km north and km east of a point, and then you may need to project these back to latitude-longitude and regrid them.
@@ -84,7 +86,8 @@ The following recipe should work for most cases to align weighting data with a w
     Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.
 
 
-    Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
+Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
+
 | R                                                                                                                                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `landscan <- raster(``"``…/w001001.adf``"``)`<br>`landscan`                                                                                                                                                                  |
@@ -92,26 +95,28 @@ The following recipe should work for most cases to align weighting data with a w
 | `prism <- raster(``"``PRISM_tmax_stable_4kmM2_2000_all_asc")`<br>`prism`                                                                                                                                                     |
 | `class       : RasterLayer` <br>`dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)`<br>`resolution  : 0.04166667, 0.04166667  (x, y)`<br>`extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)` |
 
-    Start by throwing away extraneous data, by cropping the LandScan to, say,
-    126 to 66°W, 24 to 50°N.
+Start by throwing away extraneous data, by cropping the LandScan to, say,
+126 to 66°W, 24 to 50°N.
+
 | R                                                       |
 | ------------------------------------------------------- |
 | `landscan <- crop(landscan, extent(-126, -66, 24, 50))` |
 
-    Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
+Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 | R                                                |
 | ------------------------------------------------ |
 | `landscan <- disaggregate(landscan, fact=2) / 4` |
 
-    We divide by 4 so that the total population remains the same.
+We divide by 4 so that the total population remains the same.
 
 
 2. **Clip the two datasets so that they line up.**
 
 
-    In the example above, after increasing the resolution of the LandScan data, we clip it again.
+In the example above, after increasing the resolution of the LandScan data, we clip it again.
+
 | R                                                                            |
 | ---------------------------------------------------------------------------- |
 | `landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))` |
@@ -119,7 +124,8 @@ The following recipe should work for most cases to align weighting data with a w
 3. **Re-aggregate the weighting data, so that it has the same resolution as the weather data.**
 
 
-    In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:
+In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:
+
 | R                                                   |
 | --------------------------------------------------- |
 | `landscan <- aggregate(landscan, fact=10, fun=sum)` |
