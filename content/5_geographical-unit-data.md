@@ -1,5 +1,7 @@
 # 5. Generating geographical unit data
 
+[Using Weather Data and Climate Model Output in Economic Analyses of Climate Change](https://academic.oup.com/reep/article/7/2/181/1522753) describes
+the common pitfalls in translating weather data into geographical unit data.
 
 Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries[[1]](https://ec.europa.eu/eurostat/web/cities/spatial-units).
 
