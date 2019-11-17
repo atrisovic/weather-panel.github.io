@@ -1,5 +1,9 @@
 # 3. Developing a reduced-form specification:
 
+For an extensive review of the results available from the climate
+econometric literature and the empirical methods used to identify
+them, read [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
+
 This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income.
 
 ## Choosing weather variables
