@@ -105,6 +105,7 @@ Start by throwing away extraneous data, by cropping the LandScan to, say,
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
+
 | R                                                |
 | ------------------------------------------------ |
 | `landscan <- disaggregate(landscan, fact=2) / 4` |

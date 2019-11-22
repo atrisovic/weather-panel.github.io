@@ -26,8 +26,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//4_weighting-schemes.html",
   "headline": "Weighting schemes",
-  "datePublished": "2019-11-13T12:16:32-05:00",
-  "dateModified": "2019-11-13T12:16:32-05:00",
+  "datePublished": "2019-11-22T14:02:51-05:00",
+  "dateModified": "2019-11-22T14:02:51-05:00",
   "description": "        4. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...",
   "author": {
     "@type": "Person",
@@ -551,7 +551,7 @@ initFunction(initPrint)
           
             5.
           
-          Suggestions for word organization
+          Suggestions for work organization
         </a>
 
         
@@ -750,10 +750,18 @@ $$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\r
 </table>
 <p>Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
-    That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
-| R                                                |
-| ------------------------------------------------ |
-| <code>landscan &lt;- disaggregate(landscan, fact=2) / 4</code> |</p>
+    That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- disaggregate(landscan, fact=2) / 4</code></td>
+</tr>
+</tbody>
+</table>
 <p>We divide by 4 so that the total population remains the same.</p>
 <ol>
 <li><strong>Clip the two datasets so that they line up.</strong></li>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Generating geographical unit data</title>
-  <meta name="description" content="        5. Generating geographical unit data Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area o...">
+  <meta name="description" content="        5. Generating geographical unit data Using Weather Data and Climate Model Output in Economic Analyses of Climate Change describesthe common pitfalls ...">
 
   <link rel="canonical" href="/YOUR%20URL//5_geographical-unit-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//5_geographical-unit-data.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Generating geographical unit data" />
-<meta property="og:description" content="        5. Generating geographical unit data Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area o..." />
+<meta property="og:description" content="        5. Generating geographical unit data Using Weather Data and Climate Model Output in Economic Analyses of Climate Change describesthe common pitfalls ..." />
 <meta property="og:image"       content="YOUR%20URL/images/logo/CIL-Logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//5_geographical-unit-data.html",
   "headline": "Generating geographical unit data",
-  "datePublished": "2019-11-13T12:16:32-05:00",
-  "dateModified": "2019-11-13T12:16:32-05:00",
-  "description": "        5. Generating geographical unit data Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area o...",
+  "datePublished": "2019-11-22T14:02:51-05:00",
+  "dateModified": "2019-11-22T14:02:51-05:00",
+  "description": "        5. Generating geographical unit data Using Weather Data and Climate Model Output in Economic Analyses of Climate Change describesthe common pitfalls ...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -551,7 +551,7 @@ initFunction(initPrint)
           
             5.
           
-          Suggestions for word organization
+          Suggestions for work organization
         </a>
 
         
@@ -631,7 +631,9 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.-Generating-geographical-unit-data">5. Generating geographical unit data<a class="anchor-link" href="#5.-Generating-geographical-unit-data"> </a></h1><p>Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">[1]</a>.</p>
+<h1 id="5.-Generating-geographical-unit-data">5. Generating geographical unit data<a class="anchor-link" href="#5.-Generating-geographical-unit-data"> </a></h1><p><a href="https://academic.oup.com/reep/article/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change</a> describes
+the common pitfalls in translating weather data into geographical unit data.</p>
+<p>Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">[1]</a>.</p>
 <p>Administrative units in economics analyses are typically politically defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. Besides, politically defined regions are also more relevant for policy-makers.</p>
 <p>When generating an administrative unit, it is important to capture territory with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative unit should be homogeneous concerning mean temperature and precipitation<a href="https://bfi.uchicago.edu/wp-content/uploads/WP_2018-51_0.pdf">[2]</a>.</p>
 <p>Administrative unit data can capture existing administrative units(high granularity) or groups of those units(lesser granularity). For example, the administrative unit database, <a href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.</p>
@@ -640,10 +642,7 @@ initFunction(initPrint)
 
 <pre><code>states.shp
 states.shx
-states.dbf
-
-
-</code></pre>
+states.dbf</code></pre>
 <p>Technical description for shapefiles can be found <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"><em>HERE</em></a></p>
 <h2 id="Software">Software<a class="anchor-link" href="#Software"> </a></h2><p>The shapefile format is a commonly used to capture geospatial vector-data in geographic information system (GIS) software. QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is a proprietary software for working with maps and geographic data.</p>
 <h2 id="Creating-shapefiles">Creating shapefiles<a class="anchor-link" href="#Creating-shapefiles"> </a></h2><p>Shapefiles can be created with these methods<a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">[3]</a>:</p>
@@ -653,47 +652,33 @@ states.dbf
 <li>Programming: ArcView GIS, MapObjects allow you to create shapefiles within your programs, <strong>Matlab</strong></li>
 </ol>
 <h2 id="Working-with-shapefiles-from-python-and-R">Working with shapefiles from python and R<a class="anchor-link" href="#Working-with-shapefiles-from-python-and-R"> </a></h2><p>Shapefiles can be opened with Python packages like</p>
-<ol>
-<li><strong>Fiona</strong>,</li>
-</ol>
-
-<pre><code>import fiona
-shape = fiona.open("my_shapefile.shp")
-print shape.schema
-{'geometry': 'LineString', 'properties': OrderedDict([(u'FID', 'float:11')])}
-
-
-</code></pre>
-<ol>
-<li><strong>PyShp</strong> or</li>
-</ol>
-
-<pre><code>import shapefile
-shape = shapefile.Reader("my_shapefile.shp")
-
-
-</code></pre>
-<ol>
-<li><strong>geopandas</strong> (among other packages).</li>
-</ol>
-
-<pre><code>import geopandas as gpd
-shapefile = gpd.read_file("/my_shapefile.shp")
-print(shapefile)
-
-
-</code></pre>
-<p>Data analysis software R also supports working with spatial data. To read shape files you could use a package like <code>maptools</code>,  <code>rgdal</code> or <code>sf</code>.</p>
-
-<pre><code>library(maptools)
-shapefile=readShapePoly("/my_shapefile.shp")
-
-
-</code></pre>
 <ul>
-<li>5b. Weighted aggregations within spatial units</li>
+<li><strong>Fiona</strong>,</li>
 </ul>
-<h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
+<span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \ 
+<span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="sa">u</span><span class="s1">&#39;FID&#39;</span><span class="p">,</span> <span class="s1">&#39;float:11&#39;</span><span class="p">)])}</span>
+</pre></div>
+<ul>
+<li><strong>PyShp</strong> or</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shapefile</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li><strong>geopandas</strong> (among other packages).</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
+</pre></div>
+<p>Data analysis software R also supports working with spatial data. To read shape files you could use a package like <code>maptools</code>,  <code>rgdal</code> or <code>sf</code>.</p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
+<span class="n">shapefile</span><span class="o">=</span><span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+<h2 id="Weighted-aggregations-within-spatial-units">Weighted aggregations within spatial units<a class="anchor-link" href="#Weighted-aggregations-within-spatial-units"> </a></h2><h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
 <p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
 <p>Here are some suggestions for dealing with the mess that is political geography:</p>
 <p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
@@ -723,7 +708,7 @@ shapefile=readShapePoly("/my_shapefile.shp")
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/6_suggestions.html">
-      Suggestions for word organization <span class="u-margin-right-tiny"></span> 〉
+      Suggestions for work organization <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
