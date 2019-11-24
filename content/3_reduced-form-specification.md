@@ -1,44 +1,125 @@
 # 3. Developing a reduced-form specification:
 
+This section describes some of the considerations that go into
+developing a reduced-form specification using weather panel data.
+
 For an extensive review of the results available from the climate
 econometric literature and the empirical methods used to identify
-them, read [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
-
-This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income.
+them, a good resource is
+[Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 
 ## Choosing weather variables
 
-Choice of weather variables depends on the question we are trying to answer. For example, in case of temperature, we can use *T_min/T_max, T_avg or HDD/CDD or GDD.* A few of the important weather variables are listed below:
+The choice of weather variables depends on the question we are trying
+to answer, and there are many forms to represent any given
+variable. For example, in the case of temperature, we can use
+$T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling
+degree-days, or growing degree-days. A few of the important weather variables are listed below:
 
 - Temperature
-    1. *T_min/T_max:*  Useful when temperature variation is large leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, such as having events of heat waves and cold storms in the temporal support
-    2. *T_avg:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. Different averaging methods, like Bartlett Kernels, Moving Average, etc. can be used here
-    3. *HDD/CDD & GDD:*  Degree Days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was below a certain level.  Reference: https://www.degreedays.net/introduction
+    1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more
+       sensitive to extreme temperatures than to variation in the
+       average. This is also useful when temperature variation is
+       large, leading to significant differences in cold end and hot
+       end response. These are important metric when heterogeneity
+       between each time unit matters, and capture heat waves and cold
+       spells. Also, note that $T_{min}$ reflects nighttime
+       temperatures while $T_{max}$ is reached in the daytime.
+    2. *$T_{avg}$:*  A good mean metric for seeing average response
+       over the temperature support, when there is not much variation
+       in temperature across time unit considered in the
+       study. $T_{avg}$ is most appropriate when there is some natural
+       inertia in the response, so that the dependent variable is
+       responding to a kind of average over the last 24 hours. Note
+       that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless
+       calculated from sub-daily data.
+    3. *HDD/CDD & GDD:*  Degree days (DD) are a measure of ’how much’
+       and for ’how long’ the outside air temperature was above or
+       below a certain level.  Reference:
+       https://www.degreedays.net/introduction
+	   
 - Precipitation
-    1. Highly local, poorly measured, and poorly predicted
-    2. Total precipitation is often not the best variable. Consider soil water, potential evapotranspiration rate (PET), and water runoff/availability
-    3. Distribution of precipitation often matters more than total. Consider no. of rainy/dry days, moments of the distribution
-    4. Precipitation is an important control to include, even if it’s not the main variable of interest However, we should remember that the properties of precipitation and temperature variables are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see the variation in death rates due to storm events, using binned annual precipitation is likely not going to give us the variation in death rates, rather we would have to separately account for storm events by using an additional control
+    As described above, precipitation is highly local, poorly
+    measured, and poorly predicted.
+	1. *Total precipitation (e.g., over a year)*: Often used as a
+       control, but not a very good reflection of the relevance of
+       precipitation ot a socioeconomic process.
+	2. *Soil water, potential evapotranspiration rate (PET), Palmer
+       drought severity index (PDSI), and water runoff/availability*:
+       These are more appropriate for representing water stress.
+    3. *Number of of rainy/dry days, or moments of the precipitation
+	   distribution*: Distribution of precipitation often matters more
+	   than total.
+    
+	Precipitation is an important control to include, even if it’s not
+	the main variable of interest, since temperature and precipitation
+	are correlated. However, we should remember that the properties of
+	precipitation and temperature variables are very different in the
+	way they affect humans. For example, binning of annual temperature
+	variable, keeping high temperature bins small-sized, can explain
+	variation in death rates due to heat waves events. However, if we
+	want to see the variation in death rates due to storm events,
+	using binned annual precipitation is likely not going to give us
+	the variation in death rates, rather we would have to separately
+	account for storm events by using an additional control
+	   
 - River discharge rate
-    1. Still measured at the station-level, so we don’t have gridded products
-    2. For example Central Water Commission of India maintains this dataset for some of the Himalayan rivers that flow in India
+    River flows are generally measured at the station-level. While
+    runoff is avaialble in gridded products, it is not a good
+    reflection of water availability. Hydrological models (like VIC)
+    can translate precipitation into river discharges across a region.
+
 - Wind speed
+    The process of interest determines how wind speeds should be
+    measured. For example, normal speeds are important for
+    agriculture, squared speeds for distructive force, and cubic
+    speeds for wind turbine power. Also consider gust velocity, which
+    is generally available.
+	
 - Evapotranspiration rate
+    [Define; relate to water stress and ag. productivity?]
+	
 - Solar radiation
+    [Longwave vs. shortwave, and uses]
+	
 - Humidity
+    [Also describe wetbulb temperature.]
+	
 - Ocean temperature
+    [Do you mean SST?]
+
 - Atmospheric CO2
+    [Haven't seen this. Maybe drop it?]
+
 - Storm events
+    [Break it down: wind, precip., storm surge, and note warning systems.]
+
 - Sea level
+    [Not sure if this is useful for panel regressions.]
+
 - Ocean currents
+    [Few uses of this.]
+
 - Soil erosion and salinity
+    [Salinity is only available staticly, right? Erosion: would this
+    be from a model?]
+
 - Plant productivity
+    [Maybe describe NPP?]
 
 ## Common functional forms (pros, cons, and methods)
 
-We use one/many/combination of different functional forms for weather variables for generating reduced form results. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below:
+Different functional forms serve different purposes. First, think
+about the "true model" that relates your dependent variable to your
+weather variables, and then try to turn it into a linear expression
+that you can estimate.
+
+Some of the frequently used functional forms along with a good
+reference for understanding them in detail are listed below.
+
 
 - Bins
+
     1. Assignment of observations to bins. e.g.  15C-20C, 20C-25C, ...  for temperature
     2. Uses the mean metric, so its advantage is non-parametric nature
     3. Highly susceptible to existence of outliers in data
@@ -67,25 +148,128 @@ http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Wo
 
 ## Cross-validation
 
-- Cross-validation exercise can be done to check the *internal validity* and the *external validity* of the model estimates
-- For checking internal validity, the model can be run on a subset of the dataset. For example, running country-wise regressions or running regressions on *k* partitions of data (k-fold cross validation) instead of running a full-sample global regression
-- For gauging external validity, model is run on some new dataset that has not been not used in estimating the model parameters. For example, predicting response for a new country using global regression model estimates, and comparing it to the actual observations
-- Although cross-validation exercise is not universally performed by researchers, but good papers have at least a section discussing the internal and the external validity of their models
-- Sometimes, researchers tend to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly this it can perform even in very simple cases
+Cross-validation can be done to check the *internal validity*
+and the *external validity* of the model estimates. For checking
+internal validity, the model can be fit to a subset of the dataset,
+and evaluated on the remainder. For example, you can leave particular
+regions out of your regression or remove a random *1/k* of your data
+(k-fold cross validation) instead of running a full-sample
+regression.
+
+For gauging external validity, model is run on some new dataset that
+has not been not used in the model-evaluation process. For example, by
+predicting the response for a new country using global regression model
+estimates, and comparing it to the actual observations.
+
+Although cross-validation is not universally performed by researchers,
+and many people continue to rely on the measure of R-squared
+statistic. However, we know from our basic statistics learning, how
+badly this it can perform even in very simple cases. Cross-validation
+can be an effective approach for doing model-selection.
+
+[Can you give a couple examples-- e.g., cross-validation to determine
+the number of poly terms, or the thresholds for GDDs?]
 
 ## Fixed Effects Regression
 
 
 ## Dealing with the spatial and temporal scales of economic processes
 
-Weather data products are generally available in *gridded* form, developed after careful interpolation and/or reanalysis exercise. The grids used can vary in size across datasets, but they can be aggregated to economic scale of administrative units like county, city, etc., using appropriate weighted aggregation methods. While doing the spatial aggregation, we need to decide whether we want to do transformation-before-aggregation or aggregation-before-transformation based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. It is because precipitation is highly local both temporally and spatially; it could rain for < 1 min in <1 km radius area. Let us try to understand these two methods with county as our higher administrative level:
+Weather data products are generally available in *gridded* form,
+developed through careful interpolation and/or reanalysis. The grids
+used can vary in size across datasets, but they can be aggregated to
+administrative units like county, city, etc., using appropriate
+weighted aggregation methods. Think about the scale of your
+administrative units, relative to the scale of the grid cells. If the
+regions are much bigger than the grid cells, a weighted average across
+included cells is appropriate. If the regions are much smaller than
+the cells, it will probably be necessary to aggregate the regions,
+since the level of variation is only at the grid cell level. If the
+two are of similar sizes, it is generally necessary to account for the
+amount that each grid cell lies within each region. This can be
+calculated as a transformation matrix, with a row for each region and
+a column for each cell. Once the matrix is calculated, it can be
+reused for each time step.
+
+Typically, preparing the weather variables requires some kind of
+non-linear transformation. For example, estimating a polynomial
+functional form requires raising the temperatures to various
+powers. The square of a weighted average of grid-level temperatures is
+not the same as the weighted average of the square of grid-level
+temperatures.
+
+While doing the spatial aggregation, we need to decide whether we want
+to transform the data first and then aggregate it
+(transformation-before-aggregation) or aggregate it and then transform
+it (aggregation-before-transformation). This decision is based on the whether the phenomenon
+in consideration is occurring at the local (grid) scale or at the
+larger administrative units (country, state, county, etc.)
+scale. Also, it matters what variable is in consideration. For
+example, doing aggregation-before-transformation for temperature will
+distort the signal less that doing it for precipitation. This is because
+precipitation is highly local both temporally and spatially; it could
+rain for <1 min in <1 km radius area. Let us try to understand these
+two methods using counties as our higher administrative level:
 
 
 **Transformation-before-aggregation** 
 
-When an economic process is occurring at the grid level, we need to first do estimation at the grid level. Here, we need to do the required transformation of our weather variables at the grid level, run our estimation procedure on those transformed variables, and then aggregate grid-level estimates using weighted averaging method. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Therefore, we need to estimate the effect of temperature on mortality at the grid level first, and then take population-weighted average of grid-level effects for the grids that are inside the selected county boundaries
+When an economic process is occurring at the grid level (for example,
+for individuals or households), we need to first do our estimation at
+the grid level. For example, to estimate the effect of temperature on
+human mortality at the county level, we should reckon that the effect
+of temperature on mortality is a local phenomenon, so the estimation
+should happen at the lowest possible level.
+
+Here, we need to do the required transformation of our
+weather variables at the grid level, then aggregate these values using
+a weighted averaging method, and feed these into our estimation
+procedure.
 
 ### Mathematical formulation for transformation-before-aggregation method
+
+We want to understand how local agents respond to weather
+shocks. Suppose that there exists an agent-level dose-response curve,
+$y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where
+the temperature affecting agents is in grid cell $p$ and occurs in
+timestep $s$ (e.g., if the agents respond on a day-by-day basis,
+$T_{ps}$ is the local weather for a single day).
+
+However, we do not observed agent-level responses. Instead, we have
+region-wide sums, $y_{it}$ for region $i$ and reporting period
+$t$. For example, if $y_{js}$ is death risk for agent $j$ for a given
+day, we may only observe total deaths across a region in each year, $y_{it} =
+\sum_{\text{s in year t}} \sum_{\text{j in region i}} y_{js}$.
+
+We can determine the agent-level response $f(T_{ps})$ if we assume
+linearity. First, let us represent this the way we would if we could
+run a regression with agent-level data, breaking up the dose-response
+curve into a sum of terms:
+$$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})$$
+where $g_k(T_{ps})$ is a transformation of the weather
+variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$,
+$g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.
+
+We know that
+$$y_i = \sum_{\text{js in it}} y_{js} = \sum_{\text{js in it}}
+\beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k
+g_k(T_{ps})$$
+
+We can rearrange this to:
+$$y_i = \beta_1 (\sum_{\text{sj in it}} g_1(T_{ps})) + \beta_2
+(\sum_{\text{sj in it}} g_2(T_{ps})) + \cdots + \beta_k
+(\sum_{\text{sj in it}} g_k(T_{ps}))$$
+
+Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
+N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})
+
+where $N_{it}$ is the number of agent-timestep observations
+represented included within region $i$ and reporting period $t$.
+
+
+[Azhar, I've left your text below. I'm not sure if you want to keep
+it, or move it elsewhere.]
+
 
 Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.
 
