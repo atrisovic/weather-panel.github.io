@@ -1,5 +1,7 @@
 # 5. Generating geographical unit data
 
+[Using Weather Data and Climate Model Output in Economic Analyses of Climate Change](https://academic.oup.com/reep/article/7/2/181/1522753) describes
+the common pitfalls in translating weather data into geographical unit data.
 
 Geographical units are necessary for conducting location-specific economic analyses. A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  For example, a“city” is a local administrative unit where the majority of the population lives in an urban center, while the“greater city” is an approximation of the urban center beyond of the administrative city boundaries[[1]](https://ec.europa.eu/eurostat/web/cities/spatial-units).
 
@@ -17,11 +19,11 @@ A shapefile stores nontopological geometry and attribute information for the spa
 
 Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions `.shp`, `.shx` and `.dbf`. There may be additional files like `.prj` with the shape file’s projection information. All files must have the same name, for example:
 
-
-    states.shp
-    states.shx
-    states.dbf
-
+```
+states.shp
+states.shx
+states.dbf
+```
 
 Technical description for shapefiles can be found [*HERE*](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
 
@@ -42,38 +44,40 @@ Shapefiles can be created with these methods[[3]](https://www.esri.com/library/w
 ## Working with shapefiles from python and R
 
  Shapefiles can be opened with Python packages like
- 1. **Fiona**,
 
+- **Fiona**,
 
-    import fiona
-    shape = fiona.open("my_shapefile.shp")
-    print shape.schema
-    {'geometry': 'LineString', 'properties': OrderedDict([(u'FID', 'float:11')])}
+```python
+import fiona
+shape = fiona.open("my_shapefile.shp")
+print shape.schema
+{'geometry': 'LineString', \ 
+'properties': OrderedDict([(u'FID', 'float:11')])}
+```
 
+- **PyShp** or
 
- 2. **PyShp** or
+```python
+import shapefile
+shape = shapefile.Reader("my_shapefile.shp")
+```
 
+- **geopandas** (among other packages).
 
-    import shapefile
-    shape = shapefile.Reader("my_shapefile.shp")
-
-
- 3. **geopandas** (among other packages).
-
-
-    import geopandas as gpd
-    shapefile = gpd.read_file("/my_shapefile.shp")
-    print(shapefile)
-
+```python
+import geopandas as gpd
+shapefile = gpd.read_file("/my_shapefile.shp")
+print(shapefile)
+```
 
 Data analysis software R also supports working with spatial data. To read shape files you could use a package like `maptools`,  `rgdal` or `sf`.
 
+```R
+library(maptools)
+shapefile=readShapePoly("/my_shapefile.shp")
+```
 
-    library(maptools)
-    shapefile=readShapePoly("/my_shapefile.shp")
-
-
- - 5b. Weighted aggregations within spatial units
+## Weighted aggregations within spatial units
 
 ## Matching names
 
