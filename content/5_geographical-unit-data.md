@@ -28,13 +28,13 @@ refers to the representation of polygons, curves, and points, and
 their use in data analysis.
 
 Describing shapes requires specialized data formats. The most common
-data format is a ESRI Shapefile, and we will focus on these for this
+data format is an ESRI Shapefile, and we will focus on these for this
 tutorial. You may also encounter GDB (common in hydrology), GeoJSON
 (used with web interfaces), KXML (used by Google Earth), and OSM (from
 OpenStreetMap) files. All of these can be converted to Shapefiles,
 using GIS software like QGIS.
 
-A shapefile also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as closed loop, double-digitized polygons [technical guide]. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.
+A shapefile also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.
 
 Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions `.shp`, `.shx` and `.dbf`. There may be additional files like `.prj` with the shape file’s projection information. All files must have the same name, for example:
 
@@ -60,7 +60,7 @@ clean physical shape information.
 ## Creating shapefiles
 
 In some cases, you will have to make the shapefile from scratch. The
-most common ways for doing this is by clicking out the shape of each
+most common ways of doing this is by clicking out the shape of each
 polygon. This generally requires a few steps.
 
 1. Find an image that shows the regions that you want to digitize and
@@ -140,7 +140,7 @@ Here are some suggestions for dealing with the mess that is political geography:
 
 First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use [ISO alpha-3 codes](https://www.nationsonline.org/oneworld/country_code_list.htm) if possible.
 
-Second, use fuzzy string matching. However, in this case you will need to inspect all of the matches to make sure that they are correct.
+Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.
 
 Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as `<dataset>2canonical` and `canonical2<dataset2>`.
 
