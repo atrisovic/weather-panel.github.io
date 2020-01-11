@@ -21,8 +21,8 @@ Through this section, the relevant commands for working with netCDF files are li
 
 - Matlab (native support)
 - python
+    - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports netCDF files
     - [netCDF4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
-    - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports netCDF
 - R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
 - [nco](http://nco.sourceforge.net) (“netCDF operators”) - command line tools
     - documentation may look overwhelming, but at its core it’s an easy way to check the contents of a file, collate different netCDF files, and extract individual variables without having to go through a full language.
@@ -33,34 +33,15 @@ For any R code chunks, it’s assumed the ncdf4 package is loaded (`library(ncdf
 
 **netCDF Contents**
 
-The core function of NetCDF files is to store matrices. These matrices
-may have one dimension (e.g., a vector of years), two dimensions
-(e.g., elevation across space), three dimensions (e.g., weather
-varying across space and time), or more. The other contents of the
-file help you to interpret these matrices.
+The core function of NetCDF files is to store matrices. These matrices may have one dimension (e.g., a vector of years), two dimensions (e.g., elevation across space), three dimensions (e.g., weather varying across space and time), or more. The other contents of the file help you to interpret these matrices.
 
 NetCDF files have three kinds of information:
 
-- *Attribute*: Documentation information, associated to either
-  individual variables or the file as a whole. Each attribute has a
-  name (e.g., `version`) and text content (e.g., "Someone to Lean
-  On").
-- *Variables*: The matrices themselves, containing the data you
-  want.. Each matrix has an order of dimensions. For a two-dimensional
-  matrix, the first dimension corresponds to the rows and the second
-  dimension to the columns.
-- *Dimensions*: The dimensions information in a NetCDF says how many
-  entries are in each dimension. For example, a file containing a
-  1-degree grid over the world would typically lave a `lon` dimension
-  of length 360 and a `lat` dimension with length 180.
+- *Attribute*: Documentation information, associated to either individual variables or the file as a whole. Each attribute has a name (e.g., `version`) and text content (e.g., "Someone to Lean On").
+- *Variables*: The matrices themselves, containing the data you want.. Each matrix has an order of dimensions. For a two-dimensional matrix, the first dimension corresponds to the rows and the second dimension to the columns.
+- *Dimensions*: The dimensions information in a NetCDF says how many entries are in each dimension. For example, a file containing a 1-degree grid over the world would typically lave a `lon` dimension of length 360 and a `lat` dimension with length 180.
   
-Typically, there will be variables that correspond to each of the
-dimensions, and sometimes these will have the same name as the
-dimension objects. These variables give you the value of each index in
-the dimension. For example, if there is a `lon` dimension with length
-360, there will usually be a `lon` or `longitude` variable, which is a
-matrix with the single `lon` dimension, and its contents would look
-something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
+Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` or `longitude` variable, which is a matrix with the single `lon` dimension, and its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
 
 **netCDF File Organization**
 
@@ -136,15 +117,7 @@ You’ll often only want or need a subset of a variable. In this case, make sure
 
 As mentioned above, these files also include populated variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the netCDF header first (the author has seen grid variables listed for example as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, and any number of other names).
 
-The `time` variable can also be listed in a few different formats. An
-integer representation of “days since [some date, often 1850-01-01]”
-is common, as is an integer representation of the form [YYYYMMDD],
-among others. The key is to always check the description of the
-variable in the header, and adjust your methods accordingly until it’s
-in a format you want it in. The `xarray` package has the ability to
-interpret some of these time representations and translate them into
-the `datetime64` data, which makes some kinds of manipulation, like
-averaging over months, easier.
+The `time` variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using python, the `xarray` package has the ability to interpret some of these time representations for you and translates them into the `datetime64` class, which makes some kinds of manipulation, like averaging over months, easier.
 
 ## Introduction to Gridded Data
 
@@ -164,8 +137,7 @@ Data products differ by how they assimilate data, and how much “additional” 
 Both ends of their spectrum have tradeoffs, and generalizable statements about these tradeoffs are hard to make because of differences in methodologies. The following are a few simplified rules of thumb:
 
 ### *“Observational” / Interpolated Datasets*
-Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka
-“BEST”), HadCrut4, GISTEMP, PRISM, etc.
+Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”), HadCrut4, GISTEMP, PRISM, etc.
 
 - Observations are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)
 - Products generally differ by which stations or other data sources are included and excluded
@@ -211,11 +183,7 @@ Some incredibly useful resources to keep in mind while working with weather data
 
 These resources will help you determine which data product is right for you (and better interpret results from existing studies - for example, NCEP2, which was commonly used in economics and policy studies, has known issues including larger biases in the Southern Hemisphere).
 
-Also think about if you want climatological ("what you expect") data,
-rather than weather ("what you get") data. Climatolgy is generally
-known with more precision and available at higher resolution, but will
-only represent average patterns (e.g., average temperature by month)
-rather than any particular year.
+Also think about if you want climatological ("what you expect") data, rather than weather ("what you get") data. Climatolgy is generally known with more precision and available at higher resolution, but will only represent average patterns (e.g., average temperature by month) rather than any particular year.
 
 *Getting Started with a Data Product - Sample Process Using ERA-5*
 
@@ -223,17 +191,7 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
 
 
 1. *Understand the Data Product* - you look up ERA5 on the UCAR Climate Data Guide https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis;
-    1. It tells you the product has a resolution of about 31 km
-       horizontally (this is about as high as it gets in this
-       generation of data products) and includes 137 pressure levels
-       (this is the vertical resolution; you can safely ignore this if
-       you just care about temperature by the surface). It also allows
-       hourly data (this too is uncommon; most only provide daily, or
-       maybe 3-hourly). However, observe caution here: just because
-       the data is available at this resolution does not mean it is
-       reliable at that resolution, and you will likely need to
-	   spend time aggregating the data across time to develop your
-       final dataset.
+    1. It tells you the product has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products) and includes 137 pressure levels (this is the vertical resolution; you can safely ignore this if you just care about temperature by the surface). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just becausethe data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.
     2. You see that it even gives you an estimate of the internal model uncertainty by rerunning the same analysis 10 times (10 “ensemble members”), though in “weaknesses” you note that the uncertainty may be underestimated.
     3. It extends back to 1979 for now (1979 is a common cutoff point due to it being roughly coterminous with the start of modern satellite observationsXXXX).
     4. The summary describes it as an ‘extraordinary product’, so you feel good in your choice, especially since most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest (near-surface temperature).
@@ -248,18 +206,7 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
 
 **Thinking ahead to climate projections**
 
-You may want to project your outcomes into the future under climate
-change, and if so, you should plan now. Projected climate data
-requires a step called "bias-correction", where the raw outputs of
-Global Climate Models are adjusted to reproduce the distributions of
-historical weather. But as we note above, there is no single
-agreed-upon historical weather dataset. If you want to project your
-results, find a future climate dataset that has already been
-bias-corrected (and downscaled) now, and use the same weather
-dataset that it was bias-corrected to. For example, the [NASA Earth
-Exchange Global Daily Downscaled Projections (NEX-GDDP)](https://cds.nccs.nasa.gov/wp-content/uploads/2015/06/NEX-GDDP_Tech_Note_v1_08June2015.pdf) dataset is
-bias-corrected to the [Global Meteorological Forcing
-Dataset (GMFD) for Land Surface Modeling](http://hydrology.princeton.edu/data.pgf.php) historical dataset.
+You may want to project your outcomes into the future under climate change, and if so, you should plan now. Projected climate data requires a step called "bias-correction", where the raw outputs of Global Climate Models are adjusted to reproduce the distributions of historical weather. But as we note above, there is no single agreed-upon historical weather dataset. If you want to project your results, find a future climate dataset that has already been bias-corrected (and downscaled) now, and use the same weather dataset that it was bias-corrected to. For example, the [NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP)](https://cds.nccs.nasa.gov/wp-content/uploads/2015/06/NEX-GDDP_Tech_Note_v1_08June2015.pdf) dataset is bias-corrected to the [Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling](http://hydrology.princeton.edu/data.pgf.php) historical dataset.
 
 **A Quick Summarizing Note**
 
@@ -267,7 +214,7 @@ This process may seem overwhelming, especially given the large variety of data p
 
 The author’s personal suggestion is to start off with a latest-generation reanalysis data product such as ERA5, unless there is a compelling reason not to. Don’t use a dataset or a data assimilation methodology just because previous work (even big-name papers) have used them. There are enough examples (XXXX various citations, including Burke/Hsiang on climate data, Burke’s response to Deschenes and Greenstone, etc. XXXX) in the literature of problematic uses of weather and climate data.
 
-And check your results with multiple datasets from the latest generation! Consider performing your analysis with both a reanalysis dataset and an interpolated dataset. This may not make a huge difference for more stable variables in areas with high station coverage (i.e. temperature in North America), but could be a useful robustness check for more problematic ones (i.e. precipitation).
+And check your results with multiple datasets from the latest generation! Consider performing your analysis with both a reanalysis dataset and an interpolated dataset. This may not make a huge difference for more stable variables in areas with high station coverage (e.g. temperature in North America), but could be a useful robustness check for more problematic ones (e.g. precipitation).
 
 **A Warning on Hydrological Variables (Precipitation, Humidity, etc.)**
 
@@ -285,8 +232,7 @@ In general, rain gauges of most types are biased low. In strong wind conditions,
 
 Bias-correcting is integrated into weather data products, often involving assimilation of multiple data sources (satellites, radar, etc.) but significant biases remain (see above Figure).
 
-It is often recommended to include precipitation data as a control,
-but even in this case, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data.
+Though precipitation is often recommended as a control, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data (and finally, make sure you think about what role precipitation plays in your model - see XXXX!).
 
 **A Quick Final Note on Station Data**
 
