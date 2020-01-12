@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Using Weather and Climate Data</title>
-  <meta name="description" content="        2. Using Weather and Climate Data Introduction When using weather data as independent variables in an economic model, or climate data to project your...">
+  <meta name="description" content="            1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to proj...">
 
   <link rel="canonical" href="/YOUR%20URL//2_using-weather-and-climate-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//2_using-weather-and-climate-data.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Using Weather and Climate Data" />
-<meta property="og:description" content="        2. Using Weather and Climate Data Introduction When using weather data as independent variables in an economic model, or climate data to project your..." />
+<meta property="og:description" content="            1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to proj..." />
 <meta property="og:image"       content="YOUR%20URL/images/logo/CIL-Logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//2_using-weather-and-climate-data.html",
   "headline": "Using Weather and Climate Data",
-  "datePublished": "2019-12-16T10:55:35-05:00",
-  "dateModified": "2019-12-16T10:55:35-05:00",
-  "description": "        2. Using Weather and Climate Data Introduction When using weather data as independent variables in an economic model, or climate data to project your...",
+  "datePublished": "2020-01-11T21:24:59-06:00",
+  "dateModified": "2020-01-11T21:24:59-06:00",
+  "description": "            1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to proj...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -627,39 +627,51 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
+    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="2.-Using-Weather-and-Climate-Data">2. Using Weather and Climate Data<a class="anchor-link" href="#2.-Using-Weather-and-Climate-Data"> </a></h1><h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><p>When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note:</p>
+<h1 id="1.-Using-Weather-and-Climate-Data">1. Using Weather and Climate Data<a class="anchor-link" href="#1.-Using-Weather-and-Climate-Data"> </a></h1><h2 id="1.0-Introduction">1.0 Introduction<a class="anchor-link" href="#1.0-Introduction"> </a></h2><p>When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note:</p>
 <ul>
 <li>There is no universally <em>right</em> or <em>correct</em> weather or climate data product</li>
 <li>Every weather or climate data product has its use cases, limitations, uncertainties, and quirks</li>
 </ul>
 <p>This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research.</p>
-<h2 id="Quick-Aside-on-the-netCDF-Data-Format">Quick Aside on the netCDF Data Format<a class="anchor-link" href="#Quick-Aside-on-the-netCDF-Data-Format"> </a></h2><p>Almost all climate and weather datasets are released in <a href="https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/netcdf-overview">netCDF</a> format. It's efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with almost any climate or weather dataset published in the world.</p>
-<p><strong>Supported Languages</strong></p>
-<p>Through this section, the relevant commands for working with netCDF files are listed for:</p>
+<p>A useful resource to better understand the basics of weather, climate, and the physical
+changes occuring in the climate system is <a href="https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3">An Economist’s Guide to Climate Change Science</a>.</p>
+<h2 id="1.1-Introducing-the-netCDF-Data-Format">1.1 Introducing the netCDF Data Format<a class="anchor-link" href="#1.1-Introducing-the-netCDF-Data-Format"> </a></h2><p>Almost all climate and weather datasets are released in <a href="https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/netcdf-overview">netCDF</a> format. It's efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with almost any climate or weather dataset published in the world.</p>
+<h3 id="Supported-Languages">Supported Languages<a class="anchor-link" href="#Supported-Languages"> </a></h3><p>Through this section, the relevant commands for working with netCDF files are listed for:</p>
 <ul>
 <li>Matlab (native support)</li>
 <li>python<ul>
+<li><a href="http://xarray.pydata.org/en/stable/">xarray</a> (recommended) - a package for dealing with N-dimensional data that natively supports netCDF files</li>
 <li><a href="https://unidata.github.io/netcdf4-python/netCDF4/index.html">netCDF4-python</a> module</li>
-<li><a href="http://xarray.pydata.org/en/stable/">xarray</a> (recommended) - a package for dealing with N-dimensional data that natively supports netCDF</li>
 </ul>
 </li>
 <li>R (<a href="https://cran.r-project.org/web/packages/ncdf4/index.html">ncdf4</a> package)</li>
 <li><a href="http://nco.sourceforge.net">nco</a> (“netCDF operators”) - command line tools<ul>
 <li>documentation may look overwhelming, but at its core it’s an easy way to check the contents of a file, collate different netCDF files, and extract individual variables without having to go through a full language.</li>
-<li>important commands: <code>ncks</code> (“nc kitchen sink” - to split or concatenate files command line) and <code>ndump</code> (to print contents of the file)</li>
+<li>important commands: <code>ncview</code> (to display spatial data), <code>ncks</code> (“nc kitchen sink” - to split or
+concatenate files command line), and <code>ncdump</code> (to print contents of the file)</li>
 </ul>
 </li>
 </ul>
 <p>For any R code chunks, it’s assumed the ncdf4 package is loaded (<code>library(ncdf4)</code>). For any python code chunks, it’s assumed that the netCDF4-python module is loaded as <code>nc</code> (<code>import netCDF4 as nc</code>) and/or the xarray package is loaded as <code>xr</code> (<code>import xarray as xr</code>).</p>
-<p><strong>netCDF File Structure</strong></p>
-<p>The netCDF file structure is self-describing, meaning all the information you need to understand what data are within are contained within the file as well (in theory). <em>However</em>, the format doesn’t require any information be put there, so names of attributes, which attributes are included, etc., may vary between files, especially if they’re ‘unofficial’ files not created by a major modeling group as part of a larger project.</p>
+<h3 id="netCDF-Contents">netCDF Contents<a class="anchor-link" href="#netCDF-Contents"> </a></h3><p>The core function of NetCDF files is to store matrices. These matrices may have one dimension (e.g., a vector of years), two dimensions (e.g., elevation across space), three dimensions (e.g., weather varying across space and time), or more. The other contents of the file help you to interpret these matrices.</p>
+<p>NetCDF files have three kinds of information:</p>
+<ul>
+<li><em>Attribute</em>: Documentation information, associated to either individual variables or the file as a whole. Each attribute has a name (e.g., <code>version</code>) and text content (e.g., "Someone to Lean On").</li>
+<li><em>Variables</em>: The matrices themselves, containing the data you want.. Each matrix has an order of dimensions. For a two-dimensional matrix, the first dimension corresponds to the rows and the second dimension to the columns.</li>
+<li><em>Dimensions</em>: The dimensions information in a NetCDF says how many entries are in each dimension. For example, a file containing a 1-degree grid over the world would typically lave a <code>lon</code> dimension of length 360 and a <code>lat</code> dimension with length 180.</li>
+</ul>
+<p>Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a <code>lon</code> dimension with length 360, there will usually be a <code>lon</code> or <code>longitude</code> variable, which is a matrix with the single <code>lon</code> dimension, and its contents would look something like <code>[-179.5, -178.5, -177.5, ..., 179.5]</code>.</p>
+<h3 id="netCDF-File-Organization">netCDF File Organization<a class="anchor-link" href="#netCDF-File-Organization"> </a></h3><p>The netCDF file structure is self-describing, meaning all the information you need to understand what data are within are contained within the file as well (in theory). <em>However</em>, the format doesn’t require any information be put there, so names of attributes, which attributes are included, etc., may vary between files, especially if they’re ‘unofficial’ files not created by a major modeling group as part of a larger project.</p>
 <p>But fear not: thankfully, most data you will be facing has standardized to something akin to the format used by CMIP5 (a ‘model intercomparison project’ in which different modeling groups agreed to run their models on identical climate ‘experiments’ and publish their data in a uniform format).</p>
-<p>For example, most climate data you will encounter will also follow a CMIP5 filename format, of the form (and this terminology will be useful to recognize even when filenames are not of this format, as is likely for weather data products):</p>
-<p><code>[variable shorthand]_[frequency]_[model name]_[experiment]_[run]_[timeframe].nc</code></p>
+<p>For example, most climate data you will encounter will also follow a CMIP5 filename format, of the form:</p>
+<p><code>[variable shorthand]_[frequency]_[model
+name]_[experiment]_[run]_[timeframe].nc</code></p>
+<p>(This terminology will also be useful to recognize even when filenames are not of this format, as is likely for weather data products.)</p>
 <ul>
 <li>most commonly encountered <strong>variable shorthands:</strong><ul>
 <li><code>tas</code> = temperature; “[air] temperature at surface,” which is different from “surface temperature” (the temperature of the ground) or temperature at other heights. Sometimes also listed as <code>t2m</code> for 2m air temperature or <code>TREFHT</code> for reference height temperature. (for a discussion on why ‘(near-) surface temperature’ is taken at a ‘reference height’, see here[XX])</li>
@@ -678,8 +690,7 @@ initFunction(initPrint)
 <li>combination: file contains many variables over a large time domain (rare due to size constraints)</li>
 </ul>
 <p>To figure out which file saving convention your netCDF file uses, and what is contained, you can check the header of the file:</p>
-<p><strong>The netCDF Header</strong></p>
-<p>netCDF files are self-describing, meaning that they contain information about the data contained within. Every netCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for netCDF filename <code>fn</code>, for each mentioned tool above:</p>
+<h3 id="The-netCDF-Header">The netCDF Header<a class="anchor-link" href="#The-netCDF-Header"> </a></h3><p>netCDF files are self-describing, meaning that they contain information about the data contained within. Every netCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for netCDF filename <code>fn</code>, for each mentioned tool above:</p>
 <table>
 <thead><tr>
 <th>nco</th>
@@ -693,7 +704,7 @@ initFunction(initPrint)
 <tr>
 <td><code>ncdump -h fn</code></td>
 <td><code>ncdisp(fn)</code></td>
-<td><code>ncfile &lt;- nc_open(fn)</code><br><code>print(ncfile)</code></td>
+<td><code>ncfile &lt;- nc_open(fn)</code><br><code>ncfile</code></td>
 <td><code>ds = nc.Dataset(fn))</code><br><code>ds</code></td>
 <td><code>ds = xr.open_dataset(fn))</code><br><code>ds</code></td>
 </tr>
@@ -701,12 +712,11 @@ initFunction(initPrint)
 </table>
 <p>The header will open with ‘global attributes,’ which are just text fields that primarily tell you housekeeping information (modeling groups, copyright information, etc.). Then, for each variable contained within the file, the header will tell you what dimensions they contain and their respective sizes, plus variable-specific attributes, like units.</p>
 <p>Use the header to check what the variable you want is called, and what dimensions it has. For a variable-focused netCDF file (see above), the dimensions will likely be <code>lon,lat,time</code> (though always verify - some will save their data with the <code>time</code> variable first and non-gridded data may be saved as <code>location,time</code>). The file will also contain populated variables for each of these dimensions, giving the values of <code>lon,lat,time</code>  at each point (be aware - for non-rectangular grids, the <em>variables</em> <code>lon</code> and <code>lat</code> may each be 2-D arrays as well).</p>
-<p><strong>Attributes</strong></p>
-<p>Here are some important common “attributes” of netCDF files or variables:</p>
+<h3 id="Attributes">Attributes<a class="anchor-link" href="#Attributes"> </a></h3><p>Here are some important common “attributes” of netCDF files or variables:</p>
 <ul>
 <li><strong>Calendar</strong> - probably the most important and inconsistent attribute for climate data (for historical ‘weather’ data products, one would hope it just follows the Gregorian calendar). Either global, or attached to the “record-keeping dimension” (<code>time</code> ). Common formats include<ul>
 <li><em>365_day</em> / <em>noleap</em> / <em>365day</em> / <em>no_leap</em> / etc. **- the years are magically shortened so they all have 365 days (most common for climate data)</li>
-<li>g<em>regorian</em> / <em>proleptic_gregorian -</em> modern calendar with leap years</li>
+<li><em>gregorian</em> / <em>proleptic_gregorian -</em> modern calendar with leap years</li>
 <li><em>360_day</em> - rare calendar in which the year has 360 days (so all months have equal lengths). To my knowledge, the Hadley Model is the only major recent model to use this, but be aware of its existence.</li>
 </ul>
 </li>
@@ -715,10 +725,13 @@ initFunction(initPrint)
 <li><em>Precipitation</em> - often in <em>kg/m^2s</em>, which is the SI unit for precipitation rate (volume per time). Multiply by 3600 to get mm/hour, or 141.7323 to get in/hour (the density of water is 1000 kg/m^3, multiplying by the density gets you the rate in m/s, or depth/time - the rest is just accounting to your desired units of depth and time).</li>
 </ul>
 </li>
-<li><strong>Missing / Fill Value</strong> - if there are some crazy high or low values in your data, you may want to check if those just represent the missing / fill value, a common sub-attribute of variables.</li>
+<li><strong>Missing / Fill Value</strong> - if there are some crazy high or low
+values in your data, you may want to check if those just represent
+the missing / fill value, a common sub-attribute of variables. You
+may also encounter "masked arrays", which are another way to
+represent missing data.</li>
 </ul>
-<p><strong>Reading netCDF data</strong></p>
-<p>netCDF files can be easily imported as numeric data in any language. Here are some common ways:</p>
+<h3 id="Reading-netCDF-data">Reading netCDF data<a class="anchor-link" href="#Reading-netCDF-data"> </a></h3><p>netCDF files can be easily imported as numeric data in any language. Here are some common ways:</p>
 <table>
 <thead><tr>
 <th>Matlab</th>
@@ -731,8 +744,8 @@ initFunction(initPrint)
 <tr>
 <td><code>ncread(fn,var);</code></td>
 <td><code>ncfile &lt;- nc_open(fn)</code><br><code>var &lt;- ncvar_get(ncfile,var)</code></td>
-<td><code>ncf = nc.Dataset(fn)</code> <br><code>ncf.variables\[var\][:]</code><br>(<code>ncf.variables[var]</code> will return a <code>float</code> object that keeps the attributes from the netCDF file)</td>
-<td><code>ds = xr.open_dataset(fn))</code><br>(data is loaded lazily and only fully loaded when calculations are done - to force loading, run <code>ds.load()</code>)</td>
+<td><code>ncf = nc.Dataset(fn)</code> <br><code>ncf.variables[var][:]</code><br>(<code>ncf.variables[var]</code> will return a <code>float</code> object that keeps the attributes from the netCDF file)</td>
+<td><code>ds = xr.open_dataset(fn))</code><br>ds.var<br>(data is loaded lazily and only fully loaded when calculations are done - to force loading, run <code>ds.load()</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -746,23 +759,22 @@ initFunction(initPrint)
 </thead>
 <tbody>
 <tr>
-<td><code>ncread(fn,var,…</code><br><code>[1 1 1],[5 5 365]);</code></td>
+<td><code>ncread(fn,var,</code><br><code>[1 1 1],[5 5 365]);</code></td>
 <td><code>ncfile &lt;- nc_open(fn)</code><br><code>vardata &lt;- ncvar_get(ncfile,var,             start=c(1,1,1), count=c(5,5,365))</code></td>
 <td><code>ds = xr.open_dataset(fn))</code><br><code>ds.loc[0:5,0:5,0:365]</code> <br>(data is loaded lazily and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.; check the docs)</td>
 </tr>
 </tbody>
 </table>
 <p>As mentioned above, these files also include populated variables that give values for indices along each dimension (<code>lon, lat</code> / <code>location</code> and <code>time</code>), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the netCDF header first (the author has seen grid variables listed for example as <code>lat</code>, <code>latitude</code>, <code>Latitude</code>, <code>Lat</code>, <code>latitude_1</code>, and any number of other names).</p>
-<p>The <code>time</code> variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in.</p>
-<h2 id="Introduction-to-Gridded-Data">Introduction to Gridded Data<a class="anchor-link" href="#Introduction-to-Gridded-Data"> </a></h2><p>Weather data is collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
+<p>The <code>time</code> variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using python, the <code>xarray</code> package has the ability to interpret some of these time representations for you and translates them into the <code>datetime64</code> class, which makes some kinds of manipulation, like averaging over months, easier.</p>
+<h2 id="1.2-Gridded-Data">1.2 Gridded Data<a class="anchor-link" href="#1.2-Gridded-Data"> </a></h2><p>Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
 <p>Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. <em>(NB: Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins)</em>.</p>
 <p>However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.</p>
 <p>The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.</p>
-<h2 id="Weather-Data-Products">Weather Data Products<a class="anchor-link" href="#Weather-Data-Products"> </a></h2><p><strong>The Interpolation - Reanalysis Spectrum</strong>
+<h2 id="1.3-Weather-Data-Products">1.3 Weather Data Products<a class="anchor-link" href="#1.3-Weather-Data-Products"> </a></h2><p><strong>The Interpolation - Reanalysis Spectrum</strong>
 Data products differ by how they assimilate data, and how much “additional” information is added beyond (pre-processed) station data. They can be thought of as a rough spectrum ranging from ‘observational’ data products that merely statistically interpolate data into a grid to ‘reanalysis’ products that feed data products into a sort of climate model to produce a more complete set of variables. Some datasets are observational but include topographic and other physical information in their statistical methods, while some reanalysis datasets use pure model output for only some variables.</p>
 <p>Both ends of their spectrum have tradeoffs, and generalizable statements about these tradeoffs are hard to make because of differences in methodologies. The following are a few simplified rules of thumb:</p>
-<p><em>“Observational” / Interpolated Datasets</em>
-Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”), HadCrut4, GISTEMP, etc.</p>
+<h3 id="&#8220;Observational&#8221;-/-Interpolated-Datasets">&#8220;Observational&#8221; / Interpolated Datasets<a class="anchor-link" href="#&#8220;Observational&#8221;-/-Interpolated-Datasets"> </a></h3><p>Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”), HadCrut4, GISTEMP, PRISM, etc.</p>
 <ul>
 <li>Observations are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)</li>
 <li>Products generally differ by which stations or other data sources are included and excluded</li>
@@ -777,11 +789,12 @@ Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”),
 <li>Less realistic outside areas with strong station coverage</li>
 <li>Statistical interpolation means data not bound by physicality</li>
 </ul>
-<p><em>Reanalysis Datasets</em></p>
-<p>Examples: ERA-INTERIM, ERA-5, JRA-55, MERRA-2, NCEP2 (outdated), etc.</p>
+<h3 id="Reanalysis-Datasets">Reanalysis Datasets<a class="anchor-link" href="#Reanalysis-Datasets"> </a></h3><p>Examples: ERA-INTERIM, ERA-5, JRA-55, MERRA-2, NCEP2 (outdated), etc.</p>
 <ul>
 <li>Observational data are combined with climate models to produce a full set of atmospheric variables in a more physically plausible way than through mere interpolation</li>
-<li>Products differ by data is included (as with interpolated datasets), but now also differ by which underlying models are used as well</li>
+<li>Products differ by what data is included (as with interpolated
+datasets), but now also differ by which underlying models are used</li>
+<li>Typically include remote sensing data and a variety of other sources.</li>
 </ul>
 <p><em>Strengths</em>:</p>
 <ul>
@@ -795,19 +808,18 @@ Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”),
 <li>Limited by biases in underlying models</li>
 <li>Accuracy in areas of high station density may be lower than in interpolated products</li>
 </ul>
-<p><strong>Where to Even Begin - Resources and How to Start Working with a Data Product</strong></p>
-<p>Some incredibly useful resources to keep in mind while working with weather data are the following two sites:</p>
+<h2 id="1.4-Where-to-Even-Begin---Resources-and-How-to-Start-Working-with-a-Data-Product">1.4 Where to Even Begin - Resources and How to Start Working with a Data Product<a class="anchor-link" href="#1.4-Where-to-Even-Begin---Resources-and-How-to-Start-Working-with-a-Data-Product"> </a></h2><p>Some incredibly useful resources to keep in mind while working with weather data are the following two sites:</p>
 <ul>
 <li><a href="https://climatedataguide.ucar.edu">https://climatedataguide.ucar.edu</a> - an encyclopedia for weather and climate data products with expert guidance on strengths and weaknesses for most commonly-used datasets</li>
 <li><a href="https://reanalyses.org">https://reanalyses.org</a> - a forum and wiki for makers and users of reanalyses with a focus on evaluating data products and comparing them with observational data</li>
 <li><a href="https://www.esrl.noaa.gov/psd/data/writ/moncomp/datasets/">https://www.esrl.noaa.gov/psd/data/writ/moncomp/datasets/</a> - a “who’s who” of historical weather products with basic facts about each</li>
 </ul>
 <p>These resources will help you determine which data product is right for you (and better interpret results from existing studies - for example, NCEP2, which was commonly used in economics and policy studies, has known issues including larger biases in the Southern Hemisphere).</p>
-<p><em>Getting Started with a Data Product - Sample Process Using ERA-5</em></p>
-<p>Say you’re studying heat waves in the Sahel. Weather station data is low, so you need a gridded data product, and probably want a reanalysis data product for the same reasons. You consider ERA5, the most advanced modern reanalysis data product as of 2019, recently released by the European Centre for Medium-Range Weather Forecasting (ECMWF, which incidentally also produces the world’s most respected hurricane forecast model).</p>
+<p>Also think about if you want climatological ("what you expect") data, rather than weather ("what you get") data. Climatolgy is generally known with more precision and available at higher resolution, but will only represent average patterns (e.g., average temperature by month) rather than any particular year.</p>
+<h3 id="Getting-Started-with-a-Data-Product---Sample-Process-Using-ERA-5">Getting Started with a Data Product - Sample Process Using ERA-5<a class="anchor-link" href="#Getting-Started-with-a-Data-Product---Sample-Process-Using-ERA-5"> </a></h3><p>Say you’re studying heat waves in the Sahel. Weather station data is low, so you need a gridded data product, and probably want a reanalysis data product for the same reasons. You consider ERA5, the most advanced modern reanalysis data product as of 2019, recently released by the European Centre for Medium-Range Weather Forecasting (ECMWF, which incidentally also produces the world’s most respected hurricane forecast model).</p>
 <ol>
 <li><em>Understand the Data Product</em> - you look up ERA5 on the UCAR Climate Data Guide <a href="https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis">https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis</a>;<ol>
-<li>It tells you the product has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products) and includes 137 pressure levels (this is the vertical resolution; you can safely ignore this if you just care about temperature by the surface). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly).</li>
+<li>It tells you the product has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products) and includes 137 pressure levels (this is the vertical resolution; you can safely ignore this if you just care about temperature by the surface). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just becausethe data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.</li>
 <li>You see that it even gives you an estimate of the internal model uncertainty by rerunning the same analysis 10 times (10 “ensemble members”), though in “weaknesses” you note that the uncertainty may be underestimated.</li>
 <li>It extends back to 1979 for now (1979 is a common cutoff point due to it being roughly coterminous with the start of modern satellite observationsXXXX).</li>
 <li>The summary describes it as an ‘extraordinary product’, so you feel good in your choice, especially since most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest (near-surface temperature).</li>
@@ -826,20 +838,18 @@ Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”),
 </ol>
 </li>
 </ol>
-<p><strong>A Quick Summarizing Note</strong></p>
-<p>This process may seem overwhelming, especially given the large variety of data products that exist, and the sometimes rather opaque processes for figuring out what works best.</p>
+<h3 id="Thinking-ahead-to-climate-projections">Thinking ahead to climate projections<a class="anchor-link" href="#Thinking-ahead-to-climate-projections"> </a></h3><p>You may want to project your outcomes into the future under climate change, and if so, you should plan now. Projected climate data requires a step called "bias-correction", where the raw outputs of Global Climate Models are adjusted to reproduce the distributions of historical weather. But as we note above, there is no single agreed-upon historical weather dataset. If you want to project your results, find a future climate dataset that has already been bias-corrected (and downscaled) now, and use the same weather dataset that it was bias-corrected to. For example, the <a href="https://cds.nccs.nasa.gov/wp-content/uploads/2015/06/NEX-GDDP_Tech_Note_v1_08June2015.pdf">NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP)</a> dataset is bias-corrected to the <a href="http://hydrology.princeton.edu/data.pgf.php">Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling</a> historical dataset.</p>
+<h3 id="A-Quick-Summarizing-Note">A Quick Summarizing Note<a class="anchor-link" href="#A-Quick-Summarizing-Note"> </a></h3><p>This process may seem overwhelming, especially given the large variety of data products that exist, and the sometimes rather opaque processes for figuring out what works best.</p>
 <p>The author’s personal suggestion is to start off with a latest-generation reanalysis data product such as ERA5, unless there is a compelling reason not to. Don’t use a dataset or a data assimilation methodology just because previous work (even big-name papers) have used them. There are enough examples (XXXX various citations, including Burke/Hsiang on climate data, Burke’s response to Deschenes and Greenstone, etc. XXXX) in the literature of problematic uses of weather and climate data.</p>
-<p>And, when in doubt, check your results with multiple datasets from the latest generation! This may not make a huge difference for more stable variables in areas with high station coverage (i.e. temperature in North America), but could be a useful robustness check for more problematic ones (i.e. precipitation).</p>
-<p><strong>A Warning on Hydrological Variables (Precipitation, Humidity, etc.)</strong></p>
-<p>Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately, but is frequently desired for socioeconomic applications.</p>
+<p>And check your results with multiple datasets from the latest generation! Consider performing your analysis with both a reanalysis dataset and an interpolated dataset. This may not make a huge difference for more stable variables in areas with high station coverage (e.g. temperature in North America), but could be a useful robustness check for more problematic ones (e.g. precipitation).</p>
+<h2 id="1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)">1.5 A Warning on Hydrological Variables (Precipitation, Humidity, etc.)<a class="anchor-link" href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)"> </a></h2><p>Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately, but is frequently desired for socioeconomic applications.</p>
 <p><img src="https://paper-attachments.dropbox.com/s_68BC671A1663C9697A33A33E2D6C239622EC497BC251908A341D68D3A838B5CF_1569337731829_global_monthly_precip_reanalysis_models.png" alt="Data from Bosliovich et al. (2015); gridded data products disagree on average global monthly precipitation by up to 40%, and aren&#39;t always consistent!"></p>
-<p>Unlike temperature, which is relatively uniform spatiotemporally and can be interpolated with a relatively high degree of confidence, precipitation data is very difficult to interpolate and requires a much more complex understanding of regional precipitation patterns. Consequently,  [text on common issues with assimilated precipitation products]</p>
+<p>Unlike temperature, which is relatively uniform spatiotemporally and can be interpolated with a relatively high degree of confidence, precipitation data is very difficult to interpolate and requires a much more complex understanding of regional precipitation patterns. Consequently,  [text on common issues with assimilated precipitation productsXXXX]</p>
 <p>Finally, even the ‘raw’ precipitation data from weather stations and rain gauges is problematic. Developing a reliable, easily scaled rain gauge network is a difficult task. As an example, a common type of rain gauge, the ‘tipping bucket’, only records rain in discrete intervals (when the bucket fills and subsequently ‘tips’), and therefore can record a large rainstorm when a drizzle happened if that drizzle happens to be the straw that tips the bucket. A meteorologist once told the author of this section that tipping buckets stationed in remote areas may be stuck in the ‘tipped’ position for some time before anyone notices or can repair it.</p>
 <p>In general, rain gauges of most types are biased low. In strong wind conditions, many drops may not enter the rain catch in a gauge due to turbulence; in strong storms, point estimates may miss areas of greatest intensity. Rain data averaged over areas with complex terrain is biased because of the vertical profile of precipitation (stations are generally in valleys). Kenji Matsuura (of the UDel dataset fame) in his <a href="https://climatedataguide.ucar.edu/climate-data/global-land-precipitation-and-temperature-willmott-matsuura-university-delaware">expert guidance</a> on his dataset explains: “Under-catch bias can be nontrivial and very difficult to estimate adequately, especially over extensive areas...”</p>
 <p>Bias-correcting is integrated into weather data products, often involving assimilation of multiple data sources (satellites, radar, etc.) but significant biases remain (see above Figure).</p>
-<p>If you have to include precipitation data, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data.</p>
-<p><strong>A Quick Final Note on Station Data</strong></p>
-<p>Station data (e.g. the Global Summary of the Day) <em>can</em> be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. However, station data can’t be seen as the ‘true’ weather either; assumptions and calibration methodologies affect data here as well (see e.g. <a href="https://journals.ametsoc.org/doi/full/10.1175/BAMS-D-14-00226.1">Parker 2015</a>), some variables remain rather uncertain, and the influence of microclimates even in close proximity to stations shouldn’t be underestimated (think for example the Greater Los Angeles region, where temperature can vary up to 35 F between the inland valleys and the coast).</p>
+<p>Though precipitation is often recommended as a control, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data (and finally, make sure you think about what role precipitation plays in your model - see XXXX!).</p>
+<h2 id="1.6-A-Final-Note-on-Station-Data">1.6 A Final Note on Station Data<a class="anchor-link" href="#1.6-A-Final-Note-on-Station-Data"> </a></h2><p>Station data (e.g. Global Historical Climatology Network (GHCN) and the Global Summary of the Day) <em>can</em> be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. However, station data can’t be seen as the ‘true’ weather either; assumptions and calibration methodologies affect data here as well (see e.g. <a href="https://journals.ametsoc.org/doi/full/10.1175/BAMS-D-14-00226.1">Parker 2015</a>), some variables remain rather uncertain, and the influence of microclimates even in close proximity to stations shouldn’t be underestimated (think for example the Greater Los Angeles region, where temperature can vary up to 35 F between the inland valleys and the coast).</p>
 <p>Finally, under normal circumstances, <strong>don’t try to interpolate data yourself</strong>. Interpolated and reanalysis data products covered above were specifically designed for this purpose, and have vetted methodologies and publicly available citable diagnostics and uncertainties.</p>
 
 </div>
@@ -858,14 +868,14 @@ Examples: Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”),
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/1_getting-started.html">
-      〈 <span class="u-margin-right-tiny"></span> Getting started
+      〈 <span class="u-margin-right-tiny"></span> 
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/3_reduced-form-specification.html">
-      Developing a reduced-form specific... <span class="u-margin-right-tiny"></span> 〉
+       <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
