@@ -1,4 +1,5 @@
 # 1. Using Weather and Climate Data
+
 ## 1.0 Introduction
 
 When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note:

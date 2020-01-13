@@ -1,6 +1,6 @@
 # Weather Panel Tutorial
 
-# 1. Introduction to the Tutorial
+# Introduction to the Tutorial
 
 Welcome to the weather panel data regression tutorial! This tutorial
 will walk you through the steps necessary to relate socioeconomic

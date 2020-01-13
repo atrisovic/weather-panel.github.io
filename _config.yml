@@ -30,7 +30,7 @@ url: YOUR URL                  # the base hostname & protocol for your site, e.g
 # Jupyter Book settings
 
 # Main page settings
-footer_text: This page was created by <a href="http://www.impactlab.org">Climate Impact Lab</a>
+# footer_text: This page was created by <a href="http://www.impactlab.org">Climate Impact Lab</a>
 
 # Sidebar settings
 show_sidebar: true                # Show the sidebar. Only set to false if your only wish to host a single page.

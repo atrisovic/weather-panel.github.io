@@ -1,4 +1,4 @@
-# 4. Weighting schemes
+# 3. Weighting schemes
 
 This section describes how to use different weighting schemes when aggregating gridded data to data regions.
 

@@ -1,4 +1,4 @@
-# 3. Developing a reduced-form specification:
+# 2. Developing a reduced-form specification:
 
 This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income.
 

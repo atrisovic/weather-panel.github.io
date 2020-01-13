@@ -1,4 +1,4 @@
-# 6. Suggestions when producing a panel dataset
+# 5. Suggestions when producing a panel dataset
 
 Keep your code and your data separate. A typical file organization will be:
 

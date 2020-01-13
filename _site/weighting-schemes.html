@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Generating geographical unit data</title>
-  <meta name="description" content="        5. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm...">
+  <title>Weighting schemes</title>
+  <meta name="description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...">
 
-  <link rel="canonical" href="/YOUR%20URL//5_geographical-unit-data.html">
+  <link rel="canonical" href="/YOUR%20URL//weighting-schemes.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
 
-  <meta property="og:url"         content="/YOUR%20URL//5_geographical-unit-data.html" />
+  <meta property="og:url"         content="/YOUR%20URL//weighting-schemes.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Generating geographical unit data" />
-<meta property="og:description" content="        5. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm..." />
+<meta property="og:title"       content="Weighting schemes" />
+<meta property="og:description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//5_geographical-unit-data.html",
-  "headline": "Generating geographical unit data",
+  "mainEntityOfPage": "YOUR URL//weighting-schemes.html",
+  "headline": "Weighting schemes",
   "datePublished": "2020-01-13T13:21:48-05:00",
   "dateModified": "2020-01-13T13:21:48-05:00",
-  "description": "        5. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm...",
+  "description": "        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -499,7 +499,7 @@ initFunction(initPrint)
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
+        <a class="c-sidebar__entry c-sidebar__entry--active"
           href="/weighting-schemes.html"
         >
           
@@ -631,113 +631,168 @@ initFunction(initPrint)
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.-Generating-geographical-unit-data">5. Generating geographical unit data<a class="anchor-link" href="#5.-Generating-geographical-unit-data"> </a></h1><p>A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">[1]</a>.</p>
-<p>One kind of geographic region is simply called an "administrative
-unit", and refers to states and provinces, or counties and
-municipalities. The top level of this hierarchy of administrative
-units is "ADM0", referring to countries; "ADM1" is the first level of
-political division, usually called states or provinces; "ADM2" is the
-second level of division, and has a wider range of names across the
-globe.
- Administrative units in economics analyses are typically politically-defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. They can also be more effective for communicating results, since politically defined regions are also more relevant for policy-makers.</p>
-<p>Administrative unit data can capture existing administrative units (high granularity) or groups of those units (lesser granularity). For example, the administrative unit database, <a href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
-When aggregating administrative units, it is important to capture
-territories with homogeneous features that are relevant to the
-study. For example, if the weather is relevant for the study, the
-administrative unit should be fairly homogeneous concerning mean temperature and precipitation.</p>
-<p><a href="https://academic.oup.com/reep/article/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change</a> describes
-the common pitfalls in translating weather data into geographical unit data.</p>
-<h2 id="Geographic-information-systems">Geographic information systems<a class="anchor-link" href="#Geographic-information-systems"> </a></h2><p>Much is made of geographic information system (GIS), but these have
-long since become unnotably common parts of spatial research. GIS
-refers to the representation of polygons, curves, and points, and
-their use in data analysis.</p>
-<p>Describing shapes requires specialized data formats. The most common
-data format is an ESRI Shapefile, and we will focus on these for this
-tutorial. You may also encounter GDB (common in hydrology), GeoJSON
-(used with web interfaces), KXML (used by Google Earth), and OSM (from
-OpenStreetMap) files. All of these can be converted to Shapefiles,
-using GIS software like QGIS.</p>
-<p>A shapefile also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.</p>
-<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code>.shp</code>, <code>.shx</code> and <code>.dbf</code>. There may be additional files like <code>.prj</code> with the shape file’s projection information. All files must have the same name, for example:</p>
-
-<pre><code>states.shp
-states.shx
-states.dbf</code></pre>
-<p>Technical description for shapefiles can be found <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"><em>HERE</em></a></p>
-<h2 id="Finding-shapefiles">Finding shapefiles<a class="anchor-link" href="#Finding-shapefiles"> </a></h2><p>It is usually possible to find a shapefile corresponding to a set of
-socioeconomic data by searching around online. Many governments will
-have an internal search engine for their GIS data. Two frequently
-useful resources are
-the <a href="https://gadm.org">Global Administrative Regions</a> database, which
-has standard administrative units across the globe,
-and <a href="http://www.naturalearthdata.com/">Natural Earth</a> which has
-clean physical shape information.</p>
-<h2 id="Creating-shapefiles">Creating shapefiles<a class="anchor-link" href="#Creating-shapefiles"> </a></h2><p>In some cases, you will have to make the shapefile from scratch. The
-most common ways of doing this is by clicking out the shape of each
-polygon. This generally requires a few steps.</p>
+<h1 id="3.-Weighting-schemes">3. Weighting schemes<a class="anchor-link" href="#3.-Weighting-schemes"> </a></h1><p>This section describes how to use different weighting schemes when aggregating gridded data to data regions.</p>
+<h2 id="Why-spatial-weighting-schemes-matter">Why spatial weighting schemes matter<a class="anchor-link" href="#Why-spatial-weighting-schemes-matter"> </a></h2><p>Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.</p>
+<p>As described in section <a href="https://paper.dropbox.com/doc/Weather-Panel-Tutorial-Dealing-with-the-spatial-and-t-Y19yJIcW3pV0TW76gmp5H#:uid=202980750047650372256790&amp;amp;h2=Dealing-with-the-spatial-and-t">+Weather Panel Tutorial: Dealing-with-the-spatial-and-t</a>, the scale of a phenomenon matters. Many processes occur at a more local scale than that which data is collected. The motivation for weighting is different for aggregation that represents averaged phenomena vs. phenomena that respond to averaged weather, and the sequence of analysis changes.</p>
+<p>In the first case, the phenomenon occurs locally, in response to local weather. In this case, we perform weighted aggregations to reflect the amount of the phenomenon in each location. For example, we would use population weighting to model the effects of heat on people. In this case, the order of operations is:</p>
 <ol>
-<li>Find an image that shows the regions that you want to digitize and
-import the image into QGIS or ArcGIS.</li>
-<li>Typically, published images will not report the projection that was
-used, but you will need to find a mapping between points in the
-image and latitude-longitude coordinates. Use
-the
-<a href="https://www.qgistutorials.com/en/docs/georeferencing_basics.html">GDAL Georeferencer</a> to
-make this a point-and-click task.</li>
-<li>Create new polygons by clicking around the edges of the polygon.</li>
+<li>Transform weather into the terms of the model specification.</li>
+<li>Average these transformed terms across space using a weighting scheme.</li>
 </ol>
-<h2 id="Working-with-shapefiles">Working with shapefiles<a class="anchor-link" href="#Working-with-shapefiles"> </a></h2><p>Your first step should be to view your shapefile in a software system
-like QGIS or ArcGIS.
-QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is a proprietary software for working with maps and geographic data.</p>
-<p>These systems also allow you to perform many kinds of spatial
-analysis. Some of the most commonly useful are calculating Zonal
-Statistics, such as the average of a gridded dataset across each
-shapefile region, and Merging units, and translating points to
-polygons with Voronoi Polygons.</p>
-<p>Shapefiles can be opened with Python packages like the following</p>
-<ul>
-<li><strong>Fiona</strong>,</li>
+<p>In the second case, the phenomenon occurs at a data region level, in response to averaged weather. In this case, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from a shore could be important to predict the declaration of states of emergency. The order of operations is:</p>
+<ol>
+<li>Average the weather across space using a weighting scheme.</li>
+<li>Transform the averaged weather to the model specification.</li>
+</ol>
+<p>In either case, the weighting scheme is the same:</p>
+$$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i$$<p>where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.</p>
+<h2 id="Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources<a class="anchor-link" href="#Kinds-of-weight-schemes-and-data-sources"> </a></h2><p>Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.</p>
+<ol>
+<li>Format of the data values: Data values can be written out in text (as with CSV and ASC files) or in a binary representation (GeoTIFF and BIL). If the values are written as text, delimiters will be used to separate them (comma for CSV, spaces for ASC).</li>
+<li>The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.<ul>
+<li>The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.</li>
+<li>Grid cell sizes are often given as decimal representation of fractions of a degree, such as 0.0083333333333 = 1 / 120 of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.</li>
+<li>The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
-<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
-<span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \ 
-<span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="sa">u</span><span class="s1">&#39;FID&#39;</span><span class="p">,</span> <span class="s1">&#39;float:11&#39;</span><span class="p">)])}</span>
-</pre></div>
-<ul>
-<li><strong>PyShp</strong> or</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shapefile</span>
-<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
-<ul>
-<li><strong>geopandas</strong> (among other packages).</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
-</pre></div>
-<p>Data analysis software R also supports working with spatial data. To
-read shape files you could use a package like <code>maptools</code>,  <code>rgdal</code>,
-<code>sf</code>, or <code>PBSmapping</code>.</p>
-<ul>
-<li><p><strong>maptools</strong></p>
-<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
 </li>
-<li><p><strong>PBSmapping</strong></p>
-<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
-</li>
+</ol>
+<p>Based on this information, you can calculate which grid cell any point on the globe falls into:</p>
+$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right)$$<p>, $$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$</p>
+<p>where $x_0, y_0$ is lower-left corner point. If the center of the lower-left cell was given, $x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$, $y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$.</p>
+<p>For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.</p>
+<ol>
+<li>Projections are a way to map points on the globe (in latitude-longitude space) to a point in a flat x, y space. While this is important for visualizing maps, it can just be a nuisance for gridded datasets. The most common “projection” for gridded datasets is an equirectangular projection, and we have been assuming this above. This is variously referred to as <code>1</code>, <code>ll</code>, <code>WGS 84</code>, and <code>EPSG: 4326</code> (techically, WGS 84 species how latitude and longitude are defined, and EPSG:4326 specifies a drawing scheme where x = longitude and y = latitude). However, you will sometimes enounter grids in terms of km north and km east of a point, and then you may need to project these back to latitude-longitude and regrid them.</li>
+<li>All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.</li>
+</ol>
+<p>Implementation Notes: Reading gridded data.</p>
+<table>
+<thead><tr>
+<th>R</th>
+<th>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use the <code>raster</code> library.</td>
+<td>Take a look at <a href="https://github.com/jrising/research-common/tree/master/python/geogrid">https://github.com/jrising/research-common/tree/master/python/geogrid</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.</p>
+<p>Implementation Notes: Downloading multiple files and reading them.</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>library(raster)</code><br><code>for (year in 1980:2010) {</code><br>  <code>download.file(paste0(``"``http://archive.org/awesome/``"``, year,</code> <code>"``.zip``"``), "temp.zip")</code><br>  <code>filename &lt;- paste0("prefix-", year, ".asc")</code><br>  <code>zip.file.extract(filename,</code> <code>"``temp.zip``"``)</code><br>  <code>r &lt;- raster(filename)</code><br>  <code>&lt;perform weighting&gt;</code><br><code>}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Below are some common datasources for various weighting schemes.</p>
+<ul>
+<li>Population is an important weighting scheme for social impacts.<ul>
+<li>Gridded Population of the World: <a href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">https://sedac.ciesin.columbia.edu/data/collection/gpw-v4</a>
+  This is open-source, available at 30 arc-second resolution every 5 years from 2000 (or before with their previous version).</li>
+<li>LandScan: <a href="https://landscan.ornl.gov/landscan-datasets">https://landscan.ornl.gov/landscan-datasets</a>
+  LandScan is available at 30 arc-second resolution, annually, but previous years need to be purchased. As at your institution, as many already have it.</li>
 </ul>
-<h2 id="Weighted-aggregations-within-spatial-units">Weighted aggregations within spatial units<a class="anchor-link" href="#Weighted-aggregations-within-spatial-units"> </a></h2><h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
-<p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
-<p>Here are some suggestions for dealing with the mess that is political geography:</p>
-<p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
-<p>Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.</p>
-<p>Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as <code>&lt;dataset&gt;2canonical</code> and <code>canonical2&lt;dataset2&gt;</code>.</p>
+</li>
+<li>Gridded agriculture information<ul>
+<li>Global Agricultural Lands in the Year 2000: <a href="https://sedac.ciesin.columbia.edu/data/collection/aglands">https://sedac.ciesin.columbia.edu/data/collection/aglands</a></li>
+<li>Also consider gridded land use datasets: <a href="https://www.atmos.illinois.edu/~meiyapp2/datasets.htm">https://www.atmos.illinois.edu/~meiyapp2/datasets.htm</a></li>
+</ul>
+</li>
+<li>Look at the IRI Data Library for a large variety of datasets, available in any format: <a href="https://iridl.ldeo.columbia.edu/">https://iridl.ldeo.columbia.edu/</a>
+## Aligning weather and weighting grids</li>
+</ul>
+<p>The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See <a href="https://paper.dropbox.com/doc/Weather-Panel-Tutorial-Kinds-of-weight-schemes-and-da-Y19yJIcW3pV0TW76gmp5H#:uid=481082604230980012799322&amp;amp;h2=Kinds-of-weight-schemes-and-da">+Weather Panel Tutorial: Kinds-of-weight-schemes-and-da</a> to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.</p>
+<p>The following recipe should work for most cases to align weighting data with a weather grid.</p>
+<ol>
+<li><strong>Resample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong>
+ Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.</li>
+</ol>
+<p>Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- raster(``"``…/w001001.adf``"``)</code><br><code>landscan</code></td>
+</tr>
+<tr>
+<td><code>class       : RasterLayer</code> <br><code>dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)</code><br><code>resolution  : 0.008333333, 0.008333333  (x, y)</code><br><code>extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)</code></td>
+</tr>
+<tr>
+<td><code>prism &lt;- raster(``"``PRISM_tmax_stable_4kmM2_2000_all_asc")</code><br><code>prism</code></td>
+</tr>
+<tr>
+<td><code>class       : RasterLayer</code> <br><code>dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)</code><br><code>resolution  : 0.04166667, 0.04166667  (x, y)</code><br><code>extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Start by throwing away extraneous data, by cropping the LandScan to, say,
+126 to 66°W, 24 to 50°N.</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- crop(landscan, extent(-126, -66, 24, 50))</code></td>
+</tr>
+</tbody>
+</table>
+<p>Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
+    120 * (180 - 125.0208) = 6597.5
+    That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- disaggregate(landscan, fact=2) / 4</code></td>
+</tr>
+</tbody>
+</table>
+<p>We divide by 4 so that the total population remains the same.</p>
+<ol>
+<li><strong>Clip the two datasets so that they line up.</strong></li>
+</ol>
+<p>In the example above, after increasing the resolution of the LandScan data, we clip it again.</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>Re-aggregate the weighting data, so that it has the same resolution as the weather data.</strong></li>
+</ol>
+<p>In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:</p>
+<table>
+<thead><tr>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>landscan &lt;- aggregate(landscan, fact=10, fun=sum)</code></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
@@ -754,15 +809,15 @@ read shape files you could use a package like <code>maptools</code>,  <code>rgda
               <nav class="c-page__nav">
   
     
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/4_weighting-schemes.html">
-      〈 <span class="u-margin-right-tiny"></span> Weighting schemes
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/reduced-form-specification.html">
+      〈 <span class="u-margin-right-tiny"></span> Developing a reduced-form specific...
     </a>
   
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/6_suggestions.html">
-      Suggestions for work organization <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/geographical-unit-data.html">
+      Generating geographical unit data <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
