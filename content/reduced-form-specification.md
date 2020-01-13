@@ -71,7 +71,6 @@ http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Wo
 
 ## Fixed Effects Regression
 
-
 ## Dealing with the spatial and temporal scales of economic processes
 
 Weather data products are generally available in *gridded* form, developed after careful interpolation and/or reanalysis exercise. The grids used can vary in size across datasets, but they can be aggregated to economic scale of administrative units like county, city, etc., using appropriate weighted aggregation methods. While doing the spatial aggregation, we need to decide whether we want to do transformation-before-aggregation or aggregation-before-transformation based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. It is because precipitation is highly local both temporally and spatially; it could rain for < 1 min in <1 km radius area. Let us try to understand these two methods with county as our higher administrative level:

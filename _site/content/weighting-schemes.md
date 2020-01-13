@@ -6,7 +6,7 @@ This section describes how to use different weighting schemes when aggregating g
 
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
-As described in section [+Weather Panel Tutorial: Dealing-with-the-spatial-and-t](https://paper.dropbox.com/doc/Weather-Panel-Tutorial-Dealing-with-the-spatial-and-t-Y19yJIcW3pV0TW76gmp5H#:uid=202980750047650372256790&amp;h2=Dealing-with-the-spatial-and-t), the scale of a phenomenon matters. Many processes occur at a more local scale than that which data is collected. The motivation for weighting is different for aggregation that represents averaged phenomena vs. phenomena that respond to averaged weather, and the sequence of analysis changes.
+As described in section [Dealing with the spatial and temporal scales of economic processes](reduced-form-specification#Dealing-with-the-spatial-and-temporal-scales-of-economic-processes), the scale of a phenomenon matters. Many processes occur at a more local scale than that which data is collected. The motivation for weighting is different for aggregation that represents averaged phenomena vs. phenomena that respond to averaged weather, and the sequence of analysis changes.
 
 In the first case, the phenomenon occurs locally, in response to local weather. In this case, we perform weighted aggregations to reflect the amount of the phenomenon in each location. For example, we would use population weighting to model the effects of heat on people. In this case, the order of operations is:
 
@@ -23,6 +23,7 @@ In either case, the weighting scheme is the same:
 $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i$$
 
 where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.
+
 
 ## Kinds of weight schemes and data sources
 
@@ -77,7 +78,7 @@ Below are some common datasources for various weighting schemes.
 - Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
 ## Aligning weather and weighting grids
 
-The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [+Weather Panel Tutorial: Kinds-of-weight-schemes-and-da](https://paper.dropbox.com/doc/Weather-Panel-Tutorial-Kinds-of-weight-schemes-and-da-Y19yJIcW3pV0TW76gmp5H#:uid=481082604230980012799322&amp;h2=Kinds-of-weight-schemes-and-da) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
+The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
 
 The following recipe should work for most cases to align weighting data with a weather grid.
 
