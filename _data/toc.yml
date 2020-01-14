@@ -23,23 +23,23 @@
 
 # Top-level page
 - title: Getting started
-  url: /1_getting-started
+  url: /getting-started
   not_numbered: true
 
 - title: Using Weather and Climate Data
-  url: /2_using-weather-and-climate-data
+  url: /weather-and-climate-data
 
 - title: Developing a reduced-form specification
-  url: /3_reduced-form-specification
+  url: /reduced-form-specification
 
 - title: Weighting schemes
-  url: /4_weighting-schemes
+  url: /weighting-schemes
 
 - title:  Generating geographical unit data
-  url: /5_geographical-unit-data
+  url: /geographical-unit-data
 
 - title: Suggestions for work organization 
-  url: /6_suggestions
+  url: /suggestions
 
 # External link
 - title: GitHub repository

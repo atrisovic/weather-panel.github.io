@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Search the site</title>
-  <meta name="description" content="        ">
+  <title>Generating geographical unit data</title>
+  <meta name="description" content="        4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm...">
 
-  <link rel="canonical" href="/YOUR%20URL//search">
+  <link rel="canonical" href="/YOUR%20URL//geographical-unit-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
 
-  <meta property="og:url"         content="/YOUR%20URL//search" />
+  <meta property="og:url"         content="/YOUR%20URL//geographical-unit-data.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Search the site" />
-<meta property="og:description" content="        " />
+<meta property="og:title"       content="Generating geographical unit data" />
+<meta property="og:description" content="        4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//search",
-  "headline": "Search the site",
+  "mainEntityOfPage": "YOUR URL//geographical-unit-data.html",
+  "headline": "Generating geographical unit data",
   "datePublished": "2020-01-13T14:55:47-05:00",
   "dateModified": "2020-01-13T14:55:47-05:00",
-  "description": "        ",
+  "description": "        4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of adm...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -522,7 +522,7 @@ initFunction(initPrint)
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
+        <a class="c-sidebar__entry c-sidebar__entry--active"
           href="/geographical-unit-data.html"
         >
           
@@ -626,68 +626,144 @@ initFunction(initPrint)
 
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
-              <div class="search-content__inner-wrap">
-    <input type="text" id="lunr_search" class="search-input" tabindex="-1" placeholder="'Enter your search term...''" />
-    <div id="results" class="results"></div>
+                  <main class="jupyter-page">
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="4.-Generating-geographical-unit-data">4. Generating geographical unit data<a class="anchor-link" href="#4.-Generating-geographical-unit-data"> </a></h1><p>A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">[1]</a>.</p>
+<p>One kind of geographic region is simply called an "administrative
+unit", and refers to states and provinces, or counties and
+municipalities. The top level of this hierarchy of administrative
+units is "ADM0", referring to countries; "ADM1" is the first level of
+political division, usually called states or provinces; "ADM2" is the
+second level of division, and has a wider range of names across the
+globe.
+ Administrative units in economics analyses are typically politically-defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. They can also be more effective for communicating results, since politically defined regions are also more relevant for policy-makers.</p>
+<p>Administrative unit data can capture existing administrative units (high granularity) or groups of those units (lesser granularity). For example, the administrative unit database, <a href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
+When aggregating administrative units, it is important to capture
+territories with homogeneous features that are relevant to the
+study. For example, if the weather is relevant for the study, the
+administrative unit should be fairly homogeneous concerning mean temperature and precipitation.</p>
+<p><a href="https://academic.oup.com/reep/article/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change</a> describes
+the common pitfalls in translating weather data into geographical unit data.</p>
+<h2 id="Geographic-information-systems">Geographic information systems<a class="anchor-link" href="#Geographic-information-systems"> </a></h2><p>Much is made of geographic information system (GIS), but these have
+long since become unnotably common parts of spatial research. GIS
+refers to the representation of polygons, curves, and points, and
+their use in data analysis.</p>
+<p>Describing shapes requires specialized data formats. The most common
+data format is an ESRI Shapefile, and we will focus on these for this
+tutorial. You may also encounter GDB (common in hydrology), GeoJSON
+(used with web interfaces), KXML (used by Google Earth), and OSM (from
+OpenStreetMap) files. All of these can be converted to Shapefiles,
+using GIS software like QGIS.</p>
+<p>A shapefile also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.</p>
+<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code>.shp</code>, <code>.shx</code> and <code>.dbf</code>. There may be additional files like <code>.prj</code> with the shape file’s projection information. All files must have the same name, for example:</p>
+
+<pre><code>states.shp
+states.shx
+states.dbf</code></pre>
+<p>Technical description for shapefiles can be found <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf"><em>HERE</em></a></p>
+<h2 id="Finding-shapefiles">Finding shapefiles<a class="anchor-link" href="#Finding-shapefiles"> </a></h2><p>It is usually possible to find a shapefile corresponding to a set of
+socioeconomic data by searching around online. Many governments will
+have an internal search engine for their GIS data. Two frequently
+useful resources are
+the <a href="https://gadm.org">Global Administrative Regions</a> database, which
+has standard administrative units across the globe,
+and <a href="http://www.naturalearthdata.com/">Natural Earth</a> which has
+clean physical shape information.</p>
+<h2 id="Creating-shapefiles">Creating shapefiles<a class="anchor-link" href="#Creating-shapefiles"> </a></h2><p>In some cases, you will have to make the shapefile from scratch. The
+most common ways of doing this is by clicking out the shape of each
+polygon. This generally requires a few steps.</p>
+<ol>
+<li>Find an image that shows the regions that you want to digitize and
+import the image into QGIS or ArcGIS.</li>
+<li>Typically, published images will not report the projection that was
+used, but you will need to find a mapping between points in the
+image and latitude-longitude coordinates. Use
+the
+<a href="https://www.qgistutorials.com/en/docs/georeferencing_basics.html">GDAL Georeferencer</a> to
+make this a point-and-click task.</li>
+<li>Create new polygons by clicking around the edges of the polygon.</li>
+</ol>
+<h2 id="Working-with-shapefiles">Working with shapefiles<a class="anchor-link" href="#Working-with-shapefiles"> </a></h2><p>Your first step should be to view your shapefile in a software system
+like QGIS or ArcGIS.
+QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is a proprietary software for working with maps and geographic data.</p>
+<p>These systems also allow you to perform many kinds of spatial
+analysis. Some of the most commonly useful are calculating Zonal
+Statistics, such as the average of a gridded dataset across each
+shapefile region, and Merging units, and translating points to
+polygons with Voronoi Polygons.</p>
+<p>Shapefiles can be opened with Python packages like the following</p>
+<ul>
+<li><strong>Fiona</strong>,</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
+<span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \ 
+<span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="sa">u</span><span class="s1">&#39;FID&#39;</span><span class="p">,</span> <span class="s1">&#39;float:11&#39;</span><span class="p">)])}</span>
+</pre></div>
+<ul>
+<li><strong>PyShp</strong> or</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shapefile</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li><strong>geopandas</strong> (among other packages).</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
+<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
+</pre></div>
+<p>Data analysis software R also supports working with spatial data. To
+read shape files you could use a package like <code>maptools</code>,  <code>rgdal</code>,
+<code>sf</code>, or <code>PBSmapping</code>.</p>
+<ul>
+<li><p><strong>maptools</strong></p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li><p><strong>PBSmapping</strong></p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+</ul>
+<h2 id="Weighted-aggregations-within-spatial-units">Weighted aggregations within spatial units<a class="anchor-link" href="#Weighted-aggregations-within-spatial-units"> </a></h2><h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
+<p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
+<p>Here are some suggestions for dealing with the mess that is political geography:</p>
+<p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
+<p>Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.</p>
+<p>Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as <code>&lt;dataset&gt;2canonical</code> and <code>canonical2&lt;dataset2&gt;</code>.</p>
+
+</div>
+</div>
+</div>
 </div>
 
-<script>
-    // Add the lunr store since we will now search it
-    var store = [{
-        "title": "Generating geographical unit data",
-        
-        "excerpt":
-            "4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data. These geographic regions may be defined in subtle, non-intuitive ways. For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries[1]. One kind of geographic region is simply called an \"administrative unit\", and refers to...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/geographical-unit-data.html",
-        "teaser":null},{
-        "title": "Getting started",
-        
-        "excerpt":
-            "Weather Panel Tutorial Introduction to the Tutorial Welcome to the weather panel data regression tutorial! This tutorial will walk you through the steps necessary to relate socioeconomic outcomes to weather data at high resolution. We will cover: How to find and read weather data, and what you should be aware of when using it. How to relate your socioeconomic outcomes to weather variables, and develop your regression specification. How to work with shapefiles, and use them to generate your predictor variables. This tutorial will assume a knowledge of econometrics and basic experience with one scientific programming language (Stata, R, Matlab,...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/getting-started.html",
-        "teaser":null},{
-        "title": "Developing a reduced-form specification",
-        
-        "excerpt":
-            "2. Developing a reduced-form specification: This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income. Choosing weather variables Choice of weather variables depends on the question we are trying to answer. For example, in case of temperature, we can use T_min/T_max, T_avg or HDD/CDD or GDD. A few of the important weather variables are listed below: Temperature T_min/T_max: Useful when temperature variation is large leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, such as...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/reduced-form-specification.html",
-        "teaser":null},{
-        "title": "Suggestions for work organization",
-        
-        "excerpt":
-            "5. Suggestions when producing a panel dataset Keep your code and your data separate. A typical file organization will be: code/ - all of your analysis sources/ - the original data files, along with information so you can find them again data/ - merged datasets that are ready to be analyzed results/ - result files, typically not formatted for display. figures/ - formatted figures and LaTeX tables. If you aren’t sure what predictors you will need for your analysis, create your dataset with a lot of possible predictors and decide later. Often merging together your panel dataset is laborious, and...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/suggestions.html",
-        "teaser":null},{
-        "title": "Using Weather and Climate Data",
-        
-        "excerpt":
-            "1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note: There is no universally right or correct weather or climate data product Every weather or climate data product has its use cases, limitations, uncertainties, and quirks This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. A useful resource to better understand the basics of weather, climate, and the physical changes occuring in the climate...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/weather-and-climate-data.html",
-        "teaser":null},{
-        "title": "Weighting schemes",
-        
-        "excerpt":
-            "3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions. Why spatial weighting schemes matter Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/weighting-schemes.html",
-        "teaser":null},]
-</script>
+ 
+
+
+    </main>
+    
             </div>
             <div class="c-textbook__footer" id="textbook_footer">
               <nav class="c-page__nav">
   
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/weighting-schemes.html">
+      〈 <span class="u-margin-right-tiny"></span> Weighting schemes
+    </a>
+  
 
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/suggestions.html">
+      Suggestions for work organization <span class="u-margin-right-tiny"></span> 〉
+    </a>
   
 </nav>
 

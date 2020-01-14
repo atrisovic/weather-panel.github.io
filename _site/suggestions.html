@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Search the site</title>
-  <meta name="description" content="        ">
+  <title>Suggestions for work organization</title>
+  <meta name="description" content="        5. Suggestions when producing a panel dataset Keep your code and your data separate. A typical file organization will be:code/ - all of your analysis...">
 
-  <link rel="canonical" href="/YOUR%20URL//search">
+  <link rel="canonical" href="/YOUR%20URL//suggestions.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
 
-  <meta property="og:url"         content="/YOUR%20URL//search" />
+  <meta property="og:url"         content="/YOUR%20URL//suggestions.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Search the site" />
-<meta property="og:description" content="        " />
+<meta property="og:title"       content="Suggestions for work organization" />
+<meta property="og:description" content="        5. Suggestions when producing a panel dataset Keep your code and your data separate. A typical file organization will be:code/ - all of your analysis..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//search",
-  "headline": "Search the site",
+  "mainEntityOfPage": "YOUR URL//suggestions.html",
+  "headline": "Suggestions for work organization",
   "datePublished": "2020-01-13T14:55:47-05:00",
   "dateModified": "2020-01-13T14:55:47-05:00",
-  "description": "        ",
+  "description": "        5. Suggestions when producing a panel dataset Keep your code and your data separate. A typical file organization will be:code/ - all of your analysis...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -545,7 +545,7 @@ initFunction(initPrint)
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
+        <a class="c-sidebar__entry c-sidebar__entry--active"
           href="/suggestions.html"
         >
           
@@ -626,68 +626,49 @@ initFunction(initPrint)
 
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
-              <div class="search-content__inner-wrap">
-    <input type="text" id="lunr_search" class="search-input" tabindex="-1" placeholder="'Enter your search term...''" />
-    <div id="results" class="results"></div>
+                  <main class="jupyter-page">
+    <div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="5.-Suggestions-when-producing-a-panel-dataset">5. Suggestions when producing a panel dataset<a class="anchor-link" href="#5.-Suggestions-when-producing-a-panel-dataset"> </a></h1><p>Keep your code and your data separate. A typical file organization will be:</p>
+<ul>
+<li><code>code/</code> - all of your analysis</li>
+<li><code>sources/</code> - the original data files, along with information so you can find them again</li>
+<li><code>data/</code> - merged datasets that are ready to be analyzed</li>
+<li><code>results/</code> - result files, typically not formatted for display.</li>
+<li><code>figures/</code> - formatted figures and LaTeX tables.</li>
+</ul>
+<p>If you aren’t sure what predictors you will need for your analysis,
+create your dataset with a lot of possible predictors and decide
+later.  Often merging together your panel dataset is laborious, and
+you do not want to do it more times than necessary.</p>
+
+</div>
+</div>
+</div>
 </div>
 
-<script>
-    // Add the lunr store since we will now search it
-    var store = [{
-        "title": "Generating geographical unit data",
-        
-        "excerpt":
-            "4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data. These geographic regions may be defined in subtle, non-intuitive ways. For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries[1]. One kind of geographic region is simply called an \"administrative unit\", and refers to...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/geographical-unit-data.html",
-        "teaser":null},{
-        "title": "Getting started",
-        
-        "excerpt":
-            "Weather Panel Tutorial Introduction to the Tutorial Welcome to the weather panel data regression tutorial! This tutorial will walk you through the steps necessary to relate socioeconomic outcomes to weather data at high resolution. We will cover: How to find and read weather data, and what you should be aware of when using it. How to relate your socioeconomic outcomes to weather variables, and develop your regression specification. How to work with shapefiles, and use them to generate your predictor variables. This tutorial will assume a knowledge of econometrics and basic experience with one scientific programming language (Stata, R, Matlab,...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/getting-started.html",
-        "teaser":null},{
-        "title": "Developing a reduced-form specification",
-        
-        "excerpt":
-            "2. Developing a reduced-form specification: This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income. Choosing weather variables Choice of weather variables depends on the question we are trying to answer. For example, in case of temperature, we can use T_min/T_max, T_avg or HDD/CDD or GDD. A few of the important weather variables are listed below: Temperature T_min/T_max: Useful when temperature variation is large leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, such as...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/reduced-form-specification.html",
-        "teaser":null},{
-        "title": "Suggestions for work organization",
-        
-        "excerpt":
-            "5. Suggestions when producing a panel dataset Keep your code and your data separate. A typical file organization will be: code/ - all of your analysis sources/ - the original data files, along with information so you can find them again data/ - merged datasets that are ready to be analyzed results/ - result files, typically not formatted for display. figures/ - formatted figures and LaTeX tables. If you aren’t sure what predictors you will need for your analysis, create your dataset with a lot of possible predictors and decide later. Often merging together your panel dataset is laborious, and...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/suggestions.html",
-        "teaser":null},{
-        "title": "Using Weather and Climate Data",
-        
-        "excerpt":
-            "1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note: There is no universally right or correct weather or climate data product Every weather or climate data product has its use cases, limitations, uncertainties, and quirks This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. A useful resource to better understand the basics of weather, climate, and the physical changes occuring in the climate...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/weather-and-climate-data.html",
-        "teaser":null},{
-        "title": "Weighting schemes",
-        
-        "excerpt":
-            "3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions. Why spatial weighting schemes matter Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme...",
-        "categories": [],
-        "tags": [],
-        "url": "YOUR%20URL/weighting-schemes.html",
-        "teaser":null},]
-</script>
+ 
+
+
+    </main>
+    
             </div>
             <div class="c-textbook__footer" id="textbook_footer">
               <nav class="c-page__nav">
   
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/geographical-unit-data.html">
+      〈 <span class="u-margin-right-tiny"></span> Generating geographical unit data
+    </a>
+  
 
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="">
+       <span class="u-margin-right-tiny"></span> 〉
+    </a>
   
 </nav>
 
