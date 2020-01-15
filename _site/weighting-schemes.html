@@ -26,8 +26,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//weighting-schemes.html",
   "headline": "Weighting schemes",
-  "datePublished": "2020-01-13T14:55:47-05:00",
-  "dateModified": "2020-01-13T14:55:47-05:00",
+  "datePublished": "2020-01-15T15:46:28-05:00",
+  "dateModified": "2020-01-15T15:46:28-05:00",
   "description": "        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...",
   "author": {
     "@type": "Person",
@@ -705,10 +705,9 @@ $$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\r
 <li>Also consider gridded land use datasets: <a href="https://www.atmos.illinois.edu/~meiyapp2/datasets.htm">https://www.atmos.illinois.edu/~meiyapp2/datasets.htm</a></li>
 </ul>
 </li>
-<li>Look at the IRI Data Library for a large variety of datasets, available in any format: <a href="https://iridl.ldeo.columbia.edu/">https://iridl.ldeo.columbia.edu/</a>
-## Aligning weather and weighting grids</li>
+<li>Look at the IRI Data Library for a large variety of datasets, available in any format: <a href="https://iridl.ldeo.columbia.edu/">https://iridl.ldeo.columbia.edu/</a></li>
 </ul>
-<p>The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See <a href="#Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources</a> to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.</p>
+<h2 id="Aligning-weather-and-weighting-grids">Aligning weather and weighting grids<a class="anchor-link" href="#Aligning-weather-and-weighting-grids"> </a></h2><p>The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See <a href="#Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources</a> to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.</p>
 <p>The following recipe should work for most cases to align weighting data with a weather grid.</p>
 <ol>
 <li><strong>Resample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong>

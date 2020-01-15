@@ -76,6 +76,7 @@ Below are some common datasources for various weighting schemes.
     - Global Agricultural Lands in the Year 2000: https://sedac.ciesin.columbia.edu/data/collection/aglands
     - Also consider gridded land use datasets: https://www.atmos.illinois.edu/~meiyapp2/datasets.htm
 - Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
+
 ## Aligning weather and weighting grids
 
 The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
