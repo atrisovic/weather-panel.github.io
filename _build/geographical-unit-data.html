@@ -120,7 +120,86 @@ read shape files you could use a package like <code>maptools</code>,  <code>rgda
 </pre></div>
 </li>
 </ul>
-<h2 id="Weighted-aggregations-within-spatial-units">Weighted aggregations within spatial units<a class="anchor-link" href="#Weighted-aggregations-within-spatial-units"> </a></h2><h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
+<h2 id="Weighted-averages-within-spatial-units">Weighted averages within spatial units<a class="anchor-link" href="#Weighted-averages-within-spatial-units"> </a></h2><p>Now, you probably have a gridded spatiotemporal dataset of historical
+weather and economic output data specific to shapefile regions.  The
+next step is construct the weather measures that will correspond to
+each of your economic data observations.  To do this, you will need to
+construct a weighted average of the weather in each region for each
+timestep.</p>
+<p>This can be a computationally expensive operation, so it is important
+to set up the mathematical process efficiently. The regional averaging
+process is equivalent to a matrix transformation:
+$$w_\text{region} = A w_\text{gridded}$$</p>
+<p>where $w_\text{region}$ is a vector of weather values across
+regions, in a given timestep; and $w_\text{gridded}$ is a vector of
+weather values across grid cells.  Suppose there are $N$ regions and
+$R C$ grid cells, then the transformation matrix $A$ will be $N x
+R C$. The $A$ matrix does not change over time, so once you
+calculate it, the process for generating each time step is faster.</p>
+<p>Below, we sketch out two approaches to generating this matrix, but a
+few comments are common no matter how you generate it.</p>
+<ol>
+<li><p>The sum of entries across each row should be 1. Missing values can
+cause reasonable-looking calculations to produce rows sums that are
+less than one, so make sure you check.</p>
+</li>
+<li><p>This matrix is huge, but it is very sparse: most entries
+are 0. Make sure to use a sparse matrix implementation (e.g.,
+<code>sparseMatrix</code> in R, <code>scipy.sparse</code> in python, <code>sparse</code> in Matlab).</p>
+</li>
+<li><p>The $w_\text{gridded}$ data starts as a matrix, but here we use
+it as a vector.  It is easy (in any language) to convert a matrix
+to a vector with all of its values, but you need to be careful
+about the order of the entries, and order the columns of $A$ the
+same way.</p>
+<p>In R, <code>as.vector</code> will convert from a matrix to a vector, with each
+<em>column</em> being listed in full before moving on to the next column.</p>
+<p>In python, <code>numpy.flatten</code> will convert a numpy matrix to a vector,
+with each <em>row</em> being listed in full before moving on to the next
+row.</p>
+<p>In Matlab, indexing the grid with <code>(:)</code> will convert from an array
+to a vector, with each <em>column</em> being listed in full before moving
+on to the next column.</p>
+</li>
+</ol>
+<h3 id="Version-1.-Using-grid-cell-centers">Version 1. Using grid cell centers<a class="anchor-link" href="#Version-1.-Using-grid-cell-centers"> </a></h3><p>The easiest way to generate weather for each region in a shapefile is
+to generate a collection of points at the center of each grid
+cell. This approach can be used without generating an $A$ matrix,
+but the matrix method improves efficiency.</p>
+<p>As an example, in R, you generate these points like so:</p>
+<div class="highlight"><pre><span></span><span class="n">longitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
+<span class="n">latitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
+<span class="n">pts</span> <span class="o">&lt;-</span> <span class="nf">expand.grid</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">longitudes</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">latitudes</span><span class="p">)</span>
+</pre></div>
+<p>Now, you can iterate through each region, and get a list of all of the
+points within each region. Here's how you would do that with the
+<code>PBSmapping</code> library in R:</p>
+<div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span> <span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span>
+<span class="n">eids</span> <span class="o">&lt;-</span> <span class="nf">findPolys</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">polys</span><span class="p">,</span> <span class="n">maxRows</span><span class="o">=</span><span class="m">6e5</span><span class="p">)</span>
+</pre></div>
+<p>Then you can use the cells that have been found (which, if you've set
+it up right, will be in the same order as the columns of $A$) to
+fill in the entries of your transformation matrix.</p>
+<p>If your regions are not much bigger than the grid cells, you may get
+regions that do not contain any cell centers. In this case, you need
+to find whichever grid cell is closest. For example, in R, using
+<code>PBSmapping</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">centroid</span> <span class="o">&lt;-</span> <span class="nf">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">dists</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">((</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span> <span class="o">-</span> <span class="n">centroid</span><span class="o">$</span><span class="n">X</span><span class="p">)</span><span class="n">^2</span> <span class="o">+</span> <span class="p">(</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span> <span class="o">-</span> <span class="n">centroid</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span>
+<span class="n">closest</span> <span class="o">&lt;-</span> <span class="nf">which.min</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span><span class="n">[1]</span>
+</pre></div>
+<h3 id="Version-2.-Allowing-for-partial-grid-cells">Version 2. Allowing for partial grid cells<a class="anchor-link" href="#Version-2.-Allowing-for-partial-grid-cells"> </a></h3><p>Just using the grid cell centers can result in a poor representation
+of the weather that overlaps each region, particularly when the
+regions are of a similar size to the grid cells. In this case, you
+need to determine how much each grid cell overlaps with each region.</p>
+<p>There are different ways for doing this, but one is to use QGIS.
+Within QGIS, you can create a shapefile with a rectangle for each grid
+cell. Then intersect those with the region shapefile, producing a
+separate polygon for each region-by-grid cell combination. Then have
+QGIS compute the area of each of those regions: these will give you
+the portion of grid cells to use.</p>
+<h2 id="Matching-names">Matching names<a class="anchor-link" href="#Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
 <p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
 <p>Here are some suggestions for dealing with the mess that is political geography:</p>
 <p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
