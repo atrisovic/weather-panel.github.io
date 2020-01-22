@@ -218,7 +218,7 @@ closest <- which.min(dists)[1]
 
 Just using the grid cell centers can result in a poor representation
 of the weather that overlaps each region, particularly when the
-regions are of a similarly size to the grid cells. In this case, you
+regions are of a similar size to the grid cells. In this case, you
 need to determine how much each grid cell overlaps with each region.
 
 There are different ways for doing this, but one is to use QGIS.
