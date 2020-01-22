@@ -142,11 +142,11 @@ to set up the mathematical process efficiently. The regional averaging
 process is equivalent to a matrix transformation:
 $$w_\text{region} = A w_\text{gridded}$$
 
-where $$w_\text{region}$$ is a vector of weather values across
-regions, in a given timestep; and $$w_\text{gridded}$$ is a vector of
-weather values across grid cells.  Suppose there are $$N$$ regions and
-$$R C$$ grid cells, then the transformation matrix $$A$$ will be $$N x
-R C$$. The $$A$$ matrix does not change over time, so once you
+where $w_\text{region}$ is a vector of weather values across
+regions, in a given timestep; and $w_\text{gridded}$ is a vector of
+weather values across grid cells.  Suppose there are $N$ regions and
+$R C$ grid cells, then the transformation matrix $A$ will be $N x
+R C$. The $A$ matrix does not change over time, so once you
 calculate it, the process for generating each time step is faster.
 
 Below, we sketch out two approaches to generating this matrix, but a
@@ -160,10 +160,10 @@ few comments are common no matter how you generate it.
    are 0. Make sure to use a sparse matrix implementation (e.g.,
    `sparseMatrix` in R, `scipy.sparse` in python, `sparse` in Matlab).
    
-3. The $$w_\text{gridded}$$ data starts as a matrix, but here we use
+3. The $w_\text{gridded}$ data starts as a matrix, but here we use
    it as a vector.  It is easy (in any language) to convert a matrix
    to a vector with all of its values, but you need to be careful
-   about the order of the entries, and order the columns of $$A$$ the
+   about the order of the entries, and order the columns of $A$ the
    same way.
    
    In R, `as.vector` will convert from a matrix to a vector, with each
@@ -181,7 +181,7 @@ few comments are common no matter how you generate it.
 
 The easiest way to generate weather for each region in a shapefile is
 to generate a collection of points at the center of each grid
-cell. This approach can be used without generating an $$A$$ matrix,
+cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
 
 As an example, in R, you generate these points like so:
@@ -201,7 +201,7 @@ eids <- findPolys(events, polys, maxRows=6e5)
 ```
 
 Then you can use the cells that have been found (which, if you've set
-it up right, will be in the same order as the columns of $$A$$) to
+it up right, will be in the same order as the columns of $A$) to
 fill in the entries of your transformation matrix.
 
 If your regions are not much bigger than the grid cells, you may get
