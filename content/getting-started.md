@@ -2,9 +2,19 @@
 
 # Introduction to the Tutorial
 
-Welcome to the weather panel data regression tutorial! This tutorial
-will walk you through the steps necessary to relate socioeconomic
-outcomes to weather data at high resolution. We will cover:
+Welcome to the weather panel data regression tutorial! Using
+econometrics to study how social, economic, and biophysical systems
+respond to weather has opened a huge number of doors, allowing us to
+better understand the impacts of climate change, disaster risk and
+responses, resource management, human behavior, and sustainable
+development. Here are some of the relationships that have been
+uncovered in recent years:
+
+![Examples from Carleton and Hsiang (2016).](images/examples.jpg)
+
+This tutorial will walk you through the steps necessary to relate
+socioeconomic outcomes to weather data at high resolution. We will
+cover:
 
 1. How to find and read weather data, and what you should be aware of when using it.
 2. How to relate your socioeconomic outcomes to weather variables, and
@@ -21,6 +31,13 @@ yourself. In particular, we do not provide prepared weather data or a
 ready-made script to prepare it. Each particular case is too specific,
 so you, the researcher, need to think through everything. This
 tutorial is aimed at helping you do that.
+
+We will also assume that you already have a research question. There
+are plenty of ways to find important questions, and maybe we will try
+to offer a tutorial on that in the future.
+
+A useful resource to better understand the basics of weather, climate, and the physical
+changes occuring in the climate system is [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3). If you have not had experience with climate (or meterological) science, that is a great place to start.
 
 For a theoretical foundation for the work of estimating weather and
 climate responses,

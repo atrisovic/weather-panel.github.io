@@ -9,9 +9,6 @@ When using weather data as independent variables in an economic model, or climat
 
 This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research.
 
-A useful resource to better understand the basics of weather, climate, and the physical
-changes occuring in the climate system is [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3).
-
 ## 1.1 Introducing the netCDF Data Format
 
 Almost all climate and weather datasets are released in [netCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/netcdf-overview) format. It's efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with almost any climate or weather dataset published in the world.
