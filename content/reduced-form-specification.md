@@ -1,6 +1,6 @@
 # 2. Developing a reduced-form specification:
 
-This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income.
+This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is[Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 
 ## Choosing weather variables
 
