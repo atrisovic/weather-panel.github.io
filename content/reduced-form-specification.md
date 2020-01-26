@@ -1,4 +1,4 @@
-# 2. Developing a reduced-form specification:
+# 2. Developing a reduced-form specification
 
 This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 
@@ -6,76 +6,67 @@ This section describes some of the considerations that go into developing a redu
 
 The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. A few of the important weather variables are listed below:
 
-- Temperature: There are various measures of temperature that can be used. Some of them are listed below:
+- **Temperature:** There are various measures of temperature that can be used. Some of them are listed below:
     1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.
     2. *$T_{avg}$:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
     3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.
     
-- Precipitation: As described above, precipitation is highly local, poorly measured, and poorly predicted.
-	1. *Total precipitation (e.g., over a year)*: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.
-	2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: These are more appropriate for representing water stress.
+- **Precipitation:** As described above, precipitation is highly local, poorly measured, and poorly predicted.
+    1. *Total precipitation (e.g., over a year)*: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.
+    2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: These are more appropriate for representing water stress.
     3. *Number of of rainy/dry days, or moments of the precipitation distribution*: The distribution of precipitation often matters more than total.  
     
     Precipitation is an important control to include, even if it’s not the main variable of interest, since temperature and       precipitation are correlated. However, we should remember that the properties of precipitation and temperature variables       are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high           temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see       the variation in death rates due to storm events,using binned annual precipitation is likely not going to give us the         variation in death rates, rather we would have to separately account for storm events by using an additional control.
     
-- River discharge rate: River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
+- **River discharge rate:** River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
 
-- Wind speed: The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.
+- **Wind speed:** The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.
 
-- Evapotranspiration rate (ET): It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.
+- **Net primary productivity (NPP):** It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near $0 g of carbon/m^2/day$ (tan) to $6.5 g of carbon/m^2/day$ (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.
 
-- Solar radiation: Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.
+- **Evapotranspiration rate (ET):** It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.
 
-- Humidity: 
+- **Solar radiation:** Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.
 
-- Ocean temperature: 
+- **Humidity:** There are mainly three metrics for humidity measurements: absolute, relative and specific. Absolute humidity describes the water content of air, expressed in grams per cubic metre or grams per kilogram. Relative humidity is expressed as a percentage relative to a maximum humidity value given the same temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. An important measure of temperature that takes humidity into account is wet-bulb temperature (WBT). WBT is the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. At 100% relative humidity, the wet-bulb temperature is equal to the air temperature (dry-bulb temperature) and it is lower at lower humidity. The intuition behind using WBT is the effect of temperature on living organisms depends on their bodies' evaporative cooling mechanisms, and the effectiveness of this mechanism in turn depends on humidity. Therefore, WBT is a better than crude temperature measures in guaging the effects of heat/radiation on living organisms.
 
-- Storm events: 
-- Plant productivity: 
+- **Sea surface temperature (SST) and ocean temperature:** SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag.
 
 
-## Common functional forms (pros, cons, and methods)
+## 2.2. Common functional forms (pros, cons, and methods)
 
-We use one/many/combination of different functional forms for weather variables for generating reduced form results. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below:
+Different functional forms serve different purposes. First, think about the "true model" that relates your dependent variable to your weather variables, and then try to turn it into a linear expression that you can estimate. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
 
-- Bins
+- [Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)
     1. Assignment of observations to bins. e.g.  15C-20C, 20C-25C, ...  for temperature
     2. Uses the mean metric, so its advantage is non-parametric nature
     3. Highly susceptible to existence of outliers in data
-
-https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152
 
 - [Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
 
-
-- Restricted Cubic Spline
+- [Restricted Cubic Spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)
     1. Fitting a piecewise polynomial function between pre-specified knots
     2. More independence compared to poly in choosing function knots
     3. Highly parametric due to freedom of choice of knots
 
-https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf
-
-- Linear Spline
+- [Linear Spline](http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)
     1. Fitting a line between cutoff values e.g.  25C CDD/0C HDD for temp
     2. Less parametric and very useful for predicting mid-range response
     3. Linear and highly sensitive to choice of cutoff values
 
-http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf
 
-## Cross-validation
+## 2.3. Cross-validation
 
-- Cross-validation exercise can be done to check the *internal validity* and the *external validity* of the model estimates
-- For checking internal validity, the model can be run on a subset of the dataset. For example, running country-wise regressions or running regressions on *k* partitions of data (k-fold cross validation) instead of running a full-sample global regression
-- For gauging external validity, model is run on some new dataset that has not been not used in estimating the model parameters. For example, predicting response for a new country using global regression model estimates, and comparing it to the actual observations
-- Although cross-validation exercise is not universally performed by researchers, but good papers have at least a section discussing the internal and the external validity of their models
-- Sometimes, researchers tend to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly this it can perform even in very simple cases
+Cross-validation can be done to check the *internal validity* and the *external validity* of the model estimates. For checking
+internal validity, the model can be fit to a subset of the dataset, and evaluated on the remainder. For example, you can leave particular regions out of your regression or remove a random *1/k* of your data (k-fold cross validation) instead of running a full-sample regression. For gauging external validity, model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.  
 
-## Fixed Effects Regression
+Although cross-validation is not universally performed by researchers, and many people continue to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly R-squared statistic can perform even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.
 
-## Dealing with the spatial and temporal scales of economic processes
+
+## 2.4. Dealing with the spatial and temporal scales of economic processes
 
 Weather data products are generally available in *gridded* form, developed after careful interpolation and/or reanalysis exercise. The grids used can vary in size across datasets, but they can be aggregated to economic scale of administrative units like county, city, etc., using appropriate weighted aggregation methods. While doing the spatial aggregation, we need to decide whether we want to do transformation-before-aggregation or aggregation-before-transformation based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. It is because precipitation is highly local both temporally and spatially; it could rain for < 1 min in <1 km radius area. Let us try to understand these two methods with county as our higher administrative level:
 
