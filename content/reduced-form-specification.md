@@ -35,27 +35,74 @@ The choice of weather variables depends on the question we are trying to answer,
 
 ## 2.2. Common functional forms (pros, cons, and methods)
 
-Different functional forms serve different purposes. First, think about the "true model" that relates your dependent variable to your weather variables, and then try to turn it into a linear expression that you can estimate. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
+Different functional forms serve different purposes. First, think about the "true model" that relates your dependent variable to your weather variables, and then try to turn it into a linear expression that you can estimate. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.  
+
+For understanding the methods part we are using transformation-before-aggregation method, which is explained in 2.4. Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$. Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:  
+$$f(T_{it}^k)=g(T_{\theta it})$$
+where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.
+Once we have $f(T_{it}^k)$ for each $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:  
+$$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
 
 - [Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)
     1. Assignment of observations to bins. e.g.  15C-20C, 20C-25C, ...  for temperature
     2. Uses the mean metric, so its advantage is non-parametric nature
     3. Highly susceptible to existence of outliers in data
+    
+    Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in       actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of       the response to occur. For now, the $K=6$ temp bins are: $<-5^\circ C$, $-5^\circ C-5^\circ C$, $5^\circ C-15^\circ C$,       $15^\circ C-25^\circ C$, $25^\circ C-35^\circ C$ and $>35^\circ C$.  
+    
+    As defined earlier, the grid $\theta$ temperature is $T_{\theta i t}$. For transformation, we will have to map actual         temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms     across all the grids that come under a specific county. The mapping is defined as follows:  
+    
+    $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$             $$\forall k \in \{1,2,...,6\}$$  
+    where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    
+    The aggregate transformation is as below:  
+    $$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
 
 - [Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
+    
+    Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining           polynomial terms, namely $T_{\theta i t}^2$, $T_{\theta i t}^3$ and $T_{\theta i t}^4$, by raising original $T_{\theta i       t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under     a county. So, we have:  
+    
+    $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta}*T_{\theta i t}^k$$ $$\forall k \in \{1,2,3,4\}$$  
+    where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    
+    The aggregate transformation is as below:  
+    $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
 
 - [Restricted Cubic Spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)
     1. Fitting a piecewise polynomial function between pre-specified knots
     2. More independence compared to poly in choosing function knots
     3. Highly parametric due to freedom of choice of knots
+    
+    For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$       temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
+    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in         {1,2,...,n-2\}$$  
+    where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    
+    And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
+    $\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$  
+    $\nabla^3_+=0$ if $\nabla^3_+<0$  
+    
+    The aggregate transformation is as below:  
+    $$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$
 
 - [Linear Spline](http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)
     1. Fitting a line between cutoff values e.g.  25C CDD/0C HDD for temp
     2. Less parametric and very useful for predicting mid-range response
-    3. Linear and highly sensitive to choice of cutoff values
+    3. Linear and highly sensitive to choice of cutoff values  
+    
+    Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a         linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To       implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method,     we get:  
+    $$f(T_{it}^1)=\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_2)_+$$  
+    $$f(T_{it}^2)=-\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_1)_+$$  
+    where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+
+    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of     degree 1, which is defined as follows:  
+    $\nabla_+=\nabla_+$ if $\nabla_+>0$  
+    $\nabla_+=0$ if $\nabla_+<0$  
+
+    The aggregate transformation is as below:  
+    $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$
 
 
 ## 2.3. Cross-validation
@@ -102,86 +149,6 @@ Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
 N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})  
 
 where $N_{it}$ is the number of agent-timestep observations represented within region $i$ and reporting period $t$.  
-
-Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.
-
-Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:
-
-$$f(T_{it}^k)=g(T_{\theta it})$$
-
-where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.
-
-Once we have $f(T_{it}^k)$ for each  $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:
-
-$$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
-
-The coefficients, $\beta^k \,\forall k\in \{1,2,...,K\}$ are estimated using an appropriate estimation technique for generating the response functions.
-
-Suppose we want a model for estimating the effect of temperature on human mortality $Y_{it}$.
-
-$$Y_{it}=\sum_{k\in \{1,2,...,K\}} \beta^k*T_{it}^k + \alpha_i + \zeta_t + \varepsilon_{it}$$
-
-We can run a fixed effects estimation on the county-level data for estimating the coefficients, and then generate the response functions for different counties in our data. As pointed out in the cross-validation section, it is important to check for internal validity and the external validity after the estimation is over.
-
-**Bin**
-
-Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of the response to occur. For now, the $K=6$ temp bins are: $<-5^\circ C$, $-5^\circ C-5^\circ C$, $5^\circ C-15^\circ C$, $15^\circ C-25^\circ C$, $25^\circ C-35^\circ C$ and $>35^\circ C$.
-As defined earlier, the grid $\theta$ temperature is $T_{\theta i t}$. For transformation, we will have to map actual temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms across all the grids that come under a specific county. The mapping is defined as follows:
-
-$$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$ $$\forall k \in \{1,2,...,6\}$$
-
-where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:
-
-$$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
-
-#### Polynomial
-
-Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining polynomial terms, namely $T_{\theta i t}^2$, $T_{\theta i t}^3$ and $T_{\theta i t}^4$, by raising original $T_{\theta i t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under a county. So, we have:
-
-$$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta}*T_{\theta i t}^k$$ $$\forall k \in \{1,2,3,4\}$$
-
-where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid. The aggregate transformation is as below:
-
-$$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
-
-#### Restricted Cubic Spline
-
-For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots. The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$ temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:
-
-$$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$
-
-where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.
-
-And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated polynomial of degree 3, which is defined as follows:
-
-$\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$
-
-$\nabla^3_+=0$ if $\nabla^3_+<0$
-
-The aggregate transformation is as below:
-
-$$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$
-
-#### Linear Spline
-
-Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method, we get:
-
-$$f(T_{it}^1)=\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_2)_+$$
-
-$$f(T_{it}^2)=-\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_1)_+$$
-
-where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.
-
-And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:
-
-$\nabla_+=\nabla_+$ if $\nabla_+>0$
-
-$\nabla_+=0$ if $\nabla_+<0$
-
-The aggregate transformation is as below:
-
-$$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$
-
 
 **Aggregation-before-transformation** 
 
