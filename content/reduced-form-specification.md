@@ -1,34 +1,38 @@
 # 2. Developing a reduced-form specification:
 
-This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is[Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
+This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 
-## Choosing weather variables
+## 2.1. Choosing weather variables
 
-Choice of weather variables depends on the question we are trying to answer. For example, in case of temperature, we can use *T_min/T_max, T_avg or HDD/CDD or GDD.* A few of the important weather variables are listed below:
+The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. A few of the important weather variables are listed below:
 
-- Temperature
-    1. *T_min/T_max:*  Useful when temperature variation is large leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, such as having events of heat waves and cold storms in the temporal support
-    2. *T_avg:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. Different averaging methods, like Bartlett Kernels, Moving Average, etc. can be used here
-    3. *HDD/CDD & GDD:*  Degree Days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was below a certain level.  Reference: https://www.degreedays.net/introduction
-- Precipitation
-    1. Highly local, poorly measured, and poorly predicted
-    2. Total precipitation is often not the best variable. Consider soil water, potential evapotranspiration rate (PET), and water runoff/availability
-    3. Distribution of precipitation often matters more than total. Consider no. of rainy/dry days, moments of the distribution
-    4. Precipitation is an important control to include, even if it’s not the main variable of interest However, we should remember that the properties of precipitation and temperature variables are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see the variation in death rates due to storm events, using binned annual precipitation is likely not going to give us the variation in death rates, rather we would have to separately account for storm events by using an additional control
-- River discharge rate
-    1. Still measured at the station-level, so we don’t have gridded products
-    2. For example Central Water Commission of India maintains this dataset for some of the Himalayan rivers that flow in India
-- Wind speed
-- Evapotranspiration rate
-- Solar radiation
-- Humidity
-- Ocean temperature
-- Atmospheric CO2
-- Storm events
-- Sea level
-- Ocean currents
-- Soil erosion and salinity
-- Plant productivity
+- Temperature: There are various measures of temperature that can be used. Some of them are listed below:
+    1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.
+    2. *$T_{avg}$:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
+    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.
+    
+- Precipitation: As described above, precipitation is highly local, poorly measured, and poorly predicted.
+	1. *Total precipitation (e.g., over a year)*: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.
+	2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: These are more appropriate for representing water stress.
+    3. *Number of of rainy/dry days, or moments of the precipitation distribution*: The distribution of precipitation often matters more than total.  
+    
+    Precipitation is an important control to include, even if it’s not the main variable of interest, since temperature and       precipitation are correlated. However, we should remember that the properties of precipitation and temperature variables       are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high           temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see       the variation in death rates due to storm events,using binned annual precipitation is likely not going to give us the         variation in death rates, rather we would have to separately account for storm events by using an additional control.
+    
+- River discharge rate: River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
+
+- Wind speed: The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.
+
+- Evapotranspiration rate (ET): It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.
+
+- Solar radiation: Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.
+
+- Humidity: 
+
+- Ocean temperature: 
+
+- Storm events: 
+- Plant productivity: 
+
 
 ## Common functional forms (pros, cons, and methods)
 
