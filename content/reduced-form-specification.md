@@ -68,14 +68,40 @@ Although cross-validation is not universally performed by researchers, and many 
 
 ## 2.4. Dealing with the spatial and temporal scales of economic processes
 
-Weather data products are generally available in *gridded* form, developed after careful interpolation and/or reanalysis exercise. The grids used can vary in size across datasets, but they can be aggregated to economic scale of administrative units like county, city, etc., using appropriate weighted aggregation methods. While doing the spatial aggregation, we need to decide whether we want to do transformation-before-aggregation or aggregation-before-transformation based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. It is because precipitation is highly local both temporally and spatially; it could rain for < 1 min in <1 km radius area. Let us try to understand these two methods with county as our higher administrative level:
+Weather data products are generally available in *gridded* form, developed through careful interpolation and/or reanalysis. The grids used can vary in size across datasets, but they can be aggregated to administrative units like county, city, etc., using appropriate weighted aggregation methods. Think about the scale of your administrative units, relative to the scale of the grid cells. If the regions are much bigger than the grid cells, a weighted average across included cells is appropriate. If the regions are much smaller than the cells, it will probably be necessary to aggregate the regions, since the level of variation is only at the grid cell level. If the two are of similar sizes, it is generally necessary to account for the
+amount that each grid cell lies within each region. This can be calculated as a transformation matrix, with a row for each region and a column for each cell. Once the matrix is calculated, it can be reused for each time step.  
 
+Typically, preparing the weather variables requires some kind of non-linear transformation. For example, estimating a polynomial functional form requires raising the temperatures to various powers. The square of a weighted average of grid-level temperatures is not the same as the weighted average of the square of grid-level temperatures.  
+
+While doing the spatial aggregation, we need to decide whether we want to transform the data first and then aggregate it (transformation-before-aggregation) or aggregate it and then transform it (aggregation-before-transformation). This decision is based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. This is because precipitation is highly local both temporally and spatially; it could rain for <1 min in <1 km radius area. Let us try to understand these two methods using counties as our higher administrative level:
 
 **Transformation-before-aggregation** 
 
-When an economic process is occurring at the grid level, we need to first do estimation at the grid level. Here, we need to do the required transformation of our weather variables at the grid level, run our estimation procedure on those transformed variables, and then aggregate grid-level estimates using weighted averaging method. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Therefore, we need to estimate the effect of temperature on mortality at the grid level first, and then take population-weighted average of grid-level effects for the grids that are inside the selected county boundaries
+When an economic process is occurring at the grid level (for example, for individuals or households), we need to first do our estimation at the grid level. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Here, we need to do the required transformation of our weather variables at the grid level, then aggregate these values using a weighted averaging method, and feed these into our estimation procedure.
 
 ### Mathematical formulation for transformation-before-aggregation method
+
+We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, $y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where the temperature affecting agents is in grid cell $p$ and occurs in timestep $s$ (e.g., if the agents respond on a day-by-day basis, $T_{ps}$ is the local weather for a single day).  
+
+However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $y_{it} = \sum_{\text{s in year t}} \sum_{\text{j in region i}} y_{js}$.  
+
+We can determine the agent-level response $f(T_{ps})$ if we assume linearity. First, let us represent this the way we would if we could run a regression with agent-level data, breaking up the dose-response
+curve into a sum of terms:  
+$$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})$$  
+
+where $g_k(T_{ps})$ is a transformation of the weather variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$, $g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.  
+
+We know that  
+$$y_i = \sum_{\text{js in it}} y_{js} = \sum_{\text{js in it}} \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k
+g_k(T_{ps})$$  
+
+We can rearrange this to  
+$$y_i = \beta_1 (\sum_{\text{sj in it}} g_1(T_{ps})) + \beta_2 (\sum_{\text{sj in it}} g_2(T_{ps})) + \cdots + \beta_k (\sum_{\text{sj in it}} g_k(T_{ps}))$$  
+
+Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
+N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})  
+
+where $N_{it}$ is the number of agent-timestep observations represented within region $i$ and reporting period $t$.  
 
 Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$.
 
