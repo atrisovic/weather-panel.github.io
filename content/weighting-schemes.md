@@ -2,7 +2,7 @@
 
 This section describes how to use different weighting schemes when aggregating gridded data to data regions.
 
-## Why spatial weighting schemes matter
+## 3.0 Why spatial weighting schemes matter
 
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
@@ -25,7 +25,7 @@ $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)}
 where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.
 
 
-## Kinds of weight schemes and data sources
+## 3.1 Kinds of weight schemes and data sources
 
 Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.
 
@@ -60,10 +60,16 @@ In some cases, it is appropriate and possible to use time-varying weighting sche
 
 Implementation Notes: Downloading multiple files and reading them.
 
-| R                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `library(raster)`<br>`for (year in 1980:2010) {`<br>  `download.file(paste0(``"``http://archive.org/awesome/``"``, year,` `"``.zip``"``), "temp.zip")`<br>  `filename <- paste0("prefix-", year, ".asc")`<br>  `zip.file.extract(filename,` `"``temp.zip``"``)`<br>  `r <- raster(filename)`<br>  `<perform weighting>`<br>`}` |
-
+```R
+library(raster)
+for (year in 1980:2010) {
+  download.file(paste0("http://archive.org/awesome/", year, ".zip"), "temp.zip")
+  filename <- paste0("prefix-", year, ".asc")
+  zip.file.extract(filename, "temp.zip")
+  r <- raster(filename)
+  <perform weighting>
+}
+```
 
 Below are some common datasources for various weighting schemes.
 
@@ -77,7 +83,7 @@ Below are some common datasources for various weighting schemes.
     - Also consider gridded land use datasets: https://www.atmos.illinois.edu/~meiyapp2/datasets.htm
 - Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
 
-## Aligning weather and weighting grids
+## 3.2 Aligning weather and weighting grids
 
 The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
 
@@ -90,27 +96,35 @@ The following recipe should work for most cases to align weighting data with a w
 
 Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
-| R                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `landscan <- raster(``"``…/w001001.adf``"``)`<br>`landscan`                                                                                                                                                                  |
-| `class       : RasterLayer` <br>`dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)`<br>`resolution  : 0.008333333, 0.008333333  (x, y)`<br>`extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)`             |
-| `prism <- raster(``"``PRISM_tmax_stable_4kmM2_2000_all_asc")`<br>`prism`                                                                                                                                                     |
-| `class       : RasterLayer` <br>`dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)`<br>`resolution  : 0.04166667, 0.04166667  (x, y)`<br>`extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)` |
+```R
+landscan <- raster("…/w001001.adf")
+landscan
+## class       : RasterLayer
+## dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)
+## resolution  : 0.008333333, 0.008333333  (x, y)
+## extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)
+prism <- raster("PRISM_tmax_stable_4kmM2_2000_all_asc")
+prism
+## class       : RasterLayer
+## dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)
+## resolution  : 0.04166667, 0.04166667  (x, y)
+## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
+```
 
 Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.
 
-| R                                                       |
-| ------------------------------------------------------- |
-| `landscan <- crop(landscan, extent(-126, -66, 24, 50))` |
+```R
+landscan <- crop(landscan, extent(-126, -66, 24, 50))
+```
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
-| R                                                |
-| ------------------------------------------------ |
-| `landscan <- disaggregate(landscan, fact=2) / 4` |
+```R
+landscan <- disaggregate(landscan, fact=2) / 4
+```
 
 We divide by 4 so that the total population remains the same.
 
@@ -120,17 +134,15 @@ We divide by 4 so that the total population remains the same.
 
 In the example above, after increasing the resolution of the LandScan data, we clip it again.
 
-| R                                                                            |
-| ---------------------------------------------------------------------------- |
-| `landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))` |
+```R
+landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
+```
 
 3. **Re-aggregate the weighting data, so that it has the same resolution as the weather data.**
 
 
 In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:
 
-| R                                                   |
-| --------------------------------------------------- |
-| `landscan <- aggregate(landscan, fact=10, fun=sum)` |
-
-
+```R
+landscan <- aggregate(landscan, fact=10, fun=sum)
+```
