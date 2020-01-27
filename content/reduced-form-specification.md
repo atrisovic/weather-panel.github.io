@@ -43,7 +43,7 @@ where, $g(.)$ denotes the transformation mapping on the grid-level temperature d
 Once we have $f(T_{it}^k)$ for each $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:  
 $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
 
-- [Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)
+- **[Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)**
     1. Assignment of observations to bins. e.g.  15C-20C, 20C-25C, ...  for temperature
     2. Uses the mean metric, so its advantage is non-parametric nature
     3. Highly susceptible to existence of outliers in data
@@ -58,7 +58,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     The aggregate transformation is as below:  
     $$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
 
-- [Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)
+- **[Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)**
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
@@ -71,7 +71,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     The aggregate transformation is as below:  
     $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
 
-- [Restricted Cubic Spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)
+- **[Restricted cubic spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)**
     1. Fitting a piecewise polynomial function between pre-specified knots
     2. More independence compared to poly in choosing function knots
     3. Highly parametric due to freedom of choice of knots
@@ -87,7 +87,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     The aggregate transformation is as below:  
     $$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$
 
-- [Linear Spline](http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)
+- **[Linear spline](http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)**
     1. Fitting a line between cutoff values e.g.  25C CDD/0C HDD for temp
     2. Less parametric and very useful for predicting mid-range response
     3. Linear and highly sensitive to choice of cutoff values  
@@ -122,11 +122,11 @@ Typically, preparing the weather variables requires some kind of non-linear tran
 
 While doing the spatial aggregation, we need to decide whether we want to transform the data first and then aggregate it (transformation-before-aggregation) or aggregate it and then transform it (aggregation-before-transformation). This decision is based on the whether the phenomenon in consideration is occurring at the local (grid) scale or at the larger administrative units (country, state, county, etc.) scale. Also, it matters what variable is in consideration. For example, doing aggregation-before-transformation for temperature will distort the signal less that doing it for precipitation. This is because precipitation is highly local both temporally and spatially; it could rain for <1 min in <1 km radius area. Let us try to understand these two methods using counties as our higher administrative level:
 
-**Transformation-before-aggregation** 
+### Transformation-before-aggregation
 
 When an economic process is occurring at the grid level (for example, for individuals or households), we need to first do our estimation at the grid level. For example, to estimate the effect of temperature on human mortality at the county level, we should reckon that the effect of temperature on mortality is a local phenomenon, so the estimation should happen at the lowest possible level. Here, we need to do the required transformation of our weather variables at the grid level, then aggregate these values using a weighted averaging method, and feed these into our estimation procedure.
 
-### Mathematical formulation for transformation-before-aggregation method
+**Mathematical formulation for transformation-before-aggregation method**
 
 We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, $y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where the temperature affecting agents is in grid cell $p$ and occurs in timestep $s$ (e.g., if the agents respond on a day-by-day basis, $T_{ps}$ is the local weather for a single day).  
 
@@ -150,8 +150,6 @@ N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})
 
 where $N_{it}$ is the number of agent-timestep observations represented within region $i$ and reporting period $t$.  
 
-**Aggregation-before-transformation** 
+### Aggregation-before-transformation
 
-When an economic process is occurring at the county level, we need to first do the weather variable aggregation at the county level. We do the weather variable transformation after we have aggregated it to the county level using weighted averaging method, and then run our estimation on the county level data. For example, to estimate the effect of storm events on public service employment at the administrative block level, we need to take into account the fact that hiring/firing of public service employees happens at the block level only.  Estimating grid-level effects will lead to wrong estimation, as it would result in zero estimate for those (almost all) grid cells which do not have the block office coordinates, and extremely large values for those (very few) cells, which comprise of the block office coordinates. The mathematical formulation for aggregation-before-transformation can be learned through transformation-before-aggregation formulation described above, with a change that the aggregation step precedes the transformation step.
-
-Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade; however, unlike spatial aggregation, the averaging process is standard in all general cases.
+When an economic process is occurring at the county level, we need to first do the weather variable aggregation at the county level. We do the weather variable transformation after we have aggregated it to the county level using weighted averaging method, and then run our estimation on the county level data. For example, to estimate the effect of storm events on public service employment at the administrative block level, we need to take into account the fact that hiring/firing of public service employees happens at the block level only.  Estimating grid-level effects will lead to wrong estimation, as it would result in zero estimate for those (almost all) grid cells which do not have the block office coordinates, and extremely large values for those (very few) cells, which comprise of the block office coordinates. The mathematical formulation for aggregation-before-transformation can be learned through transformation-before-aggregation formulation described above, with a change that the aggregation step precedes the transformation step. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade; however, unlike spatial aggregation, the averaging process is standard in all general cases.
