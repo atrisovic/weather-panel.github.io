@@ -102,8 +102,10 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     $\nabla_+=0$ if $\nabla_+<0$  
 
     The aggregate transformation is as below:  
-    $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$
+    $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$  
 
+**Example of reduced-form regression plots for different functional forms**
+![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
 
 ## 2.3. Cross-validation
 
