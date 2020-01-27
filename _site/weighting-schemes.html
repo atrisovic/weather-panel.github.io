@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Weighting schemes</title>
-  <meta name="description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...">
+  <meta name="description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.3.1 Why spatial weig...">
 
   <link rel="canonical" href="/YOUR%20URL//weighting-schemes.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//weighting-schemes.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Weighting schemes" />
-<meta property="og:description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin..." />
+<meta property="og:description" content="        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.3.1 Why spatial weig..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//weighting-schemes.html",
   "headline": "Weighting schemes",
-  "datePublished": "2020-01-22T11:32:19-05:00",
-  "dateModified": "2020-01-22T11:32:19-05:00",
-  "description": "        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.Why spatial weightin...",
+  "datePublished": "2020-01-27T12:19:39-05:00",
+  "dateModified": "2020-01-27T12:19:39-05:00",
+  "description": "        3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions.3.1 Why spatial weig...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -632,7 +632,7 @@ initFunction(initPrint)
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="3.-Weighting-schemes">3. Weighting schemes<a class="anchor-link" href="#3.-Weighting-schemes"> </a></h1><p>This section describes how to use different weighting schemes when aggregating gridded data to data regions.</p>
-<h2 id="Why-spatial-weighting-schemes-matter">Why spatial weighting schemes matter<a class="anchor-link" href="#Why-spatial-weighting-schemes-matter"> </a></h2><p>Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.</p>
+<h2 id="3.1-Why-spatial-weighting-schemes-matter">3.1 Why spatial weighting schemes matter<a class="anchor-link" href="#3.1-Why-spatial-weighting-schemes-matter"> </a></h2><p>Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.</p>
 <p>As described in section <a href="reduced-form-specification#Dealing-with-the-spatial-and-temporal-scales-of-economic-processes">Dealing with the spatial and temporal scales of economic processes</a>, the scale of a phenomenon matters. Many processes occur at a more local scale than that which data is collected. The motivation for weighting is different for aggregation that represents averaged phenomena vs. phenomena that respond to averaged weather, and the sequence of analysis changes.</p>
 <p>In the first case, the phenomenon occurs locally, in response to local weather. In this case, we perform weighted aggregations to reflect the amount of the phenomenon in each location. For example, we would use population weighting to model the effects of heat on people. In this case, the order of operations is:</p>
 <ol>
@@ -646,7 +646,7 @@ initFunction(initPrint)
 </ol>
 <p>In either case, the weighting scheme is the same:</p>
 $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i$$<p>where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.</p>
-<h2 id="Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources<a class="anchor-link" href="#Kinds-of-weight-schemes-and-data-sources"> </a></h2><p>Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.</p>
+<h2 id="3.2-Kinds-of-weight-schemes-and-data-sources">3.2 Kinds of weight schemes and data sources<a class="anchor-link" href="#3.2-Kinds-of-weight-schemes-and-data-sources"> </a></h2><p>Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.</p>
 <ol>
 <li>Format of the data values: Data values can be written out in text (as with CSV and ASC files) or in a binary representation (GeoTIFF and BIL). If the values are written as text, delimiters will be used to separate them (comma for CSV, spaces for ASC).</li>
 <li>The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.<ul>
@@ -657,8 +657,8 @@ $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)}
 </li>
 </ol>
 <p>Based on this information, you can calculate which grid cell any point on the globe falls into:</p>
-$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right)$$<p>, $$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$</p>
-<p>where $x_0, y_0$ is lower-left corner point. If the center of the lower-left cell was given, $x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$, $y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$.</p>
+$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right),$$<p></p>
+$$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$<p>where $x_0, y_0$ is lower-left corner point. If the center of the lower-left cell was given, $x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$, $y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$.</p>
 <p>For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.</p>
 <ol>
 <li>Projections are a way to map points on the globe (in latitude-longitude space) to a point in a flat x, y space. While this is important for visualizing maps, it can just be a nuisance for gridded datasets. The most common “projection” for gridded datasets is an equirectangular projection, and we have been assuming this above. This is variously referred to as <code>1</code>, <code>ll</code>, <code>WGS 84</code>, and <code>EPSG: 4326</code> (techically, WGS 84 species how latitude and longitude are defined, and EPSG:4326 specifies a drawing scheme where x = longitude and y = latitude). However, you will sometimes enounter grids in terms of km north and km east of a point, and then you may need to project these back to latitude-longitude and regrid them.</li>
@@ -680,17 +680,15 @@ $$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\r
 </table>
 <p>In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.</p>
 <p>Implementation Notes: Downloading multiple files and reading them.</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>library(raster)</code><br><code>for (year in 1980:2010) {</code><br>  <code>download.file(paste0(``"``http://archive.org/awesome/``"``, year,</code> <code>"``.zip``"``), "temp.zip")</code><br>  <code>filename &lt;- paste0("prefix-", year, ".asc")</code><br>  <code>zip.file.extract(filename,</code> <code>"``temp.zip``"``)</code><br>  <code>r &lt;- raster(filename)</code><br>  <code>&lt;perform weighting&gt;</code><br><code>}</code></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">year</span> <span class="n">in</span> <span class="m">1980</span><span class="o">:</span><span class="m">2010</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">download.file</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;http://archive.org/awesome/&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s">&quot;.zip&quot;</span><span class="p">),</span> <span class="s">&quot;temp.zip&quot;</span><span class="p">)</span>
+  <span class="n">filename</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;prefix-&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s">&quot;.asc&quot;</span><span class="p">)</span>
+  <span class="nf">zip.file.extract</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;temp.zip&quot;</span><span class="p">)</span>
+  <span class="n">r</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+  <span class="o">&lt;</span><span class="n">perform</span> <span class="n">weighting</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</pre></div>
 <p>Below are some common datasources for various weighting schemes.</p>
 <ul>
 <li>Population is an important weighting scheme for social impacts.<ul>
@@ -707,91 +705,39 @@ $$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\r
 </li>
 <li>Look at the IRI Data Library for a large variety of datasets, available in any format: <a href="https://iridl.ldeo.columbia.edu/">https://iridl.ldeo.columbia.edu/</a></li>
 </ul>
-<h2 id="Aligning-weather-and-weighting-grids">Aligning weather and weighting grids<a class="anchor-link" href="#Aligning-weather-and-weighting-grids"> </a></h2><p>The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See <a href="#Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources</a> to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.</p>
+<h2 id="3.3-Aligning-weather-and-weighting-grids">3.3 Aligning weather and weighting grids<a class="anchor-link" href="#3.3-Aligning-weather-and-weighting-grids"> </a></h2><p>The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See <a href="#Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources</a> to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.</p>
 <p>The following recipe should work for most cases to align weighting data with a weather grid.</p>
-<ol>
-<li><strong>Resample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong>
- Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.</li>
-</ol>
+<h3 id="Step-1:-Resample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data.">Step 1: <strong>Resample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong><a class="anchor-link" href="#Step-1:-Resample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data."> </a></h3><p>Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.</p>
 <p>Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>landscan &lt;- raster(``"``…/w001001.adf``"``)</code><br><code>landscan</code></td>
-</tr>
-<tr>
-<td><code>class       : RasterLayer</code> <br><code>dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)</code><br><code>resolution  : 0.008333333, 0.008333333  (x, y)</code><br><code>extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)</code></td>
-</tr>
-<tr>
-<td><code>prism &lt;- raster(``"``PRISM_tmax_stable_4kmM2_2000_all_asc")</code><br><code>prism</code></td>
-</tr>
-<tr>
-<td><code>class       : RasterLayer</code> <br><code>dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)</code><br><code>resolution  : 0.04166667, 0.04166667  (x, y)</code><br><code>extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)</code></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;…/w001001.adf&quot;</span><span class="p">)</span>
+<span class="n">landscan</span>
+<span class="c1">## class       : RasterLayer</span>
+<span class="c1">## dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)</span>
+<span class="c1">## resolution  : 0.008333333, 0.008333333  (x, y)</span>
+<span class="c1">## extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)</span>
+<span class="n">prism</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;PRISM_tmax_stable_4kmM2_2000_all_asc&quot;</span><span class="p">)</span>
+<span class="n">prism</span>
+<span class="c1">## class       : RasterLayer</span>
+<span class="c1">## dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)</span>
+<span class="c1">## resolution  : 0.04166667, 0.04166667  (x, y)</span>
+<span class="c1">## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)</span>
+</pre></div>
 <p>Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>landscan &lt;- crop(landscan, extent(-126, -66, 24, 50))</code></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span> <span class="m">-66</span><span class="p">,</span> <span class="m">24</span><span class="p">,</span> <span class="m">50</span><span class="p">))</span>
+</pre></div>
 <p>Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>landscan &lt;- disaggregate(landscan, fact=2) / 4</code></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">/</span> <span class="m">4</span>
+</pre></div>
 <p>We divide by 4 so that the total population remains the same.</p>
-<ol>
-<li><strong>Clip the two datasets so that they line up.</strong></li>
-</ol>
-<p>In the example above, after increasing the resolution of the LandScan data, we clip it again.</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>landscan &lt;- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))</code></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li><strong>Re-aggregate the weighting data, so that it has the same resolution as the weather data.</strong></li>
-</ol>
-<p>In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:</p>
-<table>
-<thead><tr>
-<th>R</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>landscan &lt;- aggregate(landscan, fact=10, fun=sum)</code></td>
-</tr>
-</tbody>
-</table>
+<h3 id="Step-2:-Clip-the-two-datasets-so-that-they-line-up.">Step 2: <strong>Clip the two datasets so that they line up.</strong><a class="anchor-link" href="#Step-2:-Clip-the-two-datasets-so-that-they-line-up."> </a></h3><p>In the example above, after increasing the resolution of the LandScan data, we clip it again.</p>
+<div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-125.0208</span><span class="p">,</span> <span class="m">-66.47917</span><span class="p">,</span> <span class="m">24.0625</span><span class="p">,</span> <span class="m">49.9375</span><span class="p">))</span>
+</pre></div>
+<h3 id="Step-3:-Re-aggregate-the-weighting-data,-so-that-it-has-the-same-resolution-as-the-weather-data.">Step 3: <strong>Re-aggregate the weighting data, so that it has the same resolution as the weather data.</strong><a class="anchor-link" href="#Step-3:-Re-aggregate-the-weighting-data,-so-that-it-has-the-same-resolution-as-the-weather-data."> </a></h3><p>In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:</p>
+<div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>

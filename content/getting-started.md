@@ -1,5 +1,5 @@
 # Weather Panel Tutorial
-
+--------------------------------
 # Introduction to the Tutorial
 
 Welcome to the weather panel data regression tutorial! Using

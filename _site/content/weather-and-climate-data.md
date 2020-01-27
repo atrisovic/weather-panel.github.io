@@ -1,16 +1,11 @@
 # 1. Using Weather and Climate Data
 
-## 1.0 Introduction
-
 When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note:
 
 - There is no universally *right* or *correct* weather or climate data product
 - Every weather or climate data product has its use cases, limitations, uncertainties, and quirks
 
 This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research.
-
-A useful resource to better understand the basics of weather, climate, and the physical
-changes occuring in the climate system is [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3).
 
 ## 1.1 Introducing the netCDF Data Format
 
