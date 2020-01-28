@@ -40,11 +40,11 @@ A [shapefile](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf) also 
 
 Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions `.shp`, `.shx` and `.dbf`. There may be additional files like `.prj` with the shape file’s projection information. All files must have the same name, for example:
 
-```bash
-states.shp 
-states.shx 
-states.dbf 
-```        
+> `states.shp` 
+
+> `states.shx` 
+
+> `states.dbf` 
 
 ## 4.3 Finding shapefiles
 
