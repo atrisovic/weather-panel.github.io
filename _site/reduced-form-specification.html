@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Developing a reduced-form specification</title>
-  <meta name="description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...">
+  <meta name="description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...">
 
   <link rel="canonical" href="/YOUR%20URL//reduced-form-specification.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//reduced-form-specification.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Developing a reduced-form specification" />
-<meta property="og:description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification..." />
+<meta property="og:description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//reduced-form-specification.html",
   "headline": "Developing a reduced-form specification",
-  "datePublished": "2020-01-27T22:22:39-05:00",
-  "dateModified": "2020-01-27T22:22:39-05:00",
-  "description": "            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...",
+  "datePublished": "2020-01-28T14:34:03-05:00",
+  "dateModified": "2020-01-28T14:34:03-05:00",
+  "description": "        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -569,10 +569,10 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter">
         <a class="c-sidebar__entry "
-          href="https://github.com/atrisovic/weather-panel.github.io"
+          href="/contributors.html"
         >
           
-          See a mistake? Send us a pull request on GitHub!
+          Contributors
         </a>
 
         
@@ -627,7 +627,6 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
-    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -639,23 +638,21 @@ initFunction(initPrint)
 <ol>
 <li><em>$T_{min}$, $T_{max}$:</em>  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.</li>
 <li><em>$T_{avg}$:</em>  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.</li>
-<li><a href="https://www.degreedays.net/introduction"><em>HDD/CDD &amp; GDD:</em></a> Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.</li>
+<li><a href="https://www.degreedays.net/introduction"><em>HDD/CDD &amp; GDD:</em></a> Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.  </li>
 </ol>
 </li>
-<li><p><strong>Precipitation:</strong> As described above, precipitation is highly local, poorly measured, and poorly predicted.</p>
+<li><p><strong>Precipitation:</strong> It is a highly local (in space <em>and</em> time), poorly measured, and poorly predicted (see <a href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.">Section 1.5</a>) weather variable. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation listed below are often used:</p>
 <ol>
 <li><em>Total precipitation (e.g., over a year)</em>: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.</li>
 <li><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: These are more appropriate for representing water stress.</li>
-<li><p><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: The distribution of precipitation often matters more than total.</p>
-<p>Precipitation is an important control to include, even if it’s not the main variable of interest, since temperature and       precipitation are correlated. However, we should remember that the properties of precipitation and temperature variables       are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high           temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see       the variation in death rates due to storm events,using binned annual precipitation is likely not going to give us the         variation in death rates, rather we would have to separately account for storm events by using an additional control.</p>
-</li>
+<li><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: The distribution of precipitation often matters more than total.  </li>
 </ol>
 </li>
 <li><p><strong>River discharge rate:</strong> River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.</p>
 </li>
 <li><p><strong>Wind speed:</strong> The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.</p>
 </li>
-<li><p><strong>Net primary productivity (NPP):</strong> It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near $0 g of carbon/m^2/day$ (tan) to $6.5 g of carbon/m^2/day$ (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p>
+<li><p><strong>Net primary productivity (NPP):</strong> It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p>
 </li>
 <li><p><strong>Evapotranspiration rate (ET):</strong> It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.</p>
 </li>
@@ -706,7 +703,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$</p>
 <li>More independence compared to poly in choosing function knots</li>
 <li><p>Highly parametric due to freedom of choice of knots</p>
 <p>For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$       temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1&lt;t_2&lt;...&lt;t_n$, then for $T_{\theta i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:<br>
-$$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in         {1,2,...,n-2\}$$<br>
+$$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
 where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.</p>
 <p>And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:<br>
 $\nabla^3_+=\nabla^3_+$ if $\nabla^3_+&gt;0$<br>
@@ -721,11 +718,11 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$</p>
 <li>Fitting a line between cutoff values e.g.  25C CDD/0C HDD for temp</li>
 <li>Less parametric and very useful for predicting mid-range response</li>
 <li><p>Linear and highly sensitive to choice of cutoff values</p>
-<p>Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a         linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To       implement this, we first decide location of the two knots, say $t_1&lt;t_2$. Then, closely following the cubic spline method,     we get:<br>
+<p>Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1&lt;t_2$. Then, closely following the cubic spline method, we get:<br>
 $$f(T_{it}^1)=\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_2)_+$$<br>
 $$f(T_{it}^2)=-\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_1)_+$$<br>
 where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.</p>
-<p>And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of     degree 1, which is defined as follows:<br>
+<p>And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:<br>
 $\nabla_+=\nabla_+$ if $\nabla_+&gt;0$<br>
 $\nabla_+=0$ if $\nabla_+&lt;0$</p>
 <p>The aggregate transformation is as below:<br>
@@ -757,8 +754,8 @@ $$y_i = \sum_{\text{js in it}} y_{js} = \sum_{\text{js in it}} \beta_1 g_1(T_{ps
 g_k(T_{ps})$$</p>
 <p>We can rearrange this to<br>
 $$y_i = \beta_1 (\sum_{\text{sj in it}} g_1(T_{ps})) + \beta_2 (\sum_{\text{sj in it}} g_2(T_{ps})) + \cdots + \beta_k (\sum_{\text{sj in it}} g_k(T_{ps}))$$</p>
-<p>Or, more simply, $$y_i = \beta<em>1 N</em>{it} g<em>1(T</em>{ps}) + \beta<em>2
-N</em>{it} g<em>2(T</em>{ps}) + \cdots + \beta<em>k N</em>{it} g<em>k(T</em>{ps})</p>
+<p>Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
+N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$</p>
 <p>where $N_{it}$ is the number of agent-timestep observations represented within region $i$ and reporting period $t$.</p>
 <h3 id="Aggregation-before-transformation">Aggregation-before-transformation<a class="anchor-link" href="#Aggregation-before-transformation"> </a></h3><p>When an economic process is occurring at the county level, we need to first do the weather variable aggregation at the county level. We do the weather variable transformation after we have aggregated it to the county level using weighted averaging method, and then run our estimation on the county level data. For example, to estimate the effect of storm events on public service employment at the administrative block level, we need to take into account the fact that hiring/firing of public service employees happens at the block level only.  Estimating grid-level effects will lead to wrong estimation, as it would result in zero estimate for those (almost all) grid cells which do not have the block office coordinates, and extremely large values for those (very few) cells, which comprise of the block office coordinates. The mathematical formulation for aggregation-before-transformation can be learned through transformation-before-aggregation formulation described above, with a change that the aggregation step precedes the transformation step. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade; however, unlike spatial aggregation, the averaging process is standard in all general cases.</p>
 
@@ -778,14 +775,14 @@ N</em>{it} g<em>2(T</em>{ps}) + \cdots + \beta<em>k N</em>{it} g<em>k(T</em>{ps}
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/weather-and-climate-data.html">
-      〈 <span class="u-margin-right-tiny"></span> 
+      〈 <span class="u-margin-right-tiny"></span> Using Weather and Climate Data
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/weighting-schemes.html">
-       <span class="u-margin-right-tiny"></span> 〉
+      Weighting schemes <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

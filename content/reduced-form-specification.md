@@ -75,7 +75,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     3. Highly parametric due to freedom of choice of knots
     
     For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$       temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
-    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in         {1,2,...,n-2\}$$  
+    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
     where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
     
     And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  

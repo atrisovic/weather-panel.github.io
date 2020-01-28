@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Using Weather and Climate Data</title>
-  <meta name="description" content="            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research...">
+  <meta name="description" content="        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res...">
 
   <link rel="canonical" href="/YOUR%20URL//weather-and-climate-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//weather-and-climate-data.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Using Weather and Climate Data" />
-<meta property="og:description" content="            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research..." />
+<meta property="og:description" content="        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//weather-and-climate-data.html",
   "headline": "Using Weather and Climate Data",
-  "datePublished": "2020-01-27T22:22:39-05:00",
-  "dateModified": "2020-01-27T22:22:39-05:00",
-  "description": "            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research...",
+  "datePublished": "2020-01-28T14:34:03-05:00",
+  "dateModified": "2020-01-28T14:34:03-05:00",
+  "description": "        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -569,10 +569,10 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter">
         <a class="c-sidebar__entry "
-          href="https://github.com/atrisovic/weather-panel.github.io"
+          href="/contributors.html"
         >
           
-          See a mistake? Send us a pull request on GitHub!
+          Contributors
         </a>
 
         
@@ -627,7 +627,6 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
-    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -649,7 +648,7 @@ initFunction(initPrint)
 </li>
 <li>R (<a href="https://cran.r-project.org/web/packages/ncdf4/index.html">ncdf4</a> package)</li>
 <li><a href="http://nco.sourceforge.net">nco</a> (“netCDF operators”) - command line tools<ul>
-<li>documentation may look overwhelming, but at its core it’s an easy way to check the contents of a file, collate different netCDF files, and extract individual variables without having to go through a full language.</li>
+<li>documentation may look overwhelming, but at its core, it’s an easy way to check the contents of a file, collate different netCDF files, and extract individual variables without having to go through a full language.</li>
 <li>important commands: <code>ncview</code> (to display spatial data), <code>ncks</code> (“nc kitchen sink” - to split or
 concatenate files command line), and <code>ncdump</code> (to print contents of the file)</li>
 </ul>
@@ -817,7 +816,7 @@ datasets), but now also differ by which underlying models are used</li>
 <h3 id="Getting-Started-with-a-Data-Product---Sample-Process-Using-ERA-5">Getting Started with a Data Product - Sample Process Using ERA-5<a class="anchor-link" href="#Getting-Started-with-a-Data-Product---Sample-Process-Using-ERA-5"> </a></h3><p>Say you’re studying heat waves in the Sahel. Weather station data is low, so you need a gridded data product, and probably want a reanalysis data product for the same reasons. You consider ERA5, the most advanced modern reanalysis data product as of 2019, recently released by the European Centre for Medium-Range Weather Forecasting (ECMWF, which incidentally also produces the world’s most respected hurricane forecast model).</p>
 <ol>
 <li><em>Understand the Data Product</em> - you look up ERA5 on the UCAR Climate Data Guide <a href="https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis">https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis</a>;<ol>
-<li>It tells you the product has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products) and includes 137 pressure levels (this is the vertical resolution; you can safely ignore this if you just care about temperature by the surface). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just becausethe data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.</li>
+<li>It tells you the product has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products) and includes 137 pressure levels (this is the vertical resolution; you can safely ignore this if you just care about temperature by the surface). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just because the data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.</li>
 <li>You see that it even gives you an estimate of the internal model uncertainty by rerunning the same analysis 10 times (10 “ensemble members”), though in “weaknesses” you note that the uncertainty may be underestimated.</li>
 <li>It extends back to 1979 for now (1979 is a common cutoff point due to the start of satellite observations in 1978).</li>
 <li>The summary describes it as an ‘extraordinary product’, so you feel good in your choice, especially since most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest (near-surface temperature).</li>
@@ -826,7 +825,7 @@ datasets), but now also differ by which underlying models are used</li>
 <li><em>Prepare to Download the Data</em> - most weather products will require some bureaucracy to download data, and most have their own weird quirks about how they want data to be downloaded<ol>
 <li>You click on ‘Get Data (external)’ in the Data Guide to find a <a href="https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset">link</a> to the Copernicus climate data store. There, you realize that you’ll need to sign up for an account (modern data products from larger institutions such as the ECMWF will thankfully have an automated system for this; some smaller products may require you to wait until someone manually approves your account), which just asks you to sign a data use agreement (remember to correctly cite data sources!).</li>
 <li>The download page also gives you some documentation for the data product, including variable names - you see “2m air temperature” in Kelvin is the variable you need.</li>
-<li>You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it (<em>NB: GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through <a href="https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+netCDF">command line tools</a> such as <a href="https://code.zmaw.de/projects/cdo">cdo</a> </em>).</li>
+<li>You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it (<em>NB: GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through <a href="https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+netCDF">command-line tools</a> such as <a href="https://code.zmaw.de/projects/cdo">cdo</a> </em>).</li>
 <li>You click download, and voila! (<em>NB: Many datasets, especially those from smaller institutions, will not give up their secrets so easily. Be prepared to have to deal with “wget” scripts, “jblob” scripts, writing ftp scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just copy their scripts to you</em>).</li>
 </ol>
 </li>
@@ -868,14 +867,14 @@ datasets), but now also differ by which underlying models are used</li>
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/getting-started.html">
-      〈 <span class="u-margin-right-tiny"></span> 
+      〈 <span class="u-margin-right-tiny"></span> Getting started
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/reduced-form-specification.html">
-       <span class="u-margin-right-tiny"></span> 〉
+      Developing a reduced-form specific... <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

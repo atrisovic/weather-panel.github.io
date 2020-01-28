@@ -9,20 +9,18 @@ The choice of weather variables depends on the question we are trying to answer,
 - **Temperature:** There are various measures of temperature that can be used. Some of them are listed below:
     1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.
     2. *$T_{avg}$:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
-    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.
+    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.  
     
-- **Precipitation:** As described above, precipitation is highly local, poorly measured, and poorly predicted.
+- **Precipitation:** It is a highly local (in space *and* time), poorly measured, and poorly predicted (see [Section 1.5](#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)) weather variable. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760)). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation listed below are often used:  
     1. *Total precipitation (e.g., over a year)*: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.
     2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: These are more appropriate for representing water stress.
     3. *Number of of rainy/dry days, or moments of the precipitation distribution*: The distribution of precipitation often matters more than total.  
-    
-    Precipitation is an important control to include, even if it’s not the main variable of interest, since temperature and       precipitation are correlated. However, we should remember that the properties of precipitation and temperature variables       are very different in the way they affect humans. For example, binning of annual temperature variable, keeping high           temperature bins small-sized, can explain variation in death rates due to heat waves events. However, if we want to see       the variation in death rates due to storm events,using binned annual precipitation is likely not going to give us the         variation in death rates, rather we would have to separately account for storm events by using an additional control.
     
 - **River discharge rate:** River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
 
 - **Wind speed:** The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.
 
-- **Net primary productivity (NPP):** It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near $0 g of carbon/m^2/day$ (tan) to $6.5 g of carbon/m^2/day$ (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.
+- **Net primary productivity (NPP):** It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.
 
 - **Evapotranspiration rate (ET):** It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.
 
@@ -77,7 +75,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     3. Highly parametric due to freedom of choice of knots
     
     For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$       temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
-    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in         {1,2,...,n-2\}$$  
+    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
     where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
     
     And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
@@ -92,12 +90,12 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     2. Less parametric and very useful for predicting mid-range response
     3. Linear and highly sensitive to choice of cutoff values  
     
-    Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a         linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To       implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method,     we get:  
+    Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method, we get:  
     $$f(T_{it}^1)=\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_2)_+$$  
     $$f(T_{it}^2)=-\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_1)_+$$  
     where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
 
-    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of     degree 1, which is defined as follows:  
+    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
     $\nabla_+=\nabla_+$ if $\nabla_+>0$  
     $\nabla_+=0$ if $\nabla_+<0$  
 
@@ -150,7 +148,7 @@ We can rearrange this to
 $$y_i = \beta_1 (\sum_{\text{sj in it}} g_1(T_{ps})) + \beta_2 (\sum_{\text{sj in it}} g_2(T_{ps})) + \cdots + \beta_k (\sum_{\text{sj in it}} g_k(T_{ps}))$$  
 
 Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
-N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})  
+N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$  
 
 where $N_{it}$ is the number of agent-timestep observations represented within region $i$ and reporting period $t$.  
 
