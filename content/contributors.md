@@ -2,7 +2,7 @@
 
 The core contributors of this tutorial are, in alphabetic order:
 
-- Azhar Hussain
+- [Azhar Hussain](https://azharhsain.github.io/)
 - James Rising
 - Kevin Schwarzwald
 - [Ana Trisovic](https://anatrisovic.com)
