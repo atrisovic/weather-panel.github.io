@@ -9,12 +9,12 @@ The choice of weather variables depends on the question we are trying to answer,
 - **Temperature:** There are various measures of temperature that can be used. Some of them are listed below:
     1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.
     2. *$T_{avg}$:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
-    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.  
+    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.
     
 - **Precipitation:** It is a highly local (in space *and* time), poorly measured, and poorly predicted (see [Section 1.5](#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)) weather variable. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760)). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation listed below are often used:  
     1. *Total precipitation (e.g., over a year)*: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.
     2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: These are more appropriate for representing water stress.
-    3. *Number of of rainy/dry days, or moments of the precipitation distribution*: The distribution of precipitation often matters more than total.  
+    3. *Number of of rainy/dry days, or moments of the precipitation distribution*: The distribution of precipitation often matters more than total.
     
 - **River discharge rate:** River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
 
@@ -35,7 +35,9 @@ The choice of weather variables depends on the question we are trying to answer,
 
 Different functional forms serve different purposes. First, think about the "true model" that relates your dependent variable to your weather variables, and then try to turn it into a linear expression that you can estimate. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.  
 
-For understanding the methods part we are using transformation-before-aggregation method, which is explained in 2.4. Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$. Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:  
+For understanding the methods part we are using transformation-before-aggregation method, which is explained in section 2.4 below.  
+
+Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$. Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:  
 $$f(T_{it}^k)=g(T_{\theta it})$$
 where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.
 Once we have $f(T_{it}^k)$ for each $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:  
@@ -132,7 +134,7 @@ When an economic process is occurring at the grid level (for example, for indivi
 
 We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, $y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where the temperature affecting agents is in grid cell $p$ and occurs in timestep $s$ (e.g., if the agents respond on a day-by-day basis, $T_{ps}$ is the local weather for a single day).  
 
-However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $y_{it} = \sum_{\text{s in year t}} \sum_{\text{j in region i}} y_{js}$.  
+However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $y_{it} = \sum_{\text{s \in t}} \sum_{\text{j \in i}} y_{js}$.  
 
 We can determine the agent-level response $f(T_{ps})$ if we assume linearity. First, let us represent this the way we would if we could run a regression with agent-level data, breaking up the dose-response
 curve into a sum of terms:  
@@ -141,11 +143,11 @@ $$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T
 where $g_k(T_{ps})$ is a transformation of the weather variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$, $g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.  
 
 We know that  
-$$y_i = \sum_{\text{js in it}} y_{js} = \sum_{\text{js in it}} \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k
+$$y_{it} = \sum_{\text{s \in t}} \sum_{\text{j \in i}} y_{js} = \sum_{\text{s \in t}} \sum_{\text{j \in i}} \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k
 g_k(T_{ps})$$  
 
 We can rearrange this to  
-$$y_i = \beta_1 (\sum_{\text{sj in it}} g_1(T_{ps})) + \beta_2 (\sum_{\text{sj in it}} g_2(T_{ps})) + \cdots + \beta_k (\sum_{\text{sj in it}} g_k(T_{ps}))$$  
+$$y_i = \beta_1 (\sum_{\text{s \in t}} \sum_{\text{j \in i}} g_1(T_{ps})) + \beta_2 (\sum_{\text{s \in t}} \sum_{\text{j \in i}} g_2(T_{ps})) + \cdots + \beta_k (\sum_{\text{s \in t}} \sum_{\text{j \in i}} g_k(T_{ps}))$$  
 
 Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
 N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$  
