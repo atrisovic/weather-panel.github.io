@@ -134,7 +134,7 @@ When an economic process is occurring at the grid level (for example, for indivi
 
 We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, $y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where the temperature affecting agents is in grid cell $p$ and occurs in timestep $s$ (e.g., if the agents respond on a day-by-day basis, $T_{ps}$ is the local weather for a single day).  
 
-However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $$y_{it} = \sum_{\text{s \in t}} \sum_{\text{j \in i}} y_{js}$$.  
+However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $$y_{it} = \sum_{s \in t} \sum_{j \in i} y_{js}.$$  
 
 We can determine the agent-level response $f(T_{ps})$ if we assume linearity. First, let us represent this the way we would if we could run a regression with agent-level data, breaking up the dose-response
 curve into a sum of terms:  
@@ -143,13 +143,13 @@ $$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T
 where $g_k(T_{ps})$ is a transformation of the weather variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$, $g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.  
 
 We know that  
-$$y_{it} = \sum_{\text{s\in t}} \sum_{\text{j\in i}} y_{js} = \sum_{\text{s\in t}} \sum_{\text{j\in i}}$$
+$$y_{it} = \sum_{s\in t} \sum_{j\in i} y_{js} = \sum_{s\in t} \sum_{j\in i}$$
 $$\beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})$$  
 
 We can rearrange this to  
-$$y_{it} = \beta_1 (\sum_{\text{s\in t}} \sum_{\text{j\in i}} g_1(T_{ps})) + $$
-$$\beta_2 (\sum_{\text{s\in t}} \sum_{\text{j\in i}} g_2(T_{ps})) + \cdots + $$
-$$\beta_k (\sum_{\text{s\in t}} \sum_{\text{j\in i}} g_k(T_{ps}))$$  
+$$y_{it} = \beta_1 (\sum_{s\in t} \sum_{j\in i} g_1(T_{ps})) + $$
+$$\beta_2 (\sum_{s\in t} \sum_{j\in i} g_2(T_{ps})) + \cdots + $$
+$$\beta_k (\sum_{s\in t} \sum_{j\in i} g_k(T_{ps}))$$  
 
 Or, more simply, $$y_i = \beta_1 N_{it} g_1(T_{ps}) + \beta_2
 N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$  

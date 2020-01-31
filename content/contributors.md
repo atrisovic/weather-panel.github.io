@@ -19,5 +19,5 @@ Cite the tutorial as:
 ## Contributions
 
 We welcome any contributions to this tutorial. 
-If you see a mistake, please don't hesitate to send us a 
-pull request on [GitHub](https://github.com/atrisovic/weather-panel.github.io).
+If you see a mistake, please don't hesitate to [open an issue](https://github.com/atrisovic/weather-panel.github.io/issues) 
+or send us a pull request on [GitHub](https://github.com/atrisovic/weather-panel.github.io).
