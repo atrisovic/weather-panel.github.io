@@ -4,7 +4,7 @@ The core contributors of this tutorial are, in alphabetic order:
 
 - [Azhar Hussain](https://azharhsain.github.io/)
 - [James Rising](http://existencia.org/pro)
-- Kevin Schwarzwald
+- [Kevin Schwarzwald](https://epic.uchicago.edu/people/kevin-schwarzwald/)
 - [Ana Trisovic](https://anatrisovic.com)
 
 ## Citing the _Weather Panel Tutorial_
