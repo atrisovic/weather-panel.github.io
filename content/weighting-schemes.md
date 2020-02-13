@@ -88,7 +88,14 @@ Below are some common datasources for various weighting schemes.
 
 ## 3.3 Aligning weather and weighting grids
 
-The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
+The first step to using a gridded weighting dataset is to make it
+conform to data grid definition used by your weather data.  Here we
+assume that both are regular latitude-longitude
+grids. See
+[Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to
+understand the grid scheme for your weighting file; note that gridded
+weather data often reports the center of each grid cell, rather than
+the corner.
 
 The following recipe should work for most cases to align weighting data with a weather grid.
 
@@ -149,3 +156,129 @@ In the example above, the resolution of the dataset has become 1/240th, and we c
 ```R
 landscan <- aggregate(landscan, fact=10, fun=sum)
 ```
+
+## 3.4 Plotting your results
+
+Now take a moment to visualize the data that you have created. This is
+a good way to make sure you haven't made any mistakes and to wow your
+less climate-adept colleagues in presentations.
+
+To get an initial view of your data, you can just plot your data as a
+matrix. In R, use the `image` function; similar functions exist in
+other languages. The trick is to make sure that you specify the
+coordinates when you plot the map.
+
+Here's an easy case, using population data from the (Gridded
+Population of the
+World)[https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download]
+dataset.
+
+```R
+library(raster)
+## Load the data
+rr <-
+raster("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_2pt5_min.asc")
+
+## Display it!
+image(rr)
+```
+
+![Result of `image(rr)`.](images/examples/image-gpw.png)
+
+But that wasn't any fun. Let's try again with something more
+complicated.
+
+First, we'll download (historical maximum temperature)[https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/] data from the
+easy-to-use IRI data library.
+
+```R
+library(ncdf4)
+
+## Load the data
+nc <- nc_open("data.nc")
+temp <- ncvar_get(nc, 'temp')
+
+## Display it!
+image(temp)
+```
+
+![Result of `image(temp)`.](images/examples/image-tmax.png)
+
+This is R's default way of showing matrices, with axes that go from
+0 - 1. What's worse, the map is up-side-down, though it will take some
+staring to convince yourself ot this. The reason is that NetCDFs
+usually have the upper-left corner representing the extreme
+North-West. But R's `image` command shows the upper-left corner in the
+lower-left.
+
+We are also going to plot the countries, so this is easier to
+interpret. And to do that, we need to rearrange the data so it goes
+from -180 to 180, rather than 0 to 360 as currently. Here's our second
+attempt:
+
+```R
+## Extract the coordinate values
+lon <- ncvar_get(nc, "X")
+lat <- ncvar_get(nc, "Y")
+
+## Rearrange longitude to go from -180 to 180
+lon2 <- c(lon[lon >= 180] - 360, lon[lon < 180])
+temp2 <- rbind(temp[lon >= 180,], temp[lon < 180,])
+
+## Display it, with map!
+library(maps)
+image(lon2, rev(lat), temp2[,ncol(temp2):1])
+map("world", add=T)
+```
+
+![Result after `map(world)`.](images/examples/image-tmax-flip.png)
+
+Now, for our production-ready map, we're going to switch to
+`ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
+to convert the matrix into a dataframe (with `melt`) and the map into
+a dataframe (with `map_data`):
+
+```R
+## Convert temp2 to a dataframe
+library(reshape2)
+rownames(temp2) <- lon2
+colnames(temp2) <- lat
+temp3 <- melt(temp2, varnames=c('lon', 'lat'))
+
+## Convert world map to a dataframe
+library(ggmap)
+world <- map_data("world")
+
+## Plot everything
+ggplot() +
+    geom_raster(data=temp3, aes(x=lon, y=lat, fill=value)) +
+    geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA)
+```
+
+![Result after `ggplot`.](images/examples/ggplot-tmax.png)
+
+And now we're ready to production-ready graph. The biggest change
+will be the addition of a map projection. You'll want to choose your
+projection carefully, since people are bound to judge you for it.
+
+![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
+
+Using the projection, we can now make the final version of this
+figure. Note that you will need to use `geom_tile` rather than
+`geom_raster` when plotting grids over projections, and this can be
+quite a bit slower. I also use a color palette from
+(ColorBrewer)[http://colorbrewer2.org/], an excellent resource for
+choosing colors.
+
+```R
+library(RColorBrewer)
+ggplot() +
+    geom_tile(data=temp3, aes(x=lon, y=lat, fill=value - 273.15)) +
+    geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA, lwd=.2) +
+    coord_map(projection="mollweide", ylim=c(-65, 65)) + xlim(-180, 180) +
+    theme_light() + theme(panel.ontop=TRUE, panel.background=element_blank()) +
+    xlab(NULL) + ylab(NULL) + scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
+    theme(legend.justification=c(0,0), legend.position=c(.01,.01))
+```
+
+![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
