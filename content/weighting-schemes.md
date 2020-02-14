@@ -168,9 +168,9 @@ matrix. In R, use the `image` function; similar functions exist in
 other languages. The trick is to make sure that you specify the
 coordinates when you plot the map.
 
-Here's an easy case, using population data from the (Gridded
+Here's an easy case, using population data from the [Gridded
 Population of the
-World)[https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download]
+World](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download)
 dataset.
 
 ```R
@@ -188,7 +188,7 @@ image(rr)
 But that wasn't any fun. Let's try again with something more
 complicated.
 
-First, we'll download (historical maximum temperature)[https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/] data from the
+First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
 easy-to-use IRI data library.
 
 ```R
@@ -267,7 +267,7 @@ Using the projection, we can now make the final version of this
 figure. Note that you will need to use `geom_tile` rather than
 `geom_raster` when plotting grids over projections, and this can be
 quite a bit slower. I also use a color palette from
-(ColorBrewer)[http://colorbrewer2.org/], an excellent resource for
+[ColorBrewer](http://colorbrewer2.org/), an excellent resource for
 choosing colors.
 
 ```R
