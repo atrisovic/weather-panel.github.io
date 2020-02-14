@@ -15,5 +15,5 @@ jobs:
     steps:
     - name: Run a build
       run: |
-        pip install jupyter-book
+        python -m pip install jupyter-book
         jupyter-book build ./weather-panel.github.io
