@@ -11,6 +11,7 @@ development. Here are some of the relationships that have been
 uncovered in recent years:
 
 ![Examples from Carleton and Hsiang (2016).](images/examples.jpg)
+Source: [Carleton and Hsiang (2016)](https://science.sciencemag.org/content/353/6304/aad9837).
 
 This tutorial will walk you through the steps necessary to relate
 socioeconomic outcomes to weather data at high resolution. We will

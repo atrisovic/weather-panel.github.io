@@ -106,6 +106,7 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
 
 **Example of reduced-form regression plots for different functional forms**
 ![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
+Source: [Carleton et al. (2019)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365).
 
 ## 2.3. Cross-validation
 
