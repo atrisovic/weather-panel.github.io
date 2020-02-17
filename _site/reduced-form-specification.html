@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Developing a reduced-form specification</title>
-  <meta name="description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...">
+  <meta name="description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...">
 
   <link rel="canonical" href="/YOUR%20URL//reduced-form-specification.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//reduced-form-specification.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Developing a reduced-form specification" />
-<meta property="og:description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi..." />
+<meta property="og:description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//reduced-form-specification.html",
   "headline": "Developing a reduced-form specification",
-  "datePublished": "2020-02-14T14:58:50-05:00",
-  "dateModified": "2020-02-14T14:58:50-05:00",
-  "description": "        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...",
+  "datePublished": "2020-02-17T16:56:56-05:00",
+  "dateModified": "2020-02-17T16:56:56-05:00",
+  "description": "            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -627,6 +627,7 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
+    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -733,7 +734,8 @@ $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$</p>
 </li>
 </ul>
 <p><strong>Example of reduced-form regression plots for different functional forms</strong>
-<img src="images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!"></p>
+<img src="images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!">
+Source: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
 <h2 id="2.3.-Cross-validation">2.3. Cross-validation<a class="anchor-link" href="#2.3.-Cross-validation"> </a></h2><p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
 internal validity, the model can be fit to a subset of the dataset, and evaluated on the remainder. For example, you can leave particular regions out of your regression or remove a random <em>1/k</em> of your data (k-fold cross validation) instead of running a full-sample regression. For gauging external validity, model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.</p>
 <p>Although cross-validation is not universally performed by researchers, and many people continue to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly R-squared statistic can perform even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.</p>
@@ -779,14 +781,14 @@ N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$</p>
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/weather-and-climate-data.html">
-      〈 <span class="u-margin-right-tiny"></span> Using Weather and Climate Data
+      〈 <span class="u-margin-right-tiny"></span> 
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/weighting-schemes.html">
-      Weighting schemes <span class="u-margin-right-tiny"></span> 〉
+       <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

@@ -1,20 +1,19 @@
 ---
 title: |-
   Developing a reduced-form specification
+pagenum: 2
 prev_page:
   url: /weather-and-climate-data.html
-  title: |-
-    Using Weather and Climate Data
 next_page:
   url: /weighting-schemes.html
-  title: |-
-    Weighting schemes
 suffix: .md
+search: t theta k temperature transformation sum level ps g grid data weather c f precipitation aggregation n example county polynomial nabla variable degree humidity variables below response before where circ knots into using not radiation aggregate bins psi used average region model our linear weighted spline y j beta form important across e cubic need cross validation agent s specification also local etc year process carbon values doing cells available methods good forms min days above temperatures metric while often air highly since however et should different effect shortwave relative sst functional method grids terms betak betakf observations let take
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 
     <main class="jupyter-page">
+    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -121,7 +120,8 @@ $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$</p>
 </li>
 </ul>
 <p><strong>Example of reduced-form regression plots for different functional forms</strong>
-<img src="images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!"></p>
+<img src="images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!">
+Source: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
 <h2 id="2.3.-Cross-validation">2.3. Cross-validation<a class="anchor-link" href="#2.3.-Cross-validation"> </a></h2><p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
 internal validity, the model can be fit to a subset of the dataset, and evaluated on the remainder. For example, you can leave particular regions out of your regression or remove a random <em>1/k</em> of your data (k-fold cross validation) instead of running a full-sample regression. For gauging external validity, model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.</p>
 <p>Although cross-validation is not universally performed by researchers, and many people continue to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly R-squared statistic can perform even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.</p>

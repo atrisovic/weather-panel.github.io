@@ -1,20 +1,19 @@
 ---
 title: |-
   Weighting schemes
+pagenum: 3
 prev_page:
   url: /reduced-form-specification.html
-  title: |-
-    Developing a reduced-form specification
 next_page:
   url: /geographical-unit-data.html
-  title: |-
-    Generating geographical unit data
 suffix: .md
+search: data weighting temp landscan weather grid text x y resolution r lon gridded population scheme case files map library image need cell left world schemes example c file longitude lat ggplot projection latitude datasets raster spatial average year p w common asc point dataset cellsize edu png using same t weight any values used lower corner columbia after prism extent result images examples nc scale phenomenon averaged model into space second sources csv format global degree frac above grids zip step plot tmax dataframe aes fill group different within region phenomena should across processes specification terms important where kinds geotiff
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 
     <main class="jupyter-page">
+    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -214,7 +213,8 @@ a dataframe (with <code>map_data</code>):</p>
 <p>And now we're ready to production-ready graph. The biggest change
 will be the addition of a map projection. You'll want to choose your
 projection carefully, since people are bound to judge you for it.</p>
-<p><img src="https://imgs.xkcd.com/comics/map_projections.png" alt="Considerations for projections."></p>
+<p><img src="https://imgs.xkcd.com/comics/map_projections.png" alt="Considerations for projections.">
+Source: <a href="https://www.xkcd.com/977/">XKCD 977</a>.</p>
 <p>Using the projection, we can now make the final version of this
 figure. Note that you will need to use <code>geom_tile</code> rather than
 <code>geom_raster</code> when plotting grids over projections, and this can be

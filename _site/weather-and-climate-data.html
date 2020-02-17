@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Using Weather and Climate Data</title>
-  <meta name="description" content="        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res...">
+  <meta name="description" content="            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research...">
 
   <link rel="canonical" href="/YOUR%20URL//weather-and-climate-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//weather-and-climate-data.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Using Weather and Climate Data" />
-<meta property="og:description" content="        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res..." />
+<meta property="og:description" content="            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//weather-and-climate-data.html",
   "headline": "Using Weather and Climate Data",
-  "datePublished": "2020-02-14T14:58:50-05:00",
-  "dateModified": "2020-02-14T14:58:50-05:00",
-  "description": "        1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research res...",
+  "datePublished": "2020-02-17T16:56:56-05:00",
+  "dateModified": "2020-02-17T16:56:56-05:00",
+  "description": "            1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -627,6 +627,7 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
+    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
@@ -764,6 +765,37 @@ concatenate files command line), and <code>ncdump</code> (to print contents of t
 </table>
 <p>As mentioned above, these files also include populated variables that give values for indices along each dimension (<code>lon, lat</code> / <code>location</code> and <code>time</code>), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the netCDF header first (the author has seen grid variables listed for example as <code>lat</code>, <code>latitude</code>, <code>Latitude</code>, <code>Lat</code>, <code>latitude_1</code>, and any number of other names). As mentioned, <code>xarray</code> has built-in methods for identifying the dimensions in the file, regardless of order.</p>
 <p>The <code>time</code> variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using python, the <code>xarray</code> package has the ability to interpret some of these time representations for you and translates them into the <code>datetime64</code> class, which makes some kinds of manipulation, like averaging over months, easier.</p>
+<h3 id="Visualizing-Climate-Data-for-Diagnostics">Visualizing Climate Data for Diagnostics<a class="anchor-link" href="#Visualizing-Climate-Data-for-Diagnostics"> </a></h3><p>You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It's generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren't suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset:</p>
+<h4 id="Python-(xarray)">Python (xarray)<a class="anchor-link" href="#Python-(xarray)"> </a></h4><div class="highlight"><pre><span></span><span class="c1"># Assuming your variable is a 3-D (lat,lon,time, in any order)</span>
+<span class="c1"># variable called &quot;tas&quot;,in a dataset loaded using</span>
+<span class="c1"># ds = xr.open_dataset() as above. This will get you a</span>
+<span class="c1"># &quot;QuadMesh&quot; image - just a heatmap of your data:</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="c1"># (for the time mean, you can use ds.tas.mean(time).plot()</span>
+<span class="c1"># similarly)</span>
+
+<span class="c1"># Example with gegographic information:</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="kn">as</span> <span class="nn">ccrs</span> <span class="c1"># If plotting on a geographically correct map    </span>
+<span class="c1"># (see resources below on why transforms/projections</span>
+<span class="c1"># need to be explicitly noted)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">EckertIV</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+</pre></div>
+<p>(For more information on plotting geographic data with xarray and cartopy, the author highly recommends the <a href="https://earth-env-data-science.github.io/intro.html">"Earth and Environmental Science" with python guide</a>, especially the section on <a href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html]">"Making Maps with Cartopy"</a>)</p>
+<h4 id="Matlab">Matlab<a class="anchor-link" href="#Matlab"> </a></h4><div class="highlight"><pre><span></span><span class="c">% Assuming your dataset is called &quot;tas&quot; (lon,lat,time)</span>
+<span class="c">% This will just plot a heatmap of your data:</span>
+<span class="n">pcolor</span><span class="p">(</span><span class="nb">squeeze</span><span class="p">(</span><span class="n">tas</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">)).</span><span class="o">&#39;</span><span class="p">);</span> <span class="n">shading</span> <span class="n">flat</span>
+
+<span class="c">% Alternatively, with geographic information:</span>
+<span class="n">axesm</span><span class="p">()</span> <span class="c">% Set desired projection in the function call; i.e. &#39;eckert4&#39;</span>
+<span class="n">pcolorm</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span><span class="nb">squeeze</span><span class="p">(</span><span class="n">tas</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">)).</span><span class="o">&#39;</span><span class="p">);</span> <span class="n">shading</span> <span class="n">flat</span> 
+<span class="c">% coast.mat is included with Matlab installations; this will add </span>
+<span class="c">% coastlines. </span>
+<span class="n">coasts</span><span class="p">=</span><span class="n">matfile</span><span class="p">(</span><span class="s">&#39;coast.mat&#39;</span><span class="p">)</span>
+<span class="n">geoshow</span><span class="p">(</span><span class="n">coasts</span><span class="p">.</span><span class="n">lat</span><span class="p">,</span><span class="n">coasts</span><span class="p">.</span><span class="n">long</span><span class="p">)</span>
+</pre></div>
 <h2 id="1.2-Gridded-Data">1.2 Gridded Data<a class="anchor-link" href="#1.2-Gridded-Data"> </a></h2><p>Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
 <p>Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. <em>(NB: Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins)</em>.</p>
 <p>However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.</p>
@@ -867,14 +899,14 @@ datasets), but now also differ by which underlying models are used</li>
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/getting-started.html">
-      〈 <span class="u-margin-right-tiny"></span> Getting started
+      〈 <span class="u-margin-right-tiny"></span> 
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/reduced-form-specification.html">
-      Developing a reduced-form specific... <span class="u-margin-right-tiny"></span> 〉
+       <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

@@ -262,6 +262,7 @@ will be the addition of a map projection. You'll want to choose your
 projection carefully, since people are bound to judge you for it.
 
 ![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
+Source: [XKCD 977](https://www.xkcd.com/977/).
 
 Using the projection, we can now make the final version of this
 figure. Note that you will need to use `geom_tile` rather than
