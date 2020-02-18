@@ -4,7 +4,7 @@ This section describes some of the considerations that go into developing a redu
 
 ## 2.1. Choosing weather variables
 
-The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. A few of the important weather variables are listed below:
+The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. Morevoer, it is very important to first think about possible *mechanism(s)* behind a change witnessed in the environment, and then only make choices for variables that can explain that mechanism. A few of the important and frequently-used weather variables are listed below:
 
 - **Temperature:** There are various measures of temperature that can be used. Some of them are listed below:
     1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metrics when heterogeneity between each time unit matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$. 
@@ -108,6 +108,8 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
 
     The aggregate transformation is as below:  
     $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$  
+
+We generally try to work with many functional forms in a paper because it serves dual purpose of being a *sanity check* for researchers' codes, and a *robustness check* for readers' confirmation. However, we need to take decision on the *main specification* that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the *fit* of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:
 
 **Example of reduced-form regression plots for different functional forms**
 ![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
