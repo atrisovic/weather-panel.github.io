@@ -163,6 +163,8 @@ Thankfully, a large suite of data products have been developed to mitigate these
 
 However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.
 
+Keep in mind that just because a dataset exists at a certain resolution, does not mean it is accurate at that resolution! 
+
 The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.
 
 ## 1.3 Weather Data Products
@@ -259,6 +261,8 @@ The author’s personal suggestion is to start off with a latest-generation rean
 Furthermore, check your results with multiple datasets from the latest generation! Consider performing your analysis with both a reanalysis dataset and an interpolated dataset. This may not make a huge difference for more stable variables in areas with high station coverage (e.g. temperature in North America), but could be a useful robustness check for more problematic ones (e.g. precipitation).
 
 ## 1.5 A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
+![Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error.](https://imgs.xkcd.com/comics/meteorologist.png)
+*As usual, [XKCD](https://imgs.xkcd.com/comics/meteorologist.png) gets it best*
 
 Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately, but is frequently desired for socioeconomic applications.
 
