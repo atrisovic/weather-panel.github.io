@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Developing a reduced-form specification</title>
-  <meta name="description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...">
+  <meta name="description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...">
 
   <link rel="canonical" href="/YOUR%20URL//reduced-form-specification.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="/YOUR%20URL//reduced-form-specification.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Developing a reduced-form specification" />
-<meta property="og:description" content="            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification..." />
+<meta property="og:description" content="        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//reduced-form-specification.html",
   "headline": "Developing a reduced-form specification",
-  "datePublished": "2020-02-17T21:14:21-05:00",
-  "dateModified": "2020-02-17T21:14:21-05:00",
-  "description": "            2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification...",
+  "datePublished": "2020-02-18T10:24:16-05:00",
+  "dateModified": "2020-02-18T10:24:16-05:00",
+  "description": "        2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification usi...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -627,31 +627,39 @@ initFunction(initPrint)
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
                   <main class="jupyter-page">
-    <div id="page-info"></div>
     <div class="jb_cell">
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="2.-Developing-a-reduced-form-specification">2. Developing a reduced-form specification<a class="anchor-link" href="#2.-Developing-a-reduced-form-specification"> </a></h1><p>This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is <a href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
-<h2 id="2.1.-Choosing-weather-variables">2.1. Choosing weather variables<a class="anchor-link" href="#2.1.-Choosing-weather-variables"> </a></h2><p>The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. A few of the important weather variables are listed below:</p>
+<h2 id="2.1.-Choosing-weather-variables">2.1. Choosing weather variables<a class="anchor-link" href="#2.1.-Choosing-weather-variables"> </a></h2><p>The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. Morevoer, it is very important to first think about possible <em>mechanism(s)</em> behind a change witnessed in the environment, and then only make choices for variables that can explain that mechanism. A few of the important and frequently-used weather variables are listed below:</p>
 <ul>
 <li><p><strong>Temperature:</strong> There are various measures of temperature that can be used. Some of them are listed below:</p>
 <ol>
-<li><em>$T_{min}$, $T_{max}$:</em>  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, and capture heat waves and cold spells. Also, note that $T_{min}$ reflects nighttime temperatures while $T_{max}$ is reached in the daytime.</li>
+<li><em>$T_{min}$, $T_{max}$:</em>  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metrics when heterogeneity between each time unit matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$. </li>
 <li><em>$T_{avg}$:</em>  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.</li>
 <li><a href="https://www.degreedays.net/introduction"><em>HDD/CDD &amp; GDD:</em></a> Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.</li>
+<li><em>Heat Index &amp; Wet Bulb Temperature</em>: (see below on humidity)</li>
 </ol>
 </li>
-<li><p><strong>Precipitation:</strong> It is a highly local (in space <em>and</em> time), poorly measured, and poorly predicted (see <a href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.">Section 1.5</a>) weather variable. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation listed below are often used:</p>
+<li><p><strong>Humidity:</strong> There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air, expressed in grams per cubic metre or grams per kilogram. Relative humidity is expressed as a percentage relative to a maximum humidity value given the same temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like":</p>
 <ol>
-<li><em>Total precipitation (e.g., over a year)</em>: It is often used as a control, but not a very good reflection of the relevance of precipitation ot a socioeconomic process.</li>
-<li><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: These are more appropriate for representing water stress.</li>
-<li><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: The distribution of precipitation often matters more than total.</li>
+<li><em>Wet-Bulb Temperature (WBT)</em>: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. </li>
+<li><em>Wet-Bulb Globe Temperature (WBGT)</em>: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight) </li>
+<li><em>Heat Index (HI)</em>: various calculated metrics combining shade temperature and relative humidity</li>
+</ol>
+</li>
+<li><p><strong>Precipitation:</strong> highly local (in space <em>and</em> time), non-normal (especially compared to temperature), poorly measured, and poorly predicted (see <a href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.">Section 1.5</a>). Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):</p>
+<ol>
+<li><em>Total precipitation (e.g., over a year)</em>: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. </li>
+<li><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: often used to capture water stress.</li>
+<li><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: the distribution of precipitation often matters more than total.
+Some datasets (such as <a href="https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data">HadEX2</a>) specialize in extremes data. </li>
 </ol>
 </li>
 <li><p><strong>River discharge rate:</strong> River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.</p>
 </li>
-<li><p><strong>Wind speed:</strong> The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available.</p>
+<li><p><strong>Wind speed:</strong> The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available. Maximum wind speed over some time period has been used as well.</p>
 </li>
 <li><p><strong>Net primary productivity (NPP):</strong> It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p>
 </li>
@@ -659,9 +667,7 @@ initFunction(initPrint)
 </li>
 <li><p><strong>Solar radiation:</strong> Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.</p>
 </li>
-<li><p><strong>Humidity:</strong> There are mainly three metrics for humidity measurements: absolute, relative and specific. Absolute humidity describes the water content of air, expressed in grams per cubic metre or grams per kilogram. Relative humidity is expressed as a percentage relative to a maximum humidity value given the same temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. An important measure of temperature that takes humidity into account is wet-bulb temperature (WBT). WBT is the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. At 100% relative humidity, the wet-bulb temperature is equal to the air temperature (dry-bulb temperature) and it is lower at lower humidity. The intuition behind using WBT is the effect of temperature on living organisms depends on their bodies' evaporative cooling mechanisms, and the effectiveness of this mechanism in turn depends on humidity. Therefore, WBT is a better than crude temperature measures in guaging the effects of heat/radiation on living organisms.</p>
-</li>
-<li><p><strong>Sea surface temperature (SST) and ocean temperature:</strong> SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag.</p>
+<li><p><strong>Sea surface temperature (SST) and ocean temperature:</strong> SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.</p>
 </li>
 </ul>
 <h2 id="2.2.-Common-functional-forms-(pros,-cons,-and-methods)">2.2. Common functional forms (pros, cons, and methods)<a class="anchor-link" href="#2.2.-Common-functional-forms-(pros,-cons,-and-methods)"> </a></h2><p>Different functional forms serve different purposes. First, think about the "true model" that relates your dependent variable to your weather variables, and then try to turn it into a linear expression that you can estimate. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.</p>
@@ -733,6 +739,7 @@ $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$</p>
 </ol>
 </li>
 </ul>
+<p>We generally try to work with many functional forms in a paper because it serves dual purpose of being a <em>sanity check</em> for researchers' codes, and a <em>robustness check</em> for readers' confirmation. However, we need to take decision on the <em>main specification</em> that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the <em>fit</em> of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:</p>
 <p><strong>Example of reduced-form regression plots for different functional forms</strong>
 <img src="images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!">
 Source: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
@@ -781,14 +788,14 @@ N_{it} g_2(T_{ps}) + \cdots + \beta_k N_{it} g_k(T_{ps})$$</p>
   
     
     <a id="js-page__nav__prev" class="c-page__nav__prev" href="/weather-and-climate-data.html">
-      〈 <span class="u-margin-right-tiny"></span> 
+      〈 <span class="u-margin-right-tiny"></span> Using Weather and Climate Data
     </a>
   
 
   
     
     <a id="js-page__nav__next" class="c-page__nav__next" href="/weighting-schemes.html">
-       <span class="u-margin-right-tiny"></span> 〉
+      Weighting schemes <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
