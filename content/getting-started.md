@@ -2,21 +2,22 @@
 
 # Introduction to the Tutorial
 
-Welcome to the weather panel data regression tutorial! Using
-econometrics to study how social, economic, and biophysical systems
-respond to weather has opened a huge number of doors, allowing us to
-better understand the impacts of climate change, disaster risk and
-responses, resource management, human behavior, and sustainable
-development. Here are some of the relationships that have been
-uncovered in recent years:
+Welcome to the Weather Panel Tutorial!
 
-![Examples from Carleton and Hsiang (2016).](images/examples.jpg)
+The use of econometrics to study how social, economic, and biophysical
+systems respond to weather has started a torrent of new research. It
+is allowing us to better understand the impacts of climate change,
+disaster risk and responses, resource management, human behavior, and
+sustainable development. Here are some of the relationships that have
+been uncovered in recent years:
+
+![Examples from Carleton and Hsiang (2016).](images/examples.png)
 
 This tutorial will walk you through the steps necessary to relate
 socioeconomic outcomes to weather data at high resolution. We will
 cover:
 
-1. How to find and read weather data, and what you should be aware of when using it.
+1. How to find and use weather data, and what you should be aware of when using it.
 2. How to relate your socioeconomic outcomes to weather variables, and
    develop your regression specification.
 3. How to work with shapefiles, and use them to generate your predictor variables.
@@ -28,7 +29,7 @@ so you can get started.
 
 At the same time, this tutorial asks you to perform every step
 yourself. In particular, we do not provide prepared weather data or a
-ready-made script to prepare it. Each particular case is too specific,
+ready-made script to prepare it. Each particular project is too specific,
 so you, the researcher, need to think through everything. This
 tutorial is aimed at helping you do that.
 
@@ -70,7 +71,7 @@ forms:
    models or analyses. In the latter case, it often is not clear
    exactly what is being measured (e.g., the point data at the
    centroid, or the average over a rectangular region). Keeping
-   information at high resolution is important to avoid this question.
+   information at a high resolution is important to avoid misusing such data.
    
 It is always appropriate to analyze data in the spatial structure it
 is offered, even if translating it to another structure would be
