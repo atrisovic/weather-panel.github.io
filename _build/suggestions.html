@@ -6,9 +6,9 @@ prev_page:
   title: |-
     Generating geographical unit data
 next_page:
-  url: 
+  url: /contributors.html
   title: |-
-    
+    Contributors
 suffix: .md
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
@@ -19,7 +19,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.-Suggestions-when-producing-a-panel-dataset">5. Suggestions when producing a panel dataset<a class="anchor-link" href="#5.-Suggestions-when-producing-a-panel-dataset"> </a></h1><h2 id="Organization-of-data-and-code">Organization of data and code<a class="anchor-link" href="#Organization-of-data-and-code"> </a></h2><p>Having a single directory for a project, containing all data and code in subdirectories 
+<h1 id="5.-Suggestions-when-producing-a-panel-dataset">5. Suggestions when producing a panel dataset<a class="anchor-link" href="#5.-Suggestions-when-producing-a-panel-dataset"> </a></h1><h2 id="5.1-Organization-of-data-and-code">5.1 Organization of data and code<a class="anchor-link" href="#5.1-Organization-of-data-and-code"> </a></h2><p>Having a single directory for a project, containing all data and code in subdirectories 
 makes it easier to find things, and also, in case you want to zip everything up and send it to someone else.
 However, try to keep your code and your data separate. A typical file organization should be:</p>
 <ul>
@@ -43,7 +43,7 @@ Instead of making changes to the original data, you should create derived (new) 
 This is important because the pre-processing performed on source data is as important as the final analysis steps.
 In addition, it will allow you to reuse the original data multiple times.</li>
 </ul>
-<h2 id="Naming-conventions">Naming conventions<a class="anchor-link" href="#Naming-conventions"> </a></h2><p>Good naming practices should be applied to files and folders to make clear the contents of your project. 
+<h2 id="5.2-Naming-conventions">5.2 Naming conventions<a class="anchor-link" href="#5.2-Naming-conventions"> </a></h2><p>Good naming practices should be applied to files and folders to make clear the contents of your project. 
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.</p>
 <h3 id="Recommendations:">Recommendations:<a class="anchor-link" href="#Recommendations:"> </a></h3><ul>
 <li>Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., <code>.csv</code>)</li>
@@ -56,12 +56,12 @@ Informative naming makes it easier to understand the purpose of each item and ca
 some additional documentation in readme files (readme.txt, readme.md).
 Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. </li>
 </ul>
-<h2 id="Version-control">Version control<a class="anchor-link" href="#Version-control"> </a></h2><p>We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
+<h2 id="5.3-Version-control">5.3 Version control<a class="anchor-link" href="#5.3-Version-control"> </a></h2><p>We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
 Also, it gives access to historical versions of your project.</p>
 <h3 id="Version-control-with-git">Version control with git<a class="anchor-link" href="#Version-control-with-git"> </a></h3><p>We recommend you to go through <a href="https://swcarpentry.github.io/git-novice/">a tutorial on version control with git</a>.</p>
 <p>Here is one more reason why you would want to use version control:</p>
 <p><img src="https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png" alt=""></p>
-<h2 id="Workflow-automation">Workflow automation<a class="anchor-link" href="#Workflow-automation"> </a></h2><p>Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
+<h2 id="5.4-Workflow-automation">5.4 Workflow automation<a class="anchor-link" href="#5.4-Workflow-automation"> </a></h2><p>Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command.</p>
 <p>Here is an example that showcases a simple workflow sequence with <a href="http://swcarpentry.github.io/shell-novice/">bash</a>.
 The file that defines analysis steps is often called a 'master script'.

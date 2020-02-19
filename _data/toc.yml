@@ -41,11 +41,15 @@
 - title: Suggestions for work organization 
   url: /suggestions
 
-# External link
-- title: See a mistake? Send us a pull request on GitHub!
-  url: https://github.com/atrisovic/weather-panel.github.io 
-  external: true
+- title: Contributors
+  url: /contributors
   not_numbered: true
+
+# External link
+#- title: See a mistake? Send us a pull request on GitHub!
+#  url: https://github.com/atrisovic/weather-panel.github.io 
+#  external: true
+#  not_numbered: true
 
 # Adds a searchbar link
 #- title: Search

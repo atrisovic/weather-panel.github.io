@@ -1,7 +1,7 @@
 # 5. Suggestions when producing a panel dataset
 
 
-## Organization of data and code
+## 5.1 Organization of data and code
 
 Having a single directory for a project, containing all data and code in subdirectories 
 makes it easier to find things, and also, in case you want to zip everything up and send it to someone else.
@@ -30,7 +30,7 @@ Instead of making changes to the original data, you should create derived (new) 
 This is important because the pre-processing performed on source data is as important as the final analysis steps.
 In addition, it will allow you to reuse the original data multiple times.
 
-## Naming conventions
+## 5.2 Naming conventions
 
 Good naming practices should be applied to files and folders to make clear the contents of your project. 
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.
@@ -48,7 +48,7 @@ Informative naming makes it easier to understand the purpose of each item and ca
 some additional documentation in readme files (readme.txt, readme.md).
 Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. 
 
-## Version control
+## 5.3 Version control
 
 We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
 Also, it gives access to historical versions of your project. 
@@ -61,7 +61,7 @@ Here is one more reason why you would want to use version control:
 
 ![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
 
-## Workflow automation
+## 5.4 Workflow automation
 
 Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command. 

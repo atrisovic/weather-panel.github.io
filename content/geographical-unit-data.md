@@ -1,6 +1,8 @@
 # 4. Generating geographical unit data
 
-A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries[[1]](https://ec.europa.eu/eurostat/web/cities/spatial-units).
+## 4.1 Introduction
+
+A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “[city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is a local administrative unit where the majority of the population lives in an urban center, while the “[greater city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is an approximation of the urban center beyond of the administrative city boundaries.
 
 One kind of geographic region is simply called an "administrative
 unit", and refers to states and provinces, or counties and
@@ -20,7 +22,7 @@ administrative unit should be fairly homogeneous concerning mean temperature and
 [Using Weather Data and Climate Model Output in Economic Analyses of Climate Change](https://academic.oup.com/reep/article/7/2/181/1522753) describes
 the common pitfalls in translating weather data into geographical unit data.
 
-## Geographic information systems
+## 4.2 Geographic information systems
 
 Much is made of geographic information system (GIS), but these have
 long since become unnotably common parts of spatial research. GIS
@@ -34,19 +36,17 @@ tutorial. You may also encounter GDB (common in hydrology), GeoJSON
 OpenStreetMap) files. All of these can be converted to Shapefiles,
 using GIS software like QGIS.
 
-A shapefile also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.
+A [shapefile](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf) also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.
 
 Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions `.shp`, `.shx` and `.dbf`. There may be additional files like `.prj` with the shape file’s projection information. All files must have the same name, for example:
 
-```
-states.shp
-states.shx
-states.dbf
-```
+> `states.shp` 
 
-Technical description for shapefiles can be found [*HERE*](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
+> `states.shx` 
 
-## Finding shapefiles
+> `states.dbf` 
+
+## 4.3 Finding shapefiles
 
 It is usually possible to find a shapefile corresponding to a set of
 socioeconomic data by searching around online. Many governments will
@@ -57,7 +57,8 @@ has standard administrative units across the globe,
 and [Natural Earth](http://www.naturalearthdata.com/) which has
 clean physical shape information.
 
-## Creating shapefiles
+
+## 4.4 Creating shapefiles
 
 In some cases, you will have to make the shapefile from scratch. The
 most common ways of doing this is by clicking out the shape of each
@@ -73,7 +74,8 @@ polygon. This generally requires a few steps.
    make this a point-and-click task.
 3. Create new polygons by clicking around the edges of the polygon.
 
-## Working with shapefiles
+
+## 4.5 Working with shapefiles
 
 Your first step should be to view your shapefile in a software system
 like QGIS or ArcGIS.
@@ -128,7 +130,7 @@ library(PBSmapping)
 shapefile <- importShapefile("/my_shapefile.shp")
 ```
 
-## Weighted averages within spatial units
+## 4.6 Weighted averages within spatial units
 
 Now, you probably have a gridded spatiotemporal dataset of historical
 weather and economic output data specific to shapefile regions.  The
@@ -228,7 +230,7 @@ separate polygon for each region-by-grid cell combination. Then have
 QGIS compute the area of each of those regions: these will give you
 the portion of grid cells to use.
 
-## Matching names
+## 4.7 Matching names
 
 It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.
 

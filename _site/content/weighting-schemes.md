@@ -2,7 +2,7 @@
 
 This section describes how to use different weighting schemes when aggregating gridded data to data regions.
 
-## Why spatial weighting schemes matter
+## 3.1 Why spatial weighting schemes matter
 
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
@@ -25,7 +25,7 @@ $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)}
 where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.
 
 
-## Kinds of weight schemes and data sources
+## 3.2 Kinds of weight schemes and data sources
 
 Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.
 
@@ -39,7 +39,10 @@ Weighting data files come in a wide range of file formats, since any gridded dat
 
 Based on this information, you can calculate which grid cell any point on the globe falls into:
 
-$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right)$$, $$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$
+$$\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right),$$ 
+
+$$\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)$$
+
 
 where $x_0, y_0$ is lower-left corner point. If the center of the lower-left cell was given, $x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}$, $y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}$.
 
@@ -60,10 +63,16 @@ In some cases, it is appropriate and possible to use time-varying weighting sche
 
 Implementation Notes: Downloading multiple files and reading them.
 
-| R                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `library(raster)`<br>`for (year in 1980:2010) {`<br>  `download.file(paste0(``"``http://archive.org/awesome/``"``, year,` `"``.zip``"``), "temp.zip")`<br>  `filename <- paste0("prefix-", year, ".asc")`<br>  `zip.file.extract(filename,` `"``temp.zip``"``)`<br>  `r <- raster(filename)`<br>  `<perform weighting>`<br>`}` |
-
+```R
+library(raster)
+for (year in 1980:2010) {
+  download.file(paste0("http://archive.org/awesome/", year, ".zip"), "temp.zip")
+  filename <- paste0("prefix-", year, ".asc")
+  zip.file.extract(filename, "temp.zip")
+  r <- raster(filename)
+  <perform weighting>
+}
+```
 
 Below are some common datasources for various weighting schemes.
 
@@ -77,60 +86,200 @@ Below are some common datasources for various weighting schemes.
     - Also consider gridded land use datasets: https://www.atmos.illinois.edu/~meiyapp2/datasets.htm
 - Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
 
-## Aligning weather and weighting grids
+## 3.3 Aligning weather and weighting grids
 
-The first step to using a gridded weighting dataset is to make it conform to data grid definition used by your weather data. Here we assume that both are regular latitude-longitude grids. See [Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to understand the grid scheme for your weighting file; note that gridded weather data often reports the center of each grid cell, rather than the corner.
+The first step to using a gridded weighting dataset is to make it
+conform to data grid definition used by your weather data.  Here we
+assume that both are regular latitude-longitude
+grids. See
+[Kinds of weight schemes and data sources](#Kinds-of-weight-schemes-and-data-sources) to
+understand the grid scheme for your weighting file; note that gridded
+weather data often reports the center of each grid cell, rather than
+the corner.
 
 The following recipe should work for most cases to align weighting data with a weather grid.
 
 
-1. **Resample the weighting data until the grid of the weighting data evenly divides up the weather data.**
-    Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.
+### Step 1: **Resample the weighting data until the grid of the weighting data evenly divides up the weather data.**
 
+Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.
 
 Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
-| R                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `landscan <- raster(``"``…/w001001.adf``"``)`<br>`landscan`                                                                                                                                                                  |
-| `class       : RasterLayer` <br>`dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)`<br>`resolution  : 0.008333333, 0.008333333  (x, y)`<br>`extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)`             |
-| `prism <- raster(``"``PRISM_tmax_stable_4kmM2_2000_all_asc")`<br>`prism`                                                                                                                                                     |
-| `class       : RasterLayer` <br>`dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)`<br>`resolution  : 0.04166667, 0.04166667  (x, y)`<br>`extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)` |
+```R
+landscan <- raster("…/w001001.adf")
+landscan
+## class       : RasterLayer
+## dimensions  : 21120, 43200, 912384000  (nrow, ncol, ncell)
+## resolution  : 0.008333333, 0.008333333  (x, y)
+## extent      : -180, 180, -90, 86  (xmin, xmax, ymin, ymax)
+prism <- raster("PRISM_tmax_stable_4kmM2_2000_all_asc")
+prism
+## class       : RasterLayer
+## dimensions  : 621, 1405, 872505  (nrow, ncol, ncell)
+## resolution  : 0.04166667, 0.04166667  (x, y)
+## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
+```
 
 Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.
 
-| R                                                       |
-| ------------------------------------------------------- |
-| `landscan <- crop(landscan, extent(-126, -66, 24, 50))` |
+```R
+landscan <- crop(landscan, extent(-126, -66, 24, 50))
+```
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
-| R                                                |
-| ------------------------------------------------ |
-| `landscan <- disaggregate(landscan, fact=2) / 4` |
+```R
+landscan <- disaggregate(landscan, fact=2) / 4
+```
 
 We divide by 4 so that the total population remains the same.
 
 
-2. **Clip the two datasets so that they line up.**
+### Step 2: **Clip the two datasets so that they line up.**
 
 
 In the example above, after increasing the resolution of the LandScan data, we clip it again.
 
-| R                                                                            |
-| ---------------------------------------------------------------------------- |
-| `landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))` |
+```R
+landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
+```
 
-3. **Re-aggregate the weighting data, so that it has the same resolution as the weather data.**
+### Step 3: **Re-aggregate the weighting data, so that it has the same resolution as the weather data.**
 
 
 In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:
 
-| R                                                   |
-| --------------------------------------------------- |
-| `landscan <- aggregate(landscan, fact=10, fun=sum)` |
+```R
+landscan <- aggregate(landscan, fact=10, fun=sum)
+```
 
+## 3.4 Plotting your results
 
+Now take a moment to visualize the data that you have created. This is
+a good way to make sure you haven't made any mistakes and to wow your
+less climate-adept colleagues in presentations.
+
+To get an initial view of your data, you can just plot your data as a
+matrix. In R, use the `image` function; similar functions exist in
+other languages. The trick is to make sure that you specify the
+coordinates when you plot the map.
+
+Here's an easy case, using population data from the [Gridded
+Population of the
+World](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download)
+dataset.
+
+```R
+library(raster)
+## Load the data
+rr <-
+raster("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_2pt5_min.asc")
+
+## Display it!
+image(rr)
+```
+
+![Result of `image(rr)`.](images/examples/image-gpw.png)
+
+But that wasn't any fun. Let's try again with something more
+complicated.
+
+First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
+easy-to-use IRI data library.
+
+```R
+library(ncdf4)
+
+## Load the data
+nc <- nc_open("data.nc")
+temp <- ncvar_get(nc, 'temp')
+
+## Display it!
+image(temp)
+```
+
+![Result of `image(temp)`.](images/examples/image-tmax.png)
+
+This is R's default way of showing matrices, with axes that go from
+0 - 1. What's worse, the map is up-side-down, though it will take some
+staring to convince yourself ot this. The reason is that NetCDFs
+usually have the upper-left corner representing the extreme
+North-West. But R's `image` command shows the upper-left corner in the
+lower-left.
+
+We are also going to plot the countries, so this is easier to
+interpret. And to do that, we need to rearrange the data so it goes
+from -180 to 180, rather than 0 to 360 as currently. Here's our second
+attempt:
+
+```R
+## Extract the coordinate values
+lon <- ncvar_get(nc, "X")
+lat <- ncvar_get(nc, "Y")
+
+## Rearrange longitude to go from -180 to 180
+lon2 <- c(lon[lon >= 180] - 360, lon[lon < 180])
+temp2 <- rbind(temp[lon >= 180,], temp[lon < 180,])
+
+## Display it, with map!
+library(maps)
+image(lon2, rev(lat), temp2[,ncol(temp2):1])
+map("world", add=T)
+```
+
+![Result after `map(world)`.](images/examples/image-tmax-flip.png)
+
+Now, for our production-ready map, we're going to switch to
+`ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
+to convert the matrix into a dataframe (with `melt`) and the map into
+a dataframe (with `map_data`):
+
+```R
+## Convert temp2 to a dataframe
+library(reshape2)
+rownames(temp2) <- lon2
+colnames(temp2) <- lat
+temp3 <- melt(temp2, varnames=c('lon', 'lat'))
+
+## Convert world map to a dataframe
+library(ggmap)
+world <- map_data("world")
+
+## Plot everything
+ggplot() +
+    geom_raster(data=temp3, aes(x=lon, y=lat, fill=value)) +
+    geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA)
+```
+
+![Result after `ggplot`.](images/examples/ggplot-tmax.png)
+
+And now we're ready to production-ready graph. The biggest change
+will be the addition of a map projection. You'll want to choose your
+projection carefully, since people are bound to judge you for it.
+
+![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
+Source: [XKCD 977](https://www.xkcd.com/977/).
+
+Using the projection, we can now make the final version of this
+figure. Note that you will need to use `geom_tile` rather than
+`geom_raster` when plotting grids over projections, and this can be
+quite a bit slower. I also use a color palette from
+[ColorBrewer](http://colorbrewer2.org/), an excellent resource for
+choosing colors.
+
+```R
+library(RColorBrewer)
+ggplot() +
+    geom_tile(data=temp3, aes(x=lon, y=lat, fill=value - 273.15)) +
+    geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA, lwd=.2) +
+    coord_map(projection="mollweide", ylim=c(-65, 65)) + xlim(-180, 180) +
+    theme_light() + theme(panel.ontop=TRUE, panel.background=element_blank()) +
+    xlab(NULL) + ylab(NULL) + scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
+    theme(legend.justification=c(0,0), legend.position=c(.01,.01))
+```
+
+![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)

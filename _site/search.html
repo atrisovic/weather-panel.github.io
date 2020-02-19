@@ -26,8 +26,8 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "YOUR URL//search",
   "headline": "Search the site",
-  "datePublished": "2020-01-22T11:32:19-05:00",
-  "dateModified": "2020-01-22T11:32:19-05:00",
+  "datePublished": "2020-02-18T10:24:16-05:00",
+  "dateModified": "2020-02-18T10:24:16-05:00",
   "description": "        ",
   "author": {
     "@type": "Person",
@@ -569,10 +569,10 @@ initFunction(initPrint)
       
       <li class="c-sidebar__chapter">
         <a class="c-sidebar__entry "
-          href="https://github.com/atrisovic/weather-panel.github.io"
+          href="/contributors.html"
         >
           
-          See a mistake? Send us a pull request on GitHub!
+          Contributors
         </a>
 
         
@@ -634,10 +634,18 @@ initFunction(initPrint)
 <script>
     // Add the lunr store since we will now search it
     var store = [{
+        "title": "Contributors",
+        
+        "excerpt":
+            "             Contributors  The core contributors of this tutorial are, in alphabetic order:   Azhar Hussain James Rising Kevin Schwarzwald Ana Trisovic  Citing the Weather Panel Tutorial  You can reference this tutorial with the DOI 10.5281/zenodo.3629801.  This DOI represents all versions, and will always resolve to the latest one.  Cite the tutorial as:  Ana Trisovic, Azhar Hussain, James Rising, &amp; Kevin Schwarzwald. (2020, January). Weather Panel Tutorial (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.3629802   Contributions  We welcome any contributions to this tutorial.  If you see a mistake, please don't hesitate to open an issue  or send us a pull request on GitHub.                     ",
+        "categories": [],
+        "tags": [],
+        "url": "YOUR%20URL/contributors.html",
+        "teaser":null},{
         "title": "Generating geographical unit data",
         
         "excerpt":
-            "4. Generating geographical unit data A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data. These geographic regions may be defined in subtle, non-intuitive ways. For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries[1]. One kind of geographic region is simply called an \"administrative unit\", and refers to...",
+            "4. Generating geographical unit data 4.1 Introduction A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data. These geographic regions may be defined in subtle, non-intuitive ways. For example, a “city” is a local administrative unit where the majority of the population lives in an urban center, while the “greater city” is an approximation of the urban center beyond of the administrative city boundaries. One kind of geographic region is simply called an \"administrative unit\", and...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/geographical-unit-data.html",
@@ -645,7 +653,7 @@ initFunction(initPrint)
         "title": "Getting started",
         
         "excerpt":
-            "Weather Panel Tutorial Introduction to the Tutorial Welcome to the weather panel data regression tutorial! This tutorial will walk you through the steps necessary to relate socioeconomic outcomes to weather data at high resolution. We will cover: How to find and read weather data, and what you should be aware of when using it. How to relate your socioeconomic outcomes to weather variables, and develop your regression specification. How to work with shapefiles, and use them to generate your predictor variables. This tutorial will assume a knowledge of econometrics and basic experience with one scientific programming language (Stata, R, Matlab,...",
+            "Weather Panel Tutorial Introduction to the Tutorial Welcome to the weather panel data regression tutorial! Using econometrics to study how social, economic, and biophysical systems respond to weather has opened a huge number of doors, allowing us to better understand the impacts of climate change, disaster risk and responses, resource management, human behavior, and sustainable development. Here are some of the relationships that have been uncovered in recent years: Source: Carleton and Hsiang (2016). This tutorial will walk you through the steps necessary to relate socioeconomic outcomes to weather data at high resolution. We will cover: How to find and...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/getting-started.html",
@@ -653,7 +661,7 @@ initFunction(initPrint)
         "title": "Developing a reduced-form specification",
         
         "excerpt":
-            "2. Developing a reduced-form specification: This section describes steps to develop the first reduced-form specification, which is generally a global/country regression without any covariate, such as income. Choosing weather variables Choice of weather variables depends on the question we are trying to answer. For example, in case of temperature, we can use T_min/T_max, T_avg or HDD/CDD or GDD. A few of the important weather variables are listed below: Temperature T_min/T_max: Useful when temperature variation is large leading to significant differences in cold end and hot end response. These are important metric when heterogeneity between each time unit matters, such as...",
+            "2. Developing a reduced-form specification This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is Social and Economic Impacts of Climate. 2.1. Choosing weather variables The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/reduced-form-specification.html",
@@ -661,7 +669,7 @@ initFunction(initPrint)
         "title": "Suggestions for work organization",
         
         "excerpt":
-            "5. Suggestions when producing a panel dataset Organization of data and code Having a single directory for a project, containing all data and code in subdirectories makes it easier to find things, and also, in case you want to zip everything up and send it to someone else. However, try to keep your code and your data separate. A typical file organization should be: code/ - all of your analysis sources/ - the original data files, along with information so you can find them again data/ - merged datasets that are ready to be analyzed results/ - result files, typically...",
+            "5. Suggestions when producing a panel dataset 5.1 Organization of data and code Having a single directory for a project, containing all data and code in subdirectories makes it easier to find things, and also, in case you want to zip everything up and send it to someone else. However, try to keep your code and your data separate. A typical file organization should be: code/ - all of your analysis sources/ - the original data files, along with information so you can find them again data/ - merged datasets that are ready to be analyzed results/ - result files,...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/suggestions.html",
@@ -669,7 +677,7 @@ initFunction(initPrint)
         "title": "Using Weather and Climate Data",
         
         "excerpt":
-            "1. Using Weather and Climate Data 1.0 Introduction When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note: There is no universally right or correct weather or climate data product Every weather or climate data product has its use cases, limitations, uncertainties, and quirks This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. A useful resource to better understand the basics of weather, climate, and the physical changes occuring in the climate...",
+            "1. Using Weather and Climate Data When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note: There is no universally right or correct weather or climate data product Every weather or climate data product has its use cases, limitations, uncertainties, and quirks This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. 1.1 The NetCDF Data Format Almost all climate and weather datasets are released in netCDF format. It's efficient, self-describing, and supported...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/weather-and-climate-data.html",
@@ -677,7 +685,7 @@ initFunction(initPrint)
         "title": "Weighting schemes",
         
         "excerpt":
-            "3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions. Why spatial weighting schemes matter Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme...",
+            "3. Weighting schemes This section describes how to use different weighting schemes when aggregating gridded data to data regions. 3.1 Why spatial weighting schemes matter Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting...",
         "categories": [],
         "tags": [],
         "url": "YOUR%20URL/weighting-schemes.html",
