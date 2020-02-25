@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Suggestions for work organization</title>
-  <meta name="description" content="        5. Suggestions when producing a panel dataset 5.1 Organization of data and code Having a single directory for a project, containing all data and code...">
+  <title>Suggestions when producing a panel dataset</title>
+  <meta name="description" content="# 5. Suggestions when producing a panel dataset## 5.1 Organization of data and codeHaving a single directory for a project, containing all data and code in s...">
 
-  <link rel="canonical" href="/YOUR%20URL//suggestions.html">
+  <link rel="canonical" href="/YOUR%20URL//content/suggestions.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
 
-  <meta property="og:url"         content="/YOUR%20URL//suggestions.html" />
+  <meta property="og:url"         content="/YOUR%20URL//content/suggestions.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Suggestions for work organization" />
-<meta property="og:description" content="        5. Suggestions when producing a panel dataset 5.1 Organization of data and code Having a single directory for a project, containing all data and code..." />
+<meta property="og:title"       content="Suggestions when producing a panel dataset" />
+<meta property="og:description" content="# 5. Suggestions when producing a panel dataset## 5.1 Organization of data and codeHaving a single directory for a project, containing all data and code in s..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//suggestions.html",
-  "headline": "Suggestions for work organization",
+  "mainEntityOfPage": "YOUR URL//content/suggestions.html",
+  "headline": "Suggestions when producing a panel dataset",
   "datePublished": "2020-02-25T17:09:02-05:00",
   "dateModified": "2020-02-25T17:09:02-05:00",
-  "description": "        5. Suggestions when producing a panel dataset 5.1 Organization of data and code Having a single directory for a project, containing all data and code...",
+  "description": "# 5. Suggestions when producing a panel dataset## 5.1 Organization of data and codeHaving a single directory for a project, containing all data and code in s...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -626,108 +626,126 @@ initFunction(initPrint)
 
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
-                  <main class="jupyter-page">
-    <div class="jb_cell">
+              <h1 id="5-suggestions-when-producing-a-panel-dataset">5. Suggestions when producing a panel dataset</h1>
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.-Suggestions-when-producing-a-panel-dataset">5. Suggestions when producing a panel dataset<a class="anchor-link" href="#5.-Suggestions-when-producing-a-panel-dataset"> </a></h1><h2 id="5.1-Organization-of-data-and-code">5.1 Organization of data and code<a class="anchor-link" href="#5.1-Organization-of-data-and-code"> </a></h2><p>Having a single directory for a project, containing all data and code in subdirectories 
+<h2 id="51-organization-of-data-and-code">5.1 Organization of data and code</h2>
+
+<p>Having a single directory for a project, containing all data and code in subdirectories 
 makes it easier to find things, and also, in case you want to zip everything up and send it to someone else.
 However, try to keep your code and your data separate. A typical file organization should be:</p>
+
 <ul>
-<li><code>code/</code> - all of your analysis</li>
-<li><code>sources/</code> - the original data files, along with information so you can find them again</li>
-<li><code>data/</code> - merged datasets that are ready to be analyzed</li>
-<li><code>results/</code> - result files, typically not formatted for display.</li>
-<li><code>figures/</code> - formatted figures and LaTeX tables.</li>
+  <li><code class="language-plaintext highlighter-rouge">code/</code> - all of your analysis</li>
+  <li><code class="language-plaintext highlighter-rouge">sources/</code> - the original data files, along with information so you can find them again</li>
+  <li><code class="language-plaintext highlighter-rouge">data/</code> - merged datasets that are ready to be analyzed</li>
+  <li><code class="language-plaintext highlighter-rouge">results/</code> - result files, typically not formatted for display.</li>
+  <li><code class="language-plaintext highlighter-rouge">figures/</code> - formatted figures and LaTeX tables.</li>
 </ul>
+
 <p>If you are not sure what predictors you will need for your analysis,
 create your dataset with a lot of possible predictors and decide
 later.  Often merging together your panel dataset is laborious, and
 you do not want to do it more times than necessary.</p>
-<h3 id="Data-storage">Data storage<a class="anchor-link" href="#Data-storage"> </a></h3><ul>
-<li>Most universities typically have a data storage product available for their students and affiliates. 
+
+<h3 id="data-storage">Data storage</h3>
+
+<ul>
+  <li>Most universities typically have a data storage product available for their students and affiliates. 
 We recommend you inquire at your university about what can be the best place to store data.</li>
 </ul>
-<h3 id="Immutable-data">Immutable data<a class="anchor-link" href="#Immutable-data"> </a></h3><ul>
-<li>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
+
+<h3 id="immutable-data">Immutable data</h3>
+
+<ul>
+  <li>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
 Instead of making changes to the original data, you should create derived (new) datasets.
 This is important because the pre-processing performed on source data is as important as the final analysis steps.
 In addition, it will allow you to reuse the original data multiple times.</li>
 </ul>
-<h2 id="5.2-Naming-conventions">5.2 Naming conventions<a class="anchor-link" href="#5.2-Naming-conventions"> </a></h2><p>Good naming practices should be applied to files and folders to make clear the contents of your project. 
+
+<h2 id="52-naming-conventions">5.2 Naming conventions</h2>
+
+<p>Good naming practices should be applied to files and folders to make clear the contents of your project. 
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.</p>
-<h3 id="Recommendations:">Recommendations:<a class="anchor-link" href="#Recommendations:"> </a></h3><ul>
-<li>Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., <code>.csv</code>)</li>
-<li>Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.</li>
-<li>Ensure file names are informative of its contents</li>
-<li>If you want to indicate sequence, start your file or folder names with numbers (e.g., <code>01_clean_data</code>, <code>02_analyze</code>, <code>03_results</code>)</li>
+
+<h3 id="recommendations">Recommendations:</h3>
+
+<ul>
+  <li>Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., <code class="language-plaintext highlighter-rouge">.csv</code>)</li>
+  <li>Use delimiters (such as underscores “_” or dashes “-“) to separate information contained in the file name.</li>
+  <li>Ensure file names are informative of its contents</li>
+  <li>If you want to indicate sequence, start your file or folder names with numbers (e.g., <code class="language-plaintext highlighter-rouge">01_clean_data</code>, <code class="language-plaintext highlighter-rouge">02_analyze</code>, <code class="language-plaintext highlighter-rouge">03_results</code>)</li>
 </ul>
-<h3 id="Documentation">Documentation<a class="anchor-link" href="#Documentation"> </a></h3><ul>
-<li>Even if you have organized your working directory perfectly, it is still good to include 
+
+<h3 id="documentation">Documentation</h3>
+
+<ul>
+  <li>Even if you have organized your working directory perfectly, it is still good to include 
 some additional documentation in readme files (readme.txt, readme.md).
-Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. </li>
+Describe the files and process in these files, and try to keep them up-to-date as things are added or changed.</li>
 </ul>
-<h2 id="5.3-Version-control">5.3 Version control<a class="anchor-link" href="#5.3-Version-control"> </a></h2><p>We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
+
+<h2 id="53-version-control">5.3 Version control</h2>
+
+<p>We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
 Also, it gives access to historical versions of your project.</p>
-<h3 id="Version-control-with-git">Version control with git<a class="anchor-link" href="#Version-control-with-git"> </a></h3><p>We recommend you to go through <a href="https://swcarpentry.github.io/git-novice/">a tutorial on version control with git</a>.</p>
+
+<h3 id="version-control-with-git">Version control with git</h3>
+
+<p>We recommend you to go through <a href="https://swcarpentry.github.io/git-novice/">a tutorial on version control with git</a>.</p>
+
 <p>Here is one more reason why you would want to use version control:</p>
-<p><img src="https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png" alt=""></p>
-<h2 id="5.4-Workflow-automation">5.4 Workflow automation<a class="anchor-link" href="#5.4-Workflow-automation"> </a></h2><p>Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
+
+<p><img src="https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png" alt="" /></p>
+
+<h2 id="54-workflow-automation">5.4 Workflow automation</h2>
+
+<p>Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command.</p>
+
 <p>Here is an example that showcases a simple workflow sequence with <a href="http://swcarpentry.github.io/shell-novice/">bash</a>.
-The file that defines analysis steps is often called a 'master script'.
+The file that defines analysis steps is often called a ‘master script’.
 A master script can be written in different languages, like MATLAB, R, Python, bash etc.</p>
+
 <p>A master script written in bash that defines an analysis workflow is typically called run_all.sh, runall.sh or similar.</p>
-<h3 id="An-example-of-a-master-script-in-bash:">An example of a master script in bash:<a class="anchor-link" href="#An-example-of-a-master-script-in-bash:"> </a></h3><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1"># file: run_all.sh</span>
+
+<h3 id="an-example-of-a-master-script-in-bash">An example of a master script in bash:</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># file: run_all.sh</span>
 python clean_data.py
 
-<span class="c1"># the command echo can help with tracking progress</span>
-<span class="nb">echo</span> <span class="s2">&quot;Finished with data cleaning&quot;</span>
+<span class="c"># the command echo can help with tracking progress</span>
+<span class="nb">echo</span> <span class="s2">"Finished with data cleaning"</span>
 
 python analysis.py
-<span class="nb">echo</span> <span class="s2">&quot;Finished with analysis&quot;</span>
+<span class="nb">echo</span> <span class="s2">"Finished with analysis"</span>
 
-<span class="c1"># Use comments like this one</span>
-<span class="c1"># to add additional explanations</span>
+<span class="c"># Use comments like this one</span>
+<span class="c"># to add additional explanations</span>
 python draw_plots.py
-<span class="nb">echo</span> <span class="s2">&quot;Finished with drawing plots&quot;</span>
-</pre></div>
+<span class="nb">echo</span> <span class="s2">"Finished with drawing plots"</span>
+</code></pre></div></div>
+
 <p>The analysis is then executed with a single command in the command prompt (Terminal):</p>
-<div class="highlight"><pre><span></span>sh run_all.sh
-</pre></div>
-<h3 id="Relative-and-absolute-paths">Relative and absolute paths<a class="anchor-link" href="#Relative-and-absolute-paths"> </a></h3><ul>
-<li>A common problem when automating and packaging your project is the use of absolute paths.
-An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code>/home/someuser/project/data/input.csv</code>). 
-A relative path, on the other hand, only assumes a local relationship between folders (for example: <code>../data/input.csv</code>, where ".." refers to the "parent" directory). We recommend specifying relative paths whenever that is possible.</li>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh run_all.sh
+</code></pre></div></div>
+
+<h3 id="relative-and-absolute-paths">Relative and absolute paths</h3>
+
+<ul>
+  <li>A common problem when automating and packaging your project is the use of absolute paths.
+An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code class="language-plaintext highlighter-rouge">/home/someuser/project/data/input.csv</code>). 
+A relative path, on the other hand, only assumes a local relationship between folders (for example: <code class="language-plaintext highlighter-rouge">../data/input.csv</code>, where “..” refers to the “parent” directory). We recommend specifying relative paths whenever that is possible.</li>
 </ul>
 
-</div>
-</div>
-</div>
-</div>
 
- 
-
-
-    </main>
-    
             </div>
             <div class="c-textbook__footer" id="textbook_footer">
               <nav class="c-page__nav">
   
-    
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/geographical-unit-data.html">
-      〈 <span class="u-margin-right-tiny"></span> Generating geographical unit data
-    </a>
-  
 
-  
-    
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/contributors.html">
-      Contributors <span class="u-margin-right-tiny"></span> 〉
-    </a>
   
 </nav>
 

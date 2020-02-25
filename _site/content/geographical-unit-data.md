@@ -2,11 +2,11 @@
 
 ## 4.1 Introduction
 
-A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “[city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is a local administrative unit where the majority of the population lives in an urban center, while the “[greater city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is an approximation of the urban center beyond of the administrative city boundaries.
+A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “[city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is a local administrative unit where the majority of the population lives in an urban center, while the “[greater city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is an approximation of the urban center beyond the administrative city boundaries.
 
 One kind of geographic region is simply called an "administrative
 unit", and refers to states and provinces, or counties and
-municipalities. The top level of this hierarchy of administrative
+municipalities. The top-level of this hierarchy of administrative
 units is "ADM0", referring to countries; "ADM1" is the first level of
 political division, usually called states or provinces; "ADM2" is the
 second level of division, and has a wider range of names across the
@@ -79,7 +79,7 @@ polygon. This generally requires a few steps.
 
 Your first step should be to view your shapefile in a software system
 like QGIS or ArcGIS.
-QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is a proprietary software for working with maps and geographic data.
+QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is proprietary software for working with maps and geographic data.
 
 These systems also allow you to perform many kinds of spatial
 analysis. Some of the most commonly useful are calculating Zonal

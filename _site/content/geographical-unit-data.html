@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Generating geographical unit data</title>
-  <meta name="description" content="        4. Generating geographical unit data 4.1 Introduction A geographical unit, area or region, is a portion of a country or other region delineated for t...">
+  <meta name="description" content="# 4. Generating geographical unit data## 4.1 IntroductionA geographical unit, area or region, is a portion of a country or other region delineated for the pu...">
 
-  <link rel="canonical" href="/YOUR%20URL//geographical-unit-data.html">
+  <link rel="canonical" href="/YOUR%20URL//content/geographical-unit-data.html">
   <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
 
-  <meta property="og:url"         content="/YOUR%20URL//geographical-unit-data.html" />
+  <meta property="og:url"         content="/YOUR%20URL//content/geographical-unit-data.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Generating geographical unit data" />
-<meta property="og:description" content="        4. Generating geographical unit data 4.1 Introduction A geographical unit, area or region, is a portion of a country or other region delineated for t..." />
+<meta property="og:description" content="# 4. Generating geographical unit data## 4.1 IntroductionA geographical unit, area or region, is a portion of a country or other region delineated for the pu..." />
 <meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
 
 <meta name="twitter:card" content="summary">
@@ -24,11 +24,11 @@
   {
   "@context": "http://schema.org",
   "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//geographical-unit-data.html",
+  "mainEntityOfPage": "YOUR URL//content/geographical-unit-data.html",
   "headline": "Generating geographical unit data",
   "datePublished": "2020-02-25T17:09:02-05:00",
   "dateModified": "2020-02-25T17:09:02-05:00",
-  "description": "        4. Generating geographical unit data 4.1 Introduction A geographical unit, area or region, is a portion of a country or other region delineated for t...",
+  "description": "# 4. Generating geographical unit data## 4.1 IntroductionA geographical unit, area or region, is a portion of a country or other region delineated for the pu...",
   "author": {
     "@type": "Person",
     "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
@@ -626,44 +626,63 @@ initFunction(initPrint)
 
       <main class="c-textbook__page" tabindex="-1">
             <div class="c-textbook__content" id="textbook_content">
-                  <main class="jupyter-page">
-    <div class="jb_cell">
+              <h1 id="4-generating-geographical-unit-data">4. Generating geographical unit data</h1>
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="4.-Generating-geographical-unit-data">4. Generating geographical unit data<a class="anchor-link" href="#4.-Generating-geographical-unit-data"> </a></h1><h2 id="4.1-Introduction">4.1 Introduction<a class="anchor-link" href="#4.1-Introduction"> </a></h2><p>A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">city</a>” is a local administrative unit where the majority of the population lives in an urban center, while the “<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">greater city</a>” is an approximation of the urban center beyond the administrative city boundaries.</p>
-<p>One kind of geographic region is simply called an "administrative
-unit", and refers to states and provinces, or counties and
+<h2 id="41-introduction">4.1 Introduction</h2>
+
+<p>A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">city</a>” is a local administrative unit where the majority of the population lives in an urban center, while the “<a href="https://ec.europa.eu/eurostat/web/cities/spatial-units">greater city</a>” is an approximation of the urban center beyond the administrative city boundaries.</p>
+
+<p>One kind of geographic region is simply called an “administrative
+unit”, and refers to states and provinces, or counties and
 municipalities. The top-level of this hierarchy of administrative
-units is "ADM0", referring to countries; "ADM1" is the first level of
-political division, usually called states or provinces; "ADM2" is the
+units is “ADM0”, referring to countries; “ADM1” is the first level of
+political division, usually called states or provinces; “ADM2” is the
 second level of division, and has a wider range of names across the
 globe.
  Administrative units in economics analyses are typically politically-defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. They can also be more effective for communicating results, since politically defined regions are also more relevant for policy-makers.</p>
+
 <p>Administrative unit data can capture existing administrative units (high granularity) or groups of those units (lesser granularity). For example, the administrative unit database, <a href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
 When aggregating administrative units, it is important to capture
 territories with homogeneous features that are relevant to the
 study. For example, if the weather is relevant for the study, the
 administrative unit should be fairly homogeneous concerning mean temperature and precipitation.</p>
+
 <p><a href="https://academic.oup.com/reep/article/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change</a> describes
 the common pitfalls in translating weather data into geographical unit data.</p>
-<h2 id="4.2-Geographic-information-systems">4.2 Geographic information systems<a class="anchor-link" href="#4.2-Geographic-information-systems"> </a></h2><p>Much is made of geographic information system (GIS), but these have
+
+<h2 id="42-geographic-information-systems">4.2 Geographic information systems</h2>
+
+<p>Much is made of geographic information system (GIS), but these have
 long since become unnotably common parts of spatial research. GIS
 refers to the representation of polygons, curves, and points, and
 their use in data analysis.</p>
+
 <p>Describing shapes requires specialized data formats. The most common
 data format is an ESRI Shapefile, and we will focus on these for this
 tutorial. You may also encounter GDB (common in hydrology), GeoJSON
 (used with web interfaces), KXML (used by Google Earth), and OSM (from
 OpenStreetMap) files. All of these can be converted to Shapefiles,
 using GIS software like QGIS.</p>
+
 <p>A <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">shapefile</a> also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.</p>
-<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code>.shp</code>, <code>.shx</code> and <code>.dbf</code>. There may be additional files like <code>.prj</code> with the shape file’s projection information. All files must have the same name, for example:</p>
-<blockquote><p><code>states.shp</code></p>
-<p><code>states.shx</code></p>
-<p><code>states.dbf</code></p>
+
+<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code class="language-plaintext highlighter-rouge">.shp</code>, <code class="language-plaintext highlighter-rouge">.shx</code> and <code class="language-plaintext highlighter-rouge">.dbf</code>. There may be additional files like <code class="language-plaintext highlighter-rouge">.prj</code> with the shape file’s projection information. All files must have the same name, for example:</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">states.shp</code></p>
 </blockquote>
-<h2 id="4.3-Finding-shapefiles">4.3 Finding shapefiles<a class="anchor-link" href="#4.3-Finding-shapefiles"> </a></h2><p>It is usually possible to find a shapefile corresponding to a set of
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">states.shx</code></p>
+</blockquote>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">states.dbf</code></p>
+</blockquote>
+
+<h2 id="43-finding-shapefiles">4.3 Finding shapefiles</h2>
+
+<p>It is usually possible to find a shapefile corresponding to a set of
 socioeconomic data by searching around online. Many governments will
 have an internal search engine for their GIS data. Two frequently
 useful resources are
@@ -671,177 +690,207 @@ the <a href="https://gadm.org">Global Administrative Regions</a> database, which
 has standard administrative units across the globe,
 and <a href="http://www.naturalearthdata.com/">Natural Earth</a> which has
 clean physical shape information.</p>
-<h2 id="4.4-Creating-shapefiles">4.4 Creating shapefiles<a class="anchor-link" href="#4.4-Creating-shapefiles"> </a></h2><p>In some cases, you will have to make the shapefile from scratch. The
+
+<h2 id="44-creating-shapefiles">4.4 Creating shapefiles</h2>
+
+<p>In some cases, you will have to make the shapefile from scratch. The
 most common ways of doing this is by clicking out the shape of each
 polygon. This generally requires a few steps.</p>
+
 <ol>
-<li>Find an image that shows the regions that you want to digitize and
+  <li>Find an image that shows the regions that you want to digitize and
 import the image into QGIS or ArcGIS.</li>
-<li>Typically, published images will not report the projection that was
+  <li>Typically, published images will not report the projection that was
 used, but you will need to find a mapping between points in the
 image and latitude-longitude coordinates. Use
 the
 <a href="https://www.qgistutorials.com/en/docs/georeferencing_basics.html">GDAL Georeferencer</a> to
 make this a point-and-click task.</li>
-<li>Create new polygons by clicking around the edges of the polygon.</li>
+  <li>Create new polygons by clicking around the edges of the polygon.</li>
 </ol>
-<h2 id="4.5-Working-with-shapefiles">4.5 Working with shapefiles<a class="anchor-link" href="#4.5-Working-with-shapefiles"> </a></h2><p>Your first step should be to view your shapefile in a software system
+
+<h2 id="45-working-with-shapefiles">4.5 Working with shapefiles</h2>
+
+<p>Your first step should be to view your shapefile in a software system
 like QGIS or ArcGIS.
 QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is proprietary software for working with maps and geographic data.</p>
+
 <p>These systems also allow you to perform many kinds of spatial
 analysis. Some of the most commonly useful are calculating Zonal
 Statistics, such as the average of a gridded dataset across each
 shapefile region, and Merging units, and translating points to
 polygons with Voronoi Polygons.</p>
+
 <p>Shapefiles can be opened with Python packages like the following</p>
+
 <ul>
-<li><strong>Fiona</strong>,</li>
+  <li><strong>Fiona</strong>,</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
-<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">fiona</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"my_shapefile.shp"</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
-<span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \ 
-<span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="sa">u</span><span class="s1">&#39;FID&#39;</span><span class="p">,</span> <span class="s1">&#39;float:11&#39;</span><span class="p">)])}</span>
-</pre></div>
+<span class="p">{</span><span class="s">'geometry'</span><span class="p">:</span> <span class="s">'LineString'</span><span class="p">,</span> \ 
+<span class="s">'properties'</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s">u'FID'</span><span class="p">,</span> <span class="s">'float:11'</span><span class="p">)])}</span>
+</code></pre></div></div>
+
 <ul>
-<li><strong>PyShp</strong> or</li>
+  <li><strong>PyShp</strong> or</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shapefile</span>
-<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">shapefile</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s">"my_shapefile.shp"</span><span class="p">)</span>
+</code></pre></div></div>
+
 <ul>
-<li><strong>geopandas</strong> (among other packages).</li>
+  <li><strong>geopandas</strong> (among other packages).</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="kn">as</span> <span class="nn">gpd</span>
-<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="n">gpd</span>
+<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s">"/my_shapefile.shp"</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
-</pre></div>
+</code></pre></div></div>
+
 <p>Data analysis software R also supports working with spatial data. To
-read shape files you could use a package like <code>maptools</code>,  <code>rgdal</code>,
-<code>sf</code>, or <code>PBSmapping</code>.</p>
+read shape files you could use a package like <code class="language-plaintext highlighter-rouge">maptools</code>,  <code class="language-plaintext highlighter-rouge">rgdal</code>,
+<code class="language-plaintext highlighter-rouge">sf</code>, or <code class="language-plaintext highlighter-rouge">PBSmapping</code>.</p>
+
 <ul>
-<li><p><strong>maptools</strong></p>
-<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
-</li>
-<li><p><strong>PBSmapping</strong></p>
-<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
-</li>
+  <li><strong>maptools</strong>
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span><span class="w">
+</span><span class="n">shapefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readShapePoly</span><span class="p">(</span><span class="s2">"/my_shapefile.shp"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li><strong>PBSmapping</strong>
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span><span class="w">
+</span><span class="n">shapefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">importShapefile</span><span class="p">(</span><span class="s2">"/my_shapefile.shp"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
 </ul>
-<h2 id="4.6-Weighted-averages-within-spatial-units">4.6 Weighted averages within spatial units<a class="anchor-link" href="#4.6-Weighted-averages-within-spatial-units"> </a></h2><p>Now, you probably have a gridded spatiotemporal dataset of historical
+
+<h2 id="46-weighted-averages-within-spatial-units">4.6 Weighted averages within spatial units</h2>
+
+<p>Now, you probably have a gridded spatiotemporal dataset of historical
 weather and economic output data specific to shapefile regions.  The
 next step is construct the weather measures that will correspond to
 each of your economic data observations.  To do this, you will need to
 construct a weighted average of the weather in each region for each
 timestep.</p>
+
 <p>This can be a computationally expensive operation, so it is important
 to set up the mathematical process efficiently. The regional averaging
 process is equivalent to a matrix transformation:
-$$w_\text{region} = A w_\text{gridded}$$</p>
+<script type="math/tex">w_\text{region} = A w_\text{gridded}</script></p>
+
 <p>where $w_\text{region}$ is a vector of weather values across
 regions, in a given timestep; and $w_\text{gridded}$ is a vector of
 weather values across grid cells.  Suppose there are $N$ regions and
 $R C$ grid cells, then the transformation matrix $A$ will be $N x
 R C$. The $A$ matrix does not change over time, so once you
 calculate it, the process for generating each time step is faster.</p>
+
 <p>Below, we sketch out two approaches to generating this matrix, but a
 few comments are common no matter how you generate it.</p>
+
 <ol>
-<li><p>The sum of entries across each row should be 1. Missing values can
+  <li>
+    <p>The sum of entries across each row should be 1. Missing values can
 cause reasonable-looking calculations to produce rows sums that are
 less than one, so make sure you check.</p>
-</li>
-<li><p>This matrix is huge, but it is very sparse: most entries
+  </li>
+  <li>
+    <p>This matrix is huge, but it is very sparse: most entries
 are 0. Make sure to use a sparse matrix implementation (e.g.,
-<code>sparseMatrix</code> in R, <code>scipy.sparse</code> in python, <code>sparse</code> in Matlab).</p>
-</li>
-<li><p>The $w_\text{gridded}$ data starts as a matrix, but here we use
+<code class="language-plaintext highlighter-rouge">sparseMatrix</code> in R, <code class="language-plaintext highlighter-rouge">scipy.sparse</code> in python, <code class="language-plaintext highlighter-rouge">sparse</code> in Matlab).</p>
+  </li>
+  <li>
+    <p>The $w_\text{gridded}$ data starts as a matrix, but here we use
 it as a vector.  It is easy (in any language) to convert a matrix
 to a vector with all of its values, but you need to be careful
 about the order of the entries, and order the columns of $A$ the
 same way.</p>
-<p>In R, <code>as.vector</code> will convert from a matrix to a vector, with each
+
+    <p>In R, <code class="language-plaintext highlighter-rouge">as.vector</code> will convert from a matrix to a vector, with each
 <em>column</em> being listed in full before moving on to the next column.</p>
-<p>In python, <code>numpy.flatten</code> will convert a numpy matrix to a vector,
+
+    <p>In python, <code class="language-plaintext highlighter-rouge">numpy.flatten</code> will convert a numpy matrix to a vector,
 with each <em>row</em> being listed in full before moving on to the next
 row.</p>
-<p>In Matlab, indexing the grid with <code>(:)</code> will convert from an array
+
+    <p>In Matlab, indexing the grid with <code class="language-plaintext highlighter-rouge">(:)</code> will convert from an array
 to a vector, with each <em>column</em> being listed in full before moving
 on to the next column.</p>
-</li>
+  </li>
 </ol>
-<h3 id="Version-1.-Using-grid-cell-centers">Version 1. Using grid cell centers<a class="anchor-link" href="#Version-1.-Using-grid-cell-centers"> </a></h3><p>The easiest way to generate weather for each region in a shapefile is
+
+<h3 id="version-1-using-grid-cell-centers">Version 1. Using grid cell centers</h3>
+
+<p>The easiest way to generate weather for each region in a shapefile is
 to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.</p>
+
 <p>As an example, in R, you generate these points like so:</p>
-<div class="highlight"><pre><span></span><span class="n">longitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
-<span class="n">latitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
-<span class="n">pts</span> <span class="o">&lt;-</span> <span class="nf">expand.grid</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">longitudes</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">latitudes</span><span class="p">)</span>
-</pre></div>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">longitudes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span><span class="w"> </span><span class="n">longitude1</span><span class="p">,</span><span class="w"> </span><span class="n">gridwidth</span><span class="p">)</span><span class="w">
+</span><span class="n">latitudes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span><span class="w"> </span><span class="n">latitude1</span><span class="p">,</span><span class="w"> </span><span class="n">gridwidth</span><span class="p">)</span><span class="w">
+</span><span class="n">pts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">expand.grid</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">longitudes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">latitudes</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
 <p>Now, you can iterate through each region, and get a list of all of the
-points within each region. Here's how you would do that with the
-<code>PBSmapping</code> library in R:</p>
-<div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span> <span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
-<span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span>
-<span class="n">eids</span> <span class="o">&lt;-</span> <span class="nf">findPolys</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">polys</span><span class="p">,</span> <span class="n">maxRows</span><span class="o">=</span><span class="m">6e5</span><span class="p">)</span>
-</pre></div>
-<p>Then you can use the cells that have been found (which, if you've set
+points within each region. Here’s how you would do that with the
+<code class="language-plaintext highlighter-rouge">PBSmapping</code> library in R:</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span><span class="w"> </span><span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span><span class="w">
+</span><span class="n">events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span><span class="w">
+</span><span class="n">eids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">findPolys</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="n">polys</span><span class="p">,</span><span class="w"> </span><span class="n">maxRows</span><span class="o">=</span><span class="m">6e5</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Then you can use the cells that have been found (which, if you’ve set
 it up right, will be in the same order as the columns of $A$) to
 fill in the entries of your transformation matrix.</p>
+
 <p>If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest. For example, in R, using
-<code>PBSmapping</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">centroid</span> <span class="o">&lt;-</span> <span class="nf">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">dists</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">((</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span> <span class="o">-</span> <span class="n">centroid</span><span class="o">$</span><span class="n">X</span><span class="p">)</span><span class="n">^2</span> <span class="o">+</span> <span class="p">(</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span> <span class="o">-</span> <span class="n">centroid</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span>
-<span class="n">closest</span> <span class="o">&lt;-</span> <span class="nf">which.min</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span><span class="n">[1]</span>
-</pre></div>
-<h3 id="Version-2.-Allowing-for-partial-grid-cells">Version 2. Allowing for partial grid cells<a class="anchor-link" href="#Version-2.-Allowing-for-partial-grid-cells"> </a></h3><p>Just using the grid cell centers can result in a poor representation
+<code class="language-plaintext highlighter-rouge">PBSmapping</code>:</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">centroid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span><span class="w"> </span><span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">dists</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">((</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">centroid</span><span class="o">$</span><span class="n">X</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">centroid</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">closest</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which.min</span><span class="p">(</span><span class="n">dists</span><span class="p">)[</span><span class="m">1</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="version-2-allowing-for-partial-grid-cells">Version 2. Allowing for partial grid cells</h3>
+
+<p>Just using the grid cell centers can result in a poor representation
 of the weather that overlaps each region, particularly when the
 regions are of a similar size to the grid cells. In this case, you
 need to determine how much each grid cell overlaps with each region.</p>
+
 <p>There are different ways for doing this, but one is to use QGIS.
 Within QGIS, you can create a shapefile with a rectangle for each grid
 cell. Then intersect those with the region shapefile, producing a
 separate polygon for each region-by-grid cell combination. Then have
 QGIS compute the area of each of those regions: these will give you
 the portion of grid cells to use.</p>
-<h2 id="4.7-Matching-names">4.7 Matching names<a class="anchor-link" href="#4.7-Matching-names"> </a></h2><p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
-<p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
+
+<h2 id="47-matching-names">4.7 Matching names</h2>
+
+<p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
+
+<p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People’s Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
+
 <p>Here are some suggestions for dealing with the mess that is political geography:</p>
+
 <p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
+
 <p>Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.</p>
-<p>Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as <code>&lt;dataset&gt;2canonical</code> and <code>canonical2&lt;dataset2&gt;</code>.</p>
 
-</div>
-</div>
-</div>
-</div>
-
- 
+<p>Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as <code class="language-plaintext highlighter-rouge">&lt;dataset&gt;2canonical</code> and <code class="language-plaintext highlighter-rouge">canonical2&lt;dataset2&gt;</code>.</p>
 
 
-    </main>
-    
             </div>
             <div class="c-textbook__footer" id="textbook_footer">
               <nav class="c-page__nav">
   
-    
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/weighting-schemes.html">
-      〈 <span class="u-margin-right-tiny"></span> Weighting schemes
-    </a>
-  
 
-  
-    
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/suggestions.html">
-      Suggestions for work organization <span class="u-margin-right-tiny"></span> 〉
-    </a>
   
 </nav>
 
