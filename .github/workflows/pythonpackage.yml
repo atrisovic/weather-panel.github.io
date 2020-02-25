@@ -21,7 +21,7 @@ jobs:
         sudo apt-get install python3-pip
     - name: Create book template and build page HTML
       run: |
-        pip3 install --user -U git+https://github.com/jupyter/jupyter-book.git
+        pip install jupyter-book
         PATH="${PATH}:${HOME}/.local/bin"
         jupyter-book create mybook --content-folder content/
         jupyter-book build ./mybook
