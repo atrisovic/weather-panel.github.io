@@ -28,7 +28,8 @@ jobs:
     - name: Install ruby dependencies
       run: |
         cd mybook
-        make install
+        sudo gem install bundler
+        bundle install
         bundle exec jekyll build
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
