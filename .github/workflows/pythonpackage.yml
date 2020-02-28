@@ -19,15 +19,14 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install python3-pip
-    - name: Create book template and build page HTML
+    - name: Build Jupyter Book 
       run: |
         pip install jupyter-book
         PATH="${PATH}:${HOME}/.local/bin"
         ls -ls
         jupyter-book build .
-    - name: Install ruby dependencies
+    - name: Install Ruby dependencies
       run: |
-        sudo chown -R $(whoami):$(whoami) .
         sudo gem install bundler -v 1.17.2
         bundle install
         bundle exec jekyll build
@@ -36,9 +35,9 @@ jobs:
         sudo chown -R $(whoami):$(whoami) .
         git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git config --global user.name "$GITHUB_ACTOR"
-        cp -r _site /tmp
-        rm -rf *
-        mv /tmp/_site/* .
+        #cp -r _site /tmp
+        #rm -rf *
+        #mv /tmp/_site/* .
         git checkout -b gh-pages
         git add --all --force
         git commit -a --allow-empty-message -m ''
