@@ -23,16 +23,24 @@ jobs:
       run: |
         pip install jupyter-book
         PATH="${PATH}:${HOME}/.local/bin"
-        jupyter-book create mybook --content-folder content/
-        jupyter-book build ./mybook
+        ls -ls
+        jupyter-book build .
     - name: Install ruby dependencies
       run: |
-        cd mybook
-        sudo gem install bundler
+        sudo chown -R $(whoami):$(whoami) .
+        sudo gem install bundler -v 1.17.2
         bundle install
         bundle exec jekyll build
-    - name: GitHub Pages Deploy
-      uses: maxheld83/ghpages@v0.2.1
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
-        BUILD_DIR: _site/
+    - name: GitHub Pages Step-by-step
+      run: |
+        sudo chown -R $(whoami):$(whoami) .
+        git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config --global user.name "$GITHUB_ACTOR"
+        cp -r _site /tmp
+        rm -rf *
+        mv /tmp/_site/* .
+        git checkout -b gh-pages
+        git add --all --force
+        git commit -a --allow-empty-message -m ''
+        git remote set-url origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
+        git push --force origin gh-pages 
