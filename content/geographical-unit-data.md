@@ -130,7 +130,7 @@ library(PBSmapping)
 shapefile <- importShapefile("/my_shapefile.shp")
 ```
 
-## 4.6 Weighted averages within spatial units
+## 4.6 Constructing averages within spatial units
 
 Now, you probably have a gridded spatiotemporal dataset of historical
 weather and economic output data specific to shapefile regions.  The
@@ -139,10 +139,18 @@ each of your economic data observations.  To do this, you will need to
 construct a weighted average of the weather in each region for each
 timestep.
 
-This can be a computationally expensive operation, so it is important
-to set up the mathematical process efficiently. The regional averaging
-process is equivalent to a matrix transformation:
-$$w_\text{region} = A w_\text{gridded}$$
+In some cases, there are tools available that will help you do
+this. If you are using area weighting (i.e., no weighting grid) and
+your grid is fine enough that every region fully contains at least one
+cell, one tool you can use is
+[regionmask](http://www.matteodefelice.name/post/aggregating-gridded-data/).
+
+If your situation is more complicated, or if you just want to know how
+to do it yourself, it is important to set up the mathematical process
+efficiently since this can be a computationally expensive step.
+
+The regional averaging process is equivalent to a matrix
+transformation: $$w_\text{region} = A w_\text{gridded}$$
 
 where $w_\text{region}$ is a vector of weather values across
 regions, in a given timestep; and $w_\text{gridded}$ is a vector of
