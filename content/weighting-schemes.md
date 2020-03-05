@@ -59,6 +59,11 @@ Implementation Notes: Reading gridded data.
 | ------------------------- | ------------------------------------------------------------------------------------- |
 | Use the `raster` library. | Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid. |
 
+If you are using R, take a look at
+the
+[Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/),
+which has some extensive examples of working with geospatial raster data.
+
 In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.
 
 Implementation Notes: Downloading multiple files and reading them.
