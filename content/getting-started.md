@@ -38,8 +38,14 @@ We will also assume that you already have a research question. There
 are plenty of ways to find important questions, and maybe we will try
 to offer a tutorial on that in the future.
 
-A useful resource to better understand the basics of weather, climate, and the physical
-changes occuring in the climate system is [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3). If you have not had experience with climate (or meterological) science, that is a great place to start.
+A useful resource to better understand the basics of weather, climate,
+and the physical changes occuring in the climate system
+is
+[An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3). If
+you have not had experience with climate (or meterological) science,
+that is a great place to start. For a more general introduction to the
+sciences of climate and climate change, check out the [Encyclopedia of
+Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf).
 
 For a theoretical foundation for the work of estimating weather and
 climate responses,
