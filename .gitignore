@@ -9,6 +9,8 @@ node_modules
 
 # Book build output
 _book
+_build
+_site
 .DS_Store
 
 # eBook build output

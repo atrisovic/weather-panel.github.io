@@ -1,6 +1,9 @@
 name: Python package
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -21,7 +24,7 @@ jobs:
         sudo apt-get install python3-pip
     - name: Build Jupyter Book 
       run: |
-        pip install jupyter-book
+        pip install 'jupyter-book==0.6.3'
         PATH="${PATH}:${HOME}/.local/bin"
         ls -ls
         jupyter-book build .
@@ -29,15 +32,16 @@ jobs:
       run: |
         sudo gem install bundler -v 1.17.2
         bundle install
-        bundle exec jekyll build
+        rm -rf _build
+        make site
     - name: GitHub Pages Step-by-step
       run: |
         sudo chown -R $(whoami):$(whoami) .
         git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git config --global user.name "$GITHUB_ACTOR"
-        #cp -r _site /tmp
-        #rm -rf *
-        #mv /tmp/_site/* .
+        cp -r _site /tmp
+        rm -rf *
+        mv /tmp/_site/* .
         git checkout -b gh-pages
         git add --all --force
         git commit -a --allow-empty-message -m ''
