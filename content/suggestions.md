@@ -1,5 +1,6 @@
 # 5. Suggestions when producing a panel dataset
 
+Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self). 
 
 ## 5.1 Organization of data and code
 
