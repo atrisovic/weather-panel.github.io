@@ -14,7 +14,7 @@ This DOI represents all versions, and will always resolve to the latest one.
 
 Cite the tutorial as:
 
-> Ana Trisovic, Azhar Hussain, James Rising, & Kevin Schwarzwald. (2020, January). Weather Panel Tutorial (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.3629802
+> James Rising, Azhar Hussain, Kevin Schwarzwald, & Ana Trisovic. (2020, March). Weather Panel Tutorial (Version v1.1). Zenodo. http://doi.org/10.5281/zenodo.3732015
 
 ## Contributions
 
