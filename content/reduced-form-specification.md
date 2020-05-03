@@ -4,15 +4,43 @@ This section describes some of the considerations that go into developing a redu
 
 ## 2.1. Choosing weather variables
 
-The choice of weather variables depends on the question we are trying to answer, and there are many forms to represent any given variable. For example, in the case of temperature, we can use $T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling degree-days, or growing degree-days. Morevoer, it is very important to first think about possible *mechanism(s)* behind a change witnessed in the environment, and then only make choices for variables that can explain that mechanism. A few of the important and frequently-used weather variables are listed below:
+The choice of weather variables depends on the question we are trying
+to answer, and there are many forms to represent any given
+variable. For example, in the case of temperature, we can use
+$T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling
+degree-days, or growing degree-days. Morevoer, it is very important to
+first think about possible *mechanism(s)* behind a change witnessed in
+the environment, and then only make choices for variables that can
+explain that mechanism. A few of the important and frequently-used
+weather variables are listed below, and why you might choose them:
 
-- **Temperature:** There are various measures of temperature that can be used. Some of them are listed below:
-    1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more sensitive to extreme temperatures than to variation in the average. This is also useful when temperature variation is large, leading to significant differences in cold end and hot end response. These are important metrics when heterogeneity between each time unit matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$. 
-    2. *$T_{avg}$:*  A good mean metric for seeing average response over the temperature support, when there is not much variation in temperature across time unit considered in the study. $T_{avg}$ is most appropriate when there is some natural inertia in the response, so that the dependent variable is responding to a kind of average over the last 24 hours. Note that $T_{avg}$ is often just $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
-    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction) Degree days (DD) are a measure of ’how much’ and for ’how long’ the outside air temperature was above or below a certain level.
+- **Temperature:** Temperature relationships are often preferred in
+  climate impacts research, because temperature is more predictable
+  than many other weather variables. There are various measures of temperature that can be used. Some of them are listed below:
+    1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more
+       sensitive to extreme temperatures than to variation in the
+       average. This is also useful when temperature variation is
+       large, leading to significant differences in the cold end and hot end responses. These are important metrics when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$. 
+    2. *$T_{avg}$:*  A good mean metric for seeing average response
+       over the temperature support, when there is not much variation
+       in temperature within each time unit considered in the
+       study. $T_{avg}$ is most appropriate when there is some natural
+       inertia in the response, so that the dependent variable is
+       responding to a kind of average over the last 24 hours. Note
+       that $T_{avg}$ is often just equalt to $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
+    3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction)
+       Degree days (DD) are a measure of ’how much’ and for ’how long’
+       the outside air temperature was above or below a certain
+       level. A sinusoid between $T_{min}$ and $T_{max}$ can be used
+       to approximate DDs from daily data.
     4. *Heat Index & Wet Bulb Temperature*: (see below on humidity)
 
-- **Humidity:** There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air, expressed in grams per cubic metre or grams per kilogram. Relative humidity is expressed as a percentage relative to a maximum humidity value given the same temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
+- **Humidity:** There are mainly three metrics for humidity
+  measurements: absolute, relative (often "RH"), and
+  specific. Absolute humidity describes the water content of air,
+  expressed in grams per cubic metre or grams per kilogram. Relative
+  humidity is expressed as a percentage relative to a maximum humidity
+  value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
     1. *Wet-Bulb Temperature (WBT)*: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
     2. *Wet-Bulb Globe Temperature (WBGT)*: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight) 
     3. *Heat Index (HI)*: various calculated metrics combining shade temperature and relative humidity
@@ -29,12 +57,34 @@ Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/h
 
 - **Net primary productivity (NPP):** It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.
 
-- **Evapotranspiration rate (ET):** It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET is estimated using water stress measure in plants, thereby relating to the agricultural productivity measurement.
+- **Evapotranspiration rate (ET):** It is the sum of evaporation and
+  plant transpiration from the Earth's land and ocean surface to the
+  atmosphere. Changes in ET are estimated using water stress measures
+  in plants, and are related to the agricultural productivity.
 
 - **Solar radiation:** Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.
 
 - **Sea surface temperature (SST) and ocean temperature:** SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.  
 
+- **Climatic indicies:** A wide range of metrics have been developed
+  to understand the state of the ocean-atmosphere system at large
+  scales. These are measured in a standardized way (e.g., by comparing
+  temperature at two points or by extracting a mean over a region),
+  and often have long time-series, often at the monthly
+  level. However, they do not vary over space. Data for some of the
+  most important are available
+  through [NOAA](https://www.ncdc.noaa.gov/teleconnections/).  Some of
+  the most important are:
+      1. *El Niño/Southern Oscillation (ENSO)*: Affects temperature
+         and precipitation across the globe, with hotspots on most
+         continents. For some applications, the value of the signal
+         will be less important than the identification of El Niño and
+         La Niña phases. These phases can be somewhat predicted months
+         in advance. El Niño events can be subclassified as Modoki or
+         not.
+	  2. *Indian Ocean Dipole (IOD)*: IOD has affects weather
+         throughout East Africa, South and Southeast Asia, and
+         Oceania.
 
 ## 2.2. Common functional forms (pros, cons, and methods)
 
