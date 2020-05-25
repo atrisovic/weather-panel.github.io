@@ -191,6 +191,7 @@ $s$, $g_k(\cdot)$ is the non-linear transformation (e.g., raising to
 powers for polynomials), and $y_{it}$ is the dependent variable
 observed for region $i$ in reporting period $t$. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.
 
+![Humor](images/cartoon_sec2.JPG)
 
 ## 2.3. Common functional forms (pros, cons, and methods)
 
@@ -281,6 +282,3 @@ internal validity, the model can be fit to a subset of the dataset, and evaluate
 Although cross-validation is not universally performed by researchers, and many people continue to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly R-squared statistic can perform even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.  
 
 Some examples on the use of cross-validation exercise include deciding on degree of polynomial, cutoff knots' positions for splines, etc. To do a k-fold cross validation exercise for deciding on polynomial degree, we run our test specifications (say polynomials of degree 2, 3, 4 and 5) on $k$ subsets of data, and see the curve fit for each specification on all the $k$ subsets of data. To fix a metric for making this decision, we can rely on root-mean-square-error (RMSE) statistic. So, the specification with the lowest RMSE will be the most preferred specification here. Having said that, we usually employ combination of techniques, like eye-balling and RMSE, to take decision on most preferred specification.
-
-![Humor](images/cartoon_sec2.JPG)
-
