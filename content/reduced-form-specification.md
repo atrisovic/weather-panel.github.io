@@ -154,13 +154,13 @@ $$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T
 where $g_k(T_{ps})$ is a transformation of the weather variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$, $g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.  
 
 We know that  
-$$y_{it} = \sum_{s\in t} \sum_{j\in i} y_{js} = \sum_{s\in t} \sum_{j\in i}$$
+$$y_{it} = \sum_{s\in t} \sum_{j\in i} y_{js} = \sum_{s\in t} \sum_{p\in i}$$
 $$\beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})$$  
 
 We can rearrange this to  
-$$y_{it} = \beta_1 (\sum_{s\in t} \sum_{j\in i} g_1(T_{ps})) + $$
-$$\beta_2 (\sum_{s\in t} \sum_{j\in i} g_2(T_{ps})) + \cdots + $$
-$$\beta_k (\sum_{s\in t} \sum_{j\in i} g_k(T_{ps}))$$  
+$$y_{it} = \beta_1 (\sum_{s\in t} \sum_{p\in i} g_1(T_{ps})) + $$
+$$\beta_2 (\sum_{s\in t} \sum_{p\in i} g_2(T_{ps})) + \cdots + $$
+$$\beta_k (\sum_{s\in t} \sum_{p\in i} g_k(T_{ps}))$$  
 
 That is, the variables used in the regression should be the sum over
 weather data that has been transformed at the grid level.
@@ -182,9 +182,9 @@ offices, and extremely large values for those (very few) cells, which
 do.
 
 Using the formulation above, here we would regress:
-$$y_{it} = \beta_1 g_1(\sum_{s\in t} \sum_{j\in i} T_{ps}) + $$
-$$\beta_2 g_2(\sum_{s\in t} \sum_{j\in i} T_{ps}) + \cdots + $$
-$$\beta_k g_k(\sum_{s\in t} \sum_{j\in i} T_{ps})$$
+$$y_{it} = \beta_1 g_1(\sum_{s\in t} \sum_{p\in i} T_{ps}) + $$
+$$\beta_2 g_2(\sum_{s\in t} \sum_{p\in i} T_{ps}) + \cdots + $$
+$$\beta_k g_k(\sum_{s\in t} \sum_{p\in i} T_{ps})$$
 
 Where $T_{ps}$ is the gridded weather for cell $p$ in time step
 $s$, $g_k(\cdot)$ is the non-linear transformation (e.g., raising to
@@ -198,39 +198,42 @@ observed for region $i$ in reporting period $t$. Weather data products can have 
 Returning to the "true model" of your process, the decisions around how to
 generate a linear expression that you can estimate have important
 implications. Different functional forms serve different purposes and
-describe different underlying relationships. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
-
-
-Consider a grid $\theta$ located in county $i$ with $T_{\theta it}$ as its temperature at time $t$. We want to generate an aggregate temperature transformation, $f(T_{it}^k)$, for county $i$ at time $t$, after aggregating over the grids $\theta \in \Theta$, where $\Theta$ denotes the set of grids that are located inside county $i$. Here, $k\in\{1,2,...,K\}$ denotes the $k^{th}$ term of transformation. For example, in case of $K$-degree polynomial transformation, it will be $K$ polynomial terms, and in case of $K$-bins transformation, it will be $K$ temperature bins. So, we can write:  
-$$f(T_{it}^k)=g(T_{\theta it})$$
-where, $g(.)$ denotes the transformation mapping on the grid-level temperature data.
-Once we have $f(T_{it}^k)$ for each $k\in\{1,2,...,K\}$, we can use them to generate the full nonlinear transformation $F(T_{it})$, associating $\beta^k$ parameter with $k^{th}$ term of transformation. We have:  
-$$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
+describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
 
 - **[Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)**
-    1. Assignment of observations to bins. e.g.  15C-20C, 20C-25C, ...  for temperature
-    2. Uses the mean metric, so its advantage is non-parametric nature
-    3. Highly susceptible to existence of outliers in data
-    
-    Consider doing a 6-bins bin transformation of temperature variable. Let us take equal sized bins for simplicity, but in       actual binning procedure, we might want to have smaller sized bins around the temperature values where we expect most of       the response to occur. For now, the $K=6$ temp bins are: $<-5^\circ C$, $-5^\circ C-5^\circ C$, $5^\circ C-15^\circ C$,       $15^\circ C-25^\circ C$, $25^\circ C-35^\circ C$ and $>35^\circ C$.  
-    
-    As defined earlier, the grid $\theta$ temperature is $T_{\theta i t}$. For transformation, we will have to map actual         temperature observations to the respective bins that we have defined above. Then, take the weighted average of these terms     across all the grids that come under a specific county. The mapping is defined as follows:  
-    
-    $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta} \sum \mathbf{1} \left \{  {T_{\theta i t} \in k} \right \}$$             $$\forall k \in \{1,2,...,6\}$$  
-    where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
-    
-    The aggregate transformation is as below:  
-    $$F(T_{it})=\sum_{k\in \{1,2,...,6\}} \beta^k*f(T_{it}^k)$$
 
+Bins offer a very flexible functional form, although the choice of bin
+edges means that they are not as "non-parametric" as often assumed. It
+is also highly sensitive to existence of outliers in data. This can
+particularly be an issue for extrapolation when the results are used
+for projections: only the estimate for the extreme bins will be used.
+
+The bin widths should generally be even to avoid help with
+communication, with the exception of the lowest and highest bins,
+which can go to negative and positive infinity (or the appropriate
+analog). You may want to have smaller sized bins around weather values
+where we expect most of the response to occur and where there is a lot
+of data, but be prepared to also show evenly-spaced bins.
+
+The interpretation of a binned result is in terms of the time unit
+used. For example, if daily temperatures are used, then the marginal
+effect for a given bin is the additional effect of "one more day" for
+which the temperature falls into that bin.
+
+To calculate bin observations, count up the number of timesteps where
+the weather predictor falls into each bin:
+    $$T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}$$
+    where $\psi_{p}$ is the weight assigned to the $p$ grid cell.  
+    
 - **[Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)**
     1. Fitting an n-degree polynomial function for weather variables
     2. More poly degrees provide better data fitting
     3. Smooth curve nature doesn’t highlight important irregularities in data
     
-    Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining           polynomial terms, namely $T_{\theta i t}^2$, $T_{\theta i t}^3$ and $T_{\theta i t}^4$, by raising original $T_{\theta i       t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under     a county. So, we have:  
+    Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining           polynomial terms, namely $T_{p i t}^2$, $T_{p i t}^3$ and $T_{p i t}^4$, by raising original $T_{p i       t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under     a county. So, we have:  
     
-    $$f(T_{it}^k)=\sum_{\theta \in \Theta} \psi_{\theta}*T_{\theta i t}^k$$ $$\forall k \in \{1,2,3,4\}$$  
-    where $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    $$f(T_{it}^k)=\sum_{p \in \Theta} \psi_{p}*T_{p i t}^k$$ $$\forall k \in \{1,2,3,4\}$$  
+    where $\psi_{p}$ is the weight assigned to the $p$ grid.  
     
     The aggregate transformation is as below:  
     $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
@@ -240,11 +243,11 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     2. More independence compared to poly in choosing function knots
     3. Highly parametric due to freedom of choice of knots
     
-    For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $\theta$       temperature be $T_{\theta i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{\theta i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
-    $$f(T_{i t}^k)= \sum_{\theta \in \Theta} \psi_{\theta}*\{(T_{\theta i t}-t_k)^3_+ - (T_{\theta i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{\theta i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
-    where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $p$       temperature be $T_{p i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{p i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
+    $$f(T_{i t}^k)= \sum_{p \in \Theta} \psi_{p}*\{(T_{p i t}-t_k)^3_+ - (T_{p i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{p i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
+    where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
     
-    And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{\theta i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
+    And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{p i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
     $\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$  
     $\nabla^3_+=0$ if $\nabla^3_+<0$  
     
@@ -257,11 +260,11 @@ $$F(T_{it})=\sum_{k\in \{1,2,...,K\}} \beta^k*f(T_{it}^k)$$
     3. Linear and highly sensitive to choice of cutoff values  
     
     Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method, we get:  
-    $$f(T_{it}^1)=\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_2)_+$$  
-    $$f(T_{it}^2)=-\sum_{\theta \in \Theta} \psi_{\theta}*(T_{\theta i t}-t_1)_+$$  
-    where, $\psi_{\theta}$ is the weight assigned to the $\theta$ grid.  
+    $$f(T_{it}^1)=\sum_{p \in \Theta} \psi_{p}*(T_{p i t}-t_2)_+$$  
+    $$f(T_{it}^2)=-\sum_{p \in \Theta} \psi_{p}*(T_{p i t}-t_1)_+$$  
+    where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
 
-    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{\theta i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
+    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{p i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
     $\nabla_+=\nabla_+$ if $\nabla_+>0$  
     $\nabla_+=0$ if $\nabla_+<0$  
 
