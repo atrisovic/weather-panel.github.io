@@ -208,12 +208,12 @@ is also highly sensitive to existence of outliers in data. This can
 particularly be an issue for extrapolation when the results are used
 for projections: only the estimate for the extreme bins will be used.
 
-The bin widths should generally be even to avoid help with
-communication, with the exception of the lowest and highest bins,
-which can go to negative and positive infinity (or the appropriate
-analog). You may want to have smaller sized bins around weather values
-where we expect most of the response to occur and where there is a lot
-of data, but be prepared to also show evenly-spaced bins.
+The bin widths should generally be even to facilitate easy
+understanding, although the lowest and highest bins can go to negative
+and positive infinity (or the appropriate analog). You may want to
+have smaller sized bins around weather values where we expect most of
+the response to occur and where there is a lot of data, but be
+prepared to also show evenly-spaced bins.
 
 The interpretation of a binned result is in terms of the time unit
 used. For example, if daily temperatures are used, then the marginal
@@ -226,17 +226,36 @@ the weather predictor falls into each bin:
     where $\psi_{p}$ is the weight assigned to the $p$ grid cell.  
     
 - **[Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)**
-    1. Fitting an n-degree polynomial function for weather variables
-    2. More poly degrees provide better data fitting
-    3. Smooth curve nature doesn’t highlight important irregularities in data
-    
-    Consider doing a 4-degree polynomial transformation of temperature variable. We need to first generate the remaining           polynomial terms, namely $T_{p i t}^2$, $T_{p i t}^3$ and $T_{p i t}^4$, by raising original $T_{p i       t}$ to powers 2, 3 and 4 respectively. Then, take the weighted average of these terms across all the grids that come under     a county. So, we have:  
-    
-    $$f(T_{it}^k)=\sum_{p \in \Theta} \psi_{p}*T_{p i t}^k$$ $$\forall k \in \{1,2,3,4\}$$  
+
+Polynomial specifications balance smooth dose-response curves with the
+flexibility of increasing the effective resolution of the curve by
+increasing the degree of the polynomial. Using more degrees improves
+the ability of the curve to fit the data, but may lead to
+over-fitting. To choose the number of terms in the polynomial,
+consider cross-validation.
+
+Another benefit of polynomials for climate change estimates is that
+they provide smooth extrapolation to higher temperatures. Again, it is
+important to highlight the fact that the evaluation of the
+dose-response curve at temperatures outside the bounds of the observed
+data reflects assumptions, rather than evidence. Cross-validation that
+leaves out the latest periods or most extreme temperatures can improve
+confidence in these assumptions.
+
+In calculating the predictor values for a polynomial, consider the
+scale of the data-generating process. If it is a local process, the
+high-resolution weather values should be raised to powers before
+aggregating up to the regions in the economic data. That is, the the
+predictor for the $k$-th power of the polynomial is 
+    $$f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k$$ 
     where $\psi_{p}$ is the weight assigned to the $p$ grid.  
     
-    The aggregate transformation is as below:  
-    $$F(T_{it})=\sum_{k\in \{1,2,3,4\}} \beta^k*f(T_{it}^k)$$
+The dose-response regression would then be applied as follows
+    $$F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)$$
+	
+while the coefficients can be interepted as describing a local
+dose-response relationship:
+    $$F(T_{pit})=\sum_{k} \beta_k T_{pit}^k$$
 
 - **[Restricted cubic spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)**
     1. Fitting a piecewise polynomial function between pre-specified knots
