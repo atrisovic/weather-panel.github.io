@@ -1,6 +1,17 @@
 # 2. Developing a reduced-form specification
 
-This section describes some of the considerations that go into developing a reduced-form specification using weather panel data. For an extensive review of the results available from the climate econometric literature and the empirical methods used to identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
+This section describes some of the considerations that go into
+developing a reduced-form specification using weather panel data. Our
+discussion here will be very practical and limited to nonlinear panel
+regressions, so also
+read
+[Estimating the Economic Impacts of Climate Change Using Weather Observations](https://academic.oup.com/reep/article/14/1/1/5718007) for
+a review of the available econometric techniques and their strengths
+and weaknesses.  For an extensive review of the results available from
+the climate econometric literature and the empirical methods used to
+identify them, a good resource
+is
+[Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 
 ## 2.1. Choosing weather variables
 
