@@ -259,7 +259,7 @@ high-resolution weather values should be raised to powers before
 aggregating up to the regions in the economic data. That is, the the
 predictor for the $k$-th power of the polynomial is 
     $$f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k$$ 
-    where $\psi_{p}$ is the weight assigned to the $p$ grid.  
+    where $\psi_{p}$ is the weight assigned to the $p$ gridcell.  
     
 The dose-response regression would then be applied as follows
     $$F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)$$
@@ -269,39 +269,60 @@ dose-response relationship:
     $$F(T_{pit})=\sum_{k} \beta_k T_{pit}^k$$
 
 - **[Restricted cubic spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)**
-    1. Fitting a piecewise polynomial function between pre-specified knots
-    2. More independence compared to poly in choosing function knots
-    3. Highly parametric due to freedom of choice of knots
-    
-    For transforming the temperature data into restricted cubic splines, we need to fix the location and the number of knots.     The reference above on cubic splines can be helpful in deciding the knot specifications. As before let the grid $p$       temperature be $T_{p i t}$. Let us do this exercise for $n$ knots, placed at $t_1<t_2<...<t_n$, then for $T_{p i     t}$, which is a continuous variable, we have a set of $(n-2)$ new variables. We have:  
-    $$f(T_{i t}^k)= \sum_{p \in \Theta} \psi_{p}*\{(T_{p i t}-t_k)^3_+ - (T_{p i t} - t_{n-                   1})^3_+*\frac{t_n-t_k}{t_n-t_{n-1}}+(T_{p i t} - t_{n})^3_+*\frac{t_{n-1}-t_k}{t_{n}-t_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
+
+Restricted cubic splines produce smooth dose-response curves, like
+polynomials, but mitigate some of the problems that polynomials with
+many terms have. Whereas polynomials with high-order terms can produce
+very extreme results under extrapolation, RCS always produces a linear
+extrapolation. RCS also provides additional degrees of freedom through
+the placement of knots, and this can be used either to reflect
+features of the underlying process being modeled or to improve the
+fit.
+
+In the case where knots are choosen to maximize the fit of the curve,
+cross-validation is the preferred approach for both selecting the
+number of knots and their placement. The reference in this subsection
+title on cubic splines can be helpful in deciding the knot
+specifications.
+
+Once knot locations are determiend, the weather data needs to be
+translated into RCS terms. As before let the gridded weather be $T_{p
+i t}$ and let there be $n$ knots, placed at $T_1<T_2<...<T_n$. Then we
+have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
+    $$f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
+	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
+	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}$$ $$\forall k \in \{1,2,...,n-2\}$$ 
     where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
     
-    And, each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{p i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
+Each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{p i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
     $\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$  
     $\nabla^3_+=0$ if $\nabla^3_+<0$  
     
-    The aggregate transformation is as below:  
-    $$F(T_{it})=\sum_{k\in \{1,2,...,n-2\}} \beta^k*f(T_{it}^k)$$
+As with the polynomial, the dose-response regression would then be applied as follows
+    $$F(T_{it})=\sum_{k} \beta_k f(T_{it})_k$$
+	
+while the coefficients can be interepted as describing a local
+dose-response relationship:
+    $$F(T_{pit})=\sum_{k} \beta_k T_{pit}_k$$
 
-- **[Linear spline](http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)**
-    1. Fitting a line between cutoff values e.g.  25C CDD/0C HDD for temp
-    2. Less parametric and very useful for predicting mid-range response
-    3. Linear and highly sensitive to choice of cutoff values  
-    
-    Linear spline is a special kind of spline function, which has two knots, and the segment between these two knots is a linear function. It is also called ‘restricted’ linear spline, since the segments outside the knots are also linear. To implement this, we first decide location of the two knots, say $t_1<t_2$. Then, closely following the cubic spline method, we get:  
-    $$f(T_{it}^1)=\sum_{p \in \Theta} \psi_{p}*(T_{p i t}-t_2)_+$$  
-    $$f(T_{it}^2)=-\sum_{p \in \Theta} \psi_{p}*(T_{p i t}-t_1)_+$$  
-    where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
+- **[Linear spline](https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)**
 
-    And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{p i t} - t_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
+A linear spline provides a balance between the smoothness of RCS and
+the direct response curve to temperature correspondance of bins. The
+segments between knots here are lines. As with RCS, the choice of knot
+locations is very important.
+
+One defition of terms for a linear spline for a spline with $n$ knots at
+$T_1<T_2<...<T_n$ is:
+    $$f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}$$
+    $$f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+$$
+    where, $\psi_{p}$ is the weight assigned to the $p$ gridcell.  
+
+And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{p i t} - T_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
     $\nabla_+=\nabla_+$ if $\nabla_+>0$  
     $\nabla_+=0$ if $\nabla_+<0$  
 
-    The aggregate transformation is as below:  
-    $$F(T_{it})=\sum_{k\in \{1,2\}} \beta^k*f(T_{it}^k)$$  
-
-We generally try to work with many functional forms in a paper because it serves dual purpose of being a *sanity check* for researchers' codes, and a *robustness check* for readers' confirmation. However, we need to take decision on the *main specification* that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the *fit* of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:
+We generally try to work with many functional forms in a paper because it serves dual purpose of being a *sanity check* for researchers' code, and a *robustness check* for readers' confirmation. However, we need to take decision on the *main specification* that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the *fit* of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:
 
 **Example of reduced-form regression plots for different functional forms**
 ![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
@@ -310,8 +331,20 @@ Source: [Carleton et al. (2019)](https://papers.ssrn.com/sol3/papers.cfm?abstrac
 ## 2.3. Cross-validation
 
 Cross-validation can be done to check the *internal validity* and the *external validity* of the model estimates. For checking
-internal validity, the model can be fit to a subset of the dataset, and evaluated on the remainder. For example, you can leave particular regions out of your regression or remove a random *1/k* of your data (k-fold cross validation) instead of running a full-sample regression. For gauging external validity, model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.  
+internal validity, the model can be fit to a subset of the dataset,
+and evaluated on the remainder. For example, you can leave particular
+regions out of your regression or remove a random *1/k* of your data
+(k-fold cross validation) instead of running a full-sample
+regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.  
 
-Although cross-validation is not universally performed by researchers, and many people continue to rely on the measure of R-squared statistic. However, we know from our basic statistics learning, how badly R-squared statistic can perform even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.  
+Cross-validation is not universally performed by researchers, and many
+people continue to rely only on R-squared statistics. However,
+R-squared statistic can perform poorly even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.  
 
-Some examples on the use of cross-validation exercise include deciding on degree of polynomial, cutoff knots' positions for splines, etc. To do a k-fold cross validation exercise for deciding on polynomial degree, we run our test specifications (say polynomials of degree 2, 3, 4 and 5) on $k$ subsets of data, and see the curve fit for each specification on all the $k$ subsets of data. To fix a metric for making this decision, we can rely on root-mean-square-error (RMSE) statistic. So, the specification with the lowest RMSE will be the most preferred specification here. Having said that, we usually employ combination of techniques, like eye-balling and RMSE, to take decision on most preferred specification.
+Some examples on the use of cross-validation exercise include deciding
+on degree of polynomial, cutoff knots' positions for splines,
+and selecting weather variables for a regression. To do a k-fold cross
+validation exercise for deciding on polynomial degree, we run our test
+specifications (say polynomials of degree 2, 3, 4 and 5) on the data,
+each time excluding a subset, and evaluate how well the fitted model
+predicts the excluded data. To fix a metric for making this decision, we can rely on root-mean-square-error (RMSE) statistic. So, the specification with the lowest RMSE will be the most preferred specification here. Having said that, we usually employ combination of techniques, like eye-balling and RMSE, to take decision on most preferred specification.
