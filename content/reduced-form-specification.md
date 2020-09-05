@@ -38,7 +38,7 @@ weather variables are listed below, and why you might choose them:
        study. $T_{avg}$ is most appropriate when there is some natural
        inertia in the response, so that the dependent variable is
        responding to a kind of average over the last 24 hours. Note
-       that $T_{avg}$ is often just equalt to $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
+       that $T_{avg}$ is often just equal to $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
     3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction)
        Degree days (DD) are a measure of ’how much’ and for ’how long’
        the outside air temperature was above or below a certain
@@ -128,11 +128,11 @@ functional form requires raising the temperatures to various powers. Importantly
 While doing the spatial aggregation, we need to decide whether we want
 to transform the data first and then aggregate it
 (transformation-before-aggregation) or aggregate it and then transform
-it (aggregation-before-transformation). This decision is based on the
+it (aggregation-before-transformation). This decision is based on
 whether the phenomenon in consideration is occurring at the local
 (grid or individual) scale or at the larger administrative units
 (country, state, county, etc.) scale. Also, it matters what variable
-is being consideration. For example, doing
+is under consideration. For example, doing
 aggregation-before-transformation for temperature will distort the
 signal less that doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially; it could
@@ -158,7 +158,7 @@ We want to understand how local agents respond to weather shocks. Suppose that t
 However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, $$y_{it} = \sum_{s \in t} \sum_{j \in i} y_{js}.$$  
 
 We can determine the agent-level response $f(T_{ps})$ if we assume
-linearity. First, let us represent this the way we would if we could run a regression with agent-level data, breaking up the dose-response
+linearity. First, let us represent this as if we could run a regression with agent-level data, breaking up the dose-response
 curve into a sum of terms:  
 $$f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})$$  
 
@@ -188,7 +188,7 @@ service employment at the administrative office level, we need to take
 into account the fact that hiring/firing of public service employees
 happens at the office level only.  Estimating grid-level effects will
 lead to wrong estimation, as it should result in zero estimate for
-those (almost all) grid cells which do not have contain administrative
+those (almost all) grid cells which do not contain administrative
 offices, and extremely large values for those (very few) cells, which
 do.
 
@@ -222,7 +222,7 @@ for projections: only the estimate for the extreme bins will be used.
 The bin widths should generally be even to facilitate easy
 understanding, although the lowest and highest bins can go to negative
 and positive infinity (or the appropriate analog). You may want to
-have smaller sized bins around weather values where we expect most of
+have smaller size bins around weather values where we expect most of
 the response to occur and where there is a lot of data, but be
 prepared to also show evenly-spaced bins.
 
@@ -322,7 +322,7 @@ And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{p i t} - T_2)_+$
     $\nabla_+=\nabla_+$ if $\nabla_+>0$  
     $\nabla_+=0$ if $\nabla_+<0$  
 
-We generally try to work with many functional forms in a paper because it serves dual purpose of being a *sanity check* for researchers' code, and a *robustness check* for readers' confirmation. However, we need to take decision on the *main specification* that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the *fit* of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:
+We generally try to work with many functional forms in a paper because it serves dual purpose of being a *sanity check* for researchers' code and a *robustness check* for readers' confirmation. However, we need to take decision on the *main specification* that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the *fit* of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:
 
 **Example of reduced-form regression plots for different functional forms**
 ![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
@@ -335,7 +335,7 @@ internal validity, the model can be fit to a subset of the dataset,
 and evaluated on the remainder. For example, you can leave particular
 regions out of your regression or remove a random *1/k* of your data
 (k-fold cross validation) instead of running a full-sample
-regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates, and comparing it to the actual observations.  
+regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates and comparing it to the actual observations.  
 
 Cross-validation is not universally performed by researchers, and many
 people continue to rely only on R-squared statistics. However,
@@ -347,4 +347,8 @@ and selecting weather variables for a regression. To do a k-fold cross
 validation exercise for deciding on polynomial degree, we run our test
 specifications (say polynomials of degree 2, 3, 4 and 5) on the data,
 each time excluding a subset, and evaluate how well the fitted model
-predicts the excluded data. To fix a metric for making this decision, we can rely on root-mean-square-error (RMSE) statistic. So, the specification with the lowest RMSE will be the most preferred specification here. Having said that, we usually employ combination of techniques, like eye-balling and RMSE, to take decision on most preferred specification.
+predicts the excluded data. To fix a metric for making this decision,
+we can rely on root-mean-square-error (RMSE) statistic. So, the
+specification with the lowest RMSE will be the most preferred
+specification here. Having said that, we usually employ combination of
+techniques, like eye-balling and RMSE, to take decision on the most preferred specification.
