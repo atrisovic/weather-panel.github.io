@@ -86,14 +86,15 @@ Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/h
   most important are available
   through [NOAA](https://www.ncdc.noaa.gov/teleconnections/).  Some of
   the most important are:
-      1. *El Niño/Southern Oscillation (ENSO)*: Affects temperature
+
+    1. *El Niño/Southern Oscillation (ENSO)*: Affects temperature
          and precipitation across the globe, with hotspots on most
          continents. For some applications, the value of the signal
          will be less important than the identification of El Niño and
          La Niña phases. These phases can be somewhat predicted months
          in advance. El Niño events can be subclassified as Modoki or
          not.
-	  2. *Indian Ocean Dipole (IOD)*: IOD has affects weather
+    2. *Indian Ocean Dipole (IOD)*: IOD has affects weather
          throughout East Africa, South and Southeast Asia, and
          Oceania.
 
@@ -123,7 +124,9 @@ in sections 3 and 5.
 
 Typically, relating weather to a dependent variable requires some kind
 of non-linear transformation. For example, estimating a polynomial
-functional form requires raising the temperatures to various powers. Importantly, the square of a weighted average of grid-level temperatures is not the same as the weighted average of the square of grid-level temperatures.
+functional form requires raising the temperatures to various powers. 
+Importantly, the square of a weighted average of grid-level temperatures 
+is not the same as the weighted average of the square of grid-level temperatures.
 
 While doing the spatial aggregation, we need to decide whether we want
 to transform the data first and then aggregate it
@@ -178,8 +181,7 @@ weather data that has been transformed at the grid level.
 
 ### Aggregation-before-transformation
 
-% Let us try to understand these
-%two methods using counties (ADM2) as our higher administrative level:
+Let us try to understand these two methods using counties (ADM2) as our higher administrative level:
 
 When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
@@ -303,7 +305,8 @@ As with the polynomial, the dose-response regression would then be applied as fo
 	
 while the coefficients can be interepted as describing a local
 dose-response relationship:
-    $$F(T_{pit})=\sum_{k} \beta_k T_{pit}_k$$
+
+$$F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k$$
 
 - **[Linear spline](https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)**
 
