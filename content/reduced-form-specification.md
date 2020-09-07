@@ -181,8 +181,6 @@ weather data that has been transformed at the grid level.
 
 ### Aggregation-before-transformation
 
-Let us try to understand these two methods using counties (ADM2) as our higher administrative level:
-
 When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
 it. For example, to estimate the effect of storm events on public
