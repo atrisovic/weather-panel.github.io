@@ -1,5 +1,5 @@
 ---
-title: 'ClimateEstimate.net: A tutorial on climate econometrics'
+title: 'A practical guide to climate econometrics: Navigating key decision points in weather and climate data analysis'
 tags:
   - climate change
   - econometrics
