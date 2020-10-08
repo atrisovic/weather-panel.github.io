@@ -22,9 +22,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install python3-pip
+        pip install -r requirements.txt
     - name: Build Jupyter Book 
       run: |
-        pip install 'jupyter-book==0.6.3'
+        #pip install 'jupyter-book==0.6.3'
         PATH="${PATH}:${HOME}/.local/bin"
         ls -ls
         jupyter-book build .
