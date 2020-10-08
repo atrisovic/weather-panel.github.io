@@ -1,40 +1,42 @@
 # Contributing 
 
-## Setting up
-
-In order to make changes to this website, you will need to use Python 3 (i.e., Python 3.7)
-
-Install the necessary `jupyter-book` package with:
+To contribute to the repository, you'll need to make your own fork. Then, clone the repository locally and make a new branch for your contribution.
 
 ```
-pip install jupyter-book
+git checkout -b my-awesome-contribution
 ```
 
+## Setting up the working environment
 
-Run the following commands to clone the repo:
+You will need Python 3, i.e., Python 3.7.
+
+Install the necessary dependencies with:
 
 ```
-git clone https://github.com/atrisovic/weather-panel.github.io.git
-cd weather-panel.github.io.git
+pip install -r requirements.txt
 ```
 
 ## Making changes to the content
 
 To update the webpage, make changes to the `.md` files in the `content` folder.
-You could also add images or jupyter notebooks. (For inspiration see for example: https://the-turing-way.netlify.com)
+You could also add images or jupyter notebooks. For inspiration, see [The Turing Way guide](https://the-turing-way.netlify.com).
 
-## Testing the look of the website
+## Testing the website
 
-To see the new look of the webpage run:
+Create a local jupyter-book to see and test the new content:
 
 ```
 jupyter-book build .
 make serve
 ```
 
-and see the web page locally at: localhost:4000
+View it at `localhost:4000`.
 
-## Commit to the repository
+## Create a pull request 
 
-Once you want to commit your changes, add with `git add` all files that were created with `jupyter-book build .` (for example with: `git add -u`).
-Once the changes are committed, the webpage will be automatically updated at: https://atrisovic.github.io/weather-panel.github.io/
+1. Make sure that the jupyter-book build works on your computer and that all content looks as it should (i.e., text styles, formulas, images).
+2. Commit only changes from the `content` folder and make a pull request. 
+3. Once the changes are reviewed and merged, the webpage will be automatically rebuilt and updated at [climateestimate.net](https://climateestimate.net/getting-started).
+
+Thank you for contributing!
+
