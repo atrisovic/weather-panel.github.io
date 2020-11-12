@@ -137,7 +137,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="geographical-unit-data.html">
-   4. Generating geographical unit data
+   Geographical unit data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-shapefiles.html">
+   Working with shapefiles
   </a>
  </li>
 </ul>
@@ -452,7 +457,10 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <li><p><strong>grid label</strong>: whether data was regridded from the model’s native grid</p></li>
 <li><p><strong>timeframe</strong>: frequently in <code class="docutils literal notranslate"><span class="pre">yyyymmdd-yyyymmdd</span></code> format.</p></li>
 </ul>
-<p>(For more information on “CMIP5” and “CMIP6” terminology, please see: <a class="reference external" href="https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html">CMIP6 Guidance for Data Users</a> or the <a class="reference external" href="https://pcmdi.llnl.gov/mips/cmip5/requirements.html">CMIP5 Standard Output</a>)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information on “CMIP5” and “CMIP6” terminology, please see: <a class="reference external" href="https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html">CMIP6 Guidance for Data Users</a> or the <a class="reference external" href="https://pcmdi.llnl.gov/mips/cmip5/requirements.html">CMIP5 Standard Output</a>.</p>
+</div>
 <p>There are two common ways in which data is stored in netCDF files:</p>
 <ul class="simple">
 <li><p>variables: each file contains a single variable over the whole (or a large chunk) of the time domain</p></li>
@@ -565,7 +573,10 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(For more information on plotting geographic data with xarray and cartopy, the author highly recommends the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a>)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information on plotting geographic data with xarray and cartopy, the author highly recommends the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a></p>
+</div>
 </div>
 <div class="section" id="matlab">
 <h4>Matlab<a class="headerlink" href="#matlab" title="Permalink to this headline">¶</a></h4>
@@ -590,7 +601,10 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <p>Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
 <p>Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. <em>(NB: Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins)</em>.</p>
 <p>However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Keep in mind that just because a dataset exists at a certain resolution, does not mean it is accurate at that resolution!</p>
+</div>
 <p>The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.</p>
 </div>
 <div class="section" id="weather-data-products">

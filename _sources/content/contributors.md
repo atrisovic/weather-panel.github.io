@@ -7,7 +7,7 @@ The core contributors of this tutorial are, in alphabetic order:
 - [Kevin Schwarzwald](https://iri.columbia.edu/contact/staff-directory/kevin-schwarzwald/)
 - [Ana Trisovic](https://anatrisovic.com)
 
-## Citing the _Weather Panel Tutorial_
+## Citing this tutorial
 
 You can reference this tutorial with the DOI 10.5281/zenodo.3629801. 
 This DOI represents all versions, and will always resolve to the latest one.

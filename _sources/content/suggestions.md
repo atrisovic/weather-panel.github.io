@@ -19,46 +19,47 @@ create your dataset with a lot of possible predictors and decide
 later.  Often merging together your panel dataset is laborious, and
 you do not want to do it more times than necessary.
 
-### Data storage
+Even if you have organized your working directory perfectly, it is still good to include 
+some additional documentation in readme files (readme.txt, readme.md).
+Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. 
 
-- Most universities typically have a data storage product available for their students and affiliates. 
+```{admonition} Data storage 
+:class: tip
+Most universities typically have a data storage product available for their students and affiliates. 
 We recommend you inquire at your university about what can be the best place to store data.
+```
 
-### Immutable data
-
-- Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
+```{admonition} Immutable data
+:class: warning
+Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
 Instead of making changes to the original data, you should create derived (new) datasets.
 This is important because the pre-processing performed on source data is as important as the final analysis steps.
 In addition, it will allow you to reuse the original data multiple times.
+```
 
 ## 5.2 Naming conventions
 
 Good naming practices should be applied to files and folders to make clear the contents of your project. 
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.
 
-### Recommendations:
+Recommendations:
 
-- Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., `.csv`)
-- Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
-- Ensure file names are informative of its contents
-- If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
+1. Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., `.csv`)
+2. Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
+3. Ensure file names are informative of its contents
+4. If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
 
-### Documentation
-
-- Even if you have organized your working directory perfectly, it is still good to include 
-some additional documentation in readme files (readme.txt, readme.md).
-Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. 
 
 ## 5.3 Version control
 
 We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
 Also, it gives access to historical versions of your project. 
 
-### Version control with git
-
+```{seealso}
 We recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
+```
 
-Here is one more reason why you would want to use version control:
+Here is one more reason to use version control:
 
 ![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
 
@@ -98,9 +99,8 @@ The analysis is then executed with a single command in the command prompt (Termi
 sh run_all.sh
 ```
 
-### Relative and absolute paths
-
-- A common problem when automating and packaging your project is the use of absolute paths.
-An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: `/home/someuser/project/data/input.csv`). 
-A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). We recommend specifying relative paths whenever that is possible.
-
+```{admonition} Relative and absolute paths
+A common problem when automating and packaging your project is the use of absolute paths.
+An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: `/home/username/project/data/input.csv`). 
+A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). You should specify relative paths whenever that is possible.
+```

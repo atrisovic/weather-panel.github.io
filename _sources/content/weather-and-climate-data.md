@@ -68,7 +68,9 @@ or a CMIP6 filename format, of the form:
 - **grid label**: whether data was regridded from the model's native grid
 - **timeframe**: frequently in `yyyymmdd-yyyymmdd` format.
 
-(For more information on "CMIP5" and "CMIP6" terminology, please see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html))
+```{seealso}
+For more information on "CMIP5" and "CMIP6" terminology, please see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html).
+```
 
 There are two common ways in which data is stored in netCDF files:
 
@@ -144,7 +146,10 @@ ds.tas.isel(time=1)
  .plot(transform=ccrs.PlateCarree()
 ax.coastlines()
 ```
-(For more information on plotting geographic data with xarray and cartopy, the author highly recommends the ["Earth and Environmental Science" with python guide](https://earth-env-data-science.github.io/intro.html), especially the section on ["Making Maps with Cartopy"](https://earth-env-data-science.github.io/lectures/mapping_cartopy.html]))
+
+```{seealso}
+For more information on plotting geographic data with xarray and cartopy, the author highly recommends the ["Earth and Environmental Science" with python guide](https://earth-env-data-science.github.io/intro.html), especially the section on ["Making Maps with Cartopy"](https://earth-env-data-science.github.io/lectures/mapping_cartopy.html])
+```
 
 #### Matlab
 ```Matlab
@@ -170,7 +175,9 @@ Thankfully, a large suite of data products have been developed to mitigate these
 
 However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.
 
+```{tip}
 Keep in mind that just because a dataset exists at a certain resolution, does not mean it is accurate at that resolution! 
+```
 
 The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.
 

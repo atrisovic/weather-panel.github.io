@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Contributors" href="contributors.html" />
-    <link rel="prev" title="4. Generating geographical unit data" href="geographical-unit-data.html" />
+    <link rel="prev" title="Working with shapefiles" href="working-with-shapefiles.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -137,7 +137,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="geographical-unit-data.html">
-   4. Generating geographical unit data
+   Geographical unit data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-shapefiles.html">
+   Working with shapefiles
   </a>
  </li>
 </ul>
@@ -256,47 +261,16 @@
   <a class="reference internal nav-link" href="#organization-of-data-and-code">
    5.1 Organization of data and code
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-storage">
-     Data storage
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#immutable-data">
-     Immutable data
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#naming-conventions">
    5.2 Naming conventions
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recommendations">
-     Recommendations:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#documentation">
-     Documentation
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#version-control">
    5.3 Version control
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#version-control-with-git">
-     Version control with git
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#workflow-automation">
@@ -306,11 +280,6 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#an-example-of-a-master-script-in-bash">
      An example of a master script in bash:
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relative-and-absolute-paths">
-     Relative and absolute paths
     </a>
    </li>
   </ul>
@@ -345,55 +314,44 @@ However, try to keep your code and your data separate. A typical file organizati
 create your dataset with a lot of possible predictors and decide
 later.  Often merging together your panel dataset is laborious, and
 you do not want to do it more times than necessary.</p>
-<div class="section" id="data-storage">
-<h3>Data storage<a class="headerlink" href="#data-storage" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Most universities typically have a data storage product available for their students and affiliates.
-We recommend you inquire at your university about what can be the best place to store data.</p></li>
-</ul>
+<p>Even if you have organized your working directory perfectly, it is still good to include
+some additional documentation in readme files (readme.txt, readme.md).
+Describe the files and process in these files, and try to keep them up-to-date as things are added or changed.</p>
+<div class="tip admonition">
+<p class="admonition-title">Data storage</p>
+<p>Most universities typically have a data storage product available for their students and affiliates.
+We recommend you inquire at your university about what can be the best place to store data.</p>
 </div>
-<div class="section" id="immutable-data">
-<h3>Immutable data<a class="headerlink" href="#immutable-data" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code.
+<div class="warning admonition">
+<p class="admonition-title">Immutable data</p>
+<p>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code.
 Instead of making changes to the original data, you should create derived (new) datasets.
 This is important because the pre-processing performed on source data is as important as the final analysis steps.
-In addition, it will allow you to reuse the original data multiple times.</p></li>
-</ul>
+In addition, it will allow you to reuse the original data multiple times.</p>
 </div>
 </div>
 <div class="section" id="naming-conventions">
 <h2>5.2 Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
 <p>Good naming practices should be applied to files and folders to make clear the contents of your project.
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.</p>
-<div class="section" id="recommendations">
-<h3>Recommendations:<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<p>Recommendations:</p>
+<ol class="simple">
 <li><p>Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., <code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</p></li>
 <li><p>Use delimiters (such as underscores “_” or dashes “-“) to separate information contained in the file name.</p></li>
 <li><p>Ensure file names are informative of its contents</p></li>
 <li><p>If you want to indicate sequence, start your file or folder names with numbers (e.g., <code class="docutils literal notranslate"><span class="pre">01_clean_data</span></code>, <code class="docutils literal notranslate"><span class="pre">02_analyze</span></code>, <code class="docutils literal notranslate"><span class="pre">03_results</span></code>)</p></li>
-</ul>
-</div>
-<div class="section" id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Even if you have organized your working directory perfectly, it is still good to include
-some additional documentation in readme files (readme.txt, readme.md).
-Describe the files and process in these files, and try to keep them up-to-date as things are added or changed.</p></li>
-</ul>
-</div>
+</ol>
 </div>
 <div class="section" id="version-control">
 <h2>5.3 Version control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h2>
 <p>We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project.
 Also, it gives access to historical versions of your project.</p>
-<div class="section" id="version-control-with-git">
-<h3>Version control with git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">¶</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
 <p>We recommend you to go through <a class="reference external" href="https://swcarpentry.github.io/git-novice/">a tutorial on version control with git</a>.</p>
-<p>Here is one more reason why you would want to use version control:</p>
-<p><img alt="" src="https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png" /></p>
 </div>
+<p>Here is one more reason to use version control:</p>
+<p><img alt="" src="https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png" /></p>
 </div>
 <div class="section" id="workflow-automation">
 <h2>5.4 Workflow automation<a class="headerlink" href="#workflow-automation" title="Permalink to this headline">¶</a></h2>
@@ -425,14 +383,12 @@ python draw_plots.py
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh run_all.sh
 </pre></div>
 </div>
+<div class="admonition-relative-and-absolute-paths admonition">
+<p class="admonition-title">Relative and absolute paths</p>
+<p>A common problem when automating and packaging your project is the use of absolute paths.
+An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code class="docutils literal notranslate"><span class="pre">/home/username/project/data/input.csv</span></code>).
+A relative path, on the other hand, only assumes a local relationship between folders (for example: <code class="docutils literal notranslate"><span class="pre">../data/input.csv</span></code>, where “..” refers to the “parent” directory). You should specify relative paths whenever that is possible.</p>
 </div>
-<div class="section" id="relative-and-absolute-paths">
-<h3>Relative and absolute paths<a class="headerlink" href="#relative-and-absolute-paths" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>A common problem when automating and packaging your project is the use of absolute paths.
-An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code class="docutils literal notranslate"><span class="pre">/home/someuser/project/data/input.csv</span></code>).
-A relative path, on the other hand, only assumes a local relationship between folders (for example: <code class="docutils literal notranslate"><span class="pre">../data/input.csv</span></code>, where “..” refers to the “parent” directory). We recommend specifying relative paths whenever that is possible.</p></li>
-</ul>
 </div>
 </div>
 </div>
@@ -465,7 +421,7 @@ A relative path, on the other hand, only assumes a local relationship between fo
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="geographical-unit-data.html" title="previous page">4. Generating geographical unit data</a>
+    <a class='left-prev' id="prev-link" href="working-with-shapefiles.html" title="previous page">Working with shapefiles</a>
     <a class='right-next' id="next-link" href="contributors.html" title="next page">Contributors</a>
 
     </div>
