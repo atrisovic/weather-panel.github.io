@@ -1,4 +1,4 @@
-# Geographical unit data
+# Generating geographical unit data
 
 A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “[city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is a local administrative unit where the majority of the population lives in an urban center, while the “[greater city](https://ec.europa.eu/eurostat/web/cities/spatial-units)” is an approximation of the urban center beyond the administrative city boundaries.
 
