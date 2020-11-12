@@ -7,7 +7,7 @@ disaster risk and responses, resource management, human behavior, and
 sustainable development. Here are some of the relationships that have
 been uncovered in recent years:
 
-![Examples from Carleton and Hsiang (2016)](images/examples.png)
+<img src="images/examples.png" alt="Examples from Carleton and Hsiang (2016)" width="750"/>
 
 Source: [Carleton and Hsiang (2016)](https://science.sciencemag.org/content/353/6304/aad9837).
 

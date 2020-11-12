@@ -13,6 +13,9 @@ html:
   use_issues_button: true
   use_edit_page_button: true
 
+parse:
+  myst_extended_syntax: true
+
 execute:
   execute_notebooks: "off"
 
