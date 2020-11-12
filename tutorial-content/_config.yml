@@ -1,0 +1,18 @@
+title: ""
+author: ""
+copyright: "2020"
+logo: content/images/climate_estimate_logo.png 
+
+latex:
+  latex_engine: pdflatex  # one of 'pdflatex', 'xelatex' (recommended for unicode), 'luatex', 'platex', 'uplatex'
+
+repository:
+  url: https://github.com/atrisovic/weather-panel.github.io/ 
+html:
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+
+execute:
+  execute_notebooks: "off"
+

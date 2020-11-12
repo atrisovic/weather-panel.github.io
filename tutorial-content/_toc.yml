@@ -1,0 +1,27 @@
+- file: content/getting-started
+  title: Introduction to the Tutorial
+
+- part: Using Weather and Climate Data
+  chapters:
+  - file: content/weather-and-climate-data
+
+- part: Developing a reduced-form specification
+  chapters:
+  - file: content/reduced-form-specification
+
+- part: Weighting schemes
+  chapters:
+  - file: content/weighting-schemes
+
+- part:  Generating geographical unit data
+  chapters:
+  - file: content/geographical-unit-data
+
+- part: Suggestions for work organization 
+  chapters:
+  - file: content/suggestions
+
+- part: Contributors
+  chapters:
+  - file: content/contributors
+
