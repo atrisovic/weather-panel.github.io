@@ -1,756 +1,408 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Developing a reduced-form specification</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
-  <title>Developing a reduced-form specification</title>
-  <meta name="description" content="# 2. Developing a reduced-form specificationThis section describes some of the considerations that go intodeveloping a reduced-form specification using weath...">
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-  <link rel="canonical" href="/YOUR%20URL//content/reduced-form-specification.html">
-  <link rel="alternate" type="application/rss+xml" title="Weather Panel Tutorial" href="/YOUR%20URL//feed.xml">
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
-  <meta property="og:url"         content="/YOUR%20URL//content/reduced-form-specification.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Developing a reduced-form specification" />
-<meta property="og:description" content="# 2. Developing a reduced-form specificationThis section describes some of the considerations that go intodeveloping a reduced-form specification using weath..." />
-<meta property="og:image"       content="YOUR%20URL/images/climate_estimate_logo.png" />
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
 
-<meta name="twitter:card" content="summary">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Weighting schemes" href="weighting-schemes.html" />
+    <link rel="prev" title="1. Using Weather and Climate Data" href="weather-and-climate-data.html" />
 
-
-  <script type="application/ld+json">
-  {
-  "@context": "http://schema.org",
-  "@type": "NewsArticle",
-  "mainEntityOfPage": "YOUR URL//content/reduced-form-specification.html",
-  "headline": "Developing a reduced-form specification",
-  "datePublished": "2020-10-11T21:46:35+00:00",
-  "dateModified": "2020-10-11T21:46:35+00:00",
-  "description": "# 2. Developing a reduced-form specificationThis section describes some of the considerations that go intodeveloping a reduced-form specification using weath...",
-  "author": {
-    "@type": "Person",
-    "name": "Azhar Hussain, James Rising, Kevin Schwarzwald, Ana Trisovic"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Data 100 at UC Berkeley",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "YOUR URL/",
-      "width": 60,
-      "height": 60
-    }
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "YOUR URL/",
-    "height": 60,
-    "width": 60
-  }
-}
-
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
-
-  <!-- <link rel="manifest" href="/manifest.json"> -->
-  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-  <meta name="theme-color" content="#233947">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="/images/logo/favicon.ico">
-
-  <!-- MathJax Config -->
-  <!-- Allow inline math using $ and automatically break long math lines -->
-<!-- (mostly) copied from nbconvert configuration -->
-<!-- https://github.com/jupyter/nbconvert/blob/master/nbconvert/templates/html/mathjax.tpl -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-        processEnvironments: true
-    },
-    // Center justify equations in code and markdown cells. Elsewhere
-    // we use CSS to left justify single line equations in code cells.
-    displayAlign: 'center',
-    "HTML-CSS": {
-        styles: {'.MathJax_Display': {"margin": 0}},
-        linebreaks: { automatic: true },
-    }
-});
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML' async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
-  <!-- DOM updating function -->
-  <script src="/assets/js/page/dom-update.js"></script>
 
-  <!-- Selectors for elements on the page -->
-  <script src="/assets/js/page/documentSelectors.js"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
 
-  <!-- Define some javascript variables that will be useful in other javascript -->
-  <script>
-    const site_basename = '/';
-  </script>
-
-  <!-- Add AnchorJS to let headers be linked -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" async></script>
-  <script src="/assets/js/page/anchors.js" async></script>
-
-  <!-- Include Turbolinks to make page loads fast -->
-  <!-- https://github.com/turbolinks/turbolinks -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" async></script>
-  <meta name="turbolinks-cache-control" content="no-cache">
-
-  <!-- Load nbinteract for widgets -->
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
   
-
-  <!-- Load Thebelab for interactive widgets -->
-  <!-- Include Thebelab for interactive code if it's enabled -->
-
-
-<!-- Display Thebelab button in each code cell -->
-<script>
-/**
- * Set up thebelab button for code blocks
- */
-
-const thebelabCellButton = id =>
-  `<a id="thebelab-cell-button-${id}" class="btn thebebtn o-tooltip--left" data-tooltip="Interactive Mode">
-    <img src="/assets/images/edit-button.svg" alt="Start thebelab interactive mode">
-  </a>`
-
-
-const addThebelabButtonToCodeCells =  () => {
-
-  const codeCells = document.querySelectorAll('div.input_area > div.highlight:not(.output) pre')
-  codeCells.forEach((codeCell, index) => {
-    const id = codeCellId(index)
-    codeCell.setAttribute('id', id)
-    if (document.getElementById("thebelab-cell-button-" + id) == null) {
-      codeCell.insertAdjacentHTML('afterend', thebelabCellButton(id));
-    }
-  })
-}
-
-initFunction(addThebelabButtonToCodeCells);
-</script>
-
-
-
-<script type="text/x-thebe-config">
-    {
-      requestKernel: true,
-      binderOptions: {
-        repo: 'YOUR-ORG/YOUR-REPO',
-        ref: 'gh-pages',
-      },
-      codeMirrorConfig: {
-        theme: "abcdef"
-      },
-      kernelOptions: {
-        name: 'python3',
-      }
-    }
-</script>
-<script src="https://unpkg.com/thebelab@0.4.0/lib/index.js" async></script>
-<script>
-    /**
-     * Add attributes to Thebelab blocks
-     */
-
-    const initThebelab = () => {
-        const addThebelabToCodeCells = () => {
-            console.log("Adding thebelab to code cells...");
-            // If Thebelab hasn't loaded, wait a bit and try again. This
-            // happens because we load ClipboardJS asynchronously.
-            if (window.thebelab === undefined) {
-                setTimeout(addThebelabToCodeCells, 250)
-            return
-            }
-
-            // If we already detect a Thebelab cell, don't re-run
-            if (document.querySelectorAll('div.thebelab-cell').length > 0) {
-                return;
-            }
-
-            // Find all code cells, replace with Thebelab interactive code cells
-            const codeCells = document.querySelectorAll('.input_area pre')
-            codeCells.forEach((codeCell, index) => {
-                const id = codeCellId(index)
-                codeCell.setAttribute('data-executable', 'true')
-
-                // Figure out the language it uses and add this too
-                var parentDiv = codeCell.parentElement.parentElement;
-                var arrayLength = parentDiv.classList.length;
-                for (var ii = 0; ii < arrayLength; ii++) {
-                    var parts = parentDiv.classList[ii].split('language-');
-                    if (parts.length === 2) {
-                        // If found, assign dataLanguage and break the loop
-                        var dataLanguage = parts[1];
-                        break;
-                    }
-                }
-                codeCell.setAttribute('data-language', dataLanguage)
-
-                // If the code cell is hidden, show it
-                var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
-                if (inputCheckbox !== null) {
-                    setCodeCellVisibility(inputCheckbox, 'visible');
-                }
-            });
-
-            // Remove the event listener from the page so keyboard press doesn't
-            // Change page
-            document.removeEventListener('keydown', initPageNav)
-            keyboardListener = false;
-
-            // Init thebelab
-            thebelab.bootstrap();
-
-            // Remove copy buttons since they won't work anymore
-            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
-            copyAndThebeButtons.forEach((button, index) => {
-                button.remove();
-            });
-
-            // Remove outputs since they'll be stale
-            const outputs = document.querySelectorAll('.output *, .output')
-            outputs.forEach((output, index) => {
-                output.remove();
-            });
-
-            // Find any cells with an initialization tag and ask ThebeLab to run them when ready
-            var thebeInitCells = document.querySelectorAll('div.tag_thebelab-init');
-            thebeInitCells.forEach((cell) => {
-                console.log("Initializing ThebeLab with cell: " + cell.id);
-                cell.querySelector('.thebelab-run-button').click();
-            });
-        }
-
-        // Add event listener for the function to modify code cells
-        const thebelabButtons = document.querySelectorAll('[id^=thebelab], [id$=thebelab]')
-        thebelabButtons.forEach((thebelabButton,index) => {
-            if (thebelabButton === null) {
-                setTimeout(initThebelab, 250)
-                return
-            };
-            thebelabButton.addEventListener('click', addThebelabToCodeCells);
-        });
-    }
-
-    // Initialize Thebelab
-    initFunction(initThebelab);
-</script>
-
-
-
-  <!-- Load the auto-generating TOC (non-async otherwise the TOC won't load w/ turbolinks) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" async></script>
-  <script src="/assets/js/page/tocbot.js"></script>
-
-  <!-- Google analytics -->
+  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
   
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '');
-</script>
-
-
-
-  <!-- Clipboard copy button -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script>
-
-  <!-- Load custom website scripts -->
-  <script src="/assets/js/scripts.js" async></script>
-
-  <!-- Load custom user CSS and JS  -->
-  <script src="/assets/custom/custom.js" async></script>
-  <link rel="stylesheet" href="/assets/custom/custom.css">
-
-  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
   
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="getting-started.html">
+   Introduction to the Tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Using Weather and Climate Data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weather-and-climate-data.html">
+   1. Using Weather and Climate Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Developing a reduced-form specification
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Developing a reduced-form specification
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Weighting schemes
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weighting-schemes.html">
+   3. Weighting schemes
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Generating geographical unit data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geographical-unit-data.html">
+   4. Generating geographical unit data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Suggestions for work organization
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="suggestions.html">
+   5. Suggestions when producing a panel dataset
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Contributors
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+</ul>
 
-  <!-- Lunr search code - will only be executed on the /search page -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" async></script>
-  <script>var initQuery = function() {
-  // See if we have a search box
-  var searchInput = document.querySelector('input#lunr_search');
-  if (searchInput === null) {
-    return;
-  }
+</nav> <!-- To handle the deprecated key -->
 
-  // Function to parse our lunr cache
-  var idx = lunr(function () {
-    this.field('title')
-    this.field('excerpt')
-    this.field('categories')
-    this.field('tags')
-    this.ref('id')
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
 
-    this.pipeline.remove(lunr.trimmer)
-
-    for (var item in store) {
-      this.add({
-        title: store[item].title,
-        excerpt: store[item].excerpt,
-        categories: store[item].categories,
-        tags: store[item].tags,
-        id: item
-      })
-    }
-  });
-
-  // Run search upon keyup
-  searchInput.addEventListener('keyup', function () {
-    var resultdiv = document.querySelector('#results');
-    var query = document.querySelector("input#lunr_search").value.toLowerCase();
-    var result =
-      idx.query(function (q) {
-        query.split(lunr.tokenizer.separator).forEach(function (term) {
-          q.term(term, { boost: 100 })
-          if(query.lastIndexOf(" ") != query.length-1){
-            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
-          }
-          if (term != ""){
-            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
-          }
-        })
-      });
-
-      // Empty the results div
-      while (resultdiv.firstChild) {
-        resultdiv.removeChild(resultdiv.firstChild);
-      }
-
-    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
-    for (var item in result) {
-      var ref = result[item].ref;
-      if(store[ref].teaser){
-        var searchitem =
-          '<div class="list__item">'+
-            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
-              '<h2 class="archive__item-title" itemprop="headline">'+
-                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
-              '</h2>'+
-              '<div class="archive__item-teaser">'+
-                '<img src="'+store[ref].teaser+'" alt="">'+
-              '</div>'+
-              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
-            '</article>'+
-          '</div>';
-      }
-      else{
-    	  var searchitem =
-          '<div class="list__item">'+
-            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
-              '<h2 class="archive__item-title" itemprop="headline">'+
-                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
-              '</h2>'+
-              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
-            '</article>'+
-          '</div>';
-      }
-      resultdiv.insertAdjacentHTML('beforeend', searchitem);
-    }
-  });
-};
-
-initFunction(initQuery);
-</script>
-
-  <!-- Load JS that depends on site variables -->
-  <script src="/assets/js/page/copy-button.js" async></script>
-
-  <!-- Hide cell code -->
-  <script src="/assets/js/page/hide-cell.js" async></script>
-
-  <!-- Printing the screen -->
-  <!-- Include nbinteract for interactive widgets -->
-<script src="https://printjs-4de6.kxcdn.com/print.min.js" async></script>
-<script>
-printContent = () => {
-    // MathJax displays a second version of any math for assistive devices etc.
-    // This prevents double-rendering in the PDF output.
-    var ignoreAssistList = [];
-    assistives = document.querySelectorAll('.MathJax_Display span.MJX_Assistive_MathML').forEach((element, index) => {
-        var thisId = 'MathJax-assistive-' + index.toString();
-        element.setAttribute('id', thisId);
-        ignoreAssistList.push(thisId)
-    });
-
-    // Print the actual content object
-    printJS({
-        printable: 'textbook_content',
-        type: 'html',
-        css: "/assets/css/styles.css",
-        style: "#textbook_content {padding-top: 40px};",
-        scanStyles: false,
-        targetStyles: ["*"],
-        ignoreElements: ignoreAssistList,
-        documentTitle: "Made with Jupyter Book"
-    })
-};
-
-initPrint = () => {
-    document.querySelector('#interact-button-print').addEventListener('click', printContent)
-}
-
-initFunction(initPrint)
-</script>
-
-</head>
-
-  <body>
-    <!-- .js-show-sidebar shows sidebar by default -->
-    <div id="js-textbook" class="c-textbook js-show-sidebar">
-      
+</div>
 
 
+          
 
-<nav id="js-sidebar" class="c-textbook__sidebar">
-  <a href="https://climateestimate.net"><img src="/images/climate_estimate_logo.png" class="textbook_logo" id="sidebar-logo" alt="textbook logo" data-turbolinks-permanent/></a>
-  <h2 class="c-sidebar__title">Weather Panel Tutorial</h2>
-  <ul class="c-sidebar__chapters">
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/getting-started.html"
-        >
-          
-          Getting started
-        </a>
-
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
         
-      </li>
-
-      
-    
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/weather-and-climate-data.html"
-        >
-          
-            1.
-          
-          Using Weather and Climate Data
-        </a>
-
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
         
-      </li>
-
-      
-    
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry c-sidebar__entry--active"
-          href="/reduced-form-specification.html"
-        >
-          
-            2.
-          
-          Developing a reduced-form specification
-        </a>
-
         
-      </li>
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
 
-      
-    
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/weighting-schemes.html"
-        >
-          
-            3.
-          
-          Weighting schemes
-        </a>
-
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-      </li>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/reduced-form-specification.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
 
-      
-    
-      
-      
+        <!-- Source interaction buttons -->
 
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/geographical-unit-data.html"
-        >
-          
-            4.
-          
-          Generating geographical unit data
-        </a>
-
-        
-      </li>
-
-      
-    
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/suggestions.html"
-        >
-          
-            5.
-          
-          Suggestions for work organization
-        </a>
-
-        
-      </li>
-
-      
-    
-      
-      
-
-      
-      
-
-      
-      
-      <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry "
-          href="/contributors.html"
-        >
-          
-          Contributors
-        </a>
-
-        
-      </li>
-
-      
-    
-      
-      
-        <li class="c-sidebar__divider"></li>
-        
-  </ul>
-  <p class="sidebar_footer">Powered by <a href="https://jupyterbook.org">Jupyter Book</a></p>
-</nav>
-
-      
-      <div class="c-topbar" id="top-navbar">
-  <!-- We show the sidebar by default so we use .is-active -->
-  <div class="c-topbar__buttons">
-    <button
-      id="js-sidebar-toggle"
-      class="hamburger hamburger--arrowalt is-active"
-    >
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
-    </button>
-    <div class="buttons">
-<div class="download-buttons-dropdown">
-    <button id="dropdown-button-trigger" class="interact-button"><img src="/assets/images/download-solid.svg" alt="Download" /></button>
-    <div class="download-buttons">
-        
-        <a id="interact-button-print"><button id="interact-button-download" class="interact-button">.pdf</button></a>
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/reduced-form-specification.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/reduced-form-specification.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
 
-</div>
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
 
-  </div>
-  <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
-  <aside class="sidebar__right">
-    <header><h4 class="nav__title"><img src="/assets/images/list-solid.svg" alt="Search" />   On this page</h4></header>
-    <nav class="onthispage">
-    </nav>
-  </aside>
-  <a href="/search.html" class="topbar-right-button" id="search-button">
-    <img src="/assets/images/search-solid.svg" alt="Search" />
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-weather-variables">
+   2.1. Choosing weather variables
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dealing-with-the-spatial-and-temporal-scales-of-economic-processes">
+   2.2. Dealing with the spatial and temporal scales of economic processes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-before-aggregation">
+     Transformation-before-aggregation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aggregation-before-transformation">
+     Aggregation-before-transformation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#common-functional-forms-pros-cons-and-methods">
+   2.3. Common functional forms (pros, cons, and methods)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation">
+   2.3. Cross-validation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
 </div>
-
-      <main class="c-textbook__page" tabindex="-1">
-            <div class="c-textbook__content" id="textbook_content">
-              <h1 id="2-developing-a-reduced-form-specification">2. Developing a reduced-form specification</h1>
-
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="developing-a-reduced-form-specification">
+<h1>2. Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this headline">¶</a></h1>
 <p>This section describes some of the considerations that go into
 developing a reduced-form specification using weather panel data. Our
 discussion here will be very practical and limited to nonlinear panel
 regressions, so also
 read
-<a href="https://academic.oup.com/reep/article/14/1/1/5718007">Estimating the Economic Impacts of Climate Change Using Weather Observations</a> for
+<a class="reference external" href="https://academic.oup.com/reep/article/14/1/1/5718007">Estimating the Economic Impacts of Climate Change Using Weather Observations</a> for
 a review of the available econometric techniques and their strengths
 and weaknesses.  For an extensive review of the results available from
 the climate econometric literature and the empirical methods used to
 identify them, a good resource
 is
-<a href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
-
-<h2 id="21-choosing-weather-variables">2.1. Choosing weather variables</h2>
-
+<a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
+<div class="section" id="choosing-weather-variables">
+<h2>2.1. Choosing weather variables<a class="headerlink" href="#choosing-weather-variables" title="Permalink to this headline">¶</a></h2>
 <p>The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
 variable. For example, in the case of temperature, we can use
-$T_{avg}$, $T_{min}$, $T_{max}$, days above 30 C, heating and cooling
+<span class="math notranslate nohighlight">\(T_{avg}\)</span>, <span class="math notranslate nohighlight">\(T_{min}\)</span>, <span class="math notranslate nohighlight">\(T_{max}\)</span>, days above 30 C, heating and cooling
 degree-days, or growing degree-days. Morevoer, it is very important to
 first think about possible <em>mechanism(s)</em> behind a change witnessed in
 the environment, and then only make choices for variables that can
 explain that mechanism. A few of the important and frequently-used
 weather variables are listed below, and why you might choose them:</p>
-
-<ul>
-  <li><strong>Temperature:</strong> Temperature relationships are often preferred in
+<ul class="simple">
+<li><p><strong>Temperature:</strong> Temperature relationships are often preferred in
 climate impacts research, because temperature is more predictable
-than many other weather variables. There are various measures of temperature that can be used. Some of them are listed below:
-    <ol>
-      <li><em>$T_{min}$, $T_{max}$:</em>  Many socioeconomic processes are more
+than many other weather variables. There are various measures of temperature that can be used. Some of them are listed below:</p>
+<ol class="simple">
+<li><p><em><span class="math notranslate nohighlight">\(T_{min}\)</span>, <span class="math notranslate nohighlight">\(T_{max}\)</span>:</em>  Many socioeconomic processes are more
 sensitive to extreme temperatures than to variation in the
 average. This is also useful when temperature variation is
-large, leading to significant differences in the cold end and hot end responses. These are important metrics when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$.</li>
-      <li><em>$T_{avg}$:</em>  A good mean metric for seeing average response
+large, leading to significant differences in the cold end and hot end responses. These are important metrics when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that <span class="math notranslate nohighlight">\(T_{min}\)</span> better reflects nighttime temperatures while <span class="math notranslate nohighlight">\(T_{max}\)</span> better reflects daytime temperatures. Not all datasets include <span class="math notranslate nohighlight">\(T_{min}\)</span> or <span class="math notranslate nohighlight">\(T_{max}\)</span>.</p></li>
+<li><p><em><span class="math notranslate nohighlight">\(T_{avg}\)</span>:</em>  A good mean metric for seeing average response
 over the temperature support, when there is not much variation
 in temperature within each time unit considered in the
-study. $T_{avg}$ is most appropriate when there is some natural
+study. <span class="math notranslate nohighlight">\(T_{avg}\)</span> is most appropriate when there is some natural
 inertia in the response, so that the dependent variable is
 responding to a kind of average over the last 24 hours. Note
-that $T_{avg}$ is often just equal to $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.</li>
-      <li><a href="https://www.degreedays.net/introduction"><em>HDD/CDD &amp; GDD:</em></a>
+that <span class="math notranslate nohighlight">\(T_{avg}\)</span> is often just equal to <span class="math notranslate nohighlight">\((T_{min} + T_{max}) / 2\)</span>, unless calculated from sub-daily data.</p></li>
+<li><p><a class="reference external" href="https://www.degreedays.net/introduction"><em>HDD/CDD &amp; GDD:</em></a>
 Degree days (DD) are a measure of ’how much’ and for ’how long’
 the outside air temperature was above or below a certain
-level. A sinusoid between $T_{min}$ and $T_{max}$ can be used
-to approximate DDs from daily data.</li>
-      <li><em>Heat Index &amp; Wet Bulb Temperature</em>: (see below on humidity)</li>
-    </ol>
-  </li>
-  <li><strong>Humidity:</strong> There are mainly three metrics for humidity
+level. A sinusoid between <span class="math notranslate nohighlight">\(T_{min}\)</span> and <span class="math notranslate nohighlight">\(T_{max}\)</span> can be used
+to approximate DDs from daily data.</p></li>
+<li><p><em>Heat Index &amp; Wet Bulb Temperature</em>: (see below on humidity)</p></li>
+</ol>
+</li>
+<li><p><strong>Humidity:</strong> There are mainly three metrics for humidity
 measurements: absolute, relative (often “RH”), and
 specific. Absolute humidity describes the water content of air,
 expressed in grams per cubic metre or grams per kilogram. Relative
 humidity is expressed as a percentage relative to a maximum humidity
-value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate “apparent” temperature, i.e. the temperature the current weather “feels like”:
-    <ol>
-      <li><em>Wet-Bulb Temperature (WBT)</em>: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity.</li>
-      <li><em>Wet-Bulb Globe Temperature (WBGT)</em>: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight)</li>
-      <li><em>Heat Index (HI)</em>: various calculated metrics combining shade temperature and relative humidity</li>
-    </ol>
-  </li>
-  <li><strong>Precipitation:</strong> highly local (in space <em>and</em> time), non-normal (especially compared to temperature), poorly measured, and poorly predicted (see <a href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)">Section 1.5</a>. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it’s still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):
-    <ol>
-      <li><em>Total precipitation (e.g., over a year)</em>: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena.</li>
-      <li><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: often used to capture water stress.</li>
-      <li><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: the distribution of precipitation often matters more than total.
-Some datasets (such as <a href="https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data">HadEX2</a>) specialize in extremes data.</li>
-    </ol>
-  </li>
-  <li>
-    <p><strong>River discharge rate:</strong> River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.</p>
-  </li>
-  <li>
-    <p><strong>Wind speed:</strong> The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available. Maximum wind speed over some time period has been used as well.</p>
-  </li>
-  <li>
-    <p><strong>Net primary productivity (NPP):</strong> It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p>
-  </li>
-  <li>
-    <p><strong>Evapotranspiration rate (ET):</strong> It is the sum of evaporation and
+value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate “apparent” temperature, i.e. the temperature the current weather “feels like”:</p>
+<ol class="simple">
+<li><p><em>Wet-Bulb Temperature (WBT)</em>: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity.</p></li>
+<li><p><em>Wet-Bulb Globe Temperature (WBGT)</em>: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight)</p></li>
+<li><p><em>Heat Index (HI)</em>: various calculated metrics combining shade temperature and relative humidity</p></li>
+</ol>
+</li>
+<li><p><strong>Precipitation:</strong> highly local (in space <em>and</em> time), non-normal (especially compared to temperature), poorly measured, and poorly predicted (see <a class="reference external" href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)">Section 1.5</a>. Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it’s still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):</p>
+<ol class="simple">
+<li><p><em>Total precipitation (e.g., over a year)</em>: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena.</p></li>
+<li><p><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: often used to capture water stress.</p></li>
+<li><p><em>Number of of rainy/dry days, or moments of the precipitation distribution</em>: the distribution of precipitation often matters more than total.
+Some datasets (such as <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data">HadEX2</a>) specialize in extremes data.</p></li>
+</ol>
+</li>
+<li><p><strong>River discharge rate:</strong> River flows are generally measured at the station-level. While runoff is avaialble in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.</p></li>
+<li><p><strong>Wind speed:</strong> The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for distructive force, and cubic speeds for wind turbine power. Also consider gust velocity, which is generally available. Maximum wind speed over some time period has been used as well.</p></li>
+<li><p><strong>Net primary productivity (NPP):</strong> It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p></li>
+<li><p><strong>Evapotranspiration rate (ET):</strong> It is the sum of evaporation and
 plant transpiration from the Earth’s land and ocean surface to the
 atmosphere. Changes in ET are estimated using water stress measures
-in plants, and are related to the agricultural productivity.</p>
-  </li>
-  <li>
-    <p><strong>Solar radiation:</strong> Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.</p>
-  </li>
-  <li>
-    <p><strong>Sea surface temperature (SST) and ocean temperature:</strong> SST is the water temperature close to the ocean’s surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.</p>
-  </li>
-  <li>
-    <p><strong>Climatic indicies:</strong> A wide range of metrics have been developed
+in plants, and are related to the agricultural productivity.</p></li>
+<li><p><strong>Solar radiation:</strong> Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.</p></li>
+<li><p><strong>Sea surface temperature (SST) and ocean temperature:</strong> SST is the water temperature close to the ocean’s surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.</p></li>
+<li><p><strong>Climatic indicies:</strong> A wide range of metrics have been developed
 to understand the state of the ocean-atmosphere system at large
 scales. These are measured in a standardized way (e.g., by comparing
 temperature at two points or by extracting a mean over a region),
 and often have long time-series, often at the monthly
 level. However, they do not vary over space. Data for some of the
 most important are available
-through <a href="https://www.ncdc.noaa.gov/teleconnections/">NOAA</a>.  Some of
+through <a class="reference external" href="https://www.ncdc.noaa.gov/teleconnections/">NOAA</a>.  Some of
 the most important are:</p>
-
-    <ol>
-      <li><em>El Niño/Southern Oscillation (ENSO)</em>: Affects temperature
-  and precipitation across the globe, with hotspots on most
-  continents. For some applications, the value of the signal
-  will be less important than the identification of El Niño and
-  La Niña phases. These phases can be somewhat predicted months
-  in advance. El Niño events can be subclassified as Modoki or
-  not.</li>
-      <li><em>Indian Ocean Dipole (IOD)</em>: IOD has affects weather
-  throughout East Africa, South and Southeast Asia, and
-  Oceania.</li>
-    </ol>
-  </li>
+<ol class="simple">
+<li><p><em>El Niño/Southern Oscillation (ENSO)</em>: Affects temperature
+and precipitation across the globe, with hotspots on most
+continents. For some applications, the value of the signal
+will be less important than the identification of El Niño and
+La Niña phases. These phases can be somewhat predicted months
+in advance. El Niño events can be subclassified as Modoki or
+not.</p></li>
+<li><p><em>Indian Ocean Dipole (IOD)</em>: IOD has affects weather
+throughout East Africa, South and Southeast Asia, and
+Oceania.</p></li>
+</ol>
+</li>
 </ul>
-
-<h2 id="22-dealing-with-the-spatial-and-temporal-scales-of-economic-processes">2.2. Dealing with the spatial and temporal scales of economic processes</h2>
-
+</div>
+<div class="section" id="dealing-with-the-spatial-and-temporal-scales-of-economic-processes">
+<h2>2.2. Dealing with the spatial and temporal scales of economic processes<a class="headerlink" href="#dealing-with-the-spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
 <p>The process of developing a reduced-form specification starts with a
 study of the “true model”, or data-generating process, that relates
 your dependent variable to your weather variables. A crucial aspect of
 that relationship is the question of scale.</p>
-
 <p>Weather data products are generally available in <em>gridded</em> form,
 developed through careful interpolation and/or reanalysis. The grids
 used can vary in size across datasets, but they can be aggregated to
@@ -767,13 +419,11 @@ calculated as a transformation matrix, with a row for each region and
 a column for each cell. Once the matrix is calculated, it can be
 reused for each time step. More details for this process are described
 in sections 3 and 5.</p>
-
 <p>Typically, relating weather to a dependent variable requires some kind
 of non-linear transformation. For example, estimating a polynomial
-functional form requires raising the temperatures to various powers. 
-Importantly, the square of a weighted average of grid-level temperatures 
+functional form requires raising the temperatures to various powers.
+Importantly, the square of a weighted average of grid-level temperatures
 is not the same as the weighted average of the square of grid-level temperatures.</p>
-
 <p>While doing the spatial aggregation, we need to decide whether we want
 to transform the data first and then aggregate it
 (transformation-before-aggregation) or aggregate it and then transform
@@ -786,9 +436,8 @@ aggregation-before-transformation for temperature will distort the
 signal less that doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially; it could
 rain for &lt;1 min in &lt;1 km radius area.</p>
-
-<h3 id="transformation-before-aggregation">Transformation-before-aggregation</h3>
-
+<div class="section" id="transformation-before-aggregation">
+<h3>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h3>
 <p>When an economic process is occurring at the local level (for example,
 for individuals or households), we need to first do our estimation at
 the grid level. For example, to estimate the effect of temperature on
@@ -799,34 +448,26 @@ variable is a sum of individual-level outcomes, we should write down
 the reduced-form specification for an individual experiencing
 high-resolution weather, and then sum across all of those reduced
 forms. The result is that we need to do any non-linear transformation of our weather variables at the grid level, then aggregate these values using a weighted averaging method, and feed these into our estimation procedure.</p>
-
 <p><strong>Mathematical formulation for transformation-before-aggregation method</strong></p>
-
-<p>We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, $y_{js} = f(T_{ps})$, for a socioeconomic outcome for agent $j$, where the temperature affecting agents is in grid cell $p$ and occurs in timestep $s$ (e.g., if the agents respond on a day-by-day basis, $T_{ps}$ is the local weather for a single day).</p>
-
-<p>However, we do not observe agent-level responses. Instead, we have region-wide sums, $y_{it}$ for region $i$ and reporting period $t$. For example, if $y_{js}$ is death risk for agent $j$ for a given day, we may only observe total deaths across a region in each year, <script type="math/tex">y_{it} = \sum_{s \in t} \sum_{j \in i} y_{js}.</script></p>
-
-<p>We can determine the agent-level response $f(T_{ps})$ if we assume
+<p>We want to understand how local agents respond to weather shocks. Suppose that there exists an agent-level dose-response curve, <span class="math notranslate nohighlight">\(y_{js} = f(T_{ps})\)</span>, for a socioeconomic outcome for agent <span class="math notranslate nohighlight">\(j\)</span>, where the temperature affecting agents is in grid cell <span class="math notranslate nohighlight">\(p\)</span> and occurs in timestep <span class="math notranslate nohighlight">\(s\)</span> (e.g., if the agents respond on a day-by-day basis, <span class="math notranslate nohighlight">\(T_{ps}\)</span> is the local weather for a single day).</p>
+<p>However, we do not observe agent-level responses. Instead, we have region-wide sums, <span class="math notranslate nohighlight">\(y_{it}\)</span> for region <span class="math notranslate nohighlight">\(i\)</span> and reporting period <span class="math notranslate nohighlight">\(t\)</span>. For example, if <span class="math notranslate nohighlight">\(y_{js}\)</span> is death risk for agent <span class="math notranslate nohighlight">\(j\)</span> for a given day, we may only observe total deaths across a region in each year, $<span class="math notranslate nohighlight">\(y_{it} = \sum_{s \in t} \sum_{j \in i} y_{js}.\)</span>$</p>
+<p>We can determine the agent-level response <span class="math notranslate nohighlight">\(f(T_{ps})\)</span> if we assume
 linearity. First, let us represent this as if we could run a regression with agent-level data, breaking up the dose-response
 curve into a sum of terms:<br />
-<script type="math/tex">f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})</script></p>
-
-<p>where $g_k(T_{ps})$ is a transformation of the weather variables. For example, for a cubic response curve, $g_1(T_{ps}) = T_{ps}$, $g_2(T_{ps}) = T_{ps}^2$, and $g_3(T_{ps}) = T_{ps}^3$.</p>
-
+$<span class="math notranslate nohighlight">\(f(T_{ps}) = \beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(g_k(T_{ps})\)</span> is a transformation of the weather variables. For example, for a cubic response curve, <span class="math notranslate nohighlight">\(g_1(T_{ps}) = T_{ps}\)</span>, <span class="math notranslate nohighlight">\(g_2(T_{ps}) = T_{ps}^2\)</span>, and <span class="math notranslate nohighlight">\(g_3(T_{ps}) = T_{ps}^3\)</span>.</p>
 <p>We know that<br />
-<script type="math/tex">y_{it} = \sum_{s\in t} \sum_{j\in i} y_{js} = \sum_{s\in t} \sum_{p\in i}</script>
-<script type="math/tex">\beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})</script></p>
-
+$<span class="math notranslate nohighlight">\(y_{it} = \sum_{s\in t} \sum_{j\in i} y_{js} = \sum_{s\in t} \sum_{p\in i}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta_1 g_1(T_{ps}) + \beta_2 g_2(T_{ps}) + \cdots + \beta_k g_k(T_{ps})\)</span>$</p>
 <p>We can rearrange this to<br />
-<script type="math/tex">y_{it} = \beta_1 (\sum_{s\in t} \sum_{p\in i} g_1(T_{ps})) +</script>
-<script type="math/tex">\beta_2 (\sum_{s\in t} \sum_{p\in i} g_2(T_{ps})) + \cdots +</script>
-<script type="math/tex">\beta_k (\sum_{s\in t} \sum_{p\in i} g_k(T_{ps}))</script></p>
-
+$<span class="math notranslate nohighlight">\(y_{it} = \beta_1 (\sum_{s\in t} \sum_{p\in i} g_1(T_{ps})) + \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta_2 (\sum_{s\in t} \sum_{p\in i} g_2(T_{ps})) + \cdots + \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta_k (\sum_{s\in t} \sum_{p\in i} g_k(T_{ps}))\)</span>$</p>
 <p>That is, the variables used in the regression should be the sum over
 weather data that has been transformed at the grid level.</p>
-
-<h3 id="aggregation-before-transformation">Aggregation-before-transformation</h3>
-
+</div>
+<div class="section" id="aggregation-before-transformation">
+<h3>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h3>
 <p>When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
 it. For example, to estimate the effect of storm events on public
@@ -837,64 +478,54 @@ lead to wrong estimation, as it should result in zero estimate for
 those (almost all) grid cells which do not contain administrative
 offices, and extremely large values for those (very few) cells, which
 do.</p>
-
 <p>Using the formulation above, here we would regress:
-<script type="math/tex">y_{it} = \beta_1 g_1(\sum_{s\in t} \sum_{p\in i} T_{ps}) +</script>
-<script type="math/tex">\beta_2 g_2(\sum_{s\in t} \sum_{p\in i} T_{ps}) + \cdots +</script>
-<script type="math/tex">\beta_k g_k(\sum_{s\in t} \sum_{p\in i} T_{ps})</script></p>
-
-<p>Where $T_{ps}$ is the gridded weather for cell $p$ in time step
-$s$, $g_k(\cdot)$ is the non-linear transformation (e.g., raising to
-powers for polynomials), and $y_{it}$ is the dependent variable
-observed for region $i$ in reporting period $t$. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.</p>
-
-<p><img src="/content/images/cartoon_sec2.JPG" alt="Humor" /></p>
-
-<h2 id="23-common-functional-forms-pros-cons-and-methods">2.3. Common functional forms (pros, cons, and methods)</h2>
-
+$<span class="math notranslate nohighlight">\(y_{it} = \beta_1 g_1(\sum_{s\in t} \sum_{p\in i} T_{ps}) + \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta_2 g_2(\sum_{s\in t} \sum_{p\in i} T_{ps}) + \cdots + \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\beta_k g_k(\sum_{s\in t} \sum_{p\in i} T_{ps})\)</span>$</p>
+<p>Where <span class="math notranslate nohighlight">\(T_{ps}\)</span> is the gridded weather for cell <span class="math notranslate nohighlight">\(p\)</span> in time step
+<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(g_k(\cdot)\)</span> is the non-linear transformation (e.g., raising to
+powers for polynomials), and <span class="math notranslate nohighlight">\(y_{it}\)</span> is the dependent variable
+observed for region <span class="math notranslate nohighlight">\(i\)</span> in reporting period <span class="math notranslate nohighlight">\(t\)</span>. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.</p>
+<p><img alt="Humor" src="../_images/cartoon_sec2.JPG" /></p>
+</div>
+</div>
+<div class="section" id="common-functional-forms-pros-cons-and-methods">
+<h2>2.3. Common functional forms (pros, cons, and methods)<a class="headerlink" href="#common-functional-forms-pros-cons-and-methods" title="Permalink to this headline">¶</a></h2>
 <p>Returning to the “true model” of your process, the decisions around how to
 generate a linear expression that you can estimate have important
 implications. Different functional forms serve different purposes and
 describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.</p>
-
-<ul>
-  <li><strong><a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">Bins</a></strong></li>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">Bins</a></strong></p></li>
 </ul>
-
 <p>Bins offer a very flexible functional form, although the choice of bin
 edges means that they are not as “non-parametric” as often assumed. It
 is also highly sensitive to existence of outliers in data. This can
 particularly be an issue for extrapolation when the results are used
 for projections: only the estimate for the extreme bins will be used.</p>
-
 <p>The bin widths should generally be even to facilitate easy
 understanding, although the lowest and highest bins can go to negative
 and positive infinity (or the appropriate analog). You may want to
 have smaller size bins around weather values where we expect most of
 the response to occur and where there is a lot of data, but be
 prepared to also show evenly-spaced bins.</p>
-
 <p>The interpretation of a binned result is in terms of the time unit
 used. For example, if daily temperatures are used, then the marginal
 effect for a given bin is the additional effect of “one more day” for
 which the temperature falls into that bin.</p>
-
 <p>To calculate bin observations, count up the number of timesteps where
 the weather predictor falls into each bin:
-    <script type="math/tex">T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}</script>
-    where $\psi_{p}$ is the weight assigned to the $p$ grid cell.</p>
-
-<ul>
-  <li><strong><a href="https://en.wikipedia.org/wiki/Polynomial_regression">Polynomial</a></strong></li>
+$<span class="math notranslate nohighlight">\(T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}\)</span><span class="math notranslate nohighlight">\(
+    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid cell.</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Polynomial_regression">Polynomial</a></strong></p></li>
 </ul>
-
 <p>Polynomial specifications balance smooth dose-response curves with the
 flexibility of increasing the effective resolution of the curve by
 increasing the degree of the polynomial. Using more degrees improves
 the ability of the curve to fit the data, but may lead to
 over-fitting. To choose the number of terms in the polynomial,
 consider cross-validation.</p>
-
 <p>Another benefit of polynomials for climate change estimates is that
 they provide smooth extrapolation to higher temperatures. Again, it is
 important to highlight the fact that the evaluation of the
@@ -902,26 +533,21 @@ dose-response curve at temperatures outside the bounds of the observed
 data reflects assumptions, rather than evidence. Cross-validation that
 leaves out the latest periods or most extreme temperatures can improve
 confidence in these assumptions.</p>
-
 <p>In calculating the predictor values for a polynomial, consider the
 scale of the data-generating process. If it is a local process, the
 high-resolution weather values should be raised to powers before
 aggregating up to the regions in the economic data. That is, the the
-predictor for the $k$-th power of the polynomial is 
-    <script type="math/tex">f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k</script> 
-    where $\psi_{p}$ is the weight assigned to the $p$ gridcell.</p>
-
+predictor for the <span class="math notranslate nohighlight">\(k\)</span>-th power of the polynomial is
+$<span class="math notranslate nohighlight">\(f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k\)</span><span class="math notranslate nohighlight">\( 
+    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
 <p>The dose-response regression would then be applied as follows
-    <script type="math/tex">F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)</script></p>
-
+$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)\)</span>$</p>
 <p>while the coefficients can be interepted as describing a local
 dose-response relationship:
-    <script type="math/tex">F(T_{pit})=\sum_{k} \beta_k T_{pit}^k</script></p>
-
-<ul>
-  <li><strong><a href="https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf">Restricted cubic spline</a></strong></li>
+$<span class="math notranslate nohighlight">\(F(T_{pit})=\sum_{k} \beta_k T_{pit}^k\)</span>$</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf">Restricted cubic spline</a></strong></p></li>
 </ul>
-
 <p>Restricted cubic splines produce smooth dose-response curves, like
 polynomials, but mitigate some of the problems that polynomials with
 many terms have. Whereas polynomials with high-order terms can produce
@@ -930,72 +556,59 @@ extrapolation. RCS also provides additional degrees of freedom through
 the placement of knots, and this can be used either to reflect
 features of the underlying process being modeled or to improve the
 fit.</p>
-
 <p>In the case where knots are choosen to maximize the fit of the curve,
 cross-validation is the preferred approach for both selecting the
 number of knots and their placement. The reference in this subsection
 title on cubic splines can be helpful in deciding the knot
 specifications.</p>
-
 <p>Once knot locations are determiend, the weather data needs to be
-translated into RCS terms. As before let the gridded weather be $T_{p
-i t}$ and let there be $n$ knots, placed at $T_1&lt;T_2&lt;…&lt;T_n$. Then we
-have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
-    <script type="math/tex">f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
+translated into RCS terms. As before let the gridded weather be <span class="math notranslate nohighlight">\(T_{p
+i t}\)</span> and let there be <span class="math notranslate nohighlight">\(n\)</span> knots, placed at <span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span>. Then we
+have a set of <span class="math notranslate nohighlight">\((n-2)\)</span> terms, here indexed by <span class="math notranslate nohighlight">\(k\)</span> and defined as:
+$<span class="math notranslate nohighlight">\(f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
 	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
-	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}</script> <script type="math/tex">\forall k \in \{1,2,...,n-2\}</script> 
-    where, $\psi_{p}$ is the weight assigned to the $p$ grid.</p>
-
-<p>Each spline term in the parentheses $(\nabla)^3<em>+$ e.g. $(T</em>{p i t} - t_{n-1})^3<em>+$ is called a truncated           polynomial of degree 3, which is defined as follows:<br />
-    $\nabla^3</em>+=\nabla^3<em>+$ if $\nabla^3</em>+&gt;0$<br />
-    $\nabla^3<em>+=0$ if $\nabla^3</em>+&lt;0$</p>
-
+	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\forall k \in \{1,2,...,n-2\}\)</span><span class="math notranslate nohighlight">\( 
+    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid.</p>
+<p>Each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)^3_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - t_{n-1})^3_+\)</span> is called a truncated           polynomial of degree 3, which is defined as follows:<br />
+<span class="math notranslate nohighlight">\(\nabla^3_+=\nabla^3_+\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&gt;0\)</span><br />
+<span class="math notranslate nohighlight">\(\nabla^3_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&lt;0\)</span></p>
 <p>As with the polynomial, the dose-response regression would then be applied as follows
-    <script type="math/tex">F(T_{it})=\sum_{k} \beta_k f(T_{it})_k</script></p>
-
+$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it})_k\)</span>$</p>
 <p>while the coefficients can be interepted as describing a local
 dose-response relationship:</p>
-
-<script type="math/tex; mode=display">F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k</script>
-
-<ul>
-  <li><strong><a href="https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf">Linear spline</a></strong></li>
+<div class="math notranslate nohighlight">
+\[F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k\]</div>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf">Linear spline</a></strong></p></li>
 </ul>
-
 <p>A linear spline provides a balance between the smoothness of RCS and
 the direct response curve to temperature correspondance of bins. The
 segments between knots here are lines. As with RCS, the choice of knot
 locations is very important.</p>
-
-<p>One defition of terms for a linear spline for a spline with $n$ knots at
-$T_1&lt;T_2&lt;…&lt;T_n$ is:
-    <script type="math/tex">f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}</script>
-    <script type="math/tex">f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+</script>
-    where, $\psi_{p}$ is the weight assigned to the $p$ gridcell.</p>
-
-<p>And, each spline term in the parentheses $(\nabla)<em>+$ e.g. $(T</em>{p i t} - T_2)<em>+$ is called a truncated polynomial of degree 1, which is defined as follows:<br />
-    $\nabla</em>+=\nabla_+$ if $\nabla_+&gt;0$<br />
-    $\nabla_+=0$ if $\nabla_+&lt;0$</p>
-
+<p>One defition of terms for a linear spline for a spline with <span class="math notranslate nohighlight">\(n\)</span> knots at
+<span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span> is:
+$<span class="math notranslate nohighlight">\(f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}\)</span><span class="math notranslate nohighlight">\(
+    \)</span><span class="math notranslate nohighlight">\(f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+\)</span><span class="math notranslate nohighlight">\(
+    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
+<p>And, each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - T_2)_+\)</span> is called a truncated polynomial of degree 1, which is defined as follows:<br />
+<span class="math notranslate nohighlight">\(\nabla_+=\nabla_+\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&gt;0\)</span><br />
+<span class="math notranslate nohighlight">\(\nabla_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&lt;0\)</span></p>
 <p>We generally try to work with many functional forms in a paper because it serves dual purpose of being a <em>sanity check</em> for researchers’ code and a <em>robustness check</em> for readers’ confirmation. However, we need to take decision on the <em>main specification</em> that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the <em>fit</em> of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:</p>
-
 <p><strong>Example of reduced-form regression plots for different functional forms</strong>
-<img src="/content/images/fform_cil.JPG" alt="Data from  Greenstone et al. (2019)!" />
-Source: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
-
-<h2 id="23-cross-validation">2.3. Cross-validation</h2>
-
+<img alt="Data from  Greenstone et al. (2019)!" src="../_images/fform_cil.JPG" />
+Source: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
+</div>
+<div class="section" id="cross-validation">
+<h2>2.3. Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h2>
 <p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
 internal validity, the model can be fit to a subset of the dataset,
 and evaluated on the remainder. For example, you can leave particular
 regions out of your regression or remove a random <em>1/k</em> of your data
 (k-fold cross validation) instead of running a full-sample
 regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates and comparing it to the actual observations.</p>
-
 <p>Cross-validation is not universally performed by researchers, and many
 people continue to rely only on R-squared statistics. However,
 R-squared statistic can perform poorly even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.</p>
-
 <p>Some examples on the use of cross-validation exercise include deciding
 on degree of polynomial, cutoff knots’ positions for splines,
 and selecting weather variables for a regression. To do a k-fold cross
@@ -1007,23 +620,59 @@ we can rely on root-mean-square-error (RMSE) statistic. So, the
 specification with the lowest RMSE will be the most preferred
 specification here. Having said that, we usually employ combination of
 techniques, like eye-balling and RMSE, to take decision on the most preferred specification.</p>
+</div>
+</div>
 
-            </div>
-            <div class="c-textbook__footer" id="textbook_footer">
-              <nav class="c-page__nav">
-  
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
-  
-</nav>
-
-              <footer>
-  <p class="footer"></p>
-</footer>
-
-            </div>
-
+              </div>
+              
         </div>
-      </main>
     </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="weather-and-climate-data.html" title="previous page">1. Using Weather and Climate Data</a>
+    <a class='right-next' id="next-link" href="weighting-schemes.html" title="next page">3. Weighting schemes</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
   </body>
 </html>
