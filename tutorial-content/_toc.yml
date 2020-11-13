@@ -8,6 +8,7 @@
 - part: Developing a reduced-form specification
   chapters:
   - file: content/reduced-form-specification
+  - file: content/functional-forms
 
 - part: Weighting schemes
   chapters:

@@ -16,7 +16,7 @@ Almost all climate and weather datasets are released in [netCDF](https://climate
 Through this section, when possible relevant commands for working with netCDF files are listed for:
 
 - Matlab (native support)
-- python
+- Python
     - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports netCDF files
     - [netCDF4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
 - R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
@@ -27,9 +27,11 @@ Through this section, when possible relevant commands for working with netCDF fi
 
 For any R code chunks, it’s assumed the ncdf4 package is loaded (`library(ncdf4)`). For any python code chunks, it’s assumed that the xarray package is loaded as `xr` (`import xarray as xr`) or the netCDF4-python module is loaded as `nc` (`import netCDF4 as nc`).
 
-NB: If you know several of the languages referred to in this tutorial and just want the author's opinion on which one to use, I would suggest:
+```{note}
+If you know several of the languages referred to in this tutorial and just want the author's opinion on which one to use, we suggest:
 - Matlab: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with the background / file processing work
-- python + `xarray`: if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs
+- Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs
+```
 
 ### netCDF Contents
 
@@ -84,9 +86,38 @@ To figure out which file saving convention your netCDF file uses, and what is co
 
 netCDF files are self-describing, meaning that they contain information about the data contained within. Every netCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for netCDF filename `fn`, for each mentioned tool above:
 
-| nco            | Matlab       | R                                          | python (netCDF4)               | python (xarray)                     |
-| -------------- | ------------ | ------------------------------------------ | ------------------------------ | ----------------------------------- |
-| `ncdump -h fn` | `ncdisp(fn)` | `ncfile <- nc_open(fn)`<br>`ncfile` | `ds = nc.Dataset(fn))`<br>`ds` | `ds = xr.open_dataset(fn))`<br>`ds` |
+````{tabbed} R
+```{code-block} R
+ncfile <- nc_open(fn)
+ncfile
+```
+````
+
+````{tabbed} Python (netCDF4)
+```{code-block} python
+ds = nc.Dataset(fn))
+ds
+```
+````
+
+````{tabbed} Python (xarray)
+```{code-block} python
+ds = xr.open_dataset(fn))
+ds
+```
+````
+
+````{tabbed} Matlab
+```{code-block} matlab
+ncdisp(fn)
+```
+````
+
+````{tabbed} nco
+```{code-block} 
+ncdump -h fn
+```
+````
 
 The header will open with ‘global attributes,’ which are just text fields that primarily tell you housekeeping information (modeling groups, copyright information, etc.). Then, for each variable contained within the file, the header will tell you what dimensions they contain and their respective sizes, plus variable-specific attributes, like units.
 
@@ -109,15 +140,60 @@ Here are some important common “attributes” of netCDF files or variables:
 
 netCDF files can be easily imported as numeric data in any language. Here are some common ways:
 
-| Matlab            | R                                                         | python (netCDF4)                                                                                                                                           | python (xarray)                                                                                                                             |
-| ----------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ncread(fn,var);` | `ncfile <- nc_open(fn)`<br>`var <- ncvar_get(ncfile,var)` | `ncf = nc.Dataset(fn)` <br>`ncf.variables[var][:]`<br>(`ncf.variables[var]` will return a `float` object that keeps the attributes from the netCDF file) | `ds = xr.open_dataset(fn))`<br>ds.var<br>(data is loaded lazily and only fully loaded when calculations are done - to force loading, run `ds.load()`) |
+````{tabbed} R
+```{code-block} R
+ncfile <- nc_open(fn)
+var <- ncvar_get(ncfile,var)
+```
+````
+
+````{tabbed} Python (netCDF4)
+```{code-block} python
+ncf = nc.Dataset(fn)
+ncf.variables[var][:]
+```
+
+`ncf.variables[var]` will return a `float` object that keeps the attributes from the netCDF file
+````
+
+````{tabbed} Python (xarray)
+```{code-block} python
+ds = xr.open_dataset(fn))
+ds.var
+```
+
+Data is loaded slowly and only fully loaded when calculations are done - to force loading, run `ds.load()`
+````
+
+````{tabbed} Matlab
+```{code-block} matlab
+ncread(fn,var);
+```
+````
 
 You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with `xarray`, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:
 
-| Matlab                                     | R                                                                                                           | python (xarray)                                                                                                                                                                                                                                        |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ncread(fn,var,`<br>`[1 1 1],[5 5 365]);` | `ncfile <- nc_open(fn)`<br>`vardata <- ncvar_get(ncfile,var,             start=c(1,1,1), count=c(5,5,365))` | `ds = xr.open_dataset(fn))`<br>`ds.loc[0:5,0:5,0:365]` <br>(data is loaded lazily and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.; check the docs) |
+````{tabbed} R
+```{code-block} R
+ncfile <- nc_open(fn)
+vardata <- ncvar_get(ncfile, var, start=c(1,1,1), count=c(5,5,365))
+```
+````
+
+````{tabbed} Python (xarray)
+Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.
+
+```{code-block} python
+ds = xr.open_dataset(fn))
+ds.loc[0:5,0:5,0:365]
+```
+````
+
+````{tabbed} Matlab
+```{code-block} matlab
+ncread(fn,var,[1 1 1],[5 5 365]);
+```
+````
 
 As mentioned above, these files also include populated variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the netCDF header first (the author has seen grid variables listed for example as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, `nav_lat`, and any number of other names). As mentioned, `xarray` has built-in methods for identifying the dimensions in the file, regardless of order. 
 
@@ -127,8 +203,9 @@ The `time` variable can also be listed in a few different formats. An integer re
 
 You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It's generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren't suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset: 
 
-#### Python (xarray)
-```python
+````{tabbed} Python
+
+```{code-block} python
 # Assuming your variable is a 3-D (lat,lon,time, in any order) 
 # variable called "tas", in a dataset loaded using 
 # ds = xr.open_dataset() as above. This will get you a 
@@ -148,11 +225,13 @@ ax.coastlines()
 ```
 
 ```{seealso}
-For more information on plotting geographic data with xarray and cartopy, the author highly recommends the ["Earth and Environmental Science" with python guide](https://earth-env-data-science.github.io/intro.html), especially the section on ["Making Maps with Cartopy"](https://earth-env-data-science.github.io/lectures/mapping_cartopy.html])
+For more information on plotting geographic data with `xarray` and `cartopy`, the author highly recommends the ["Earth and Environmental Science" with python guide](https://earth-env-data-science.github.io/intro.html), especially the section on ["Making Maps with Cartopy"](https://earth-env-data-science.github.io/lectures/mapping_cartopy.html])
 ```
+````
 
-#### Matlab
-```Matlab
+````{tabbed} Matlab
+
+```{code-block} matlab
 % Assuming your dataset is called "tas" (lon,lat,time)
 % This will just plot a heatmap of your data:
 pcolor(squeeze(tas(:,:,1)).'); shading flat
@@ -165,13 +244,18 @@ pcolorm(lat,lon,squeeze(tas(:,:,1)).'); shading flat
 coasts=matfile('coast.mat')
 geoshow(coasts.lat,coasts.long)
 ```
+````
 
 
 ## 1.2 Gridded Data
 
 Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.
 
-Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. *(NB: Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins)*.
+Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. 
+
+```{note}
+Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins
+```
 
 However, since the world is not made up of grids (i.e. the world is not broken up into 50 x 50 km chunks, within which all weather conditions are identical), some processing has to be done even for historical “weather” data, and other limitations arise. For historical data, this processing is one of the sources of differences between data products, and for climate data, the simulation of sub-grid processes is the greatest source of uncertainty between models.
 
@@ -194,18 +278,22 @@ Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (a
 - Observations are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)
 - Products generally differ by which stations or other data sources are included and excluded
 
-*Strengths*:
-
+```{panels}
+Strengths
+^^^
 - Simple, biases well-understood
 - High correlation with source station data in areas with strong station coverage
-
-*Weaknesses*:
-
+---
+Weaknesses
+^^^
 - Less realistic outside areas with strong station coverage
 - Statistical interpolation means data not bound by physicality
 - Often only available at lower temporal resolution (e.g. monthly)
+```
 
-(see also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table) on temperature datasets)
+```{seealso}
+See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table) on temperature datasets.
+```
 
 ### Reanalysis Datasets
 
@@ -215,19 +303,23 @@ Examples: ERA-INTERIM, ERA-5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 - Products differ by what data is included (as with interpolated
   datasets), but now also differ by which underlying models are used
 
-*Strengths*:  
-
+```{panels}
+Strengths
+^^^
 - Large extant literature on most major reanalysis products; limitations are generally well-understood (though not always well-estimated; and biases are often tested against interpolated datasets)
 - Coverage in areas with low station coverage (generally poorer or less populated areas) is more physically reasonable
 - Covers a large number of variables (though uncertainties differ between them)
-
-*Weaknesses*:
-
+---
+Weaknesses
+^^^
 - Not fully physical either - laws of conservation e.g. are often relaxed
 - Limited by often significant biases in underlying models that may or may not be well understood
 - Accuracy in areas of high station density may be lower than in interpolated products
+```
 
-(see also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) on reanalyses)
+```{seealso}
+See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) on reanalyses.
+```
 
 ### Regional Datasets
 Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-proceessing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
@@ -273,10 +365,25 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
 2. *Prepare to Download the Data* - most weather products will require some bureaucracy to download data, and most have their own weird quirks about how they want data to be downloaded
     1. You click on ‘Get Data (external)’ in the Data Guide to find a [link](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset) to the Copernicus climate data store. There, you realize that you’ll need to sign up for an account (modern data products from larger institutions such as the ECMWF will thankfully have an automated system for this; some smaller products may require you to wait until someone manually approves your account), which just asks you to sign a data use agreement (remember to correctly cite data sources!).
     2. The download page also gives you some documentation for the data product, including variable names - you see “2m air temperature” in Kelvin is the variable you need.
-    3. You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it (*NB: GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through [command-line tools](https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+netCDF) such as [cdo](https://code.zmaw.de/projects/cdo) *).
-    4. You click download, and voila! (*NB: Many datasets, especially those from smaller institutions, will not give up their secrets so easily. Be prepared to have to deal with “wget” scripts, “jblob” scripts, writing ftp scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just copy their scripts to you*).
+    3. You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it 
+    ````{margin}
+    ```{note}
+    GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through [command-line tools](https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+netCDF) such as [cdo](https://code.zmaw.de/projects/cdo).
+    ```
+    ````
+    4. You click download, and voila! 
+    ````{margin}
+    ```{note}
+    Many datasets, especially those from smaller institutions, will not give up their secrets so easily. Be prepared to have to deal with “wget” scripts, “jblob” scripts, writing ftp scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just copy their scripts to you.
+    ```
+    ````
 3. *Accessing the Data*
-    1. However, you see an issue - your climate data is named some weird automatically generated filename. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you (pro tip: the information in a netCDF header, which will tell you the timespan and variables of each file, is always extractable; using e.g. `ncinfo` in Matlab, or the object generated by `nc_open` in R. If you're using `xarray`, `xr.open_mfdataset()` will let you list multiple files, which it will sort correctly into one dataset automatically if all goes well.) (*NB: this is uncommon but not unheard of for weather products. Be prepared to deal with inconsistent and weird filenames)*
+    1. However, you see an issue - your climate data is named some weird automatically generated filename. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you (pro tip: the information in a netCDF header, which will tell you the timespan and variables of each file, is always extractable; using e.g. `ncinfo` in Matlab, or the object generated by `nc_open` in R. If you're using `xarray`, `xr.open_mfdataset()` will let you list multiple files, which it will sort correctly into one dataset automatically if all goes well.) 
+    ````{margin}
+    ```{note}
+    This is uncommon but not unheard of for weather products. Be prepared to deal with inconsistent and weird filenames.
+    ```
+    ````
     2. Reading off the netCDF header (as detailed above) shows that your variable is named `t2m` (stored as a `longitude x latitude x time` grid), the grid variables are called `latitude`  and `longitude`, and the time variable is called `time`. Now you can access the data as detailed above!
 
 ### Thinking ahead to climate projections
@@ -322,4 +429,7 @@ Station data (e.g. [Global Historical Climatology Network (GHCN)](https://www.nc
 
 However, station data can’t be seen as the ‘true’ weather either; assumptions and calibration methodologies affect data here as well (see e.g. [Parker 2015](https://journals.ametsoc.org/doi/full/10.1175/BAMS-D-14-00226.1)), some variables remain rather uncertain, and the influence of microclimates even in close proximity to stations shouldn’t be underestimated (think for example the Greater Los Angeles region, where temperature can vary up to 35 F between the inland valleys and the coast).
 
-Finally, under normal circumstances, **don’t try to interpolate data yourself**. Interpolated and reanalysis data products covered above were specifically designed for this purpose, and have vetted methodologies and publicly available citable diagnostics and uncertainties.
+```{admonition} Do no interpolate data yourself
+:class: warning
+Under normal circumstances, do not try to interpolate data yourself. Interpolated and reanalysis data products covered above were specifically designed for this purpose and have vetted methodologies and publicly available citable diagnostics and uncertainties.
+```

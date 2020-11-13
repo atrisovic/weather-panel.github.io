@@ -26,11 +26,11 @@ You could also add images or jupyter notebooks. For inspiration, see [The Turing
 Create a local jupyter-book to see and test the new content:
 
 ```
-jupyter-book build .
-make serve
+jupyter-book build tutorial-content
 ```
 
-View it at `localhost:4000`.
+Check out the updated notebook by opening this file in a browser:
+`tutorial-content/_build/html/index.html`
 
 ## Create a pull request 
 
