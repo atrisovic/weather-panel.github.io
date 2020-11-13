@@ -116,24 +116,9 @@
    Developing a reduced-form specification
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="reduced-form-specification.html#choosing-weather-variables">
-   Choosing weather variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="reduced-form-specification.html#spatial-and-temporal-scales-of-economic-processes">
-   Spatial and temporal scales of economic processes
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Functional forms: pros, cons, and methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#cross-validation">
-   Cross-validation
   </a>
  </li>
 </ul>
@@ -174,7 +159,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="suggestions.html">
-   5. Suggestions when producing a panel dataset
+   Suggestions for work organization
   </a>
  </li>
 </ul>
@@ -277,34 +262,27 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Functional forms: pros, cons, and methods
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bins">
+   Bins
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bins">
-     Bins
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#polynomial">
-     Polynomial
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#restricted-cubic-spline">
-     Restricted cubic spline
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-spline">
-     Linear spline
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polynomial">
+   Polynomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restricted-cubic-spline">
+   Restricted cubic spline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-spline">
+   Linear spline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cross-validation">
    Cross-validation
   </a>
@@ -428,9 +406,8 @@ $<span class="math notranslate nohighlight">\(f(T_{it})_0=\sum_{p \in \Theta(i)}
 <img alt="Data from  Greenstone et al. (2019)!" src="../_images/fform_cil.JPG" />
 Source: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
 </div>
-</div>
 <div class="section" id="cross-validation">
-<h1>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h1>
+<h2>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h2>
 <p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
 internal validity, the model can be fit to a subset of the dataset,
 and evaluated on the remainder. For example, you can leave particular
@@ -451,6 +428,7 @@ we can rely on root-mean-square-error (RMSE) statistic. So, the
 specification with the lowest RMSE will be the most preferred
 specification here. Having said that, we usually employ combination of
 techniques, like eye-balling and RMSE, to take decision on the most preferred specification.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

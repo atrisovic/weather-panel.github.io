@@ -123,7 +123,7 @@ We generally try to work with many functional forms in a paper because it serves
 ![Data from  Greenstone et al. (2019)!](images/fform_cil.JPG)
 Source: [Carleton et al. (2019)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365).
 
-# Cross-validation
+## Cross-validation
 
 Cross-validation can be done to check the *internal validity* and the *external validity* of the model estimates. For checking
 internal validity, the model can be fit to a subset of the dataset,

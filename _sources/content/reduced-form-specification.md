@@ -11,7 +11,7 @@ the climate econometric literature and the empirical methods used to
 identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 ```
 
-# Choosing weather variables
+## Choosing weather variables
 
 The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
@@ -96,7 +96,7 @@ Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/h
          throughout East Africa, South and Southeast Asia, and
          Oceania.
 
-# Spatial and temporal scales of economic processes
+## Spatial and temporal scales of economic processes
 
 The process of developing a reduced-form specification starts with a
 study of the "true model", or data-generating process, that relates
@@ -139,7 +139,7 @@ signal less that doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially; it could
 rain for <1 min in <1 km radius area.
 
-## Transformation-before-aggregation
+### Transformation-before-aggregation
 
 When an economic process is occurring at the local level (for example,
 for individuals or households), we need to first do our estimation at
@@ -177,7 +177,7 @@ $$\beta_k (\sum_{s\in t} \sum_{p\in i} g_k(T_{ps}))$$
 That is, the variables used in the regression should be the sum over
 weather data that has been transformed at the grid level.
 
-## Aggregation-before-transformation
+### Aggregation-before-transformation
 
 When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming

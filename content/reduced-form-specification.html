@@ -117,23 +117,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#choosing-weather-variables">
-   Choosing weather variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#spatial-and-temporal-scales-of-economic-processes">
-   Spatial and temporal scales of economic processes
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="functional-forms.html">
    Functional forms: pros, cons, and methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="functional-forms.html#cross-validation">
-   Cross-validation
   </a>
  </li>
 </ul>
@@ -174,7 +159,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="suggestions.html">
-   5. Suggestions when producing a panel dataset
+   Suggestions for work organization
   </a>
  </li>
 </ul>
@@ -277,27 +262,22 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Developing a reduced-form specification
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#choosing-weather-variables">
    Choosing weather variables
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#spatial-and-temporal-scales-of-economic-processes">
    Spatial and temporal scales of economic processes
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#transformation-before-aggregation">
      Transformation-before-aggregation
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aggregation-before-transformation">
      Aggregation-before-transformation
     </a>
@@ -327,9 +307,8 @@ regressions.</p>
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is <a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
 </div>
-</div>
 <div class="section" id="choosing-weather-variables">
-<h1>Choosing weather variables<a class="headerlink" href="#choosing-weather-variables" title="Permalink to this headline">¶</a></h1>
+<h2>Choosing weather variables<a class="headerlink" href="#choosing-weather-variables" title="Permalink to this headline">¶</a></h2>
 <p>The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
 variable. For example, in the case of temperature, we can use
@@ -417,7 +396,7 @@ Oceania.</p></li>
 </ul>
 </div>
 <div class="section" id="spatial-and-temporal-scales-of-economic-processes">
-<h1>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h1>
+<h2>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
 <p>The process of developing a reduced-form specification starts with a
 study of the “true model”, or data-generating process, that relates
 your dependent variable to your weather variables. A crucial aspect of
@@ -456,7 +435,7 @@ signal less that doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially; it could
 rain for &lt;1 min in &lt;1 km radius area.</p>
 <div class="section" id="transformation-before-aggregation">
-<h2>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h2>
+<h3>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h3>
 <p>When an economic process is occurring at the local level (for example,
 for individuals or households), we need to first do our estimation at
 the grid level. For example, to estimate the effect of temperature on
@@ -486,7 +465,7 @@ $<span class="math notranslate nohighlight">\(y_{it} = \beta_1 (\sum_{s\in t} \s
 weather data that has been transformed at the grid level.</p>
 </div>
 <div class="section" id="aggregation-before-transformation">
-<h2>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h2>
+<h3>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h3>
 <p>When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
 it. For example, to estimate the effect of storm events on public
@@ -506,6 +485,7 @@ $<span class="math notranslate nohighlight">\(y_{it} = \beta_1 g_1(\sum_{s\in t}
 powers for polynomials), and <span class="math notranslate nohighlight">\(y_{it}\)</span> is the dependent variable
 observed for region <span class="math notranslate nohighlight">\(i\)</span> in reporting period <span class="math notranslate nohighlight">\(t\)</span>. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.</p>
 <p><img alt="Humor" src="../_images/cartoon_sec2.JPG" /></p>
+</div>
 </div>
 </div>
 

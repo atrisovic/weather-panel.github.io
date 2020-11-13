@@ -1,8 +1,8 @@
-# 5. Suggestions when producing a panel dataset
+# Suggestions for work organization 
 
 Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self). 
 
-## 5.1 Organization of data and code
+## Organization of data and code
 
 Having a single directory for a project, containing all data and code in subdirectories 
 makes it easier to find things, and also, in case you want to zip everything up and send it to someone else.
@@ -37,7 +37,7 @@ This is important because the pre-processing performed on source data is as impo
 In addition, it will allow you to reuse the original data multiple times.
 ```
 
-## 5.2 Naming conventions
+## Naming conventions
 
 Good naming practices should be applied to files and folders to make clear the contents of your project. 
 Informative naming makes it easier to understand the purpose of each item and can improve searchability.
@@ -50,7 +50,7 @@ Recommendations:
 4. If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
 
 
-## 5.3 Version control
+## Version control
 
 We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
 Also, it gives access to historical versions of your project. 
@@ -63,7 +63,7 @@ Here is one more reason to use version control:
 
 ![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
 
-## 5.4 Workflow automation
+## Workflow automation
 
 Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command. 
@@ -74,7 +74,7 @@ A master script can be written in different languages, like MATLAB, R, Python, b
 
 A master script written in bash that defines an analysis workflow is typically called run_all.sh, runall.sh or similar.
 
-### An example of a master script in bash:
+An example of a master script in bash:
 
 ```bash
 #!/bin/bash
