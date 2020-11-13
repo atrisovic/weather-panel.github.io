@@ -10,9 +10,27 @@ Statistics, such as the average of a gridded dataset across each
 shapefile region, and Merging units, and translating points to
 polygons with Voronoi Polygons.
 
- Shapefiles can be opened with Python packages like the following
+Both R and Python support working with spatial data. See the following examples:
+ 
+````{tabbed} R
+To read shape files you could use a package like `maptools`,  `rgdal`, `sf`, or `PBSmapping`.
 
-```python
+```{code-block} R
+library(maptools)
+shapefile <- readShapePoly("/my_shapefile.shp")
+
+# or
+
+library(PBSmapping)
+shapefile <- importShapefile("/my_shapefile.shp")
+```
+````
+
+````{tabbed} Python
+
+Shapefiles can be opened with Python packages in a few different ways:
+
+```{code-block} python
 import fiona
 shape = fiona.open("my_shapefile.shp")
 print shape.schema
@@ -30,20 +48,8 @@ import geopandas as gpd
 shapefile = gpd.read_file("my_shapefile.shp")
 print(shapefile)
 ```
+````
 
-Data analysis software R also supports working with spatial data. To
-read shape files you could use a package like `maptools`,  `rgdal`,
-`sf`, or `PBSmapping`.
-
-```R
-library(maptools)
-shapefile <- readShapePoly("/my_shapefile.shp")
-
-# or
-
-library(PBSmapping)
-shapefile <- importShapefile("/my_shapefile.shp")
-```
 
 ## Constructing averages within spatial units
 
@@ -159,11 +165,12 @@ It is often necessary to match names within two datasets with geographical unit 
 
 Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.
 
-Here are some suggestions for dealing with the mess that is political geography:
+```{tip}
+Here are some suggestions for dealing with political geography:
 
-First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use [ISO alpha-3 codes](https://www.nationsonline.org/oneworld/country_code_list.htm) if possible.
+1. Try to perform all merging on abbreviation codes rather than names. At the level of countries, use [ISO alpha-3 codes](https://www.nationsonline.org/oneworld/country_code_list.htm) if possible.
 
-Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.
+2. Use string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.
 
-Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as `<dataset>2canonical` and `canonical2<dataset2>`.
-
+3. Construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. For example, choose the names in one dataset as a canonical list, and name the matching functions as `<dataset>2canonical` and `canonical2<dataset2>`.
+```

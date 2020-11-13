@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Generating geographical unit data" href="geographical-unit-data.html" />
-    <link rel="prev" title="2. Developing a reduced-form specification" href="reduced-form-specification.html" />
+    <link rel="prev" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -113,7 +113,27 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="reduced-form-specification.html">
-   2. Developing a reduced-form specification
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#choosing-weather-variables">
+   Choosing weather variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#spatial-and-temporal-scales-of-economic-processes">
+   Spatial and temporal scales of economic processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html#cross-validation">
+   Cross-validation
   </a>
  </li>
 </ul>
@@ -361,18 +381,18 @@
 <li><p>All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.</p></li>
 </ol>
 <p>Implementation Notes: Reading gridded data.</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>R</p></th>
-<th class="head"><p>Python</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library.</p></td>
-<td><p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="tabbed-set docutils">
+<input checked="checked" id="48740fda-a6b9-4449-81d4-58542e39e23d" name="ee9600fe-3d41-4275-aab2-4e82b1b0a8f1" type="radio">
+</input><label class="tabbed-label" for="48740fda-a6b9-4449-81d4-58542e39e23d">
+R</label><div class="tabbed-content docutils">
+<p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library.</p>
+</div>
+<input id="236a5d18-a47f-40e2-b396-582317f3a8c4" name="ee9600fe-3d41-4275-aab2-4e82b1b0a8f1" type="radio">
+</input><label class="tabbed-label" for="236a5d18-a47f-40e2-b396-582317f3a8c4">
+Python</label><div class="tabbed-content docutils">
+<p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p>
+</div>
+</div>
 <p>If you are using R, take a look at
 the
 <a class="reference external" href="https://datacarpentry.org/r-raster-vector-geospatial/">Introduction to Geospatial Raster and Vector Data with R</a>,
@@ -602,7 +622,7 @@ choosing colors.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="reduced-form-specification.html" title="previous page">2. Developing a reduced-form specification</a>
+    <a class='left-prev' id="prev-link" href="functional-forms.html" title="previous page">Functional forms: pros, cons, and methods</a>
     <a class='right-next' id="next-link" href="geographical-unit-data.html" title="next page">Generating geographical unit data</a>
 
     </div>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Developing a reduced-form specification</title>
+    <title>Developing a reduced-form specification</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Weighting schemes" href="weighting-schemes.html" />
+    <link rel="next" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
     <link rel="prev" title="1. Using Weather and Climate Data" href="weather-and-climate-data.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -113,7 +113,27 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   2. Developing a reduced-form specification
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#choosing-weather-variables">
+   Choosing weather variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#spatial-and-temporal-scales-of-economic-processes">
+   Spatial and temporal scales of economic processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html#cross-validation">
+   Cross-validation
   </a>
  </li>
 </ul>
@@ -257,37 +277,32 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-weather-variables">
-   2.1. Choosing weather variables
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Developing a reduced-form specification
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealing-with-the-spatial-and-temporal-scales-of-economic-processes">
-   2.2. Dealing with the spatial and temporal scales of economic processes
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-weather-variables">
+   Choosing weather variables
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatial-and-temporal-scales-of-economic-processes">
+   Spatial and temporal scales of economic processes
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#transformation-before-aggregation">
      Transformation-before-aggregation
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#aggregation-before-transformation">
      Aggregation-before-transformation
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-functional-forms-pros-cons-and-methods">
-   2.3. Common functional forms (pros, cons, and methods)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cross-validation">
-   2.3. Cross-validation
-  </a>
  </li>
 </ul>
 
@@ -301,21 +316,20 @@
               <div>
                 
   <div class="section" id="developing-a-reduced-form-specification">
-<h1>2. Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this headline">¶</a></h1>
+<h1>Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this headline">¶</a></h1>
 <p>This section describes some of the considerations that go into
 developing a reduced-form specification using weather panel data. Our
 discussion here will be very practical and limited to nonlinear panel
-regressions, so also
-read
-<a class="reference external" href="https://academic.oup.com/reep/article/14/1/1/5718007">Estimating the Economic Impacts of Climate Change Using Weather Observations</a> for
-a review of the available econometric techniques and their strengths
-and weaknesses.  For an extensive review of the results available from
+regressions.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See also <a class="reference external" href="https://academic.oup.com/reep/article/14/1/1/5718007">Estimating the Economic Impacts of Climate Change Using Weather Observations</a> for a review of the available econometric techniques and their strengths and weaknesses.  For an extensive review of the results available from
 the climate econometric literature and the empirical methods used to
-identify them, a good resource
-is
-<a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
+identify them, a good resource is <a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
+</div>
+</div>
 <div class="section" id="choosing-weather-variables">
-<h2>2.1. Choosing weather variables<a class="headerlink" href="#choosing-weather-variables" title="Permalink to this headline">¶</a></h2>
+<h1>Choosing weather variables<a class="headerlink" href="#choosing-weather-variables" title="Permalink to this headline">¶</a></h1>
 <p>The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
 variable. For example, in the case of temperature, we can use
@@ -402,8 +416,8 @@ Oceania.</p></li>
 </li>
 </ul>
 </div>
-<div class="section" id="dealing-with-the-spatial-and-temporal-scales-of-economic-processes">
-<h2>2.2. Dealing with the spatial and temporal scales of economic processes<a class="headerlink" href="#dealing-with-the-spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spatial-and-temporal-scales-of-economic-processes">
+<h1>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h1>
 <p>The process of developing a reduced-form specification starts with a
 study of the “true model”, or data-generating process, that relates
 your dependent variable to your weather variables. A crucial aspect of
@@ -442,7 +456,7 @@ signal less that doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially; it could
 rain for &lt;1 min in &lt;1 km radius area.</p>
 <div class="section" id="transformation-before-aggregation">
-<h3>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h3>
+<h2>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h2>
 <p>When an economic process is occurring at the local level (for example,
 for individuals or households), we need to first do our estimation at
 the grid level. For example, to estimate the effect of temperature on
@@ -472,7 +486,7 @@ $<span class="math notranslate nohighlight">\(y_{it} = \beta_1 (\sum_{s\in t} \s
 weather data that has been transformed at the grid level.</p>
 </div>
 <div class="section" id="aggregation-before-transformation">
-<h3>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h3>
+<h2>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h2>
 <p>When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
 it. For example, to estimate the effect of storm events on public
@@ -492,139 +506,6 @@ $<span class="math notranslate nohighlight">\(y_{it} = \beta_1 g_1(\sum_{s\in t}
 powers for polynomials), and <span class="math notranslate nohighlight">\(y_{it}\)</span> is the dependent variable
 observed for region <span class="math notranslate nohighlight">\(i\)</span> in reporting period <span class="math notranslate nohighlight">\(t\)</span>. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.</p>
 <p><img alt="Humor" src="../_images/cartoon_sec2.JPG" /></p>
-</div>
-</div>
-<div class="section" id="common-functional-forms-pros-cons-and-methods">
-<h2>2.3. Common functional forms (pros, cons, and methods)<a class="headerlink" href="#common-functional-forms-pros-cons-and-methods" title="Permalink to this headline">¶</a></h2>
-<p>Returning to the “true model” of your process, the decisions around how to
-generate a linear expression that you can estimate have important
-implications. Different functional forms serve different purposes and
-describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.</p>
-<ul class="simple">
-<li><p><strong><a class="reference external" href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">Bins</a></strong></p></li>
-</ul>
-<p>Bins offer a very flexible functional form, although the choice of bin
-edges means that they are not as “non-parametric” as often assumed. It
-is also highly sensitive to existence of outliers in data. This can
-particularly be an issue for extrapolation when the results are used
-for projections: only the estimate for the extreme bins will be used.</p>
-<p>The bin widths should generally be even to facilitate easy
-understanding, although the lowest and highest bins can go to negative
-and positive infinity (or the appropriate analog). You may want to
-have smaller size bins around weather values where we expect most of
-the response to occur and where there is a lot of data, but be
-prepared to also show evenly-spaced bins.</p>
-<p>The interpretation of a binned result is in terms of the time unit
-used. For example, if daily temperatures are used, then the marginal
-effect for a given bin is the additional effect of “one more day” for
-which the temperature falls into that bin.</p>
-<p>To calculate bin observations, count up the number of timesteps where
-the weather predictor falls into each bin:
-$<span class="math notranslate nohighlight">\(T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}\)</span><span class="math notranslate nohighlight">\(
-    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid cell.</p>
-<ul class="simple">
-<li><p><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Polynomial_regression">Polynomial</a></strong></p></li>
-</ul>
-<p>Polynomial specifications balance smooth dose-response curves with the
-flexibility of increasing the effective resolution of the curve by
-increasing the degree of the polynomial. Using more degrees improves
-the ability of the curve to fit the data, but may lead to
-over-fitting. To choose the number of terms in the polynomial,
-consider cross-validation.</p>
-<p>Another benefit of polynomials for climate change estimates is that
-they provide smooth extrapolation to higher temperatures. Again, it is
-important to highlight the fact that the evaluation of the
-dose-response curve at temperatures outside the bounds of the observed
-data reflects assumptions, rather than evidence. Cross-validation that
-leaves out the latest periods or most extreme temperatures can improve
-confidence in these assumptions.</p>
-<p>In calculating the predictor values for a polynomial, consider the
-scale of the data-generating process. If it is a local process, the
-high-resolution weather values should be raised to powers before
-aggregating up to the regions in the economic data. That is, the the
-predictor for the <span class="math notranslate nohighlight">\(k\)</span>-th power of the polynomial is
-$<span class="math notranslate nohighlight">\(f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k\)</span><span class="math notranslate nohighlight">\( 
-    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
-<p>The dose-response regression would then be applied as follows
-$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)\)</span>$</p>
-<p>while the coefficients can be interepted as describing a local
-dose-response relationship:
-$<span class="math notranslate nohighlight">\(F(T_{pit})=\sum_{k} \beta_k T_{pit}^k\)</span>$</p>
-<ul class="simple">
-<li><p><strong><a class="reference external" href="https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf">Restricted cubic spline</a></strong></p></li>
-</ul>
-<p>Restricted cubic splines produce smooth dose-response curves, like
-polynomials, but mitigate some of the problems that polynomials with
-many terms have. Whereas polynomials with high-order terms can produce
-very extreme results under extrapolation, RCS always produces a linear
-extrapolation. RCS also provides additional degrees of freedom through
-the placement of knots, and this can be used either to reflect
-features of the underlying process being modeled or to improve the
-fit.</p>
-<p>In the case where knots are choosen to maximize the fit of the curve,
-cross-validation is the preferred approach for both selecting the
-number of knots and their placement. The reference in this subsection
-title on cubic splines can be helpful in deciding the knot
-specifications.</p>
-<p>Once knot locations are determiend, the weather data needs to be
-translated into RCS terms. As before let the gridded weather be <span class="math notranslate nohighlight">\(T_{p
-i t}\)</span> and let there be <span class="math notranslate nohighlight">\(n\)</span> knots, placed at <span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span>. Then we
-have a set of <span class="math notranslate nohighlight">\((n-2)\)</span> terms, here indexed by <span class="math notranslate nohighlight">\(k\)</span> and defined as:
-$<span class="math notranslate nohighlight">\(f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
-	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
-	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\forall k \in \{1,2,...,n-2\}\)</span><span class="math notranslate nohighlight">\( 
-    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid.</p>
-<p>Each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)^3_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - t_{n-1})^3_+\)</span> is called a truncated           polynomial of degree 3, which is defined as follows:<br />
-<span class="math notranslate nohighlight">\(\nabla^3_+=\nabla^3_+\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&gt;0\)</span><br />
-<span class="math notranslate nohighlight">\(\nabla^3_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&lt;0\)</span></p>
-<p>As with the polynomial, the dose-response regression would then be applied as follows
-$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it})_k\)</span>$</p>
-<p>while the coefficients can be interepted as describing a local
-dose-response relationship:</p>
-<div class="math notranslate nohighlight">
-\[F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k\]</div>
-<ul class="simple">
-<li><p><strong><a class="reference external" href="https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf">Linear spline</a></strong></p></li>
-</ul>
-<p>A linear spline provides a balance between the smoothness of RCS and
-the direct response curve to temperature correspondance of bins. The
-segments between knots here are lines. As with RCS, the choice of knot
-locations is very important.</p>
-<p>One defition of terms for a linear spline for a spline with <span class="math notranslate nohighlight">\(n\)</span> knots at
-<span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span> is:
-$<span class="math notranslate nohighlight">\(f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}\)</span><span class="math notranslate nohighlight">\(
-    \)</span><span class="math notranslate nohighlight">\(f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+\)</span><span class="math notranslate nohighlight">\(
-    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
-<p>And, each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - T_2)_+\)</span> is called a truncated polynomial of degree 1, which is defined as follows:<br />
-<span class="math notranslate nohighlight">\(\nabla_+=\nabla_+\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&gt;0\)</span><br />
-<span class="math notranslate nohighlight">\(\nabla_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&lt;0\)</span></p>
-<p>We generally try to work with many functional forms in a paper because it serves dual purpose of being a <em>sanity check</em> for researchers’ code and a <em>robustness check</em> for readers’ confirmation. However, we need to take decision on the <em>main specification</em> that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the <em>fit</em> of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:</p>
-<p><strong>Example of reduced-form regression plots for different functional forms</strong>
-<img alt="Data from  Greenstone et al. (2019)!" src="../_images/fform_cil.JPG" />
-Source: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
-</div>
-<div class="section" id="cross-validation">
-<h2>2.3. Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h2>
-<p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
-internal validity, the model can be fit to a subset of the dataset,
-and evaluated on the remainder. For example, you can leave particular
-regions out of your regression or remove a random <em>1/k</em> of your data
-(k-fold cross validation) instead of running a full-sample
-regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates and comparing it to the actual observations.</p>
-<p>Cross-validation is not universally performed by researchers, and many
-people continue to rely only on R-squared statistics. However,
-R-squared statistic can perform poorly even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.</p>
-<p>Some examples on the use of cross-validation exercise include deciding
-on degree of polynomial, cutoff knots’ positions for splines,
-and selecting weather variables for a regression. To do a k-fold cross
-validation exercise for deciding on polynomial degree, we run our test
-specifications (say polynomials of degree 2, 3, 4 and 5) on the data,
-each time excluding a subset, and evaluate how well the fitted model
-predicts the excluded data. To fix a metric for making this decision,
-we can rely on root-mean-square-error (RMSE) statistic. So, the
-specification with the lowest RMSE will be the most preferred
-specification here. Having said that, we usually employ combination of
-techniques, like eye-balling and RMSE, to take decision on the most preferred specification.</p>
 </div>
 </div>
 
@@ -657,7 +538,7 @@ techniques, like eye-balling and RMSE, to take decision on the most preferred sp
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="weather-and-climate-data.html" title="previous page">1. Using Weather and Climate Data</a>
-    <a class='right-next' id="next-link" href="weighting-schemes.html" title="next page">3. Weighting schemes</a>
+    <a class='right-next' id="next-link" href="functional-forms.html" title="next page">Functional forms: pros, cons, and methods</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

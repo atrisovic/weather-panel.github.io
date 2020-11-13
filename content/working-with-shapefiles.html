@@ -113,7 +113,27 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="reduced-form-specification.html">
-   2. Developing a reduced-form specification
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#choosing-weather-variables">
+   Choosing weather variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#spatial-and-temporal-scales-of-economic-processes">
+   Spatial and temporal scales of economic processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html#cross-validation">
+   Cross-validation
   </a>
  </li>
 </ul>
@@ -300,7 +320,26 @@ analysis. Some of the most commonly useful are calculating Zonal
 Statistics, such as the average of a gridded dataset across each
 shapefile region, and Merging units, and translating points to
 polygons with Voronoi Polygons.</p>
-<p>Shapefiles can be opened with Python packages like the following</p>
+<p>Both R and Python support working with spatial data. See the following examples:</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="4049aa6f-b1a4-425e-8618-47e092dc8666" name="7ecfcb14-4a6c-4bbb-8b68-5c392eaa0a11" type="radio">
+</input><label class="tabbed-label" for="4049aa6f-b1a4-425e-8618-47e092dc8666">
+R</label><div class="tabbed-content docutils">
+<p>To read shape files you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>,  <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+
+<span class="c1"># or</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="652fb933-d441-4442-9255-520a9fee20d9" name="7ecfcb14-4a6c-4bbb-8b68-5c392eaa0a11" type="radio">
+</input><label class="tabbed-label" for="652fb933-d441-4442-9255-520a9fee20d9">
+Python</label><div class="tabbed-content docutils">
+<p>Shapefiles can be opened with Python packages in a few different ways:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
 <span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
@@ -319,17 +358,7 @@ polygons with Voronoi Polygons.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Data analysis software R also supports working with spatial data. To
-read shape files you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>,  <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-
-<span class="c1"># or</span>
-
-<span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
-<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
-</pre></div>
+</div>
 </div>
 <div class="section" id="constructing-averages-within-spatial-units">
 <h2>Constructing averages within spatial units<a class="headerlink" href="#constructing-averages-within-spatial-units" title="Permalink to this headline">¶</a></h2>
@@ -430,10 +459,15 @@ the portion of grid cells to use.</p>
 <h2>Matching names<a class="headerlink" href="#matching-names" title="Permalink to this headline">¶</a></h2>
 <p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
 <p>Matching observations by name can be annoyingly time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People’s Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets.</p>
-<p>Here are some suggestions for dealing with the mess that is political geography:</p>
-<p>First, try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a class="reference external" href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p>
-<p>Second, use fuzzy string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.</p>
-<p>Third, construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. I usually choose the names in one dataset as my canonical list, and name the matching functions as <code class="docutils literal notranslate"><span class="pre">&lt;dataset&gt;2canonical</span></code> and <code class="docutils literal notranslate"><span class="pre">canonical2&lt;dataset2&gt;</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Here are some suggestions for dealing with political geography:</p>
+<ol class="simple">
+<li><p>Try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a class="reference external" href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p></li>
+<li><p>Use string matching. However, in this case, you will need to inspect all of the matches to make sure that they are correct.</p></li>
+<li><p>Construct “translation functions” for each dataset, which map the regional names in that dataset to a canonical list of region names. For example, choose the names in one dataset as a canonical list, and name the matching functions as <code class="docutils literal notranslate"><span class="pre">&lt;dataset&gt;2canonical</span></code> and <code class="docutils literal notranslate"><span class="pre">canonical2&lt;dataset2&gt;</span></code>.</p></li>
+</ol>
+</div>
 </div>
 </div>
 

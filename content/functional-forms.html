@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functional forms: pros, cons, and methods</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Weighting schemes" href="weighting-schemes.html" />
+    <link rel="prev" title="Developing a reduced-form specification" href="reduced-form-specification.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+  
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="getting-started.html">
+   Introduction to the Tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Weather and Climate Data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weather-and-climate-data.html">
+   1. Using Weather and Climate Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Developing a reduced-form specification
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html">
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#choosing-weather-variables">
+   Choosing weather variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html#spatial-and-temporal-scales-of-economic-processes">
+   Spatial and temporal scales of economic processes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#cross-validation">
+   Cross-validation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Weighting schemes
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weighting-schemes.html">
+   3. Weighting schemes
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Geographical unit data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geographical-unit-data.html">
+   Generating geographical unit data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-shapefiles.html">
+   Working with shapefiles
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Suggestions for work organization
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="suggestions.html">
+   5. Suggestions when producing a panel dataset
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Contributors
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/functional-forms.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/functional-forms.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/functional-forms.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Functional forms: pros, cons, and methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bins">
+     Bins
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomial">
+     Polynomial
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restricted-cubic-spline">
+     Restricted cubic spline
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-spline">
+     Linear spline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-validation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="functional-forms-pros-cons-and-methods">
+<h1>Functional forms: pros, cons, and methods<a class="headerlink" href="#functional-forms-pros-cons-and-methods" title="Permalink to this headline">¶</a></h1>
+<p>Returning to the “true model” of your process, the decisions around how to
+generate a linear expression that you can estimate have important
+implications. Different functional forms serve different purposes and
+describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.</p>
+<div class="section" id="bins">
+<h2><a class="reference external" href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">Bins</a><a class="headerlink" href="#bins" title="Permalink to this headline">¶</a></h2>
+<p>Bins offer a very flexible functional form, although the choice of bin
+edges means that they are not as “non-parametric” as often assumed. It
+is also highly sensitive to existence of outliers in data. This can
+particularly be an issue for extrapolation when the results are used
+for projections: only the estimate for the extreme bins will be used.</p>
+<p>The bin widths should generally be even to facilitate easy
+understanding, although the lowest and highest bins can go to negative
+and positive infinity (or the appropriate analog). You may want to
+have smaller size bins around weather values where we expect most of
+the response to occur and where there is a lot of data, but be
+prepared to also show evenly-spaced bins.</p>
+<p>The interpretation of a binned result is in terms of the time unit
+used. For example, if daily temperatures are used, then the marginal
+effect for a given bin is the additional effect of “one more day” for
+which the temperature falls into that bin.</p>
+<p>To calculate bin observations, count up the number of timesteps where
+the weather predictor falls into each bin:
+$<span class="math notranslate nohighlight">\(T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}\)</span><span class="math notranslate nohighlight">\(
+    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid cell.</p>
+</div>
+<div class="section" id="polynomial">
+<h2><a class="reference external" href="https://en.wikipedia.org/wiki/Polynomial_regression">Polynomial</a><a class="headerlink" href="#polynomial" title="Permalink to this headline">¶</a></h2>
+<p>Polynomial specifications balance smooth dose-response curves with the
+flexibility of increasing the effective resolution of the curve by
+increasing the degree of the polynomial. Using more degrees improves
+the ability of the curve to fit the data, but may lead to
+over-fitting. To choose the number of terms in the polynomial,
+consider cross-validation.</p>
+<p>Another benefit of polynomials for climate change estimates is that
+they provide smooth extrapolation to higher temperatures. Again, it is
+important to highlight the fact that the evaluation of the
+dose-response curve at temperatures outside the bounds of the observed
+data reflects assumptions, rather than evidence. Cross-validation that
+leaves out the latest periods or most extreme temperatures can improve
+confidence in these assumptions.</p>
+<p>In calculating the predictor values for a polynomial, consider the
+scale of the data-generating process. If it is a local process, the
+high-resolution weather values should be raised to powers before
+aggregating up to the regions in the economic data. That is, the the
+predictor for the <span class="math notranslate nohighlight">\(k\)</span>-th power of the polynomial is
+$<span class="math notranslate nohighlight">\(f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k\)</span><span class="math notranslate nohighlight">\( 
+    where \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
+<p>The dose-response regression would then be applied as follows
+$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)\)</span>$</p>
+<p>while the coefficients can be interepted as describing a local
+dose-response relationship:
+$<span class="math notranslate nohighlight">\(F(T_{pit})=\sum_{k} \beta_k T_{pit}^k\)</span>$</p>
+</div>
+<div class="section" id="restricted-cubic-spline">
+<h2><a class="reference external" href="https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf">Restricted cubic spline</a><a class="headerlink" href="#restricted-cubic-spline" title="Permalink to this headline">¶</a></h2>
+<p>Restricted cubic splines produce smooth dose-response curves, like
+polynomials, but mitigate some of the problems that polynomials with
+many terms have. Whereas polynomials with high-order terms can produce
+very extreme results under extrapolation, RCS always produces a linear
+extrapolation. RCS also provides additional degrees of freedom through
+the placement of knots, and this can be used either to reflect
+features of the underlying process being modeled or to improve the
+fit.</p>
+<p>In the case where knots are choosen to maximize the fit of the curve,
+cross-validation is the preferred approach for both selecting the
+number of knots and their placement. The reference in this subsection
+title on cubic splines can be helpful in deciding the knot
+specifications.</p>
+<p>Once knot locations are determiend, the weather data needs to be
+translated into RCS terms. As before let the gridded weather be <span class="math notranslate nohighlight">\(T_{p
+i t}\)</span> and let there be <span class="math notranslate nohighlight">\(n\)</span> knots, placed at <span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span>. Then we
+have a set of <span class="math notranslate nohighlight">\((n-2)\)</span> terms, here indexed by <span class="math notranslate nohighlight">\(k\)</span> and defined as:
+$<span class="math notranslate nohighlight">\(f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
+	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
+	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(\forall k \in \{1,2,...,n-2\}\)</span><span class="math notranslate nohighlight">\( 
+    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ grid.</p>
+<p>Each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)^3_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - t_{n-1})^3_+\)</span> is called a truncated           polynomial of degree 3, which is defined as follows:<br />
+<span class="math notranslate nohighlight">\(\nabla^3_+=\nabla^3_+\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&gt;0\)</span><br />
+<span class="math notranslate nohighlight">\(\nabla^3_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&lt;0\)</span></p>
+<p>As with the polynomial, the dose-response regression would then be applied as follows
+$<span class="math notranslate nohighlight">\(F(T_{it})=\sum_{k} \beta_k f(T_{it})_k\)</span>$</p>
+<p>while the coefficients can be interepted as describing a local
+dose-response relationship:</p>
+<div class="math notranslate nohighlight">
+\[F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k\]</div>
+</div>
+<div class="section" id="linear-spline">
+<h2><a class="reference external" href="https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf">Linear spline</a><a class="headerlink" href="#linear-spline" title="Permalink to this headline">¶</a></h2>
+<p>A linear spline provides a balance between the smoothness of RCS and
+the direct response curve to temperature correspondance of bins. The
+segments between knots here are lines. As with RCS, the choice of knot
+locations is very important.</p>
+<p>One defition of terms for a linear spline for a spline with <span class="math notranslate nohighlight">\(n\)</span> knots at
+<span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span> is:
+$<span class="math notranslate nohighlight">\(f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}\)</span><span class="math notranslate nohighlight">\(
+    \)</span><span class="math notranslate nohighlight">\(f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+\)</span><span class="math notranslate nohighlight">\(
+    where, \)</span>\psi_{p}<span class="math notranslate nohighlight">\( is the weight assigned to the \)</span>p$ gridcell.</p>
+<p>And, each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - T_2)_+\)</span> is called a truncated polynomial of degree 1, which is defined as follows:<br />
+<span class="math notranslate nohighlight">\(\nabla_+=\nabla_+\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&gt;0\)</span><br />
+<span class="math notranslate nohighlight">\(\nabla_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&lt;0\)</span></p>
+<p>We generally try to work with many functional forms in a paper because it serves dual purpose of being a <em>sanity check</em> for researchers’ code and a <em>robustness check</em> for readers’ confirmation. However, we need to take decision on the <em>main specification</em> that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the <em>fit</em> of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:</p>
+<p><strong>Example of reduced-form regression plots for different functional forms</strong>
+<img alt="Data from  Greenstone et al. (2019)!" src="../_images/fform_cil.JPG" />
+Source: <a class="reference external" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3224365">Carleton et al. (2019)</a>.</p>
+</div>
+</div>
+<div class="section" id="cross-validation">
+<h1>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h1>
+<p>Cross-validation can be done to check the <em>internal validity</em> and the <em>external validity</em> of the model estimates. For checking
+internal validity, the model can be fit to a subset of the dataset,
+and evaluated on the remainder. For example, you can leave particular
+regions out of your regression or remove a random <em>1/k</em> of your data
+(k-fold cross validation) instead of running a full-sample
+regression. For gauging external validity, the model is run on some new dataset that has not been not used in the model-evaluation process. For example, by predicting the response for a new country using global regression model estimates and comparing it to the actual observations.</p>
+<p>Cross-validation is not universally performed by researchers, and many
+people continue to rely only on R-squared statistics. However,
+R-squared statistic can perform poorly even in very simple cases. Therefore, cross-validation can be an effective approach for doing model-selection.</p>
+<p>Some examples on the use of cross-validation exercise include deciding
+on degree of polynomial, cutoff knots’ positions for splines,
+and selecting weather variables for a regression. To do a k-fold cross
+validation exercise for deciding on polynomial degree, we run our test
+specifications (say polynomials of degree 2, 3, 4 and 5) on the data,
+each time excluding a subset, and evaluate how well the fitted model
+predicts the excluded data. To fix a metric for making this decision,
+we can rely on root-mean-square-error (RMSE) statistic. So, the
+specification with the lowest RMSE will be the most preferred
+specification here. Having said that, we usually employ combination of
+techniques, like eye-balling and RMSE, to take decision on the most preferred specification.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="reduced-form-specification.html" title="previous page">Developing a reduced-form specification</a>
+    <a class='right-next' id="next-link" href="weighting-schemes.html" title="next page">3. Weighting schemes</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

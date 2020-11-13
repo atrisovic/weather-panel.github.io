@@ -55,9 +55,12 @@ For CSV files, you will need to keep track of this data yourself. ASC files have
 
 Implementation Notes: Reading gridded data.
 
-| R                         | Python                                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------- |
-| Use the `raster` library. | Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid. |
+````{tabbed} R
+Use the `raster` library.
+````
+````{tabbed} Python
+Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.
+````
 
 If you are using R, take a look at
 the
