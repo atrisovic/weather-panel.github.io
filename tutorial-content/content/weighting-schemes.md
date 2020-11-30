@@ -1,5 +1,18 @@
 # Weighting schemes
 
+```{admonition} Key objectives and decision points
+:class: note
+Objectives:
+
+- Understand how to incorporate weights into your data.
+- Understand how to match up gridded data with different grids.
+
+Decision points:
+
+ - Does your data-generating process occur locally or regionally?
+ - Select the weighting scheme most appropriate for your data.
+```
+
 This section describes how to use different weighting schemes when
 working with gridded and regional data. As we use the term, weighting
 schemes assign a weight to each grid cell or regional
