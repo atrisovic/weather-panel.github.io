@@ -1,46 +1,4 @@
-# Working with shapefiles
-
-Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to make sure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:
-
-````{tabbed} R
-To read shape files you could use a package like `maptools`, `rgdal`, `sf`, or `PBSmapping`.
- 
-```{code-block} R
-library(maptools)
-shapefile <- readShapePoly("/my_shapefile.shp")
- 
-# or
- 
-library(PBSmapping)
-shapefile <- importShapefile("/my_shapefile.shp")
-```
-````
- 
-````{tabbed} Python
- 
-Shapefiles can be opened with Python packages in a few different ways:
- 
-```{code-block} python
-import fiona
-shape = fiona.open("my_shapefile.shp")
-print shape.schema
-{'geometry': 'LineString', \
-'properties': OrderedDict([(u'FID', 'float:11')])}
- 
-# or
- 
-import shapefile
-shape = shapefile.Reader("my_shapefile.shp")
- 
-# or
- 
-import geopandas as gpd
-shapefile = gpd.read_file("my_shapefile.shp")
-print(shapefile)
-```
-````
-
-## Constructing averages within spatial units
+# Constructing weather averages within spatial units
  
 At this point, you probably have a gridded spatiotemporal dataset of historical weather and economic output data specific to shapefile regions. The next step is construct the weather measures that will correspond to each of your economic data observations. To do this, you will need to construct a weighted average of the weather in each region for each timestep.
  
@@ -50,7 +8,7 @@ In some cases, there are tools available that will help you do this. If you are 
 If your situation is more complicated, or if you just want to know how to do it yourself, it is important to set up the mathematical process efficiently since this can be a computationally intensive step.
  
 The regional averaging process is equivalent to a matrix transformation: 
-$$w_\text{region} = A w_\text{gridded}$$
+$w_\text{region} = A w_\text{gridded}$
  
 where $w_\text{region}$ is a vector of weather values across
 regions, in a given timestep; and $w_\text{gridded}$ is a vector of
@@ -90,7 +48,7 @@ Below, we sketch out two approaches to generating this matrix, but a few comment
   on to the next column.
 ````
 
-### Approach 1. Using grid cell centers
+## Approach 1. Using grid cell centers
  
 The easiest way to generate weather for each region in a shapefile is
 to generate a collection of points at the center of each grid
@@ -127,7 +85,7 @@ dists <- sqrt((pts$x - centroid$X)^2 + (pts$y - centroid$Y)^2)
 closest <- which.min(dists)[1]
 ```
  
-### Approach 2. Allowing for partial grid cells
+## Approach 2. Allowing for partial grid cells
  
 Just using the grid cell centers can result in a poor representation
 of the weather that overlaps each region, particularly when the
