@@ -1,17 +1,21 @@
 # Developing a reduced-form specification
 
 This section describes some of the considerations that go into
-developing a reduced-form specification using weather panel data. Our
-discussion here will be very practical and limited to nonlinear panel
-regressions. 
+developing a [reduced-form specification](https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form) using weather [panel data](https://en.wikipedia.org/wiki/Panel_data). Our discussion here will be very practical and limited to nonlinear panel regressions. 
 
 ```{seealso}
 See also [Estimating the Economic Impacts of Climate Change Using Weather Observations](https://academic.oup.com/reep/article/14/1/1/5718007) for a review of the available econometric techniques and their strengths and weaknesses.  For an extensive review of the results available from
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 ```
+The key decision points in this section will be as follows:
+1. Decide what weather variables (e.g. temperature, precipitation, etc.) to use in the analysis, and in what form (e.g. average, maximum, or minimum for temperature variable).
+2. Settle on the temporal scale (e.g. days, months, years, etc.) for the analysis. It is generally decided based on how frequently we expect the responses on our dependent variable to change and the temporal scale of other datasets we intend to use.
+3. Choose what scheme to use for the spatial aggregation. We can choose either *aggregation-before-transformation* or *transformation-before-aggregation* depending on what scale the process we are interested in, is actually occurring.
+4. Decide on what *functional forms* to use in the analysis. It is always good to experiment with multiple functional forms and then decide on the main specification depending on which of them provides the best linear approximation of the true process.
+5. Use cross-validation to converge on the most-preferred specification. It is always a good strategy to show results for other specification for attesting the robustness of results.
 
-## Choosing weather variables
+## Choosing weather variables and their forms
 
 The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
@@ -21,7 +25,7 @@ degree-days, or growing degree-days. Morevoer, it is very important to
 first think about possible *mechanism(s)* behind a change witnessed in
 the environment, and then only make choices for variables that can
 explain that mechanism. A few of the important and frequently-used
-weather variables are listed below, and why you might choose them:
+weather variables are listed below, and why we might choose them:
 
 - **Temperature:** Temperature relationships are often preferred in
   climate impacts research, because temperature is more predictable
@@ -54,7 +58,7 @@ weather variables are listed below, and why you might choose them:
     2. *Wet-Bulb Globe Temperature (WBGT)*: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight) 
     3. *Heat Index (HI)*: various calculated metrics combining shade temperature and relative humidity
 
-- **Precipitation:** highly local (in space *and* time), non-normal (especially compared to temperature), poorly measured, and poorly predicted (see [Section 1.5](#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)). Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
+- **Precipitation:** highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [Section 1.5](#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)). Precipitation is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation varies significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
     1. *Total precipitation (e.g., over a year)*: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
     2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: often used to capture water stress.
     3. *Number of of rainy/dry days, or moments of the precipitation distribution*: the distribution of precipitation often matters more than total.
@@ -100,14 +104,14 @@ Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/h
 
 The process of developing a reduced-form specification starts with a
 study of the "true model", or data-generating process, that relates
-your dependent variable to your weather variables. A crucial aspect of
+our dependent variable to our weather variables. A crucial aspect of
 that relationship is the question of scale.
 
 Weather data products are generally available in *gridded* form,
 developed through careful interpolation and/or reanalysis. The grids
 used can vary in size across datasets, but they can be aggregated to
 administrative units like county, city, etc., using appropriate
-weighted aggregation methods. Think about the scale of your
+weighted aggregation methods. Think about the scale of 
 administrative units, relative to the scale of the grid cells. If the
 regions are much bigger than the grid cells, a weighted average across
 included cells is appropriate. If the regions are much smaller than
