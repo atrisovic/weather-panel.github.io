@@ -11,19 +11,57 @@ been uncovered in recent years:
 
 Source: [Carleton and Hsiang (2016)](https://science.sciencemag.org/content/353/6304/aad9837).
 
-This tutorial will walk you through the steps necessary to relate
-socioeconomic outcomes to weather data at high resolution. We will
-cover:
+Relationships like these that relate weather to socioeconomic outcomes
+are openning new questions even as they provide answers. In the figure
+above, there are response functions for mortality, agriculture, and
+conflict that have been estimated for both rich and poor
+countries. Interestingly, these often do not match up, and their
+differences can help us to better understand vulnerability and the
+potential for adaptation.
+
+Many different functional forms are represented in the figure above,
+and behind these are many more decisions about the choice of weather
+variables, the handling of heterogeneity and variability, and how
+socioeconomics information can be mapped to geography.
+
+While the challenges of climate econometrics are similar across all
+problems, the appropriate solutions to these problems are unique to
+each research question. No single sequence of steps or software can be
+widely applied for resolving these issues. Instead, this tutorial is
+aimed at helping you make decisions appropriate to your research.
+
+# Who should use this tutorial?
+
+This tutorial is aimed at students and researchers new to climate
+econometrics. We will assume a knowledge of panel econometrics. You
+should be familiar with specifications that factor-out unobserved
+heterogeneity, implementing flexible trends, weighted regressions,
+approaches to deal with heteroskedasticity and correlated errors, and
+diagnosing efficiency problems. Some concepts in panel econometrics
+are more specific to weather regressions, such as dose-response
+curves, data-generating processes, and neighborhood effects, and we
+will cover those below.
+
+We also assume basic experience with one scientific programming
+language (Stata, R, Matlab, Julia, python). We try to provide examples
+in more than one language, so you can get started.
+
+You should also already have a research question. There are plenty of
+ways to find important questions, and maybe we will try to offer a
+tutorial on that in the future.
+
+# What we hope you will learn
+
+This tutorial is designed to offer guidance on all of the steps
+necessary to contribute to this research, by walking you through the
+steps necessary to relate socioeconomic outcomes to weather data at
+high resolution. We will cover:
 
 1. How to find and use weather data, and what you should be aware of when using it.
 2. How to relate your socioeconomic outcomes to weather variables, and
    develop your regression specification.
-3. How to work with shapefiles, and use them to generate your predictor variables.
-
-This tutorial will assume a knowledge of econometrics and basic
-experience with one scientific programming language (Stata, R, Matlab,
-Julia, python). We try to provide examples in more than one language,
-so you can get started.
+3. How to work with shapefiles, and use them to generate your
+   predictor variables.
 
 At the same time, this tutorial asks you to perform every step
 yourself. In particular, we do not provide prepared weather data or a
@@ -31,9 +69,24 @@ ready-made script to prepare it. Each particular project is too specific,
 so you, the researcher, need to think through everything. This
 tutorial is aimed at helping you do that.
 
-We will also assume that you already have a research question. There
-are plenty of ways to find important questions, and maybe we will try
-to offer a tutorial on that in the future.
+# How to use this tutorial
+
+The tutorial is organized along the rough outline of a research
+project: 
+
+1. *Using weather and climate data*: introduces the data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.
+2. *Developing a reduced-form specification*: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.
+3. *Weighting schemes*: explains the importance of weighting schemes and how to work with them based on their file formats and origins. 
+4. *Generating geographical unit data*: introduces geographic information systems, shapefiles, and how to work with them effectively.
+
+You can go through the sections one at a time or jump around.
+
+Most importantly, if you learn something in your own research process
+that you think would be of broad interest, see the *Contributions*
+section for how to include it here. Help us make this tutorial more
+useful for more people!
+
+# Some introductory concepts
 
 A useful resource to better understand the basics of weather, climate,
 and the physical changes occuring in the climate system

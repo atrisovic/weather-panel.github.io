@@ -42,9 +42,9 @@ In light of this, we present a new tutorial that offers step-by-step guidance on
 2. Using weather and climate data: introduces the data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.
 3. Developing a reduced-form specification: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.
 4. Weighting schemes: explains the importance of weighting schemes and how to work with them based on their file formats and origins. 
-Generating geographical unit data: introduces geographic information systems, shapefiles, and how to work with them effectively.
-5. Suggestions for work organization: presents recommendations for organizing research, including naming conventions, version control, and automation, which can improve researchers' productivity and research reproducibility.
-6. Contributions: introduces the current tutorial contributors and invites authors to contribute more information.
+5. Generating geographical unit data: introduces geographic information systems, shapefiles, and how to work with them effectively.
+6. Suggestions for work organization: presents recommendations for organizing research, including naming conventions, version control, and automation, which can improve researchers' productivity and research reproducibility.
+7. Contributions: introduces the current tutorial contributors and invites authors to contribute more information.
 
 The audiences for this tutorial are researchers and students trained in econometrics and experienced in at least one scientific programming language, such as Stata, R, Matlab, Julia, or Python. In addition to its use in a teaching event or for self-study, this tutorial can also be used as a reference manual, as each of its topics and lessons can be comprehended independently.
 
