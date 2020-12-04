@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Working with shapefiles" href="working-with-shapefiles.html" />
+    <link rel="next" title="Constructing weather averages within spatial units" href="working-with-shapefiles.html" />
     <link rel="prev" title="3. Weighting schemes" href="weighting-schemes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -147,7 +147,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="working-with-shapefiles.html">
-   Working with shapefiles
+   Constructing weather averages within spatial units
   </a>
  </li>
 </ul>
@@ -263,18 +263,18 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#geographic-information-systems">
-   Geographic information systems
+  <a class="reference internal nav-link" href="#geographic-information-systems-gis">
+   Geographic information systems (GIS)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#finding-shapefiles">
-   Finding shapefiles
+  <a class="reference internal nav-link" href="#obtaining-shapefiles">
+   Obtaining shapefiles
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-shapefiles">
-   Creating shapefiles
+  <a class="reference internal nav-link" href="#working-with-shapefiles">
+   Working with shapefiles
   </a>
  </li>
 </ul>
@@ -290,74 +290,139 @@
                 
   <div class="section" id="generating-geographical-unit-data">
 <h1>Generating geographical unit data<a class="headerlink" href="#generating-geographical-unit-data" title="Permalink to this headline">¶</a></h1>
-<p>A geographical unit, area or region, is a portion of a country or other region delineated for the purpose of administration, and as such, it is a common unit for recording economic outcome data.  These geographic regions may be defined in subtle, non-intuitive ways.  For example, a “<a class="reference external" href="https://ec.europa.eu/eurostat/web/cities/spatial-units">city</a>” is a local administrative unit where the majority of the population lives in an urban center, while the “<a class="reference external" href="https://ec.europa.eu/eurostat/web/cities/spatial-units">greater city</a>” is an approximation of the urban center beyond the administrative city boundaries.</p>
-<p>One kind of geographic region is simply called an “administrative
-unit”, and refers to states and provinces, or counties and
-municipalities. The top-level of this hierarchy of administrative
-units is “ADM0”, referring to countries; “ADM1” is the first level of
-political division, usually called states or provinces; “ADM2” is the
-second level of division, and has a wider range of names across the
-globe.
-Administrative units in economics analyses are typically politically-defined regions, rather than regular grids, because socioeconomic data is collected and corresponding to the political regions. They can also be more effective for communicating results, since politically defined regions are also more relevant for policy-makers.</p>
-<p>Administrative unit data can capture existing administrative units (high granularity) or groups of those units (lesser granularity). For example, the administrative unit database, <a class="reference external" href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.
-When aggregating administrative units, it is important to capture
-territories with homogeneous features that are relevant to the
-study. For example, if the weather is relevant for the study, the
-administrative unit should be fairly homogeneous concerning mean temperature and precipitation.</p>
+<div class="note admonition">
+<p class="admonition-title">Key objectives and decision points</p>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Understand what geographical unit and administrative unit data are</p></li>
+<li><p>Understand sharefiles, how to obtain them and how to work with them</p></li>
+</ul>
+<p>Decision points:</p>
+<ul class="simple">
+<li><p>How to incorporate geographical and administrative units in your analysis?</p></li>
+<li><p>How to generate weather measures that will correspond to your economic data and geographical regions?</p></li>
+</ul>
+</div>
+<p>Socioeconomic data is collected and corresponding to geographical units, such as states, countries, provinces, or municipalities, which is a portion of a country delineated for administration, and hence, often called  “administrative units”. For that reason, administrative units (or politically-defined regions) are frequently used in economic analysis rather than regular grids. Communicating data analysis results in administrative units is also particularly effective since politically defined regions are relevant for policy-makers.</p>
+<p>The top-level of this hierarchy of administrative units is “ADM0”, referring to countries; “ADM1” is the first level of political division, usually called states or provinces; “ADM2” is the second level of division, and has a wider range of names across the globe (see example below).</p>
+<table class="table" id="id1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Example of administrative units table for <a class="reference external" href="http://www.eki.ee/knab/adm2.htm">Philippines</a></span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ADM0</p></th>
+<th class="head"><p>ADM1</p></th>
+<th class="head"><p>ADM2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Philippines (PH)</p></td>
+<td><p>Ilocos, Iloko</p></td>
+<td><p>Ilocos Norte, Hilagang Iloko (ILN)</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Ilocos Sur, Timog Iloko (ILS)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Cagayan Valley, Lambak ng Kagayan</p></td>
+<td><p>Batanes (BTN)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>Cagayan, Kagayan (CAG)</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Isabela (ISA)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<p>Administrative unit data can capture existing administrative units (high granularity) or groups of those units (lesser granularity). For example, the administrative unit database, <a class="reference external" href="https://gadm.org">Global Administrative Regions</a>, offers a granularity of 386,735 administrative areas for the entire world, that can be grouped according to the needs of a study.</p>
+<p>When aggregating administrative units, it is important to capture territories with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative units should be fairly homogeneous concerning mean temperature and precipitation.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://academic.oup.com/reep/article/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change</a> describes the common pitfalls in translating weather data into geographical unit data.</p>
 </div>
-<div class="section" id="geographic-information-systems">
-<h2>Geographic information systems<a class="headerlink" href="#geographic-information-systems" title="Permalink to this headline">¶</a></h2>
-<p>Much is made of geographic information system (GIS), but these have
-long since become unnotably common parts of spatial research. GIS
-refers to the representation of polygons, curves, and points, and
-their use in data analysis.</p>
-<p>Describing shapes requires specialized data formats. The most common
-data format is an ESRI Shapefile, and we will focus on these for this
-tutorial. You may also encounter GDB (common in hydrology), GeoJSON
-(used with web interfaces), KXML (used by Google Earth), and OSM (from
-OpenStreetMap) files. All of these can be converted to Shapefiles,
-using GIS software like QGIS.</p>
-<p>A <a class="reference external" href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">shapefile</a> also stores geometry and attribute information for the spatial features in a data set. The geometry for a feature is stored as a shape comprising a vector of coordinates. Area features are represented as a closed-loop, double-digitized polygons. The shapes together with data attributes linked to each shape create the representation of geographic data like countries, rivers and lakes.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code class="docutils literal notranslate"><span class="pre">.shp</span></code>, <code class="docutils literal notranslate"><span class="pre">.shx</span></code> and <code class="docutils literal notranslate"><span class="pre">.dbf</span></code>. There may be additional files like <code class="docutils literal notranslate"><span class="pre">.prj</span></code> with the shape file’s projection information. All files must have the same name, for example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">states</span><span class="o">.</span><span class="n">shp</span>
-   <span class="n">states</span><span class="o">.</span><span class="n">shx</span>
-   <span class="n">states</span><span class="o">.</span><span class="n">dbf</span>
+<div class="section" id="geographic-information-systems-gis">
+<h2>Geographic information systems (GIS)<a class="headerlink" href="#geographic-information-systems-gis" title="Permalink to this headline">¶</a></h2>
+<p>Geographic information system (GIS) is a computer system for capturing, storing, analyzing and displaying geographical data, and it has been commonly used for spatial research. GIS refers to the representation of polygons, curves, and points, and their use in data analysis.</p>
+<p>QGIS is a free and open-source desktop geographic information system application that supports viewing, editing and analysis of geospatial data. ArcGIS is proprietary software for working with maps and geographic data. These systems also allow you to perform many kinds of spatial analysis. Some of the most commonly useful are calculating Zonal Statistics, such as the average of a gridded dataset across each shapefile region, and Merging units, and translating points to polygons with Voronoi Polygons.</p>
+<p>The boundaries of administrative units are described in specialized files that store geometry and attribute information for spatial features. The geometry for a feature is represented by a vector of coordinates, and area features are represented as closed-loop, double-digitized polygons. These shapes and their data attributes create the representation of geographic features like countries, rivers, and lakes.</p>
+<p>Describing shapes requires specialized data formats. The most common data format is an <a class="reference external" href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">ESRI Shapefile</a>, and we will focus on these in the tutorial. You may also encounter GDB (common in hydrology), GeoJSON (used with web interfaces), KXML (used by Google Earth), and OSM (from OpenStreetMap) files. All of these can be converted to Shapefiles, using GIS software like QGIS.</p>
+</div>
+<div class="section" id="obtaining-shapefiles">
+<h2>Obtaining shapefiles<a class="headerlink" href="#obtaining-shapefiles" title="Permalink to this headline">¶</a></h2>
+<p>It is usually possible to find online a shapefile that corresponds to a set of socioeconomic data. Many governments have an internal search engine for their GIS data. Two generally useful resources are the <a class="reference external" href="https://gadm.org">Global Administrative Regions</a> database, which has standard administrative units across the globe, and <a class="reference external" href="http://www.naturalearthdata.com/">Natural Earth</a>, which has clean physical shape information.</p>
+<p>In some cases, you will need to create a shapefile from scratch. The most common way of doing this is by defining (“clicking out”) the shape of each polygon in QGIS or ArcGIS, which can be done in the following steps:</p>
+<ol class="simple">
+<li><p>Find an image that shows the regions that you want to digitize and import it into QGIS or ArcGIS.</p></li>
+<li><p>Typically, published images will not report the projection that was used, but you will need to find a mapping between points in the image and latitude-longitude coordinates. Use the <a class="reference external" href="https://www.qgistutorials.com/en/docs/georeferencing_basics.html">GDAL Georeferencer</a> to make this a point-and-click task.</p></li>
+<li><p>Create new polygons by clicking around the edges of the polygon.</p></li>
+</ol>
+</div>
+<div class="section" id="working-with-shapefiles">
+<h2>Working with shapefiles<a class="headerlink" href="#working-with-shapefiles" title="Permalink to this headline">¶</a></h2>
+<p>Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to make sure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="61c5dc8f-f2c2-48cc-8f73-8551d101aa53" name="9f83d9ed-f09c-4e05-a81b-c97466e63cd7" type="radio">
+</input><label class="tabbed-label" for="61c5dc8f-f2c2-48cc-8f73-8551d101aa53">
+R</label><div class="tabbed-content docutils">
+<p>To read shape files you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>, <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+ 
+<span class="c1"># or</span>
+ 
+<span class="nf">library</span><span class="p">(</span><span class="n">PBSmapping</span><span class="p">)</span>
+<span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">importShapefile</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="56db3bfe-4bfa-405b-8399-80592496b8cc" name="9f83d9ed-f09c-4e05-a81b-c97466e63cd7" type="radio">
+</input><label class="tabbed-label" for="56db3bfe-4bfa-405b-8399-80592496b8cc">
+Python</label><div class="tabbed-content docutils">
+<p>Shapefiles can be opened with Python packages in a few different ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
+<span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \
+<span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="sa">u</span><span class="s1">&#39;FID&#39;</span><span class="p">,</span> <span class="s1">&#39;float:11&#39;</span><span class="p">)])}</span>
+ 
+<span class="c1"># or</span>
+ 
+<span class="kn">import</span> <span class="nn">shapefile</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+ 
+<span class="c1"># or</span>
+ 
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="finding-shapefiles">
-<h2>Finding shapefiles<a class="headerlink" href="#finding-shapefiles" title="Permalink to this headline">¶</a></h2>
-<p>It is usually possible to find a shapefile corresponding to a set of
-socioeconomic data by searching around online. Many governments will
-have an internal search engine for their GIS data. Two frequently
-useful resources are
-the <a class="reference external" href="https://gadm.org">Global Administrative Regions</a> database, which
-has standard administrative units across the globe,
-and <a class="reference external" href="http://www.naturalearthdata.com/">Natural Earth</a> which has
-clean physical shape information.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions <code class="docutils literal notranslate"><span class="pre">.shp</span></code>, <code class="docutils literal notranslate"><span class="pre">.shx</span></code> and <code class="docutils literal notranslate"><span class="pre">.dbf</span></code>. There may be additional files like <code class="docutils literal notranslate"><span class="pre">.prj</span></code> with the shape file’s projection information. All files must have the same name, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">states</span><span class="o">.</span><span class="n">shp</span>
+  <span class="n">states</span><span class="o">.</span><span class="n">shx</span>
+  <span class="n">states</span><span class="o">.</span><span class="n">dbf</span>
+</pre></div>
 </div>
-<div class="section" id="creating-shapefiles">
-<h2>Creating shapefiles<a class="headerlink" href="#creating-shapefiles" title="Permalink to this headline">¶</a></h2>
-<p>In some cases, you will have to make the shapefile from scratch. The
-most common ways of doing this is by clicking out the shape of each
-polygon. This generally requires a few steps.</p>
-<ol class="simple">
-<li><p>Find an image that shows the regions that you want to digitize and
-import the image into QGIS or ArcGIS.</p></li>
-<li><p>Typically, published images will not report the projection that was
-used, but you will need to find a mapping between points in the
-image and latitude-longitude coordinates. Use
-the
-<a class="reference external" href="https://www.qgistutorials.com/en/docs/georeferencing_basics.html">GDAL Georeferencer</a> to
-make this a point-and-click task.</p></li>
-<li><p>Create new polygons by clicking around the edges of the polygon.</p></li>
-</ol>
+</div>
 </div>
 </div>
 
@@ -390,7 +455,7 @@ make this a point-and-click task.</p></li>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="weighting-schemes.html" title="previous page">3. Weighting schemes</a>
-    <a class='right-next' id="next-link" href="working-with-shapefiles.html" title="next page">Working with shapefiles</a>
+    <a class='right-next' id="next-link" href="working-with-shapefiles.html" title="next page">Constructing weather averages within spatial units</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
