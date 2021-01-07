@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Weighting schemes</title>
+    <title>Weighting schemes</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -130,7 +130,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Weighting schemes
+   Weighting schemes
   </a>
  </li>
 </ul>
@@ -264,24 +264,71 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-spatial-weighting-schemes-matter">
-   3.1 Why spatial weighting schemes matter
+   Why spatial weighting schemes matter
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#kinds-of-weight-schemes-and-data-sources">
-   3.2 Kinds of weight schemes and data sources
+  <a class="reference internal nav-link" href="#where-to-get-spatial-weighting-data">
+   Where to get spatial weighting data.
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aligning-weather-and-weighting-grids">
-   3.3 Aligning weather and weighting grids
+  <a class="reference internal nav-link" href="#working-with-gridded-weighting-data">
+   Working with gridded weighting data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-1-resample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data">
+    <a class="reference internal nav-link" href="#the-format-of-the-data-values">
+     The format of the data values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-spatial-gridding-scheme">
+     The spatial gridding scheme
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-geographic-projection">
+     The geographic projection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handling-of-missing-data">
+     Handling of missing data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation-notes-reading-gridded-data">
+     Implementation Notes: Reading gridded data.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aligning-weather-and-weighting-grids">
+   Aligning weather and weighting grids
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upsampling-increasing-data-resolution">
+     Upsampling - increasing data resolution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsampling-decreasing-data-resolution">
+     Downsampling - decreasing data resolution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cropping-adjusting-the-extent-of-data">
+     Cropping - adjusting the extent of data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-1-upsample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data">
      Step 1:
      <strong>
-      Resample the weighting data until the grid of the weighting data evenly divides up the weather data.
+      Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.
      </strong>
     </a>
    </li>
@@ -294,18 +341,23 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-re-aggregate-the-weighting-data-so-that-it-has-the-same-resolution-as-the-weather-data">
+    <a class="reference internal nav-link" href="#step-3-re-aggregate-the-weighting-data">
      Step 3:
      <strong>
-      Re-aggregate the weighting data, so that it has the same resolution as the weather data.
+      Re-aggregate the weighting data.
      </strong>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plotting-your-results">
-   3.4 Plotting your results
+   Plotting your results
   </a>
  </li>
 </ul>
@@ -320,18 +372,42 @@
               <div>
                 
   <div class="section" id="weighting-schemes">
-<h1>3. Weighting schemes<a class="headerlink" href="#weighting-schemes" title="Permalink to this headline">¶</a></h1>
-<p>This section describes how to use different weighting schemes when aggregating gridded data to data regions.</p>
+<h1>Weighting schemes<a class="headerlink" href="#weighting-schemes" title="Permalink to this headline">¶</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Key objectives and decision points</p>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Understand how to incorporate weights into your data.</p></li>
+<li><p>Understand how to match up gridded data with different grids.</p></li>
+</ul>
+<p>Decision points:</p>
+<ul class="simple">
+<li><p>Does your data-generating process occur locally or regionally?</p></li>
+<li><p>Select the weighting scheme most appropriate for your data.</p></li>
+</ul>
+</div>
+<p>This section describes how to use different weighting schemes when
+working with gridded and regional data. As we use the term, weighting
+schemes assign a weight to each grid cell or regional
+observation. They have two major uses: (1) when running regressions,
+to weight observations to accurately estimate processes, or (2) to
+perform a weighted aggregation of gridded data to data regions.</p>
 <div class="section" id="why-spatial-weighting-schemes-matter">
-<h2>3.1 Why spatial weighting schemes matter<a class="headerlink" href="#why-spatial-weighting-schemes-matter" title="Permalink to this headline">¶</a></h2>
+<h2>Why spatial weighting schemes matter<a class="headerlink" href="#why-spatial-weighting-schemes-matter" title="Permalink to this headline">¶</a></h2>
 <p>Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.</p>
-<p>As described in section <a class="reference external" href="reduced-form-specification#Dealing-with-the-spatial-and-temporal-scales-of-economic-processes">Dealing with the spatial and temporal scales of economic processes</a>, the scale of a phenomenon matters. Many processes occur at a more local scale than that which data is collected. The motivation for weighting is different for aggregation that represents averaged phenomena vs. phenomena that respond to averaged weather, and the sequence of analysis changes.</p>
-<p>In the first case, the phenomenon occurs locally, in response to local weather. In this case, we perform weighted aggregations to reflect the amount of the phenomenon in each location. For example, we would use population weighting to model the effects of heat on people. In this case, the order of operations is:</p>
+<p>As described in section
+<a class="reference external" href="reduced-form-specification#Dealing-with-the-spatial-and-temporal-scales-of-economic-processes">Dealing with the spatial and temporal scales of economic processes</a>,
+the scale of a phenomenon matters. Many processes occur at a more
+local scale than that which data is collected. The motivation for
+weighting is different for aggregation that represents averaged
+phenomena vs. phenomena that respond to averaged weather, and the
+sequence of analysis changes accordingly.</p>
+<p>When the phenomenon occurs locally, in response to local weather, we perform weighted aggregations to reflect the amount of the phenomenon in each location. For example, we would use population weighting to model the effects of heat on people. In this case, the order of operations is:</p>
 <ol class="simple">
 <li><p>Transform weather into the terms of the model specification.</p></li>
 <li><p>Average these transformed terms across space using a weighting scheme.</p></li>
 </ol>
-<p>In the second case, the phenomenon occurs at a data region level, in response to averaged weather. In this case, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from a shore could be important to predict the declaration of states of emergency. The order of operations is:</p>
+<p>When the phenomenon occurs at a data region level, in response to averaged weather, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from a shore could be important to predict the declaration of states of emergency. The order of operations is:</p>
 <ol class="simple">
 <li><p>Average the weather across space using a weighting scheme.</p></li>
 <li><p>Transform the averaged weather to the model specification.</p></li>
@@ -341,60 +417,9 @@
 \[T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)} = 1 \,\,\,\forall i\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_p\)</span> is the weight for pixel <span class="math notranslate nohighlight">\(p\)</span>, and <span class="math notranslate nohighlight">\(P(i)\)</span> is the set of pixels in data region <span class="math notranslate nohighlight">\(i\)</span>.</p>
 </div>
-<div class="section" id="kinds-of-weight-schemes-and-data-sources">
-<h2>3.2 Kinds of weight schemes and data sources<a class="headerlink" href="#kinds-of-weight-schemes-and-data-sources" title="Permalink to this headline">¶</a></h2>
-<p>Weighting data files come in a wide range of file formats, since any gridded data file is appropriate. The most common data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or your code) need to know (1) the format of the data values, (2) the spatial gridding scheme, (3) the projection, and (4) how missing data is handled.</p>
-<ol class="simple">
-<li><p>Format of the data values: Data values can be written out in text (as with CSV and ASC files) or in a binary representation (GeoTIFF and BIL). If the values are written as text, delimiters will be used to separate them (comma for CSV, spaces for ASC).</p></li>
-<li><p>The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.</p>
-<ul class="simple">
-<li><p>The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.</p></li>
-<li><p>Grid cell sizes are often given as decimal representation of fractions of a degree, such as 0.0083333333333 = 1 / 120 of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.</p></li>
-<li><p>The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.</p></li>
-</ul>
-</li>
-</ol>
-<p>Based on this information, you can calculate which grid cell any point on the globe falls into:</p>
-<div class="math notranslate nohighlight">
-\[\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right),\]</div>
-<div class="math notranslate nohighlight">
-\[\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_0, y_0\)</span> is lower-left corner point. If the center of the lower-left cell was given, <span class="math notranslate nohighlight">\(x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}\)</span>, <span class="math notranslate nohighlight">\(y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}\)</span>.</p>
-<p>For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.</p>
-<ol class="simple">
-<li><p>Projections are a way to map points on the globe (in latitude-longitude space) to a point in a flat x, y space. While this is important for visualizing maps, it can just be a nuisance for gridded datasets. The most common “projection” for gridded datasets is an equirectangular projection, and we have been assuming this above. This is variously referred to as <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ll</span></code>, <code class="docutils literal notranslate"><span class="pre">WGS</span> <span class="pre">84</span></code>, and <code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">4326</span></code> (techically, WGS 84 species how latitude and longitude are defined, and EPSG:4326 specifies a drawing scheme where x = longitude and y = latitude). However, you will sometimes enounter grids in terms of km north and km east of a point, and then you may need to project these back to latitude-longitude and regrid them.</p></li>
-<li><p>All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.</p></li>
-</ol>
-<p>Implementation Notes: Reading gridded data.</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="b606d58d-efd9-47ce-badf-fbc236e5d474" name="4a7484d2-c4d8-492a-bd63-67a2d371c926" type="radio">
-</input><label class="tabbed-label" for="b606d58d-efd9-47ce-badf-fbc236e5d474">
-R</label><div class="tabbed-content docutils">
-<p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library.</p>
-</div>
-<input id="9d4571f0-f603-4df2-aff3-7968fe843cbd" name="4a7484d2-c4d8-492a-bd63-67a2d371c926" type="radio">
-</input><label class="tabbed-label" for="9d4571f0-f603-4df2-aff3-7968fe843cbd">
-Python</label><div class="tabbed-content docutils">
-<p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p>
-</div>
-</div>
-<p>If you are using R, take a look at
-the
-<a class="reference external" href="https://datacarpentry.org/r-raster-vector-geospatial/">Introduction to Geospatial Raster and Vector Data with R</a>,
-which has some extensive examples of working with geospatial raster data.</p>
-<p>In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.</p>
-<p>Implementation Notes: Downloading multiple files and reading them.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
-<span class="nf">for </span><span class="p">(</span><span class="n">year</span> <span class="n">in</span> <span class="m">1980</span><span class="o">:</span><span class="m">2010</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nf">download.file</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;http://archive.org/awesome/&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s">&quot;.zip&quot;</span><span class="p">),</span> <span class="s">&quot;temp.zip&quot;</span><span class="p">)</span>
-  <span class="n">filename</span> <span class="o">&lt;-</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;prefix-&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s">&quot;.asc&quot;</span><span class="p">)</span>
-  <span class="nf">zip.file.extract</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;temp.zip&quot;</span><span class="p">)</span>
-  <span class="n">r</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-  <span class="o">&lt;</span><span class="n">perform</span> <span class="n">weighting</span><span class="o">&gt;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Below are some common datasources for various weighting schemes.</p>
+<div class="section" id="where-to-get-spatial-weighting-data">
+<h2>Where to get spatial weighting data.<a class="headerlink" href="#where-to-get-spatial-weighting-data" title="Permalink to this headline">¶</a></h2>
+<p>Below are some common data sources for various weighting schemes.</p>
 <ul class="simple">
 <li><p>Population is an important weighting scheme for social impacts.</p>
 <ul>
@@ -413,21 +438,190 @@ LandScan is available at 30 arc-second resolution, annually, but previous years 
 <li><p>Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/</p></li>
 </ul>
 </div>
+<div class="section" id="working-with-gridded-weighting-data">
+<h2>Working with gridded weighting data<a class="headerlink" href="#working-with-gridded-weighting-data" title="Permalink to this headline">¶</a></h2>
+<p>Weighting data files come in a wide range of file formats, since any
+gridded data file can be used as a weighting scheme. The most common
+data types are CSV, ASC, GeoTIFF, and BIL files. In each case, you (or
+your code) need to know (1) the format of the data values, (2) the
+spatial gridding scheme, (3) the projection, and (4) how missing data
+is handled. These are described in the sections below.</p>
+<div class="section" id="the-format-of-the-data-values">
+<h3>The format of the data values<a class="headerlink" href="#the-format-of-the-data-values" title="Permalink to this headline">¶</a></h3>
+<p>Data values can be written out in text (as with CSV and ASC files) or
+in a binary representation (GeoTIFF and BIL). If the values are
+written as text, delimiters will be used to separate them (comma for
+CSV, spaces for ASC).</p>
+</div>
+<div class="section" id="the-spatial-gridding-scheme">
+<h3>The spatial gridding scheme<a class="headerlink" href="#the-spatial-gridding-scheme" title="Permalink to this headline">¶</a></h3>
+<p>The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.
+- The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.
+- Grid cell sizes are often given as decimal representation of fractions of a degree, such as 0.0083333333333 = 1 / 120 of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
+- The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.</p>
+<p>Based on this information, you can calculate which grid cell any point on the globe falls into:</p>
+<div class="math notranslate nohighlight">
+\[\text{row} = \text{floor}\left(\frac{\text{Latitude} - y_0}{\text{CellSize}}\right),\]</div>
+<div class="math notranslate nohighlight">
+\[\text{column} = \text{floor}\left(\frac{\text{Longitude} - x_0}{\text{CellSize}}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_0, y_0\)</span> is lower-left corner point. If the center of the lower-left cell was given, <span class="math notranslate nohighlight">\(x_0 = x_\text{llcenter} - \frac{\text{CellSize}}{2}\)</span>, <span class="math notranslate nohighlight">\(y_0 = y_\text{llcenter} - \frac{\text{CellSize}}{2}\)</span>.</p>
+<p>For CSV files, you will need to keep track of this data yourself. ASC files have it at the top of the file, BIL files have a corresponding HDR file with the data, and GeoTIFF files have it embedded in the file which you can read with various software tools.</p>
+</div>
+<div class="section" id="the-geographic-projection">
+<h3>The geographic projection<a class="headerlink" href="#the-geographic-projection" title="Permalink to this headline">¶</a></h3>
+<p>Projections are a way to map points on the globe (in
+latitude-longitude space) to a point in a flat x, y space. While this
+is important for visualizing maps, it can just be a nuisance for
+gridded datasets. The most common “projection” for gridded datasets is
+an equirectangular projection, and we have been assuming this
+above. This is variously referred to as <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ll</span></code>, <code class="docutils literal notranslate"><span class="pre">WGS</span> <span class="pre">84</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">EPSG:</span> <span class="pre">4326</span></code> (techically, WGS 84 species how latitude and longitude
+are defined, and EPSG:4326 specifies a drawing scheme where x =
+longitude and y = latitude). However, you will sometimes enounter
+grids in terms of km north and km east of a point, and then you may
+need to project these back to latitude-longitude and regrid them.</p>
+</div>
+<div class="section" id="handling-of-missing-data">
+<h3>Handling of missing data<a class="headerlink" href="#handling-of-missing-data" title="Permalink to this headline">¶</a></h3>
+<p>All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.</p>
+</div>
+<div class="section" id="implementation-notes-reading-gridded-data">
+<h3>Implementation Notes: Reading gridded data.<a class="headerlink" href="#implementation-notes-reading-gridded-data" title="Permalink to this headline">¶</a></h3>
+<div class="tabbed-set docutils">
+<input checked="checked" id="9eed0b1d-e5e6-4c18-b009-13710c2685c1" name="188ab404-c3b2-4bbc-b4e9-ef5003120f68" type="radio">
+</input><label class="tabbed-label" for="9eed0b1d-e5e6-4c18-b009-13710c2685c1">
+R</label><div class="tabbed-content docutils">
+<p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library. For example:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
+<span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="7f7327a2-7e0b-4119-979e-194dcdf0795d" name="188ab404-c3b2-4bbc-b4e9-ef5003120f68" type="radio">
+</input><label class="tabbed-label" for="7f7327a2-7e0b-4119-979e-194dcdf0795d">
+Python</label><div class="tabbed-content docutils">
+<p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p>
+</div>
+</div>
+<p>If you are using R, take a look at
+the
+<a class="reference external" href="https://datacarpentry.org/r-raster-vector-geospatial/">Introduction to Geospatial Raster and Vector Data with R</a>,
+which has some extensive examples of working with geospatial raster data.</p>
+<p>In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.</p>
+</div>
+</div>
 <div class="section" id="aligning-weather-and-weighting-grids">
-<h2>3.3 Aligning weather and weighting grids<a class="headerlink" href="#aligning-weather-and-weighting-grids" title="Permalink to this headline">¶</a></h2>
+<h2>Aligning weather and weighting grids<a class="headerlink" href="#aligning-weather-and-weighting-grids" title="Permalink to this headline">¶</a></h2>
 <p>The first step to using a gridded weighting dataset is to make it
-conform to data grid definition used by your weather data.  Here we
+conform to data grid definition used by your weather data.  This
+generally requires resampling the weighting data, increasing its
+resolution by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.</p>
+<p>Here we
 assume that both are regular latitude-longitude
 grids. See
-<a class="reference external" href="#Kinds-of-weight-schemes-and-data-sources">Kinds of weight schemes and data sources</a> to
+<a class="reference external" href="#Working-with-gridded-weighting-data">Working with gridded weighting data</a> to
 understand the grid scheme for your weighting file; note that gridded
 weather data often reports the center of each grid cell, rather than
 the corner.</p>
+<p>If your datasets cover the same geographic extent, and if the
+resolution of your weighting dataset is an even multiple of the
+resolution of your weather dataset, your job is easy. Just either
+aggregate or disaggregate grid cells so that they have the same
+resolution as the weather data, using the code below. In other cases,
+you will need to follow three steps, and generally require
+upsampling, downsampling, and cropping.</p>
+<div class="section" id="upsampling-increasing-data-resolution">
+<h3>Upsampling - increasing data resolution<a class="headerlink" href="#upsampling-increasing-data-resolution" title="Permalink to this headline">¶</a></h3>
+<p>To increase the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without increasing the
+sum of grid cells:</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="8700fb31-db81-4569-909b-bf3cfe18544b" name="6c972b8a-2eaf-48a0-834f-b296aef5dfd0" type="radio">
+</input><label class="tabbed-label" for="8700fb31-db81-4569-909b-bf3cfe18544b">
+R</label><div class="tabbed-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="96791e8c-ad96-4789-8a7d-dcee82199601" name="6c972b8a-2eaf-48a0-834f-b296aef5dfd0" type="radio">
+</input><label class="tabbed-label" for="96791e8c-ad96-4789-8a7d-dcee82199601">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="downsampling-decreasing-data-resolution">
+<h3>Downsampling - decreasing data resolution<a class="headerlink" href="#downsampling-decreasing-data-resolution" title="Permalink to this headline">¶</a></h3>
+<p>To decrease the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without
+decreasing the sum of grid cells:</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="7a28a897-dbbb-4709-86ad-10a45389e0bb" name="f6dcab39-98b8-4288-a31a-26048d4cb5c8" type="radio">
+</input><label class="tabbed-label" for="7a28a897-dbbb-4709-86ad-10a45389e0bb">
+R</label><div class="tabbed-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="a74477bc-2fb2-48e9-b202-420402c930bd" name="f6dcab39-98b8-4288-a31a-26048d4cb5c8" type="radio">
+</input><label class="tabbed-label" for="a74477bc-2fb2-48e9-b202-420402c930bd">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">rr2</span> <span class="o">+=</span> <span class="n">rr</span><span class="p">[</span><span class="n">ii</span><span class="p">::</span><span class="n">N</span><span class="p">,</span> <span class="n">ii</span><span class="p">::</span><span class="n">N</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cropping-adjusting-the-extent-of-data">
+<h3>Cropping - adjusting the extent of data<a class="headerlink" href="#cropping-adjusting-the-extent-of-data" title="Permalink to this headline">¶</a></h3>
+<p>To adjust the spatial extent of grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> to conform as closely as possible
+to a box from the longitudinal range <code class="docutils literal notranslate"><span class="pre">WW</span></code> to <code class="docutils literal notranslate"><span class="pre">EE</span></code> and the latitudinal
+range from <code class="docutils literal notranslate"><span class="pre">SS</span></code> to <code class="docutils literal notranslate"><span class="pre">NN</span></code>.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="00c5b13b-458e-4aa6-9cab-30559cf6d2cb" name="eacdcb88-29a1-4ecf-8563-f0e6c3065c25" type="radio">
+</input><label class="tabbed-label" for="00c5b13b-458e-4aa6-9cab-30559cf6d2cb">
+R</label><div class="tabbed-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="n">WW</span><span class="p">,</span> <span class="n">SS</span><span class="p">,</span> <span class="n">EE</span><span class="p">,</span> <span class="n">NN</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="782e982d-7de1-4400-9595-df9d51b8d18f" name="eacdcb88-29a1-4ecf-8563-f0e6c3065c25" type="radio">
+</input><label class="tabbed-label" for="782e982d-7de1-4400-9595-df9d51b8d18f">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)</span>
+
+<span class="n">rr2</span> <span class="o">=</span> <span class="n">rr</span><span class="p">[</span><span class="nb">int</span><span class="p">((</span><span class="n">SS</span> <span class="o">-</span> <span class="n">S0</span><span class="p">)</span><span class="o">/</span><span class="n">D</span><span class="p">):</span><span class="nb">int</span><span class="p">((</span><span class="n">NN</span> <span class="o">-</span> <span class="n">S0</span><span class="p">)</span><span class="o">/</span><span class="n">D</span><span class="p">),</span> <span class="nb">int</span><span class="p">((</span><span class="n">WW</span> <span class="o">-</span> <span class="n">W0</span><span class="p">)</span><span class="o">/</span><span class="n">D</span><span class="p">):</span><span class="nb">int</span><span class="p">((</span><span class="n">EE</span> <span class="o">-</span> <span class="n">W0</span><span class="p">)</span><span class="o">/</span><span class="n">D</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>The following recipe should work for most cases to align weighting data with a weather grid.</p>
-<div class="section" id="step-1-resample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data">
-<h3>Step 1: <strong>Resample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong><a class="headerlink" href="#step-1-resample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data" title="Permalink to this headline">¶</a></h3>
-<p>Resampling in this case means increasing the resolution of the weighting grid by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.</p>
-<p>Example: Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
+</div>
+<div class="section" id="step-1-upsample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data">
+<h3>Step 1: <strong>Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.</strong><a class="headerlink" href="#step-1-upsample-the-weighting-data-until-the-grid-of-the-weighting-data-evenly-divides-up-the-weather-data" title="Permalink to this headline">¶</a></h3>
+<p>Start by considering the southwest corner of each dataset. Even if the
+datasets are of the same resolution, upsampling may be required to
+make the grid cells line up. For example, if the weighting data has a
+southwest corner of (0 N, 0 E) and a resolution of 1 degree, while the weather data starts at (0.5
+N, 0.5 E) and a resolution of 1 degree, the weighting data will need
+to be upsampled by a factor of 2, so that it provides a grid line at
+(0.5 N, 0.5 E).</p>
+</div>
+<div class="section" id="step-2-clip-the-two-datasets-so-that-they-line-up">
+<h3>Step 2: <strong>Clip the two datasets so that they line up.</strong><a class="headerlink" href="#step-2-clip-the-two-datasets-so-that-they-line-up" title="Permalink to this headline">¶</a></h3>
+<p>After step 1, it should be possible to clip the two datasets to the
+exact same extent.</p>
+</div>
+<div class="section" id="step-3-re-aggregate-the-weighting-data">
+<h3>Step 3: <strong>Re-aggregate the weighting data.</strong><a class="headerlink" href="#step-3-re-aggregate-the-weighting-data" title="Permalink to this headline">¶</a></h3>
+<p>Now, downsample the weighting data to the resolution of the weather data.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;…/w001001.adf&quot;</span><span class="p">)</span>
 <span class="n">landscan</span>
 <span class="c1">## class       : RasterLayer</span>
@@ -454,24 +648,19 @@ That means that you need to increase the resolution of the LandScan data by 2 to
 </pre></div>
 </div>
 <p>We divide by 4 so that the total population remains the same.</p>
-</div>
-<div class="section" id="step-2-clip-the-two-datasets-so-that-they-line-up">
-<h3>Step 2: <strong>Clip the two datasets so that they line up.</strong><a class="headerlink" href="#step-2-clip-the-two-datasets-so-that-they-line-up" title="Permalink to this headline">¶</a></h3>
-<p>In the example above, after increasing the resolution of the LandScan data, we clip it again.</p>
+<p>After increasing the resolution of the LandScan data, we clip it again.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-125.0208</span><span class="p">,</span> <span class="m">-66.47917</span><span class="p">,</span> <span class="m">24.0625</span><span class="p">,</span> <span class="m">49.9375</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-re-aggregate-the-weighting-data-so-that-it-has-the-same-resolution-as-the-weather-data">
-<h3>Step 3: <strong>Re-aggregate the weighting data, so that it has the same resolution as the weather data.</strong><a class="headerlink" href="#step-3-re-aggregate-the-weighting-data-so-that-it-has-the-same-resolution-as-the-weather-data" title="Permalink to this headline">¶</a></h3>
-<p>In the example above, the resolution of the dataset has become 1/240th, and we can write aggregate by a factor of 10 for it to match the PRISM data:</p>
+<p>Now, the resolution of the dataset has become 1/240th, and we can
+write aggregate by a factor of 10 for it to match the PRISM data:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="plotting-your-results">
-<h2>3.4 Plotting your results<a class="headerlink" href="#plotting-your-results" title="Permalink to this headline">¶</a></h2>
+<h2>Plotting your results<a class="headerlink" href="#plotting-your-results" title="Permalink to this headline">¶</a></h2>
 <p>Now take a moment to visualize the data that you have created. This is
 a good way to make sure you haven’t made any mistakes and to wow your
 less climate-adept colleagues in presentations.</p>
@@ -554,9 +743,15 @@ a dataframe (with <code class="docutils literal notranslate"><span class="pre">m
 </pre></div>
 </div>
 <p><img alt="Result after ." src="../_images/ggplot-tmax.png" /></p>
-<p>And now we’re ready to production-ready graph. The biggest change
-will be the addition of a map projection. You’ll want to choose your
-projection carefully, since people are bound to judge you for it.</p>
+<p>And now we’re ready to production-ready graph! The biggest change
+will be the addition of a map projection. As mentioned above, map
+projections translate points on a globe into points on a screen. You’ll want to choose your
+projection carefully, since people are bound to judge you for
+it. Choosing a map projection is beyond the scope of this tutorial,
+but take a look at
+this
+<a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm">Overview from Jochen Albrecht</a> or
+the how Randall Monroe thinks about them:</p>
 <p><img alt="Considerations for projections." src="https://imgs.xkcd.com/comics/map_projections.png" />
 Source: <a class="reference external" href="https://www.xkcd.com/977/">XKCD 977</a>.</p>
 <p>Using the projection, we can now make the final version of this

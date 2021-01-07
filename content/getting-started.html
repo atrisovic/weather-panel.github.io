@@ -129,7 +129,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="weighting-schemes.html">
-   3. Weighting schemes
+   Weighting schemes
   </a>
  </li>
 </ul>
@@ -261,21 +261,48 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#definitions-and-conventions">
-   Definitions and conventions
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Introduction to the Tutorial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-should-use-this-tutorial">
+   Who should use this tutorial?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-we-hope-you-will-learn">
+   What we hope you will learn
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-use-this-tutorial">
+   How to use this tutorial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-introductory-concepts">
+   Some introductory concepts
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#point-data-region-data-and-gridded-data">
-     Point data, region data, and gridded data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mathematical-notation">
-     Mathematical notation
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definitions-and-conventions">
+     Definitions and conventions
     </a>
     <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#point-data-region-data-and-gridded-data">
+       Point data, region data, and gridded data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mathematical-notation">
+       Mathematical notation
+      </a>
+      <ul class="nav section-nav flex-column">
+      </ul>
+     </li>
     </ul>
    </li>
   </ul>
@@ -301,27 +328,78 @@ sustainable development. Here are some of the relationships that have
 been uncovered in recent years:</p>
 <a class="reference internal image-reference" href="../_images/examples.png"><img alt="Examples from Carleton and Hsiang (2016)" src="../_images/examples.png" style="width: 750px;" /></a>
 <p>Source: <a class="reference external" href="https://science.sciencemag.org/content/353/6304/aad9837">Carleton and Hsiang (2016)</a>.</p>
-<p>This tutorial will walk you through the steps necessary to relate
-socioeconomic outcomes to weather data at high resolution. We will
-cover:</p>
+<p>Relationships like these that relate weather to socioeconomic outcomes
+are openning new questions even as they provide answers. In the figure
+above, there are response functions for mortality, agriculture, and
+conflict that have been estimated for both rich and poor
+countries. Interestingly, these often do not match up, and their
+differences can help us to better understand vulnerability and the
+potential for adaptation.</p>
+<p>Many different functional forms are represented in the figure above,
+and behind these are many more decisions about the choice of weather
+variables, the handling of heterogeneity and variability, and how
+socioeconomics information can be mapped to geography.</p>
+<p>While the challenges of climate econometrics are similar across all
+problems, the appropriate solutions to these problems are unique to
+each research question. No single sequence of steps or software can be
+widely applied for resolving these issues. Instead, this tutorial is
+aimed at helping you make decisions appropriate to your research.</p>
+</div>
+<div class="section" id="who-should-use-this-tutorial">
+<h1>Who should use this tutorial?<a class="headerlink" href="#who-should-use-this-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial is aimed at students and researchers new to climate
+econometrics. We will assume a knowledge of panel econometrics. You
+should be familiar with specifications that factor-out unobserved
+heterogeneity, implementing flexible trends, weighted regressions,
+approaches to deal with heteroskedasticity and correlated errors, and
+diagnosing efficiency problems. Some concepts in panel econometrics
+are more specific to weather regressions, such as dose-response
+curves, data-generating processes, and neighborhood effects, and we
+will cover those below.</p>
+<p>We also assume basic experience with one scientific programming
+language (Stata, R, Matlab, Julia, python). We try to provide examples
+in more than one language, so you can get started.</p>
+<p>You should also already have a research question. There are plenty of
+ways to find important questions, and maybe we will try to offer a
+tutorial on that in the future.</p>
+</div>
+<div class="section" id="what-we-hope-you-will-learn">
+<h1>What we hope you will learn<a class="headerlink" href="#what-we-hope-you-will-learn" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial is designed to offer guidance on all of the steps
+necessary to contribute to this research, by walking you through the
+steps necessary to relate socioeconomic outcomes to weather data at
+high resolution. We will cover:</p>
 <ol class="simple">
 <li><p>How to find and use weather data, and what you should be aware of when using it.</p></li>
 <li><p>How to relate your socioeconomic outcomes to weather variables, and
 develop your regression specification.</p></li>
-<li><p>How to work with shapefiles, and use them to generate your predictor variables.</p></li>
+<li><p>How to work with shapefiles, and use them to generate your
+predictor variables.</p></li>
 </ol>
-<p>This tutorial will assume a knowledge of econometrics and basic
-experience with one scientific programming language (Stata, R, Matlab,
-Julia, python). We try to provide examples in more than one language,
-so you can get started.</p>
 <p>At the same time, this tutorial asks you to perform every step
 yourself. In particular, we do not provide prepared weather data or a
 ready-made script to prepare it. Each particular project is too specific,
 so you, the researcher, need to think through everything. This
 tutorial is aimed at helping you do that.</p>
-<p>We will also assume that you already have a research question. There
-are plenty of ways to find important questions, and maybe we will try
-to offer a tutorial on that in the future.</p>
+</div>
+<div class="section" id="how-to-use-this-tutorial">
+<h1>How to use this tutorial<a class="headerlink" href="#how-to-use-this-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>The tutorial is organized along the rough outline of a research
+project:</p>
+<ol class="simple">
+<li><p><em>Using weather and climate data</em>: introduces the data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.</p></li>
+<li><p><em>Developing a reduced-form specification</em>: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.</p></li>
+<li><p><em>Weighting schemes</em>: explains the importance of weighting schemes and how to work with them based on their file formats and origins.</p></li>
+<li><p><em>Generating geographical unit data</em>: introduces geographic information systems, shapefiles, and how to work with them effectively.</p></li>
+</ol>
+<p>You can go through the sections one at a time or jump around.</p>
+<p>Most importantly, if you learn something in your own research process
+that you think would be of broad interest, see the <em>Contributions</em>
+section for how to include it here. Help us make this tutorial more
+useful for more people!</p>
+</div>
+<div class="section" id="some-introductory-concepts">
+<h1>Some introductory concepts<a class="headerlink" href="#some-introductory-concepts" title="Permalink to this headline">¶</a></h1>
 <p>A useful resource to better understand the basics of weather, climate,
 and the physical changes occuring in the climate system
 is
