@@ -5,51 +5,58 @@ When using weather data as independent variables in an economic model, or climat
 - There is no universally *right* or *correct* weather or climate data product
 - Every weather or climate data product has its use cases, limitations, uncertainties, and quirks
 
-This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research.
+This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commoly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation. 
+
+After working through this section, you will be familiar with:
+- working with data in the NetCDF format in your preferred language
+- understanding the differences between reanalysis and interpolated data products
+- knowing how to find information evaluating these data products for the variables and regions that matter for your work
+- identifying major uncertainties inherent to different types of weather data products
 
 ## 1.1 The NetCDF Data Format
 
-Almost all climate and weather datasets are released in [netCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/netcdf-overview) format. It's efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format (.csv, etc.) before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with almost any climate or weather dataset published in the world.
+The [NetCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/NetCDF-overview) format is a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It's efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format (.csv, etc.) before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with most climate or weather datasets published in the world.
 
 ### Supported Languages
 
-Through this section, when possible relevant commands for working with netCDF files are listed for:
+Through this section, we introduce relevant commands whenever possible for the following languages and packages:
 
-- Matlab (native support)
 - Python
-    - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports netCDF files
-    - [netCDF4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
+    - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports NetCDF files
+    - [netcdf4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
+- Matlab (native support)
 - R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
-- [nco](http://nco.sourceforge.net) (“netCDF operators”) - command line tools
-    - documentation may look overwhelming, but at its core, it’s an easy way to check the contents of a file, collate different netCDF files, and extract individual variables without having to go through a full language.
+- [nco](http://nco.sourceforge.net) (“NetCDF operators”) - command line tools
+    - a series of tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language.
     - important commands: `ncview` (to display spatial data), `ncks` (“nc kitchen sink” - to split or
       concatenate files command line), and `ncdump` (to print contents of the file)
 
-For any R code chunks, it’s assumed the ncdf4 package is loaded (`library(ncdf4)`). For any python code chunks, it’s assumed that the xarray package is loaded as `xr` (`import xarray as xr`) or the netCDF4-python module is loaded as `nc` (`import netCDF4 as nc`).
+For any python code chunks, it’s assumed that the xarray package is loaded as `xr` (`import xarray as xr`) or the NetCDF4-python module is loaded as `nc` (`import netCDF4 as nc`). For any R code chunks, it’s assumed the ncdf4 package is loaded (`library(ncdf4)`). 
 
 ```{note}
 If you know several of the languages referred to in this tutorial and just want the author's opinion on which one to use, we suggest:
-- Matlab: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with the background / file processing work
 - Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs
+- Matlab: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management
 ```
 
-### netCDF Contents
+### NetCDF Contents
 
-The core function of NetCDF files is to store matrices. These matrices may have one dimension (e.g., a vector of years), two dimensions (e.g., elevation across space), three dimensions (e.g., weather varying across space and time), or more. The other contents of the file help you to interpret these matrices.
+The core function of NetCDF files is to store arrays. These arrays may have one dimension (e.g., a vector of years), two dimensions (e.g., elevation across space), three dimensions (e.g., weather varying across space and time), or more. The other contents of the file help you to interpret these arrays.
 
 NetCDF files have three kinds of information:
 
 - *Attribute*: Documentation information, associated to either individual variables or the file as a whole. Each attribute has a name (e.g., `version`) and text content (e.g., "Someone to Lean On").
-- *Variables*: The matrices themselves, containing the data you want.. Each matrix has an order of dimensions. For a two-dimensional matrix, the first dimension corresponds to the rows and the second dimension to the columns.
+- *Variables*: The arrays themselves, containing the data you want. Each array has an order of dimensions. For a two-dimensional array, the first dimension corresponds to the rows and the second dimension to the columns.
 - *Dimensions*: The dimensions information in a NetCDF says how many entries are in each dimension. For example, a file containing a 1-degree grid over the world would typically lave a `lon` dimension of length 360 and a `lat` dimension with length 180.
   
-Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` or `longitude` variable, which is a matrix with the single `lon` dimension, and its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
+Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` or `longitude` variable, which is a array with the single `lon` dimension, and its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
 
-### netCDF File Organization
+### NetCDF File Organization
 
-The netCDF file structure is self-describing, meaning all the information you need to understand what data are within are contained within the file as well (in theory). *However*, the format doesn’t require any information be put there, so names of attributes, which attributes are included, etc., may vary between files, especially if they’re ‘unofficial’ files not created by a major modeling group as part of a larger project.
+The NetCDF file structure is self-describing, meaning all the information you need to understand what data are within are contained within the file as well (in theory). *However*, the format doesn’t require any information be put there, so names of attributes, which attributes are included, etc., may vary between files, especially if they’re ‘unofficial’ files not created by a major modeling group as part of a larger project.
 
-But fear not: thankfully, most data you will be facing has standardized to something akin to the format used by CMIP output (a ‘model intercomparison project’ in which different modeling groups agreed to run their models on identical climate ‘experiments’ and publish their data in a uniform format; CMIP6 is the latest generation of the largest 'MIP', analysis of which makes up a substantial portion of IPCC reports).
+````{note}
+Some data you will be facing has standardized to something akin to the format used by CMIP output (a ‘model intercomparison project’ in which different modeling groups agreed to run their models on identical climate ‘experiments’ and publish their data in a uniform format; CMIP6 is the latest generation of the largest 'MIP', analysis of which makes up a substantial portion of IPCC reports).
 
 For example, climate data you will encounter will generally follow a CMIP5 filename format, of the form:
 
@@ -62,10 +69,10 @@ or a CMIP6 filename format, of the form:
 (This terminology will also be useful to recognize even when filenames are not of this format, as is likely for weather data products.)
 
 - most commonly encountered **variable shorthands:**
-    - `tas` = temperature; “[air] temperature at surface,” which is different from “surface temperature” (the temperature of the ground) or temperature at other heights. Sometimes also listed as `t2m` for 2m air temperature or `TREFHT` for reference height temperature. (Always assumed to be taken a few feet off the ground to minimize confusing air temperature with excess heat released by the ground)
+    - `tas` = temperature; “[air] temperature at surface,” which is different from “surface temperature” (the temperature of the ground) or temperature at other heights. Sometimes also listed as `t2m` for 2m air temperature or `TREFHT` for reference height temperature. (Always assumed to be taken a few feet off the ground to avoid confusing air temperature with excess heat released by the ground)
     - `pr` = precipitation rate
-- **frequency**: *day* for daily, *ann* for annual. *mon* for monthly; is sometimes listed as *Amon* for atmospheric variables; feel free to ignore this distinction.
-- **experiment**: some descriptor of the forcing used (forcing = profile of greenhouse gases), e.g. *rcp85* for the RCP8.5 scenario frequently used in projections.
+- **frequency**: e.g. *day* for daily
+- **experiment**: some descriptor of the forcing (e.g., profile of greenhouse gases) uses, e.g., *rcp85* for the RCP8.5 scenario frequently used in projections.
 - **run**: if the same model was run multiple times with the same forcing, but different physics or initial conditions, it will be noted here (e.g. *r1i1p1*). Don’t worry about this.
 - **grid label**: whether data was regridded from the model's native grid
 - **timeframe**: frequently in `yyyymmdd-yyyymmdd` format.
@@ -73,36 +80,23 @@ or a CMIP6 filename format, of the form:
 ```{seealso}
 For more information on "CMIP5" and "CMIP6" terminology, please see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html).
 ```
+````
 
-There are two common ways in which data is stored in netCDF files:
+There are two common ways in which data is stored in NetCDF files:
 
 - variables: each file contains a single variable over the whole (or a large chunk) of the time domain
 - time slices: each file contains a single timestep with a suite of variables
 - combination: file contains many variables over a large time domain (rare due to size constraints)
 
-To figure out which file saving convention your netCDF file uses, and what is contained, you can check the header of the file:
+To figure out which file saving convention your NetCDF file uses, and what is contained, you can check the header of the file:
 
-### The netCDF Header
+### The NetCDF Header
 
-netCDF files are self-describing, meaning that they contain information about the data contained within. Every netCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for netCDF filename `fn`, for each mentioned tool above:
-
-````{tabbed} R
-```{code-block} R
-ncfile <- nc_open(fn)
-ncfile
-```
-````
-
-````{tabbed} Python (netCDF4)
-```{code-block} python
-ds = nc.Dataset(fn))
-ds
-```
-````
+NetCDF files are self-describing, meaning that they contain information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for NetCDF filename `fn`, for each mentioned tool above:
 
 ````{tabbed} Python (xarray)
 ```{code-block} python
-ds = xr.open_dataset(fn))
+ds = xr.open_dataset(fn)
 ds
 ```
 ````
@@ -113,19 +107,34 @@ ncdisp(fn)
 ```
 ````
 
+````{tabbed} R
+```{code-block} R
+ncfile <- nc_open(fn)
+ncfile
+```
+````
+
+````{tabbed} Python (NetCDF4)
+```{code-block} python
+ds = nc.Dataset(fn)
+ds
+```
+````
+
 ````{tabbed} nco
 ```{code-block} 
+# 
 ncdump -h fn
 ```
 ````
 
 The header will open with ‘global attributes,’ which are just text fields that primarily tell you housekeeping information (modeling groups, copyright information, etc.). Then, for each variable contained within the file, the header will tell you what dimensions they contain and their respective sizes, plus variable-specific attributes, like units.
 
-Use the header to check what the variable you want is called, and what dimensions it has. For a variable-focused netCDF file (see above), the dimensions will likely be `lon,lat,time` (though always verify - some will save their data with the `time` variable first and non-gridded data may be saved as `location,time`). The file will also contain populated variables for each of these dimensions, giving the values of `lon,lat,time`  at each point (be aware - for non-rectangular grids, the *variables* `lon` and `lat` may each be 2-D arrays as well). If you are using `xarray` in python, `xr.open_dataset()` will usually be able to tell which dimensions are time, lon, lat without any additional specification. 
+Use the header to check what your desired variable is called, and what dimensions it has. For a variable-focused NetCDF file (see above), the dimensions will likely be `lon,lat,time` (though always verify - some will save their data with the `time` variable first and non-gridded data may be saved as `location,time`). The file will also contain populated variables for each of these dimensions, giving the values of `lon,lat,time`  at each point (be aware - for non-rectangular grids, the *variables* `lon` and `lat` may each be 2-D arrays as well). If you are using `xarray` in python, `xr.open_dataset()` will usually be able to tell which dimensions are time, lon, lat for plotting purposes without any additional specification. 
 
 ### Attributes
 
-Here are some important common “attributes” of netCDF files or variables:
+Here are some important common “attributes” of NetCDF files or variables:
 
 - **Calendar** - probably the most important and inconsistent attribute for climate data (for historical ‘weather’ data products, one would hope it just follows the Gregorian calendar). Either global, or attached to the “record-keeping dimension” (`time` ). Common formats include
     - *365_day* / *noleap* / *365day* / *no_leap* / etc. - the years are magically shortened so they all have 365 days (most common for climate data)
@@ -136,33 +145,33 @@ Here are some important common “attributes” of netCDF files or variables:
     - *Precipitation* - often in *kg/m^2s*, which is the SI unit for precipitation rate (volume per time). Multiply by 3600 to get mm/hour, or 141.7323 to get in/hour (the density of water is 1000 kg/m^3, multiplying by the density calculates the rate in m/s, or depth/time - the rest is just accounting to your desired units of depth and time).
 - **Missing / Fill Value** - if there are some crazy high or low values in your data, you may want to check if those just represent the missing / fill value, a common sub-attribute of variables. Data may also be stored in ["masked arrays"](https://currents.soest.hawaii.edu/ocn_data_analysis/_static/masked_arrays.html).
 
-### Reading netCDF data
+### Reading NetCDF data
 
-netCDF files can be easily imported as numeric data in any language. Here are some common ways:
+NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable `var`:
 
 ````{tabbed} R
 ```{code-block} R
 ncfile <- nc_open(fn)
-var <- ncvar_get(ncfile,var)
+var <- ncvar_get(ncfile,'var')
 ```
-````
-
-````{tabbed} Python (netCDF4)
-```{code-block} python
-ncf = nc.Dataset(fn)
-ncf.variables[var][:]
-```
-
-`ncf.variables[var]` will return a `float` object that keeps the attributes from the netCDF file
 ````
 
 ````{tabbed} Python (xarray)
 ```{code-block} python
-ds = xr.open_dataset(fn))
+ds = xr.open_dataset(fn)
 ds.var
 ```
 
 Data is loaded slowly and only fully loaded when calculations are done - to force loading, run `ds.load()`
+````
+
+````{tabbed} Python (NetCDF4)
+```{code-block} python
+ncf = nc.Dataset(fn)
+ncf.variables['var'][:]
+```
+
+`ncf.variables[var]` will return a `float` object that keeps the attributes from the NetCDF file
 ````
 
 ````{tabbed} Matlab
@@ -173,6 +182,28 @@ ncread(fn,var);
 
 You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with `xarray`, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:
 
+````{tabbed} Python (xarray)
+Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.
+
+```{code-block} python
+ds = xr.open_dataset(fn))
+ds.loc[0:5,0:5,0:365]
+
+# or, if you know the dimension variables (e.g. lat, lon, time):
+ds.isel(lat=slice(0,5),lon=slice(0,5),time=slice(0,5))
+
+# or, if you know the values of the dimensions you want (note "sel" vs. "isel")
+ds.sel(lat=slice(22,53),lon=slice(-125,-65),time=slice('1979-01-01','2010-12-31'))
+```
+````
+
+````{tabbed} Matlab
+```{code-block} matlab
+% in the format ncread(filename,variable name,start idx,count)
+ncread(fn,var,[1 1 1],[5 5 365]);
+```
+````
+
 ````{tabbed} R
 ```{code-block} R
 ncfile <- nc_open(fn)
@@ -180,22 +211,7 @@ vardata <- ncvar_get(ncfile, var, start=c(1,1,1), count=c(5,5,365))
 ```
 ````
 
-````{tabbed} Python (xarray)
-Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.
-
-```{code-block} python
-ds = xr.open_dataset(fn))
-ds.loc[0:5,0:5,0:365]
-```
-````
-
-````{tabbed} Matlab
-```{code-block} matlab
-ncread(fn,var,[1 1 1],[5 5 365]);
-```
-````
-
-As mentioned above, these files also include populated variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the netCDF header first (the author has seen grid variables listed for example as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, `nav_lat`, and any number of other names). As mentioned, `xarray` has built-in methods for identifying the dimensions in the file, regardless of order. 
+As mentioned above, these files also include populated variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the NetCDF header first (the author has seen grid variables listed as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, `nav_lat`, and any number of other names). As mentioned, `xarray` has built-in methods for identifying the dimensions in the file, regardless of order, for plotting purposes. 
 
 The `time` variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using python, the `xarray` package has the ability to interpret some of these time representations for you and translates them into the `datetime64` class, which makes some kinds of manipulation, like averaging over months, easier.
 
@@ -205,7 +221,7 @@ You may want to visualize your weather or climate data, either for internal diag
 
 ````{tabbed} Python
 
-```{code-block} python
+```{code-block} python (xarray)
 # Assuming your variable is a 3-D (lat,lon,time, in any order) 
 # variable called "tas", in a dataset loaded using 
 # ds = xr.open_dataset() as above. This will get you a 
@@ -214,13 +230,12 @@ ds.tas.isel(time=1).plot()
 # (for the time mean, you can use ds.tas.mean(time).plot() 
 # similarly)
     
-# Example with gegographic information:
-import cartopy.crs as ccrs # If plotting on a geographically correct map    
+## Example with gegographic information:
+import cartopy.crs as ccrs    
 # (see resources below on why transforms/projections 
 # need to be explicitly noted)
 ax = plt.axes(projection=ccrs.EckertIV()
-ds.tas.isel(time=1)
- .plot(transform=ccrs.PlateCarree()
+ds.tas.isel(time=1).plot(transform=ccrs.PlateCarree()
 ax.coastlines()
 ```
 
@@ -237,10 +252,9 @@ For more information on plotting geographic data with `xarray` and `cartopy`, th
 pcolor(squeeze(tas(:,:,1)).'); shading flat
 
 % Alternatively, with geographic information:
-axesm() % Set desired projection in the function call; i.e. 'eckert4'
+axesm('eckert4') % Set desired projection in the function call; i.e. 'eckert4'
 pcolorm(lat,lon,squeeze(tas(:,:,1)).'); shading flat 
-% coast.mat is included with Matlab installations; this will add 
-% coastlines. 
+% coast.mat is included with Matlab installations; this will add coastlines. 
 coasts=matfile('coast.mat')
 geoshow(coasts.lat,coasts.long)
 ```
@@ -251,7 +265,7 @@ geoshow(coasts.lat,coasts.long)
 
 Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.
 
-Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe or all land areas, and provide consistent coverage at each grid point location. 
+Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe (or all global land), or are specialized to a certain region, and provide consistent coverage at each grid point location. 
 
 ```{note}
 Some variables, especially relating to hydrology, may be better suited to station data, by providing single values for large regions such as river basins
@@ -297,11 +311,10 @@ See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/cli
 
 ### Reanalysis Datasets
 
-Examples: ERA-INTERIM, ERA-5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
+Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 
 - Observational data are combined with climate models to produce a full set of atmospheric variables
-- Products differ by what data is included (as with interpolated
-  datasets), but now also differ by which underlying models are used
+- Products differ by what data is included (as with interpolated datasets), but now also differ by which underlying models are used
 
 ```{panels}
 Strengths
@@ -312,9 +325,9 @@ Strengths
 ---
 Weaknesses
 ^^^
-- Not fully physical either - laws of conservation e.g. are often relaxed
 - Limited by often significant biases in underlying models that may or may not be well understood
 - Accuracy in areas of high station density may be lower than in interpolated products
+- Not fully physical either - laws of conservation e.g. are often relaxed
 ```
 
 ```{seealso}
@@ -346,7 +359,7 @@ Say you're looking at agriculture in Ethiopia. You would like both temperature a
 	1. CHIRPS: After some searching, you find that CHIRPS data is stored in a publicly accessible [directory](https://data.chc.ucsb.edu/products/CHIRPS-2.0/) (this is a simpler setup than most). You navigate to the `africa_daily/bils/` directory, and choose between 0.5 degree resolution and 2.5 degree resolution. However, you realize that you may have to write a shell script to download this data, to avoid clicking every file separately (using `ftplib` in python and similar packages is also an option).  
 	2. BEST: you click on 'Get Data (external)' on the Climate Data Guide website, taking you to Berkley Earth's data overview page. You navigate down to the section on 'Gridded Data'. You'll have to click on every decade separately, but without further ado, clean NetCDF files are being downloaded to your machine. 
 3. *Accessing the Data*
-	1. CHIRPS: Unfortauntely, the data is not in `.nc` format, but in `bil` format. This is a raster data format - but thankfully, this is easy enough to deal with in the featured languages - for example, `xarray` has `xr.open_rasterio()`, MATLAB has `multibandread`, and `R` has the `raster` package. The author would suggest you resave the file as a NetCDF, for consistency and ease of access (using `xr.to_netcdf`, for example). 
+	1. CHIRPS: Unfortauntely, the data is not in `.nc` format, but in `bil` format. This is a raster data format - but thankfully, this is easy enough to deal with in the featured languages - for example, `xarray` has `xr.open_rasterio()`, MATLAB has `multibandread`, and `R` has the `raster` package. The author would suggest you resave the file as a NetCDF, for consistency and ease of access (using `xr.Dataset.to_netcdf()`, for example). 
 	2. BEST: the filename, as is typical for observational datasets, is in tis own format - so you might want to rename them into CMIP format just for ease of reading. By reading the NetCDF header, you note that the grid variables are stored as `latitude` and `longitude` and the temperature as `temperature`, and you're set to go!
 
 These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in python. See also Section 3 on weigthing schemes. 
@@ -368,7 +381,7 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
     3. You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it 
     ````{margin}
     ```{note}
-    GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through [command-line tools](https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+netCDF) such as [cdo](https://code.zmaw.de/projects/cdo).
+    GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through [command-line tools](https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+NetCDF) such as [cdo](https://code.zmaw.de/projects/cdo).
     ```
     ````
     4. You click download, and voila! 
@@ -378,17 +391,17 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
     ```
     ````
 3. *Accessing the Data*
-    1. However, you see an issue - your climate data is named some weird automatically generated filename. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you (pro tip: the information in a netCDF header, which will tell you the timespan and variables of each file, is always extractable; using e.g. `ncinfo` in Matlab, or the object generated by `nc_open` in R. If you're using `xarray`, `xr.open_mfdataset()` will let you list multiple files, which it will sort correctly into one dataset automatically if all goes well.) 
+    1. However, you see an issue - the files are have odd automatically generated filenames. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you (pro tip: the information in a NetCDF header, which will tell you the timespan and variables of each file, is always extractable; using e.g. `ncinfo` in Matlab, or the object generated by `nc_open` in R. If you're using `xarray`, `xr.open_mfdataset()` will let you list multiple files, which it will sort correctly into one dataset automatically if all goes well.) 
     ````{margin}
     ```{note}
     This is uncommon but not unheard of for weather products. Be prepared to deal with inconsistent and weird filenames.
     ```
     ````
-    2. Reading off the netCDF header (as detailed above) shows that your variable is named `t2m` (stored as a `longitude x latitude x time` grid), the grid variables are called `latitude`  and `longitude`, and the time variable is called `time`. Now you can access the data as detailed above!
+    2. Reading off the NetCDF header (as detailed above) shows that your variable is named `t2m` (stored as a `longitude x latitude x time` grid), the grid variables are called `latitude`  and `longitude`, and the time variable is called `time`. Now you can access the data as detailed above!
 
 ### Thinking ahead to climate projections
 
-Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. As with weather data products (potentially even more so), there is no *right* or *correct* climate model, or group of models to use (see e.g. [Knutti 2010](https://link.springer.com/article/10.1007/s10584-010-9800-2) or [Collins 2017](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL073370)). Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and *intra*-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study. 
+Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. Even more so than with weather data products, there is no *right* or *correct* climate model, or group of models to use (see e.g. [Knutti 2010](https://link.springer.com/article/10.1007/s10584-010-9800-2) or [Collins 2017](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL073370)). Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and *intra*-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study. 
 
 However, to get started in thinking about incorporating changes in climate into your analysis, the author also recommends:
 - [Nissan et al. (2019)](https://onlinelibrary.wiley.com/doi/abs/10.1002/wcc.579): "On the use and misuse of climate change projections in international development"
