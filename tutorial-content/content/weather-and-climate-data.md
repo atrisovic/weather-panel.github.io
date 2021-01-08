@@ -219,9 +219,9 @@ The `time` variable can also be listed in a few different formats. An integer re
 
 You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It's generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren't suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset: 
 
-````{tabbed} Python
+````{tabbed} Python (xarray)
 
-```{code-block} python (xarray)
+```{code-block} python
 # Assuming your variable is a 3-D (lat,lon,time, in any order) 
 # variable called "tas", in a dataset loaded using 
 # ds = xr.open_dataset() as above. This will get you a 
@@ -461,30 +461,27 @@ even for studying national-level data) and as a 1-degree grid.
 3. Under Gridded Data, find "Daily Land (Experimental; 1880 –
    Recent)".
 4. Download the Average Temperature (TAVG) data in 1-degree gridded
-   form for 1980-1989, 1990-1999, and 2000-2009.
+   form for 1980 - 1989.
+5. Place this file (`Complete_TAVG_Daily_LatLong1_1980.nc`) in the
+   `data/climate_data` folder.
 
-Place all three files in a `data/climate_data` folder.
-
-As a first pre-processing step, we will clip these files to the United
-States and combine them into a single file for easier use.
+As a first pre-processing step, we will clip this file to the United
+States.
 
 ### Loading the data
 
 First, let's load all of the data into memory. This code assumes that
-it is stored in a file (call it `preprocess_best.m` or
+it (the code) is stored in a file (call it `preprocess_best.m` or
 `preprocess_best.py`) in a directory `code/`, a sister to the `data/`
 directory.
 
 ````{tabbed} Python
 ```{code-block} python
+import numpy as np
 import xarray as xr
 import datetime as dt
 
-ds = xr.open_mfdataset('../data/climate_data/Complete*.nc',combine='nested',concat_dim='time')
-
-# Through the concat_dim, some variables were broadcast over dimensions they shouldn't have been
-ds['climatology'] = ds.climatology.isel(time=0)
-ds['land_mask'] = ds.land_mask.isel(time=0)
+ds = xr.open_dataset('../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc')
 
 # Create time variable, which wasn't auto-generated from the netcdf due to BEST's ambiguous timing
 ds['time'] = (('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
@@ -494,14 +491,18 @@ ds['time'] = (('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.tim
 ````{tabbed} Matlab
 ```{code-block} matlab
 data_dir = '../data/climate_data/';
-fns = {'Complete_TAVG_Daily_LatLong1_1980.nc';...
-       'Complete_TAVG_Daily_LatLong1_1990.nc';...
-       'Complete_TAVG_Daily_LatLong1_2000.nc'};
+filename = 'Complete_TAVG_Daily_LatLong1_1980.nc';
+	   
+clim_tmp = ncread([data_dir,filename],'climatology');
+anom_tmp = ncread([data_dir,filename],'temperature');
+doy_tmp = ncread([data_dir,filename],'day_of_year');
 
-tas = cell(length(fns),1); months = cell(length(fns),1);
-for file_idx = 1:length(fns)
-   [Here is where we will combine the anomaly + climatology (see below).]
-end
+% Also loading the "months" variable - most datasets don't have it, but
+% it will make more sophisticated projecting methods easier. This is
+% particularly useful because of the gregorian calendar (which includes
+% leap days, and therefore would otherwise add an extra step to
+% determining which month each datastep is)
+months = ncread([data_dir,filename],'month');
 ```
 ````
 
@@ -517,7 +518,6 @@ that's the `climatology` + `temperature`.
 
 ````{tabbed} Python
 ```{code-block} python
-import numpy as np
 import calendar
 
 # Expand climatology to span all days
@@ -543,23 +543,11 @@ ds = ds.drop(['temperature','climatology'])
 
 ````{tabbed} Matlab
 ```{code-block} matlab
-[This code should be embedded within the loop defined in the previous
-code block.]
-   % BEST data is given in terms of anomalies from the underlying
-   % climatology. So, the climatology has to be loaded first.
-   clim_tmp = ncread([data_dir,fns{file_idx}],'climatology');
+% BEST data is given in terms of anomalies from the underlying
+% climatology. So, the climatology has to be loaded first.
+tas = anom_tmp + clim_tmp(:,:,doy_tmp); 
 
-   tas{file_idx} = ncread([data_dir,fns{file_idx}],'temperature') + ...
-                   clim_tmp(:,:,ncread([data_dir,fns{file_idx}],'day_of_year')); 
-
-   % Also loading the "months" variable - most datasets don't have it, but
-   % it will make more sophisticated projecting methods easier. This is
-   % particularly useful because of the gregorian calendar (which includes
-   % leap days, and therefore would otherwise add an extra step to
-   % determining which month each datastep is)
-   months{file_idx} = ncread([data_dir,fns{file_idx}],'month');
-
-   clear clim_tmp
+clear clim_tmp, anom_tmp, doy_tmp
 ```
 ````
 
@@ -580,12 +568,8 @@ ds = ds.sel(latitude=slice(*geo_lims['lat']),longitude=slice(*geo_lims['lon'])).
 
 ````{tabbed} Matlab
 ```{code-block} matlab
-lat = ncread([data_dir,fns{file_idx}],'latitude');
-lon = ncread([data_dir,fns{file_idx}],'longitude');
-
-%% Concatenate the three files
-tas = cat(3,tas{:});
-months = cat(1,months{:});
+lat = ncread([data_dir,filename],'latitude');
+lon = ncread([data_dir,filename],'longitude');
 
 %% Subset to continental United States
 lon_idxs = ((lon>=geo_lims(1)) & (lon<=geo_lims(2)));
@@ -605,7 +589,7 @@ the standards used in CMIP5 datasets.
 
 ````{tabbed} Python
 ```{code-block} python
-output_fn = '../data/climate_data/tas_day_BEST_historical_station_19800101-20091231.nc'
+output_fn = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc'
 
 ds.attrs['origin_script']='preprocess_best.py'
 
@@ -619,7 +603,7 @@ ds.to_netcdf(output_fn)
 ````{tabbed} Matlab
 ```{code-block} matlab
 % Set output filename
-fn_out = '../data/climate_data/tas_day_BEST_historical_station_19800101-20091231.nc';
+fn_out = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc';
 
 % Write temperature data to netcdf 
 nccreate(fn_out,'tas','Dimensions',{'lon',size(tas,1),'lat',size(tas,2),'time',size(tas,3)})
