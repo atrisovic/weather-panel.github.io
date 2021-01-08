@@ -19,3 +19,9 @@ parse:
 execute:
   execute_notebooks: "off"
 
+sphinx:
+  config:
+    nb_custom_formats:
+        .Rmd:
+            - jupytext.reads
+            - fmt: Rmd

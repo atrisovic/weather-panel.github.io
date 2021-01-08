@@ -18,6 +18,7 @@
   chapters:
   - file: content/geographical-unit-data
   - file: content/working-with-shapefiles
+  - file: content/ipynb/nb_example
 
 - part: Suggestions for work organization 
   chapters:
