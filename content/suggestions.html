@@ -101,7 +101,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="weather-and-climate-data.html">
-   1. Using Weather and Climate Data
+   Using Weather and Climate Data
   </a>
  </li>
 </ul>
@@ -295,6 +295,13 @@
                 
   <div class="section" id="suggestions-for-work-organization">
 <h1>Suggestions for work organization<a class="headerlink" href="#suggestions-for-work-organization" title="Permalink to this headline">¶</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Key objectives</p>
+<ul class="simple">
+<li><p>Understand how to organize your project materials</p></li>
+<li><p>Learn about useful tools that will help you work productively</p></li>
+</ul>
+</div>
 <p>Following these suggestions will help you organize your research, which could improve <a class="reference external" href="https://the-turing-way.netlify.com">reproducibility</a> (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self).</p>
 <div class="section" id="organization-of-data-and-code">
 <h2>Organization of data and code<a class="headerlink" href="#organization-of-data-and-code" title="Permalink to this headline">¶</a></h2>
@@ -376,15 +383,15 @@ python draw_plots.py
 <span class="nb">echo</span> <span class="s2">&quot;Finished with drawing plots&quot;</span>
 </pre></div>
 </div>
-<p>The analysis is then executed with a single command in the command prompt (Terminal):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh run_all.sh
-</pre></div>
-</div>
-<div class="admonition-relative-and-absolute-paths admonition">
+<div class="caution admonition">
 <p class="admonition-title">Relative and absolute paths</p>
 <p>A common problem when automating and packaging your project is the use of absolute paths.
 An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code class="docutils literal notranslate"><span class="pre">/home/username/project/data/input.csv</span></code>).
 A relative path, on the other hand, only assumes a local relationship between folders (for example: <code class="docutils literal notranslate"><span class="pre">../data/input.csv</span></code>, where “..” refers to the “parent” directory). You should specify relative paths whenever that is possible.</p>
+</div>
+<p>The analysis is then executed with a single command in the command prompt (Terminal):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh run_all.sh
+</pre></div>
 </div>
 </div>
 </div>

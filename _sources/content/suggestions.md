@@ -1,5 +1,11 @@
 # Suggestions for work organization 
 
+```{admonition} Key objectives
+:class: note
+- Understand how to organize your project materials 
+- Learn about useful tools that will help you work productively   
+```
+
 Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self). 
 
 ## Organization of data and code
@@ -93,14 +99,15 @@ python draw_plots.py
 echo "Finished with drawing plots"
 ```
 
+```{admonition} Relative and absolute paths
+:class: caution
+A common problem when automating and packaging your project is the use of absolute paths.
+An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: `/home/username/project/data/input.csv`). 
+A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). You should specify relative paths whenever that is possible.
+```
+
 The analysis is then executed with a single command in the command prompt (Terminal):
 
 ```bash
 sh run_all.sh
-```
-
-```{admonition} Relative and absolute paths
-A common problem when automating and packaging your project is the use of absolute paths.
-An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: `/home/username/project/data/input.csv`). 
-A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). You should specify relative paths whenever that is possible.
 ```

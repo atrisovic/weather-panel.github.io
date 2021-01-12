@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Using Weather and Climate Data</title>
+    <title>Using Weather and Climate Data</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -101,7 +101,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Using Weather and Climate Data
+   Using Weather and Climate Data
   </a>
  </li>
 </ul>
@@ -264,7 +264,7 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-netcdf-data-format">
-   1.1 The NetCDF Data Format
+   The NetCDF Data Format
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -306,12 +306,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gridded-data">
-   1.2 Gridded Data
+   Gridded Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#weather-data-products">
-   1.3 Weather Data Products
+   Weather Data Products
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -333,7 +333,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#where-to-even-begin-resources-and-how-to-start-working-with-a-data-product">
-   1.4 Where to Even Begin - Resources and How to Start Working with a Data Product
+   Where to Even Begin - Resources and How to Start Working with a Data Product
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -360,12 +360,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc">
-   1.5 A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
+   A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-final-note-on-station-data">
-   1.6 A Final Note on Station Data
+   A Final Note on Station Data
   </a>
  </li>
 </ul>
@@ -380,22 +380,32 @@
               <div>
                 
   <div class="section" id="using-weather-and-climate-data">
-<h1>1. Using Weather and Climate Data<a class="headerlink" href="#using-weather-and-climate-data" title="Permalink to this headline">¶</a></h1>
+<h1>Using Weather and Climate Data<a class="headerlink" href="#using-weather-and-climate-data" title="Permalink to this headline">¶</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Key objectives and decision points</p>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Understand how to work with data in the NetCDF format in your preferred language</p></li>
+<li><p>Understand the differences between reanalysis and interpolated data products</p></li>
+<li><p>Learn how to find information evaluating these data products for the variables and regions that are relevant for your work</p></li>
+<li><p>Learn how to identify major uncertainties inherent to different types of weather data products</p></li>
+</ul>
+<p>Decision points:</p>
+<ul class="simple">
+<li><p>How to choose climate or weather data to use in your research project?</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>When using weather data as independent variables in an economic model, or climate data to project your research results into the future, please note:</p>
 <ul class="simple">
 <li><p>There is no universally <em>right</em> or <em>correct</em> weather or climate data product</p></li>
 <li><p>Every weather or climate data product has its use cases, limitations, uncertainties, and quirks</p></li>
 </ul>
+</div>
 <p>This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commoly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation.</p>
-<p>After working through this section, you will be familiar with:</p>
-<ul class="simple">
-<li><p>working with data in the NetCDF format in your preferred language</p></li>
-<li><p>understanding the differences between reanalysis and interpolated data products</p></li>
-<li><p>knowing how to find information evaluating these data products for the variables and regions that matter for your work</p></li>
-<li><p>identifying major uncertainties inherent to different types of weather data products</p></li>
-</ul>
 <div class="section" id="the-netcdf-data-format">
-<h2>1.1 The NetCDF Data Format<a class="headerlink" href="#the-netcdf-data-format" title="Permalink to this headline">¶</a></h2>
+<h2>The NetCDF Data Format<a class="headerlink" href="#the-netcdf-data-format" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/NetCDF-overview">NetCDF</a> format is a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It’s efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format (.csv, etc.) before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with most climate or weather datasets published in the world.</p>
 <div class="section" id="supported-languages">
 <h3>Supported Languages<a class="headerlink" href="#supported-languages" title="Permalink to this headline">¶</a></h3>
@@ -418,9 +428,9 @@ concatenate files command line), and <code class="docutils literal notranslate">
 </li>
 </ul>
 <p>For any python code chunks, it’s assumed that the xarray package is loaded as <code class="docutils literal notranslate"><span class="pre">xr</span></code> (<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">xarray</span> <span class="pre">as</span> <span class="pre">xr</span></code>) or the NetCDF4-python module is loaded as <code class="docutils literal notranslate"><span class="pre">nc</span></code> (<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">netCDF4</span> <span class="pre">as</span> <span class="pre">nc</span></code>). For any R code chunks, it’s assumed the ncdf4 package is loaded (<code class="docutils literal notranslate"><span class="pre">library(ncdf4)</span></code>).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you know several of the languages referred to in this tutorial and just want the author’s opinion on which one to use, we suggest:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:</p>
 <ul class="simple">
 <li><p>Python (<code class="docutils literal notranslate"><span class="pre">xarray</span></code>): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs</p></li>
 <li><p>Matlab: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management</p></li>
@@ -479,39 +489,39 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <h3>The NetCDF Header<a class="headerlink" href="#the-netcdf-header" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files are self-describing, meaning that they contain information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for NetCDF filename <code class="docutils literal notranslate"><span class="pre">fn</span></code>, for each mentioned tool above:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="3729db2c-c542-4b79-8914-a51a8bb66e40" name="215d2fe1-7c0f-4fbc-8644-6278e28f2919" type="radio">
-</input><label class="tabbed-label" for="3729db2c-c542-4b79-8914-a51a8bb66e40">
+<input checked="checked" id="14b54ce4-caea-4580-920b-0253256d1a3f" name="300df3ef-eb9b-4c9c-ba05-606a91abc271" type="radio">
+</input><label class="tabbed-label" for="14b54ce4-caea-4580-920b-0253256d1a3f">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="1f3f800e-fe4d-42b1-a8ae-abb84d7ce6e6" name="215d2fe1-7c0f-4fbc-8644-6278e28f2919" type="radio">
-</input><label class="tabbed-label" for="1f3f800e-fe4d-42b1-a8ae-abb84d7ce6e6">
+<input id="af538618-d083-4ce3-8a35-da9660381684" name="300df3ef-eb9b-4c9c-ba05-606a91abc271" type="radio">
+</input><label class="tabbed-label" for="af538618-d083-4ce3-8a35-da9660381684">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncdisp</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="d207eab5-7f42-4e3a-904f-316880484863" name="215d2fe1-7c0f-4fbc-8644-6278e28f2919" type="radio">
-</input><label class="tabbed-label" for="d207eab5-7f42-4e3a-904f-316880484863">
+<input id="265e3f73-abbb-4631-be28-ce60766b3928" name="300df3ef-eb9b-4c9c-ba05-606a91abc271" type="radio">
+</input><label class="tabbed-label" for="265e3f73-abbb-4631-be28-ce60766b3928">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncfile</span>
 </pre></div>
 </div>
 </div>
-<input id="7387ffae-9257-40aa-a137-24d1c345c5c5" name="215d2fe1-7c0f-4fbc-8644-6278e28f2919" type="radio">
-</input><label class="tabbed-label" for="7387ffae-9257-40aa-a137-24d1c345c5c5">
+<input id="e39fdd5a-1d41-4881-aab2-0dd18d9702b0" name="300df3ef-eb9b-4c9c-ba05-606a91abc271" type="radio">
+</input><label class="tabbed-label" for="e39fdd5a-1d41-4881-aab2-0dd18d9702b0">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="9cea0686-ea0d-41f5-baec-cb5b7da94d2b" name="215d2fe1-7c0f-4fbc-8644-6278e28f2919" type="radio">
-</input><label class="tabbed-label" for="9cea0686-ea0d-41f5-baec-cb5b7da94d2b">
+<input id="e925f252-3862-4deb-99b0-5663af33141c" name="300df3ef-eb9b-4c9c-ba05-606a91abc271" type="radio">
+</input><label class="tabbed-label" for="e925f252-3862-4deb-99b0-5663af33141c">
 nco</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span>
 <span class="n">ncdump</span> <span class="o">-</span><span class="n">h</span> <span class="n">fn</span>
@@ -546,16 +556,16 @@ nco</label><div class="tabbed-content docutils">
 <h3>Reading NetCDF data<a class="headerlink" href="#reading-netcdf-data" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable <code class="docutils literal notranslate"><span class="pre">var</span></code>:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="87448de6-2209-4fd5-9548-4139dbd2b37d" name="c6f2efcc-72b0-478f-8726-efe57bc5684d" type="radio">
-</input><label class="tabbed-label" for="87448de6-2209-4fd5-9548-4139dbd2b37d">
+<input checked="checked" id="597e6ac7-0548-4916-81d6-3686e037f482" name="586850c1-2d8e-4787-bf8c-d747f6f2f44b" type="radio">
+</input><label class="tabbed-label" for="597e6ac7-0548-4916-81d6-3686e037f482">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="1f0e04c6-3a3d-4355-bf39-67e222db78de" name="c6f2efcc-72b0-478f-8726-efe57bc5684d" type="radio">
-</input><label class="tabbed-label" for="1f0e04c6-3a3d-4355-bf39-67e222db78de">
+<input id="20f4c434-df4b-4245-9ea9-473317832392" name="586850c1-2d8e-4787-bf8c-d747f6f2f44b" type="radio">
+</input><label class="tabbed-label" for="20f4c434-df4b-4245-9ea9-473317832392">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="n">var</span>
@@ -563,8 +573,8 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </div>
 <p>Data is loaded slowly and only fully loaded when calculations are done - to force loading, run <code class="docutils literal notranslate"><span class="pre">ds.load()</span></code></p>
 </div>
-<input id="5642922b-4afe-43a1-9ef9-b659d69ef31c" name="c6f2efcc-72b0-478f-8726-efe57bc5684d" type="radio">
-</input><label class="tabbed-label" for="5642922b-4afe-43a1-9ef9-b659d69ef31c">
+<input id="def11358-52ac-4f15-a7b4-6e6ad883e487" name="586850c1-2d8e-4787-bf8c-d747f6f2f44b" type="radio">
+</input><label class="tabbed-label" for="def11358-52ac-4f15-a7b4-6e6ad883e487">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncf</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">][:]</span>
@@ -572,8 +582,8 @@ Python (NetCDF4)</label><div class="tabbed-content docutils">
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ncf.variables[var]</span></code> will return a <code class="docutils literal notranslate"><span class="pre">float</span></code> object that keeps the attributes from the NetCDF file</p>
 </div>
-<input id="efb13a22-fa7d-404d-9333-b08dcf6d32e9" name="c6f2efcc-72b0-478f-8726-efe57bc5684d" type="radio">
-</input><label class="tabbed-label" for="efb13a22-fa7d-404d-9333-b08dcf6d32e9">
+<input id="a9f1bcdc-837c-4fbb-881b-e6cf058751a9" name="586850c1-2d8e-4787-bf8c-d747f6f2f44b" type="radio">
+</input><label class="tabbed-label" for="a9f1bcdc-837c-4fbb-881b-e6cf058751a9">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">);</span>
 </pre></div>
@@ -582,8 +592,8 @@ Matlab</label><div class="tabbed-content docutils">
 </div>
 <p>You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="fb7dfb51-4f67-4f17-a2fe-e3643418e404" name="7a3472d1-ea11-42f1-91fb-09ffdbd4053e" type="radio">
-</input><label class="tabbed-label" for="fb7dfb51-4f67-4f17-a2fe-e3643418e404">
+<input checked="checked" id="59f7906a-cc74-47b9-824b-a93400b078b6" name="1c390a2e-61d7-4113-88c6-cda38461a883" type="radio">
+</input><label class="tabbed-label" for="59f7906a-cc74-47b9-824b-a93400b078b6">
 Python (xarray)</label><div class="tabbed-content docutils">
 <p>Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
@@ -597,16 +607,16 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="af895819-2f25-41a0-a50a-c4a4d223a288" name="7a3472d1-ea11-42f1-91fb-09ffdbd4053e" type="radio">
-</input><label class="tabbed-label" for="af895819-2f25-41a0-a50a-c4a4d223a288">
+<input id="5f29ef6f-f5f5-45e5-a52e-4d004ef2ada3" name="1c390a2e-61d7-4113-88c6-cda38461a883" type="radio">
+</input><label class="tabbed-label" for="5f29ef6f-f5f5-45e5-a52e-4d004ef2ada3">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% in the format ncread(filename,variable name,start idx,count)</span>
 <span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">5</span> <span class="mi">5</span> <span class="mi">365</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
-<input id="7a05d5ef-d364-43a0-9a82-92abdf4f8b9f" name="7a3472d1-ea11-42f1-91fb-09ffdbd4053e" type="radio">
-</input><label class="tabbed-label" for="7a05d5ef-d364-43a0-9a82-92abdf4f8b9f">
+<input id="265218f1-fed8-4792-ac0e-e32eabd6f476" name="1c390a2e-61d7-4113-88c6-cda38461a883" type="radio">
+</input><label class="tabbed-label" for="265218f1-fed8-4792-ac0e-e32eabd6f476">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">vardata</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">365</span><span class="p">))</span>
@@ -614,23 +624,23 @@ R</label><div class="tabbed-content docutils">
 </div>
 </div>
 </div>
-<p>As mentioned above, these files also include populated variables that give values for indices along each dimension (<code class="docutils literal notranslate"><span class="pre">lon,</span> <span class="pre">lat</span></code> / <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">time</span></code>), which can be extracted like any other variable using the functions listed above. Make sure to double-check the name of those dimensions in the NetCDF header first (the author has seen grid variables listed as <code class="docutils literal notranslate"><span class="pre">lat</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">Lat</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude_1</span></code>, <code class="docutils literal notranslate"><span class="pre">nav_lat</span></code>, and any number of other names). As mentioned, <code class="docutils literal notranslate"><span class="pre">xarray</span></code> has built-in methods for identifying the dimensions in the file, regardless of order, for plotting purposes.</p>
+<p>As mentioned above, these files also include populated variables that give values for indices along each dimension (<code class="docutils literal notranslate"><span class="pre">lon,</span> <span class="pre">lat</span></code> / <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">time</span></code>), which can be extracted like any other variable using the functions listed above. In some cases, these may be listed as <code class="docutils literal notranslate"><span class="pre">lat</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>, <code class="docutils literal notranslate"><span class="pre">Lat</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude_1</span></code>, <code class="docutils literal notranslate"><span class="pre">nav_lat</span></code>, and any number of other names. Therefore, make sure to first double-check the name of those dimensions in the NetCDF header. As mentioned, <code class="docutils literal notranslate"><span class="pre">xarray</span></code> has built-in methods for identifying the file’s dimensions, regardless of order, for plotting purposes.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">time</span></code> variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you’re using python, the <code class="docutils literal notranslate"><span class="pre">xarray</span></code> package has the ability to interpret some of these time representations for you and translates them into the <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> class, which makes some kinds of manipulation, like averaging over months, easier.</p>
 </div>
 <div class="section" id="diagnostic-maps-of-climate-data">
 <h3>Diagnostic Maps of Climate Data<a class="headerlink" href="#diagnostic-maps-of-climate-data" title="Permalink to this headline">¶</a></h3>
 <p>You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It’s generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren’t suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="ed1489bd-582f-4044-8e81-ca5f6f75affd" name="f6517519-0512-4a0d-b2ff-11bdd1465693" type="radio">
-</input><label class="tabbed-label" for="ed1489bd-582f-4044-8e81-ca5f6f75affd">
+<input checked="checked" id="056dbfaa-a67b-4907-a351-6112b3ab2c18" name="ca1d632f-18a4-4bf0-b0af-c557ef1f8ae7" type="radio">
+</input><label class="tabbed-label" for="056dbfaa-a67b-4907-a351-6112b3ab2c18">
 Python</label><div class="tabbed-content docutils">
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>For more information on plotting geographic data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, the author highly recommends the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a></p>
+<p>For more information on plotting geographic data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, we highly recommend the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a></p>
 </div>
 </div>
-<input id="294aa3a0-240e-4272-922a-b8cdf2cfb7b8" name="f6517519-0512-4a0d-b2ff-11bdd1465693" type="radio">
-</input><label class="tabbed-label" for="294aa3a0-240e-4272-922a-b8cdf2cfb7b8">
+<input id="c71a41c5-3f8a-44af-87b9-9ae43db3431d" name="ca1d632f-18a4-4bf0-b0af-c557ef1f8ae7" type="radio">
+</input><label class="tabbed-label" for="c71a41c5-3f8a-44af-87b9-9ae43db3431d">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Assuming your dataset is called &quot;tas&quot; (lon,lat,time)</span>
 <span class="c">% This will just plot a heatmap of your data:</span>
@@ -649,7 +659,7 @@ Matlab</label><div class="tabbed-content docutils">
 </div>
 </div>
 <div class="section" id="gridded-data">
-<h2>1.2 Gridded Data<a class="headerlink" href="#gridded-data" title="Permalink to this headline">¶</a></h2>
+<h2>Gridded Data<a class="headerlink" href="#gridded-data" title="Permalink to this headline">¶</a></h2>
 <p>Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly changes, making it difficult to weigh or to compare across regions. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
 <p>Thankfully, a large suite of data products have been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe (or all global land), or are specialized to a certain region, and provide consistent coverage at each grid point location.</p>
 <div class="admonition note">
@@ -664,7 +674,7 @@ Matlab</label><div class="tabbed-content docutils">
 <p>The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.</p>
 </div>
 <div class="section" id="weather-data-products">
-<h2>1.3 Weather Data Products<a class="headerlink" href="#weather-data-products" title="Permalink to this headline">¶</a></h2>
+<h2>Weather Data Products<a class="headerlink" href="#weather-data-products" title="Permalink to this headline">¶</a></h2>
 <p><strong>The Interpolation - Reanalysis Spectrum</strong>
 Historical data products differ by how they <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables">“assimilate”</a> (join observational with model data) or combine data, and how much “additional” information is added beyond (pre-processed) station data. They can be thought of as a rough spectrum ranging from ‘observational’ data products that merely statistically interpolate data into a grid to ‘reanalysis’ products that feed data products into a sort of climate model to produce a more complete set of variables. Some datasets are observational but include topographic and other physical information in their statistical methods, while some reanalysis datasets use pure model output for only some variables.</p>
 <p>Both ends of their spectrum have tradeoffs, and generalizable statements about these tradeoffs are hard to make because of differences in methodologies. The following are a few simplified rules of thumb:</p>
@@ -761,7 +771,7 @@ Historical data products differ by how they <a class="reference external" href="
 </div>
 </div>
 <div class="section" id="where-to-even-begin-resources-and-how-to-start-working-with-a-data-product">
-<h2>1.4 Where to Even Begin - Resources and How to Start Working with a Data Product<a class="headerlink" href="#where-to-even-begin-resources-and-how-to-start-working-with-a-data-product" title="Permalink to this headline">¶</a></h2>
+<h2>Where to Even Begin - Resources and How to Start Working with a Data Product<a class="headerlink" href="#where-to-even-begin-resources-and-how-to-start-working-with-a-data-product" title="Permalink to this headline">¶</a></h2>
 <p>Some incredibly useful resources to keep in mind while working with weather data are the following two sites:</p>
 <ul class="simple">
 <li><p>https://climatedataguide.ucar.edu - an encyclopedia for weather and climate data products with expert guidance on strengths and weaknesses for most commonly-used datasets</p></li>
@@ -788,7 +798,7 @@ Historical data products differ by how they <a class="reference external" href="
 </li>
 <li><p><em>Accessing the Data</em></p>
 <ol class="simple">
-<li><p>CHIRPS: Unfortauntely, the data is not in <code class="docutils literal notranslate"><span class="pre">.nc</span></code> format, but in <code class="docutils literal notranslate"><span class="pre">bil</span></code> format. This is a raster data format - but thankfully, this is easy enough to deal with in the featured languages - for example, <code class="docutils literal notranslate"><span class="pre">xarray</span></code> has <code class="docutils literal notranslate"><span class="pre">xr.open_rasterio()</span></code>, MATLAB has <code class="docutils literal notranslate"><span class="pre">multibandread</span></code>, and <code class="docutils literal notranslate"><span class="pre">R</span></code> has the <code class="docutils literal notranslate"><span class="pre">raster</span></code> package. The author would suggest you resave the file as a NetCDF, for consistency and ease of access (using <code class="docutils literal notranslate"><span class="pre">xr.Dataset.to_netcdf()</span></code>, for example).</p></li>
+<li><p>CHIRPS: Unfortunately, the data is not in <code class="docutils literal notranslate"><span class="pre">.nc</span></code> format, but in <code class="docutils literal notranslate"><span class="pre">bil</span></code> format. This is a raster data format, and it can be opened in the featured languages. For example, <code class="docutils literal notranslate"><span class="pre">xarray</span></code> has <code class="docutils literal notranslate"><span class="pre">xr.open_rasterio()</span></code>, MATLAB has <code class="docutils literal notranslate"><span class="pre">multibandread</span></code>, and <code class="docutils literal notranslate"><span class="pre">R</span></code> has the <code class="docutils literal notranslate"><span class="pre">raster</span></code> package. We suggest you convert the <code class="docutils literal notranslate"><span class="pre">bil</span></code> files into NetCDF, for consistency and ease of access (using <code class="docutils literal notranslate"><span class="pre">xr.Dataset.to_netcdf()</span></code>, for example).</p></li>
 <li><p>BEST: the filename, as is typical for observational datasets, is in tis own format - so you might want to rename them into CMIP format just for ease of reading. By reading the NetCDF header, you note that the grid variables are stored as <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code> and the temperature as <code class="docutils literal notranslate"><span class="pre">temperature</span></code>, and you’re set to go!</p></li>
 </ol>
 </li>
@@ -812,38 +822,22 @@ Historical data products differ by how they <a class="reference external" href="
 <li><p>You click on ‘Get Data (external)’ in the Data Guide to find a <a class="reference external" href="https://cds.climate.copernicus.eu/#%21/search?text=ERA5&amp;type=dataset">link</a> to the Copernicus climate data store. There, you realize that you’ll need to sign up for an account (modern data products from larger institutions such as the ECMWF will thankfully have an automated system for this; some smaller products may require you to wait until someone manually approves your account), which just asks you to sign a data use agreement (remember to correctly cite data sources!).</p></li>
 <li><p>The download page also gives you some documentation for the data product, including variable names - you see “2m air temperature” in Kelvin is the variable you need.</p></li>
 <li><p>You click on the data you want, which years you want it for, etc., and prepare to check out. Here, there are two options: GRIB, and NetCDF (experimental). You click NetCDF, because after this guide, you feel comfortable working with it</p></li>
-</ol>
-<div class="margin sidebar">
-<p class="sidebar-title"></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>GRIB is another meteorological data format - it’s less common and less flexible than NetCDF, but slightly more efficient in storage. The author has yet to see it as the only option for a data product; NetCDF is still dominant. GRIB files can be converted easily to NetCDF files through <a class="reference external" href="https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+NetCDF">command-line tools</a> such as <a class="reference external" href="https://code.zmaw.de/projects/cdo">cdo</a>.</p>
-</div>
-</div>
-<ol class="simple">
 <li><p>You click download, and voila!</p></li>
 </ol>
-<div class="margin sidebar">
-<p class="sidebar-title"></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Many datasets, especially those from smaller institutions, will not give up their secrets so easily. Be prepared to have to deal with “wget” scripts, “jblob” scripts, writing ftp scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just copy their scripts to you.</p>
+<p>GRIB is another meteorological data format - it’s less common and less flexible than NetCDF but slightly more efficient in storage. GRIB files can be converted easily to NetCDF files through <a class="reference external" href="https://confluence.ecmwf.int/display/OIFS/How+to+convert+GRIB+to+NetCDF">command-line tools</a> such as <a class="reference external" href="https://code.zmaw.de/projects/cdo">cdo</a>.</p>
 </div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Many datasets, especially those from smaller institutions, will not give up their secrets so easily. Be prepared to have to deal with <code class="docutils literal notranslate"><span class="pre">wget</span></code> scripts, <code class="docutils literal notranslate"><span class="pre">jblob</span></code> scripts, writing <code class="docutils literal notranslate"><span class="pre">ftp</span></code> scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just share their scripts with you.</p>
 </div>
 </li>
 <li><p><em>Accessing the Data</em></p>
 <ol class="simple">
-<li><p>However, you see an issue - the files are have odd automatically generated filenames. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you (pro tip: the information in a NetCDF header, which will tell you the timespan and variables of each file, is always extractable; using e.g. <code class="docutils literal notranslate"><span class="pre">ncinfo</span></code> in Matlab, or the object generated by <code class="docutils literal notranslate"><span class="pre">nc_open</span></code> in R. If you’re using <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset()</span></code> will let you list multiple files, which it will sort correctly into one dataset automatically if all goes well.)</p></li>
-</ol>
-<div class="margin sidebar">
-<p class="sidebar-title"></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is uncommon but not unheard of for weather products. Be prepared to deal with inconsistent and weird filenames.</p>
-</div>
-</div>
-<ol class="simple">
-<li><p>Reading off the NetCDF header (as detailed above) shows that your variable is named <code class="docutils literal notranslate"><span class="pre">t2m</span></code> (stored as a <code class="docutils literal notranslate"><span class="pre">longitude</span> <span class="pre">x</span> <span class="pre">latitude</span> <span class="pre">x</span> <span class="pre">time</span></code> grid), the grid variables are called <code class="docutils literal notranslate"><span class="pre">latitude</span></code>  and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>, and the time variable is called <code class="docutils literal notranslate"><span class="pre">time</span></code>. Now you can access the data as detailed above!</p></li>
+<li><p>However, you see an issue - the files have odd automatically-generated filenames. This is uncommon but not unheard of for weather products. In this case, you may want to rename the file following the CMIP5 convention introduced above, or, if there are multiple files, write a script to do this for you</p></li>
+<li><p>The information in a NetCDF header, which carries the timespan and variables of each file, is always extractable. Use <code class="docutils literal notranslate"><span class="pre">ncinfo</span></code> in Matlab or <code class="docutils literal notranslate"><span class="pre">nc_open</span></code> in R to extract this information. If you’re using Python’s <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, the function <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset()</span></code> will let you list multiple files, and it should correctly and automatically sort them into a single dataset.</p></li>
+<li><p>Reading the NetCDF header shows that your variable is named <code class="docutils literal notranslate"><span class="pre">t2m</span></code> (stored as a <code class="docutils literal notranslate"><span class="pre">longitude</span> <span class="pre">x</span> <span class="pre">latitude</span> <span class="pre">x</span> <span class="pre">time</span></code> grid), the grid variables are called <code class="docutils literal notranslate"><span class="pre">latitude</span></code>  and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>, and the time variable is called <code class="docutils literal notranslate"><span class="pre">time</span></code>. Now you can access the data as detailed above!</p></li>
 </ol>
 </li>
 </ol>
@@ -851,35 +845,37 @@ Historical data products differ by how they <a class="reference external" href="
 <div class="section" id="thinking-ahead-to-climate-projections">
 <h3>Thinking ahead to climate projections<a class="headerlink" href="#thinking-ahead-to-climate-projections" title="Permalink to this headline">¶</a></h3>
 <p>Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. Even more so than with weather data products, there is no <em>right</em> or <em>correct</em> climate model, or group of models to use (see e.g. <a class="reference external" href="https://link.springer.com/article/10.1007/s10584-010-9800-2">Knutti 2010</a> or <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL073370">Collins 2017</a>). Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and <em>intra</em>-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study.</p>
-<p>However, to get started in thinking about incorporating changes in climate into your analysis, the author also recommends:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/wcc.579">Nissan et al. (2019)</a>: “On the use and misuse of climate change projections in international development”</p></li>
-<li><p><a class="reference external" href="https://academic.oup.com/reep/article-abstract/7/2/181/1522753">Auffhammer et al. (2013)</a>: “Using Weather Data and Climate Model Output in Economic Analyses of Climate Change”</p></li>
-</ul>
-<p>If you plan to project results into the future, you can start thinking about its logistics now. Climate data comes from imperfect models whose raw output generally has to be “bias-corrected” before being used in econometric or policy research contexts. Bias-correction involves using information from a weather dataset to inform the output of a climate model, either by applying model changes to the weather data (so-called “delta-method” projection) or by adjusting the model output by applying a historical difference between the model and weather data to the future model output. We won’t go into details about these methods (like everything in this field, they have their strengths and weaknesses), but you should generally use data that has been bias-corrected to the same weather data set you are using to inform your econometric model. Oftentimes this bias-correction is still conducted by the econometric or policy-focused research group, but some pre-bias-corrected climate projections exist. For example, NASA’s <a class="reference external" href="https://nex.nasa.gov/nex/projects/1356/">(NEX-GDDP)</a> dataset is bias-corrected to the <a class="reference external" href="http://hydrology.princeton.edu/data.pgf.php">Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling</a> historical dataset.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To get started thinking about incorporating changes in climate into your analysis, we also recommend: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/wcc.579">“On the use and misuse of climate change projections in international development”, by Nissan et al. (2019)</a> and <a class="reference external" href="https://academic.oup.com/reep/article-abstract/7/2/181/1522753">“Using Weather Data and Climate Model Output in Economic Analyses of Climate Change” by Auffhammer et al. (2013)</a></p>
+</div>
+<p>If you plan to project results into the future, you can start thinking about its logistics now. Climate data comes from imperfect models whose raw output generally has to be “bias-corrected” before being used in econometric or policy research contexts. Bias-correction involves using information from a weather dataset to inform the output of a climate model, either by applying model changes to the weather data (so-called “delta-method” projection) or by adjusting the model output by applying a historical difference between the model and weather data to the future model output. We won’t go into details about these methods (like everything in this field, they have their strengths and weaknesses), but you should generally use data that has been bias-corrected to the same weather data set you are using to inform your econometric model. Oftentimes this bias-correction is still conducted by the econometric or policy-focused research group, but some pre-bias-corrected climate projections exist. For example, NASA’s <a class="reference external" href="https://nex.nasa.gov/nex/projects/1356/">NEX-GDDP</a> dataset is bias-corrected to the <a class="reference external" href="http://hydrology.princeton.edu/data.pgf.php">Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling</a> historical dataset.</p>
 </div>
 <div class="section" id="a-quick-summarizing-note">
 <h3>A Quick Summarizing Note<a class="headerlink" href="#a-quick-summarizing-note" title="Permalink to this headline">¶</a></h3>
 <p>This process may seem overwhelming, especially given the large variety of data products that exist, and the sometimes rather opaque processes for figuring out what works best.</p>
-<p>The author’s personal suggestion is to start off with a regional observational dataset, if one exists for the region and variables you wish to examine, or else a well-understood global observational dataset. Don’t use a dataset or a data assimilation methodology just because previous work (even big-name papers) have used them. There are enough examples in the literature of problematic uses of weather and climate data (for examples of discussions about these issues see e.g. <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/aer.102.7.3749">Fisher et al. 2012</a>, <a class="reference external" href="https://www.mitpressjournals.org/doi/abs/10.1162/REST_a_00478">Burke et al. 2015</a>, etc.).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If a regional observational dataset exists for the region and variables you wish to examine, you should start off with them. Alternatively, you may use a well-understood global observational dataset. Don’t use a dataset or a data assimilation methodology just because previous work (even big-name papers) have used them. There are enough examples in the literature of problematic uses of weather and climate data (for examples of discussions about these issues, see <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/aer.102.7.3749">Fisher et al. 2012</a> and <a class="reference external" href="https://www.mitpressjournals.org/doi/abs/10.1162/REST_a_00478">Burke et al. 2015</a>, etc.).</p>
+</div>
 <p>Furthermore, check your results with multiple datasets from the latest generation! Consider performing your analysis with a purely station-based dataset and one that includes satellite data; or compare results to those from a reanalysis dataset if you are worried about statistical interpolation in your region of interest. This may not make a huge difference for more stable variables in areas with high station coverage (e.g. temperature in North America), but could be a useful robustness check for more problematic ones (e.g. precipitation). If the choice of ‘historical’ dataset changes your results, think about how their biases may interact with your analysis to figure out what’s causing the discrepancy.</p>
 </div>
 </div>
 <div class="section" id="a-warning-on-hydrological-variables-precipitation-humidity-etc">
-<h2>1.5 A Warning on Hydrological Variables (Precipitation, Humidity, etc.)<a class="headerlink" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc" title="Permalink to this headline">¶</a></h2>
-<p><img alt="Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error." src="https://imgs.xkcd.com/comics/meteorologist.png" />
-<em>As usual, <a class="reference external" href="https://imgs.xkcd.com/comics/meteorologist.png">XKCD</a> gets it best</em></p>
+<h2>A Warning on Hydrological Variables (Precipitation, Humidity, etc.)<a class="headerlink" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc" title="Permalink to this headline">¶</a></h2>
+<p><img alt="Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error." src="https://imgs.xkcd.com/comics/meteorologist.png" /></p>
+<p><em>As usual, <a class="reference external" href="https://imgs.xkcd.com/comics/meteorologist.png">XKCD</a> gets it best</em></p>
 <p>Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately, but is frequently desired for socioeconomic applications.</p>
 <p><img alt="Data from Bosliovich et al. (2015); gridded data products disagree on average global monthly precipitation by up to 40%, and aren't always consistent!" src="../_images/global_monthly.png" />
 <em>Data from <a class="reference external" href="https://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf">Bosilovich et al. (2015)</a>; gridded data products disagree on average global monthly precipitation by up to 40%, and aren’t always consistent!</em></p>
 <p>Unlike temperature, which is relatively uniform spatiotemporally and can be interpolated with a relatively high degree of confidence, precipitation data is very difficult to interpolate and requires a much more complex understanding of regional precipitation patterns to assimilate into gridded products. Consequently, gridded precipitation data should be used with <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables">“extreme caution”</a>, and its uncertainties should not be underestimated.</p>
-<p>Even ‘raw’ precipitation data from weather stations and rain gauges are problematic. Developing a reliable, easily scaled rain gauge network is a difficult task. For example, a common type of rain gauge, the ‘tipping bucket’, only records rain in discrete intervals (when the bucket fills and subsequently ‘tips’), and therefore could record a rainstorm if a drizzle tips an already-full bucket. A meteorologist once told the author of this section that tipping buckets stationed in remote areas may be stuck in the ‘tipped’ position for some time before anyone notices or can repair them.</p>
+<p>Even ‘raw’ precipitation data from weather stations and rain gauges are problematic. Developing a reliable, easily scaled rain gauge network is a difficult task. For example, a common type of rain gauge, the ‘tipping bucket’, only records rain in discrete intervals (when the bucket fills and subsequently ‘tips’), and therefore could record a rainstorm if a drizzle tips an already-full bucket. In rare cases, tipping buckets stationed in remote areas may be stuck in the “tipped” position for some time before anyone notices or can repair them.</p>
 <p>In general, rain gauges of most types are biased low. In strong wind conditions, many drops may not enter the rain catch in a gauge due to turbulence; in strong storms, point estimates may miss areas of greatest intensity. Rain data averaged over areas with complex terrain is biased because of the vertical profile of precipitation (stations are generally in valleys). Kenji Matsuura (of the UDel dataset fame) in his <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/global-land-precipitation-and-temperature-willmott-matsuura-university-delaware">expert guidance</a> on his dataset explains: “Under-catch bias can be nontrivial and very difficult to estimate adequately, especially over extensive areas…”</p>
 <p>Bias-correcting is integrated into weather data products, often involving assimilation of multiple data sources (satellites, radar, etc.) but significant biases remain (see above Figure).</p>
 <p>Precipitation is often recommended as a control in economic models, but its unique character makes it difficult to work with. Beyond the strong uncertainty in precipitation data, precipitation is highly non-gaussian and its correlation with temperature is time- and space- dependent. When using precipitation in your model, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data. Make sure to read studies evaluating your chosen data product - for example <a class="reference external" href="https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.3244">Dinku et al. 2018</a> for CHIRPS in Eastern Africa (a useful Google Scholar search for any product could be “[data product name] validation OR evaluation OR bias OR uncertainty”). Finally, make sure you think about what role precipitation plays in your model - see <a class="reference external" href="#2.1.-Choosing-weather-variables">2.1. Choosing weather variables</a>!</p>
 </div>
 <div class="section" id="a-final-note-on-station-data">
-<h2>1.6 A Final Note on Station Data<a class="headerlink" href="#a-final-note-on-station-data" title="Permalink to this headline">¶</a></h2>
+<h2>A Final Note on Station Data<a class="headerlink" href="#a-final-note-on-station-data" title="Permalink to this headline">¶</a></h2>
 <p>Station data (e.g. <a class="reference external" href="https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets/global-historical-climatology-network-ghcn">Global Historical Climatology Network (GHCN)</a> and the Global Summary of the Day) <em>can</em> be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. Especially if you are working with urban areas, station data will likely capture the urban heat island effect more accurately than any gridded product.</p>
 <p>However, station data can’t be seen as the ‘true’ weather either; assumptions and calibration methodologies affect data here as well (see e.g. <a class="reference external" href="https://journals.ametsoc.org/doi/full/10.1175/BAMS-D-14-00226.1">Parker 2015</a>), some variables remain rather uncertain, and the influence of microclimates even in close proximity to stations shouldn’t be underestimated (think for example the Greater Los Angeles region, where temperature can vary up to 35 F between the inland valleys and the coast).</p>
 <div class="warning admonition">

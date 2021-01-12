@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
-    <link rel="prev" title="1. Using Weather and Climate Data" href="weather-and-climate-data.html" />
+    <link rel="prev" title="Using Weather and Climate Data" href="weather-and-climate-data.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -101,7 +101,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="weather-and-climate-data.html">
-   1. Using Weather and Climate Data
+   Using Weather and Climate Data
   </a>
  </li>
 </ul>
@@ -297,6 +297,21 @@
                 
   <div class="section" id="developing-a-reduced-form-specification">
 <h1>Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this headline">¶</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Key objectives and decision points</p>
+<p>Objectives:</p>
+<ul class="simple">
+<li><p>Understand how to develop a <a class="reference external" href="https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form">reduced-form specification</a> using weather <a class="reference external" href="https://en.wikipedia.org/wiki/Panel_data">panel data</a>.</p></li>
+</ul>
+<p>Decision points:</p>
+<ul class="simple">
+<li><p>Decide what weather variables (e.g. temperature, precipitation, etc.) to use in the analysis, and in what form (e.g. average, maximum, or minimum for temperature variable).</p></li>
+<li><p>Settle on the temporal scale (e.g. days, months, years, etc.) for the analysis. It is generally decided based on how frequently we expect the responses on our dependent variable to change and the temporal scale of other datasets we intend to use.</p></li>
+<li><p>Choose what scheme to use for the spatial aggregation. We can choose either <em>aggregation-before-transformation</em> or <em>transformation-before-aggregation</em> depending on what scale the process we are interested in, is actually occurring.</p></li>
+<li><p>Decide on what <em>functional forms</em> to use in the analysis. It is always good to experiment with multiple functional forms and then decide on the main specification depending on which of them provides the best linear approximation of the true process.</p></li>
+<li><p>Use cross-validation to converge on the most-preferred specification. It is always a good strategy to show results for other specification for attesting the robustness of results.</p></li>
+</ul>
+</div>
 <p>This section describes some of the considerations that go into
 developing a <a class="reference external" href="https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form">reduced-form specification</a> using weather <a class="reference external" href="https://en.wikipedia.org/wiki/Panel_data">panel data</a>. Our discussion here will be very practical and limited to nonlinear panel regressions.</p>
 <div class="admonition seealso">
@@ -305,14 +320,6 @@ developing a <a class="reference external" href="https://stats.stackexchange.com
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is <a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
 </div>
-<p>The key decision points in this section will be as follows:</p>
-<ol class="simple">
-<li><p>Decide what weather variables (e.g. temperature, precipitation, etc.) to use in the analysis, and in what form (e.g. average, maximum, or minimum for temperature variable).</p></li>
-<li><p>Settle on the temporal scale (e.g. days, months, years, etc.) for the analysis. It is generally decided based on how frequently we expect the responses on our dependent variable to change and the temporal scale of other datasets we intend to use.</p></li>
-<li><p>Choose what scheme to use for the spatial aggregation. We can choose either <em>aggregation-before-transformation</em> or <em>transformation-before-aggregation</em> depending on what scale the process we are interested in, is actually occurring.</p></li>
-<li><p>Decide on what <em>functional forms</em> to use in the analysis. It is always good to experiment with multiple functional forms and then decide on the main specification depending on which of them provides the best linear approximation of the true process.</p></li>
-<li><p>Use cross-validation to converge on the most-preferred specification. It is always a good strategy to show results for other specification for attesting the robustness of results.</p></li>
-</ol>
 <div class="section" id="choosing-weather-variables-and-their-forms">
 <h2>Choosing weather variables and their forms<a class="headerlink" href="#choosing-weather-variables-and-their-forms" title="Permalink to this headline">¶</a></h2>
 <p>The choice of weather variables depends on the question we are trying
@@ -523,7 +530,7 @@ observed for region <span class="math notranslate nohighlight">\(i\)</span> in r
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="weather-and-climate-data.html" title="previous page">1. Using Weather and Climate Data</a>
+    <a class='left-prev' id="prev-link" href="weather-and-climate-data.html" title="previous page">Using Weather and Climate Data</a>
     <a class='right-next' id="next-link" href="functional-forms.html" title="next page">Functional forms: pros, cons, and methods</a>
 
     </div>
