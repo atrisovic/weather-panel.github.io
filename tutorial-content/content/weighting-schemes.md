@@ -396,6 +396,7 @@ this
 the how Randall Monroe thinks about them:
 
 ![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
+
 Source: [XKCD 977](https://www.xkcd.com/977/).
 
 Using the projection, we can now make the final version of this

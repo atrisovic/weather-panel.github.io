@@ -1,5 +1,20 @@
 # Developing a reduced-form specification
 
+```{admonition} Key objectives and decision points
+:class: note
+Objectives:
+
+- Understand how to develop a [reduced-form specification](https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form) using weather [panel data](https://en.wikipedia.org/wiki/Panel_data).
+
+Decision points:
+
+- Decide what weather variables (e.g. temperature, precipitation, etc.) to use in the analysis, and in what form (e.g. average, maximum, or minimum for temperature variable).
+- Settle on the temporal scale (e.g. days, months, years, etc.) for the analysis. It is generally decided based on how frequently we expect the responses on our dependent variable to change and the temporal scale of other datasets we intend to use.
+- Choose what scheme to use for the spatial aggregation. We can choose either *aggregation-before-transformation* or *transformation-before-aggregation* depending on what scale the process we are interested in, is actually occurring.
+- Decide on what *functional forms* to use in the analysis. It is always good to experiment with multiple functional forms and then decide on the main specification depending on which of them provides the best linear approximation of the true process.
+- Use cross-validation to converge on the most-preferred specification. It is always a good strategy to show results for other specification for attesting the robustness of results.
+```
+
 This section describes some of the considerations that go into
 developing a [reduced-form specification](https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form) using weather [panel data](https://en.wikipedia.org/wiki/Panel_data). Our discussion here will be very practical and limited to nonlinear panel regressions. 
 
@@ -8,12 +23,7 @@ See also [Estimating the Economic Impacts of Climate Change Using Weather Observ
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 ```
-The key decision points in this section will be as follows:
-1. Decide what weather variables (e.g. temperature, precipitation, etc.) to use in the analysis, and in what form (e.g. average, maximum, or minimum for temperature variable).
-2. Settle on the temporal scale (e.g. days, months, years, etc.) for the analysis. It is generally decided based on how frequently we expect the responses on our dependent variable to change and the temporal scale of other datasets we intend to use.
-3. Choose what scheme to use for the spatial aggregation. We can choose either *aggregation-before-transformation* or *transformation-before-aggregation* depending on what scale the process we are interested in, is actually occurring.
-4. Decide on what *functional forms* to use in the analysis. It is always good to experiment with multiple functional forms and then decide on the main specification depending on which of them provides the best linear approximation of the true process.
-5. Use cross-validation to converge on the most-preferred specification. It is always a good strategy to show results for other specification for attesting the robustness of results.
+
 
 ## Choosing weather variables and their forms
 
