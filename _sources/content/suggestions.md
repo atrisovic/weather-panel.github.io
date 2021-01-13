@@ -46,9 +46,7 @@ In addition, it will allow you to reuse the original data multiple times.
 ## Naming conventions
 
 Good naming practices should be applied to files and folders to make clear the contents of your project. 
-Informative naming makes it easier to understand the purpose of each item and can improve searchability.
-
-Recommendations:
+Informative naming makes it easier to understand the purpose of each item and can improve searchability. Here are a few recommendations:
 
 1. Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., `.csv`)
 2. Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
@@ -58,16 +56,18 @@ Recommendations:
 
 ## Version control
 
-We recommend using version control to track changes to your code files. There are many advantages to using a version control software, like, it enables multiple collaborators to simultaneously work on a single project, or a single person to use multiple computers to work on a project. 
-Also, it gives access to historical versions of your project. 
+We recommend using version control to track changes to your code files. There are many advantages to using version control software, and here we list a few:
 
-```{seealso}
-We recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
-```
-
-Here is one more reason to use version control:
+1. It enables multiple collaborators to simultaneously work on a single project. With version control, each collaborator can freely make changes to any project files, as it allows merging all the changes into a common version.
+2. It saves every version of your project after making changes, which is a great habit (see Figure below). This means that you can restore previous versions of the files, in case they can be useful or prove to be better than the latest ones. 
+3. Using version control for developing your code can help understand what has changed between each version and troubleshoot potential new bugs. It may also help you identify and solve them.
+4. Finally, version control can act as a backup of your project. In case your computer breaks, you can always retrieve the latest version of the project from your colleagues or a remote repository. This feature also allows you to work on multiple computers seamlessly. 
 
 ![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
+
+```{seealso}
+We highly recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
+```
 
 ## Workflow automation
 
