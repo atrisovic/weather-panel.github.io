@@ -290,7 +290,7 @@
                 
   <div class="section" id="constructing-weather-averages-within-spatial-units">
 <h1>Constructing weather averages within spatial units<a class="headerlink" href="#constructing-weather-averages-within-spatial-units" title="Permalink to this headline">¶</a></h1>
-<p>At this point, you probably have a gridded spatiotemporal dataset of historical weather and economic output data specific to shapefile regions. The next step is construct the weather measures that will correspond to each of your economic data observations. To do this, you will need to construct a weighted average of the weather in each region for each timestep.</p>
+<p>At this point, you probably have a gridded spatiotemporal dataset of historical weather and economic output data specific to shapefile regions. The next step is to construct the weather measures that will correspond to each of your economic data observations. To do this, you will need to construct a weighted average of the weather in each region for each timestep.</p>
 <p>In some cases, there are tools available that will help you do this. If you are using area weighting (i.e., no weighting grid) and your grid is fine enough that every region fully contains at least one cell, one tool you can use is
 <a class="reference external" href="http://www.matteodefelice.name/post/aggregating-gridded-data/">regionmask</a>.</p>
 <p>If your situation is more complicated, or if you just want to know how to do it yourself, it is important to set up the mathematical process efficiently since this can be a computationally intensive step.</p>
@@ -305,7 +305,7 @@ calculate it, the process for generating each time step is faster.</p>
 <p>Below, we sketch out two approaches to generating this matrix, but a few comments are common no matter how you generate it.</p>
 <ol class="simple">
 <li><p>The sum of entries across each row should be 1. Missing values can
-cause reasonable-looking calculations to produce rows sums that are
+cause reasonable-looking calculations to produce rows of sums that are
 less than one, so make sure you check.</p></li>
 <li><p>This matrix is huge, but it is very sparse: most entries
 are 0. Make sure to use a sparse matrix implementation (e.g.,
@@ -317,21 +317,21 @@ about the order of the entries, and order the columns of <span class="math notra
 same way.</p></li>
 </ol>
 <div class="tabbed-set docutils">
-<input checked="checked" id="dd973c2f-4dd5-45ce-ab36-8f837d85d8e5" name="7a42404a-b4f6-40fc-9a66-496494024873" type="radio">
-</input><label class="tabbed-label" for="dd973c2f-4dd5-45ce-ab36-8f837d85d8e5">
+<input checked="checked" id="b1e2567d-b4a5-4f54-8fc1-58ead58174d8" name="7f327830-9145-4245-bbd9-a0bd27fb9c65" type="radio">
+</input><label class="tabbed-label" for="b1e2567d-b4a5-4f54-8fc1-58ead58174d8">
 R</label><div class="tabbed-content docutils">
 <p>In R, <code class="docutils literal notranslate"><span class="pre">as.vector</span></code> will convert from a matrix to a vector, with each
 <em>column</em> being listed in full before moving on to the next column.</p>
 </div>
-<input id="ee53207d-2365-4d3d-985a-6ba917622065" name="7a42404a-b4f6-40fc-9a66-496494024873" type="radio">
-</input><label class="tabbed-label" for="ee53207d-2365-4d3d-985a-6ba917622065">
+<input id="0a171577-7023-4138-97af-cc3df68aa340" name="7f327830-9145-4245-bbd9-a0bd27fb9c65" type="radio">
+</input><label class="tabbed-label" for="0a171577-7023-4138-97af-cc3df68aa340">
 Python</label><div class="tabbed-content docutils">
 <p>In python, <code class="docutils literal notranslate"><span class="pre">numpy.flatten</span></code> will convert a numpy matrix to a vector,
 with each <em>row</em> being listed in full before moving on to the next
 row.</p>
 </div>
-<input id="78c26472-fc33-4b1a-b04a-906b62a9182d" name="7a42404a-b4f6-40fc-9a66-496494024873" type="radio">
-</input><label class="tabbed-label" for="78c26472-fc33-4b1a-b04a-906b62a9182d">
+<input id="f469f214-880d-4688-9e75-92947fd49684" name="7f327830-9145-4245-bbd9-a0bd27fb9c65" type="radio">
+</input><label class="tabbed-label" for="f469f214-880d-4688-9e75-92947fd49684">
 Matlab</label><div class="tabbed-content docutils">
 <p>In Matlab, indexing the grid with <code class="docutils literal notranslate"><span class="pre">(:)</span></code> will convert from an array
 to a vector, with each <em>column</em> being listed in full before moving
@@ -359,7 +359,7 @@ points within each region. Here’s how you would do that with the
 </pre></div>
 </div>
 <p>Then you can use the cells that have been found (which, if you’ve set
-it up right, will be in the same order as the columns of <span class="math notranslate nohighlight">\(A\)</span>) to
+it upright, will be in the same order as the columns of <span class="math notranslate nohighlight">\(A\)</span>) to
 fill in the entries of your transformation matrix.</p>
 <p>If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need
@@ -377,7 +377,7 @@ to find whichever grid cell is closest. For example, in R, using
 of the weather that overlaps each region, particularly when the
 regions are of a similar size to the grid cells. In this case, you
 need to determine how much each grid cell overlaps with each region.</p>
-<p>There are different ways for doing this, but one is to use QGIS.
+<p>There are different ways of doing this, but one is to use QGIS.
 Within QGIS, you can create a shapefile with a rectangle for each grid
 cell. Then intersect those with the region shapefile, producing a
 separate polygon for each region-by-grid cell combination. Then have

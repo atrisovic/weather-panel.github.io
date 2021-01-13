@@ -374,12 +374,12 @@
 </div>
 <div class="section" id="working-with-shapefiles">
 <h2>Working with shapefiles<a class="headerlink" href="#working-with-shapefiles" title="Permalink to this headline">¶</a></h2>
-<p>Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to make sure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:</p>
+<p>Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to ensure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f5102600-4433-4ff0-b599-53b3f3fab44d" name="ebc59778-ff85-4483-9996-fe51adacf44a" type="radio">
-</input><label class="tabbed-label" for="f5102600-4433-4ff0-b599-53b3f3fab44d">
+<input checked="checked" id="dae94436-d2ce-4f95-8473-7372036931ca" name="c30d97c6-4835-4892-9f80-e4d366d77028" type="radio">
+</input><label class="tabbed-label" for="dae94436-d2ce-4f95-8473-7372036931ca">
 R</label><div class="tabbed-content docutils">
-<p>To read shape files you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>, <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
+<p>To read shapefiles you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>, <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
 <span class="n">shapefile</span> <span class="o">&lt;-</span> <span class="nf">readShapePoly</span><span class="p">(</span><span class="s">&quot;/my_shapefile.shp&quot;</span><span class="p">)</span>
  
@@ -390,8 +390,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="68172b03-5859-41d5-ad65-19859fd5ca98" name="ebc59778-ff85-4483-9996-fe51adacf44a" type="radio">
-</input><label class="tabbed-label" for="68172b03-5859-41d5-ad65-19859fd5ca98">
+<input id="82408b2e-673b-42c3-8620-40232393e03b" name="c30d97c6-4835-4892-9f80-e4d366d77028" type="radio">
+</input><label class="tabbed-label" for="82408b2e-673b-42c3-8620-40232393e03b">
 Python</label><div class="tabbed-content docutils">
 <p>Shapefiles can be opened with Python packages in a few different ways:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>

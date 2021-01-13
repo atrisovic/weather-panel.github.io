@@ -403,7 +403,7 @@
 <li><p>Every weather or climate data product has its use cases, limitations, uncertainties, and quirks</p></li>
 </ul>
 </div>
-<p>This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commoly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation.</p>
+<p>This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commonly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation.</p>
 <div class="section" id="the-netcdf-data-format">
 <h2>The NetCDF Data Format<a class="headerlink" href="#the-netcdf-data-format" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/NetCDF-overview">NetCDF</a> format is a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It’s efficient, self-describing, and supported by any major programming language, though you’ll have to pre-process data into another format (.csv, etc.) before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with most climate or weather datasets published in the world.</p>
@@ -419,7 +419,7 @@
 </li>
 <li><p>MATLAB (native support)</p></li>
 <li><p>R (<a class="reference external" href="https://cran.r-project.org/web/packages/ncdf4/index.html">ncdf4</a> package)</p></li>
-<li><p><a class="reference external" href="http://nco.sourceforge.net">nco</a> (“NetCDF operators”) - command line tools</p>
+<li><p><a class="reference external" href="http://nco.sourceforge.net">nco</a> (“NetCDF operators”) - command-line tools</p>
 <ul>
 <li><p>a series of tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language.</p></li>
 <li><p>important commands: <code class="docutils literal notranslate"><span class="pre">ncview</span></code> (to display spatial data), <code class="docutils literal notranslate"><span class="pre">ncks</span></code> (“nc kitchen sink” - to split or
@@ -432,14 +432,9 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <p class="admonition-title">Tip</p>
 <p>If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:</p>
 <ul class="simple">
-<li><p>Python (<code class="docutils literal notranslate"><span class="pre">xarray</span></code>): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs</p></li>
+<li><p>Python (<code class="docutils literal notranslate"><span class="pre">xarray</span></code>): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexibility for uncommon needs</p></li>
 <li><p>MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management</p></li>
 </ul>
-</div>
-<p>In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called <a class="reference external" href="https://codeocean.com">Code Ocean</a> facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a “research capsule”.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>See a <a class="reference external" href="https://codeocean.com/capsule/8792614">demonstration of shared research material in CodeOcean</a>. This data and code were originally prepared and published with the paper “Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US’’ by Olivier Deschênes and Michael Greenstone.</p>
 </div>
 </div>
 <div class="section" id="netcdf-contents">
@@ -451,7 +446,7 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <li><p><em>Variables</em>: The arrays themselves, containing the data you want. Each array has an order of dimensions. For a two-dimensional array, the first dimension corresponds to the rows and the second dimension to the columns.</p></li>
 <li><p><em>Dimensions</em>: The dimensions information in a NetCDF says how many entries are in each dimension. For example, a file containing a 1-degree grid over the world would typically lave a <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension of length 360 and a <code class="docutils literal notranslate"><span class="pre">lat</span></code> dimension with length 180.</p></li>
 </ul>
-<p>Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension with length 360, there will usually be a <code class="docutils literal notranslate"><span class="pre">lon</span></code> or <code class="docutils literal notranslate"><span class="pre">longitude</span></code> variable, which is a array with the single <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension, and its contents would look something like <code class="docutils literal notranslate"><span class="pre">[-179.5,</span> <span class="pre">-178.5,</span> <span class="pre">-177.5,</span> <span class="pre">...,</span> <span class="pre">179.5]</span></code>.</p>
+<p>Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension with length 360, there will usually be a <code class="docutils literal notranslate"><span class="pre">lon</span></code> or <code class="docutils literal notranslate"><span class="pre">longitude</span></code> variable, which is an array with the single <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension, and its contents would look something like <code class="docutils literal notranslate"><span class="pre">[-179.5,</span> <span class="pre">-178.5,</span> <span class="pre">-177.5,</span> <span class="pre">...,</span> <span class="pre">179.5]</span></code>.</p>
 </div>
 <div class="section" id="netcdf-file-organization">
 <h3>NetCDF File Organization<a class="headerlink" href="#netcdf-file-organization" title="Permalink to this headline">¶</a></h3>
@@ -494,39 +489,39 @@ concatenate files command line), and <code class="docutils literal notranslate">
 <h3>The NetCDF Header<a class="headerlink" href="#the-netcdf-header" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files are self-describing, meaning that they contain information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for NetCDF filename <code class="docutils literal notranslate"><span class="pre">fn</span></code>, for each mentioned tool above:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="cf463703-9856-4c13-888a-94f3aeeff894" name="ad10541b-3ac9-4fbc-84c5-1418ddbb256f" type="radio">
-</input><label class="tabbed-label" for="cf463703-9856-4c13-888a-94f3aeeff894">
+<input checked="checked" id="d8266a2d-19ef-462d-b95b-2a984a6f8f92" name="693b2414-3199-4ac3-b800-83a399b78be6" type="radio">
+</input><label class="tabbed-label" for="d8266a2d-19ef-462d-b95b-2a984a6f8f92">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="8ced43c9-7cde-44a1-906e-c3e79eb238d5" name="ad10541b-3ac9-4fbc-84c5-1418ddbb256f" type="radio">
-</input><label class="tabbed-label" for="8ced43c9-7cde-44a1-906e-c3e79eb238d5">
+<input id="9f6746c9-1335-425b-82dc-0524ecd0a48d" name="693b2414-3199-4ac3-b800-83a399b78be6" type="radio">
+</input><label class="tabbed-label" for="9f6746c9-1335-425b-82dc-0524ecd0a48d">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncdisp</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="8db1f52e-1f8d-449d-8ac0-6c114b706719" name="ad10541b-3ac9-4fbc-84c5-1418ddbb256f" type="radio">
-</input><label class="tabbed-label" for="8db1f52e-1f8d-449d-8ac0-6c114b706719">
+<input id="6075f93f-38ca-4a9f-ab86-15dbe4c1aad5" name="693b2414-3199-4ac3-b800-83a399b78be6" type="radio">
+</input><label class="tabbed-label" for="6075f93f-38ca-4a9f-ab86-15dbe4c1aad5">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncfile</span>
 </pre></div>
 </div>
 </div>
-<input id="c8f10c3e-a235-4af8-8ac4-7e391a8b7cb1" name="ad10541b-3ac9-4fbc-84c5-1418ddbb256f" type="radio">
-</input><label class="tabbed-label" for="c8f10c3e-a235-4af8-8ac4-7e391a8b7cb1">
+<input id="bd38fabd-9d16-473b-a1a6-75223726c805" name="693b2414-3199-4ac3-b800-83a399b78be6" type="radio">
+</input><label class="tabbed-label" for="bd38fabd-9d16-473b-a1a6-75223726c805">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="9fcab504-2866-4345-9971-f444a32cff88" name="ad10541b-3ac9-4fbc-84c5-1418ddbb256f" type="radio">
-</input><label class="tabbed-label" for="9fcab504-2866-4345-9971-f444a32cff88">
+<input id="339c67e7-16f3-48f1-86ff-56611de0bfe9" name="693b2414-3199-4ac3-b800-83a399b78be6" type="radio">
+</input><label class="tabbed-label" for="339c67e7-16f3-48f1-86ff-56611de0bfe9">
 nco</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span>
 <span class="n">ncdump</span> <span class="o">-</span><span class="n">h</span> <span class="n">fn</span>
@@ -561,16 +556,16 @@ nco</label><div class="tabbed-content docutils">
 <h3>Reading NetCDF data<a class="headerlink" href="#reading-netcdf-data" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable <code class="docutils literal notranslate"><span class="pre">var</span></code>:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e22354f5-fa21-4dc4-89cd-30a4fd1d8a93" name="0a4adc08-6458-441d-9b73-be4a59cd873f" type="radio">
-</input><label class="tabbed-label" for="e22354f5-fa21-4dc4-89cd-30a4fd1d8a93">
+<input checked="checked" id="28280ce4-8c52-4f91-bdb1-71835f011df2" name="816563b1-c460-4978-84a5-7a9f3907ffa1" type="radio">
+</input><label class="tabbed-label" for="28280ce4-8c52-4f91-bdb1-71835f011df2">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="16117f60-5d4d-4d47-bbf0-8d91e68b206d" name="0a4adc08-6458-441d-9b73-be4a59cd873f" type="radio">
-</input><label class="tabbed-label" for="16117f60-5d4d-4d47-bbf0-8d91e68b206d">
+<input id="bad3d812-33f2-4343-b559-635e83333714" name="816563b1-c460-4978-84a5-7a9f3907ffa1" type="radio">
+</input><label class="tabbed-label" for="bad3d812-33f2-4343-b559-635e83333714">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="n">var</span>
@@ -578,8 +573,8 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </div>
 <p>Data is loaded slowly and only fully loaded when calculations are done - to force loading, run <code class="docutils literal notranslate"><span class="pre">ds.load()</span></code></p>
 </div>
-<input id="18812d91-454a-4fcc-8543-93a005186a4c" name="0a4adc08-6458-441d-9b73-be4a59cd873f" type="radio">
-</input><label class="tabbed-label" for="18812d91-454a-4fcc-8543-93a005186a4c">
+<input id="3ebcfa81-6b21-478e-b8a9-f69062d57500" name="816563b1-c460-4978-84a5-7a9f3907ffa1" type="radio">
+</input><label class="tabbed-label" for="3ebcfa81-6b21-478e-b8a9-f69062d57500">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncf</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">][:]</span>
@@ -587,8 +582,8 @@ Python (NetCDF4)</label><div class="tabbed-content docutils">
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ncf.variables[var]</span></code> will return a <code class="docutils literal notranslate"><span class="pre">float</span></code> object that keeps the attributes from the NetCDF file</p>
 </div>
-<input id="4eef39a3-4d27-43e0-a1e9-c0c254a7c148" name="0a4adc08-6458-441d-9b73-be4a59cd873f" type="radio">
-</input><label class="tabbed-label" for="4eef39a3-4d27-43e0-a1e9-c0c254a7c148">
+<input id="b9fe7a19-6c66-45c0-b45c-5f5f95457bd9" name="816563b1-c460-4978-84a5-7a9f3907ffa1" type="radio">
+</input><label class="tabbed-label" for="b9fe7a19-6c66-45c0-b45c-5f5f95457bd9">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">);</span>
 </pre></div>
@@ -597,8 +592,8 @@ Matlab</label><div class="tabbed-content docutils">
 </div>
 <p>You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="8ab574a4-c21d-47ea-a54f-c14d649b4909" name="4eeeaa56-b4b0-4681-ae1a-cc5196304d75" type="radio">
-</input><label class="tabbed-label" for="8ab574a4-c21d-47ea-a54f-c14d649b4909">
+<input checked="checked" id="9ab3271e-0382-449e-b9de-fe4bd55b4f63" name="005f3614-8797-4184-ba2f-1d0626436b58" type="radio">
+</input><label class="tabbed-label" for="9ab3271e-0382-449e-b9de-fe4bd55b4f63">
 Python (xarray)</label><div class="tabbed-content docutils">
 <p>Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
@@ -612,16 +607,16 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="83bc4c2c-2194-460f-b784-74b9d5290bfd" name="4eeeaa56-b4b0-4681-ae1a-cc5196304d75" type="radio">
-</input><label class="tabbed-label" for="83bc4c2c-2194-460f-b784-74b9d5290bfd">
+<input id="8bbb373e-c968-4c19-a63f-539ce4578572" name="005f3614-8797-4184-ba2f-1d0626436b58" type="radio">
+</input><label class="tabbed-label" for="8bbb373e-c968-4c19-a63f-539ce4578572">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% in the format ncread(filename,variable name,start idx,count)</span>
 <span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">5</span> <span class="mi">5</span> <span class="mi">365</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
-<input id="fba9bada-630f-4ce8-9976-91e722459500" name="4eeeaa56-b4b0-4681-ae1a-cc5196304d75" type="radio">
-</input><label class="tabbed-label" for="fba9bada-630f-4ce8-9976-91e722459500">
+<input id="0aa8d9af-47ae-4da2-8df5-02c5770279f5" name="005f3614-8797-4184-ba2f-1d0626436b58" type="radio">
+</input><label class="tabbed-label" for="0aa8d9af-47ae-4da2-8df5-02c5770279f5">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">vardata</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">365</span><span class="p">))</span>
@@ -636,16 +631,16 @@ R</label><div class="tabbed-content docutils">
 <h3>Diagnostic Maps of Climate Data<a class="headerlink" href="#diagnostic-maps-of-climate-data" title="Permalink to this headline">¶</a></h3>
 <p>You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It’s generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren’t suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="8be638f1-4554-4dc1-a51c-11abfef22cc6" name="2e8fbda9-bc35-4cee-9026-2224f76da188" type="radio">
-</input><label class="tabbed-label" for="8be638f1-4554-4dc1-a51c-11abfef22cc6">
+<input checked="checked" id="3f3d199a-d584-4a18-a35d-ed035942c527" name="0e0c5930-7fb6-4c97-8f70-cdd9f3dfafb9" type="radio">
+</input><label class="tabbed-label" for="3f3d199a-d584-4a18-a35d-ed035942c527">
 Python</label><div class="tabbed-content docutils">
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>For more information on plotting geographic data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, we highly recommend the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a></p>
 </div>
 </div>
-<input id="710b5dab-9284-4a65-8311-e1dd9fec0c39" name="2e8fbda9-bc35-4cee-9026-2224f76da188" type="radio">
-</input><label class="tabbed-label" for="710b5dab-9284-4a65-8311-e1dd9fec0c39">
+<input id="fe0c35ae-8d6e-476b-94ba-d1899d7920d4" name="0e0c5930-7fb6-4c97-8f70-cdd9f3dfafb9" type="radio">
+</input><label class="tabbed-label" for="fe0c35ae-8d6e-476b-94ba-d1899d7920d4">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Assuming your dataset is called &quot;tas&quot; (lon,lat,time)</span>
 <span class="c">% This will just plot a heatmap of your data:</span>
@@ -772,7 +767,7 @@ Historical data products differ by how they <a class="reference external" href="
 </div>
 <div class="section" id="regional-datasets">
 <h3>Regional Datasets<a class="headerlink" href="#regional-datasets" title="Permalink to this headline">¶</a></h3>
-<p>Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-proceessing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/B9780128159989000075">Dinku et al. 2019</a>).</p>
+<p>Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/B9780128159989000075">Dinku et al. 2019</a>).</p>
 </div>
 </div>
 <div class="section" id="where-to-even-begin-resources-and-how-to-start-working-with-a-data-product">
@@ -787,12 +782,12 @@ Historical data products differ by how they <a class="reference external" href="
 <p>Additionally, think about if you want climatological (“what you expect”) data, rather than weather (“what you get”) data. Climatology is generally known with more precision and available at higher resolution, but will only represent average patterns (e.g., average temperature by month) rather than any particular year.</p>
 <div class="section" id="getting-started-with-a-data-product-sample-process-using-best-and-chirps">
 <h3>Getting Started with a Data Product - Sample Process using BEST and CHIRPS<a class="headerlink" href="#getting-started-with-a-data-product-sample-process-using-best-and-chirps" title="Permalink to this headline">¶</a></h3>
-<p>Say you’re looking at agriculture in Ethiopia. You would like both temperature and precipitation data (see warning on hydrological variables below), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found literature specifically examining its biases in your region of interest.</p>
+<p>Say you’re looking at agriculture in Ethiopia. You would like both temperature and precipitation data (see the warning on hydrological variables below), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found literature specifically examining its biases in your region of interest.</p>
 <ol class="simple">
 <li><p><em>Understand the Data Product</em> - you look up CHIRPS and UDel on the UCAR Climate Data Guide</p>
 <ol class="simple">
 <li><p>CHIRPS is unfortunately not covered on the UCAR Climate Data Guide. <em>However</em>, you find several articles specifically validating it in Ethiopia (e.g. <a class="reference external" href="https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244">Dinku et al. 2018</a> or <a class="reference external" href="https://eprints.soton.ac.uk/435188/">Gebrechorkos et al. 2018</a>). You see that satellite data products are more biased South of the Rift Valley than North. You also see that CHIRPS tends to overestimate rainfall. You consider how these biases may affect your results.</p></li>
-<li><p>BEST <em>is</em> <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/global-surface-temperatures-best-berkeley-earth-surface-temperatures">covered</a> on the Climate Data Guide. You see that it is able to provide high-resolution data because it includes more incomplete and partial station records than other global products. However, you also see that the data is highly smoothed, meaning that it will likely be more biased in areas with large heterogeneity in temperature - for example in the mountainous highlands of Ethiopia. You resolve to use different sources to check for robustness.</p></li>
+<li><p>BEST <em>is</em> <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/global-surface-temperatures-best-berkeley-earth-surface-temperatures">covered</a> on the Climate Data Guide. You see that it is able to provide high-resolution data because it includes incomplete and partial station records than other global products. However, you also see that the data is highly smoothed, meaning that it will likely be more biased in areas with large heterogeneity in temperature - for example in the mountainous highlands of Ethiopia. You resolve to use different sources to check for robustness.</p></li>
 </ol>
 </li>
 <li><p><em>Prepare to Download the Data</em> - most weather products will require some bureaucracy to download data, and most have their own weird quirks about how they want data to be downloaded. CHIRPS and BEST do not require bureaucracy (creating accounts, signing data agreements, etc.), but CHIRPS will require some scripting to download.</p>
