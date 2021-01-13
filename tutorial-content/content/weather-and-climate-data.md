@@ -35,7 +35,7 @@ Through this section, we introduce relevant commands whenever possible for the f
 - Python
     - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports NetCDF files
     - [netcdf4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
-- Matlab (native support)
+- MATLAB (native support)
 - R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
 - [nco](http://nco.sourceforge.net) (“NetCDF operators”) - command line tools
     - a series of tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language.
@@ -47,7 +47,13 @@ For any python code chunks, it’s assumed that the xarray package is loaded as 
 ```{tip}
 If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:
 - Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs
-- Matlab: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management
+- MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management
+```
+
+In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called [Code Ocean](https://codeocean.com) facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a "research capsule".
+
+```{seealso}
+See a [demonstration of shared research material in CodeOcean](https://codeocean.com/capsule/8792614). This data and code were originally prepared and published with the paper "Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US'' by Olivier Deschênes and Michael Greenstone. 
 ```
 
 ### NetCDF Contents
