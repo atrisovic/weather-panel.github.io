@@ -50,7 +50,7 @@ Informative naming makes it easier to understand the purpose of each item and ca
 
 1. Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., `.csv`)
 2. Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
-3. Ensure file names are informative of its contents
+3. Ensure file names are informative of their contents
 4. If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
 
 
@@ -67,6 +67,14 @@ We recommend using version control to track changes to your code files. There ar
 
 ```{seealso}
 We highly recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
+```
+
+## Research dissemination 
+
+In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing, reproducibility and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called [Code Ocean](https://codeocean.com) facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a "research capsule".
+
+```{seealso}
+See a [demonstration of shared research material in CodeOcean](https://codeocean.com/capsule/8792614). This data and code were originally prepared and published with the paper "Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US'' by Olivier Deschênes and Michael Greenstone. 
 ```
 
 ## Workflow automation

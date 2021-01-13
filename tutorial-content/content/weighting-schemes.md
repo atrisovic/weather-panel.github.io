@@ -37,7 +37,7 @@ When the phenomenon occurs locally, in response to local weather, we perform wei
 1. Transform weather into the terms of the model specification.
 2. Average these transformed terms across space using a weighting scheme.
 
-When the phenomenon occurs at a data region level, in response to averaged weather, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from a shore could be important to predict the declaration of states of emergency. The order of operations is:
+When the phenomenon occurs at a data region level, in response to averaged weather, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from ashore could be important to predict the declaration of states of emergency. The order of operations is:
 
 1. Average the weather across space using a weighting scheme.
 2. Transform the averaged weather to the model specification.

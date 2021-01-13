@@ -21,7 +21,7 @@ When using weather data as independent variables in an economic model, or climat
 - Every weather or climate data product has its use cases, limitations, uncertainties, and quirks
 ```
 
-This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commoly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation. 
+This section will introduce you to the right questions to ask when deciding on climate or weather data to use in your research. It will cover how to deal with a commonly used weather and climate data format in multiple languages, understanding the differences between gridded weather data products, finding evaluations of weather data products, examples on how to do download several different weather data products, and a few warnings on common biases in weather data, especially precipitation. 
 
 
 ## The NetCDF Data Format
@@ -37,7 +37,7 @@ Through this section, we introduce relevant commands whenever possible for the f
     - [netcdf4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
 - MATLAB (native support)
 - R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
-- [nco](http://nco.sourceforge.net) (“NetCDF operators”) - command line tools
+- [nco](http://nco.sourceforge.net) (“NetCDF operators”) - command-line tools
     - a series of tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language.
     - important commands: `ncview` (to display spatial data), `ncks` (“nc kitchen sink” - to split or
       concatenate files command line), and `ncdump` (to print contents of the file)
@@ -46,14 +46,8 @@ For any python code chunks, it’s assumed that the xarray package is loaded as 
 
 ```{tip}
 If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:
-- Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexbility for uncommon needs
+- Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexibility for uncommon needs
 - MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management
-```
-
-In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called [Code Ocean](https://codeocean.com) facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a "research capsule".
-
-```{seealso}
-See a [demonstration of shared research material in CodeOcean](https://codeocean.com/capsule/8792614). This data and code were originally prepared and published with the paper "Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US'' by Olivier Deschênes and Michael Greenstone. 
 ```
 
 ### NetCDF Contents
@@ -66,7 +60,7 @@ NetCDF files have three kinds of information:
 - *Variables*: The arrays themselves, containing the data you want. Each array has an order of dimensions. For a two-dimensional array, the first dimension corresponds to the rows and the second dimension to the columns.
 - *Dimensions*: The dimensions information in a NetCDF says how many entries are in each dimension. For example, a file containing a 1-degree grid over the world would typically lave a `lon` dimension of length 360 and a `lat` dimension with length 180.
   
-Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` or `longitude` variable, which is a array with the single `lon` dimension, and its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
+Typically, there will be variables that correspond to each of the dimensions, and sometimes these will have the same name as the dimension objects. These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` or `longitude` variable, which is an array with the single `lon` dimension, and its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
 
 ### NetCDF File Organization
 
@@ -352,7 +346,7 @@ See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/cli
 ```
 
 ### Regional Datasets
-Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-proceessing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
+Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
 
 ## Where to Even Begin - Resources and How to Start Working with a Data Product
 
@@ -367,11 +361,11 @@ These resources will help you determine which data product is right for you (and
 Additionally, think about if you want climatological ("what you expect") data, rather than weather ("what you get") data. Climatology is generally known with more precision and available at higher resolution, but will only represent average patterns (e.g., average temperature by month) rather than any particular year.
 
 ### Getting Started with a Data Product - Sample Process using BEST and CHIRPS
-Say you're looking at agriculture in Ethiopia. You would like both temperature and precipitation data (see warning on hydrological variables below), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found literature specifically examining its biases in your region of interest. 
+Say you're looking at agriculture in Ethiopia. You would like both temperature and precipitation data (see the warning on hydrological variables below), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found literature specifically examining its biases in your region of interest. 
 
 1. *Understand the Data Product* - you look up CHIRPS and UDel on the UCAR Climate Data Guide 
 	1. CHIRPS is unfortunately not covered on the UCAR Climate Data Guide. _However_, you find several articles specifically validating it in Ethiopia (e.g. [Dinku et al. 2018](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244) or [Gebrechorkos et al. 2018](https://eprints.soton.ac.uk/435188/)). You see that satellite data products are more biased South of the Rift Valley than North. You also see that CHIRPS tends to overestimate rainfall. You consider how these biases may affect your results. 
-	2. BEST _is_ [covered](https://climatedataguide.ucar.edu/climate-data/global-surface-temperatures-best-berkeley-earth-surface-temperatures) on the Climate Data Guide. You see that it is able to provide high-resolution data because it includes more incomplete and partial station records than other global products. However, you also see that the data is highly smoothed, meaning that it will likely be more biased in areas with large heterogeneity in temperature - for example in the mountainous highlands of Ethiopia. You resolve to use different sources to check for robustness.  
+	2. BEST _is_ [covered](https://climatedataguide.ucar.edu/climate-data/global-surface-temperatures-best-berkeley-earth-surface-temperatures) on the Climate Data Guide. You see that it is able to provide high-resolution data because it includes incomplete and partial station records than other global products. However, you also see that the data is highly smoothed, meaning that it will likely be more biased in areas with large heterogeneity in temperature - for example in the mountainous highlands of Ethiopia. You resolve to use different sources to check for robustness.  
 2. *Prepare to Download the Data* - most weather products will require some bureaucracy to download data, and most have their own weird quirks about how they want data to be downloaded. CHIRPS and BEST do not require bureaucracy (creating accounts, signing data agreements, etc.), but CHIRPS will require some scripting to download. 
 	1. CHIRPS: After some searching, you find that CHIRPS data is stored in a publicly accessible [directory](https://data.chc.ucsb.edu/products/CHIRPS-2.0/) (this is a simpler setup than most). You navigate to the `africa_daily/bils/` directory, and choose between 0.5 degree resolution and 2.5 degree resolution. However, you realize that you may have to write a shell script to download this data, to avoid clicking every file separately (using `ftplib` in python and similar packages is also an option).  
 	2. BEST: you click on 'Get Data (external)' on the Climate Data Guide website, taking you to Berkley Earth's data overview page. You navigate down to the section on 'Gridded Data'. You'll have to click on every decade separately, but without further ado, clean NetCDF files are being downloaded to your machine. 

@@ -1,6 +1,6 @@
 # Constructing weather averages within spatial units
  
-At this point, you probably have a gridded spatiotemporal dataset of historical weather and economic output data specific to shapefile regions. The next step is construct the weather measures that will correspond to each of your economic data observations. To do this, you will need to construct a weighted average of the weather in each region for each timestep.
+At this point, you probably have a gridded spatiotemporal dataset of historical weather and economic output data specific to shapefile regions. The next step is to construct the weather measures that will correspond to each of your economic data observations. To do this, you will need to construct a weighted average of the weather in each region for each timestep.
  
 In some cases, there are tools available that will help you do this. If you are using area weighting (i.e., no weighting grid) and your grid is fine enough that every region fully contains at least one cell, one tool you can use is
 [regionmask](http://www.matteodefelice.name/post/aggregating-gridded-data/).
@@ -20,7 +20,7 @@ calculate it, the process for generating each time step is faster.
 Below, we sketch out two approaches to generating this matrix, but a few comments are common no matter how you generate it.
  
 1. The sum of entries across each row should be 1. Missing values can
-  cause reasonable-looking calculations to produce rows sums that are
+  cause reasonable-looking calculations to produce rows of sums that are
   less than one, so make sure you check.
  
 2. This matrix is huge, but it is very sparse: most entries
@@ -72,7 +72,7 @@ eids <- findPolys(events, polys, maxRows=6e5)
 ```
  
 Then you can use the cells that have been found (which, if you've set
-it up right, will be in the same order as the columns of $A$) to
+it upright, will be in the same order as the columns of $A$) to
 fill in the entries of your transformation matrix.
  
 If your regions are not much bigger than the grid cells, you may get
@@ -92,7 +92,7 @@ of the weather that overlaps each region, particularly when the
 regions are of a similar size to the grid cells. In this case, you
 need to determine how much each grid cell overlaps with each region.
  
-There are different ways for doing this, but one is to use QGIS.
+There are different ways of doing this, but one is to use QGIS.
 Within QGIS, you can create a shapefile with a rectangle for each grid
 cell. Then intersect those with the region shapefile, producing a
 separate polygon for each region-by-grid cell combination. Then have

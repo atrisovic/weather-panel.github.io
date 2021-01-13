@@ -12,7 +12,7 @@ been uncovered in recent years:
 Source: [Carleton and Hsiang (2016)](https://science.sciencemag.org/content/353/6304/aad9837).
 
 Relationships like these that relate weather to socioeconomic outcomes
-are openning new questions even as they provide answers. In the figure
+are opening new questions even as they provide answers. In the figure
 above, there are response functions for mortality, agriculture, and
 conflict that have been estimated for both rich and poor
 countries. Interestingly, these often do not match up, and their
@@ -89,10 +89,10 @@ useful for more people!
 # Some introductory concepts
 
 A useful resource to better understand the basics of weather, climate,
-and the physical changes occuring in the climate system
+and the physical changes occurring in the climate system
 is
 [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3). If
-you have not had experience with climate (or meterological) science,
+you have not had experience with climate (or meteorological) science,
 that is a great place to start. For a more general introduction to the
 sciences of climate and climate change, check out the [Encyclopedia of
 Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf).
@@ -119,7 +119,7 @@ forms:
 2. Region data describes an aggregate over an irregular space. Typical
    natural science regions include basins and water/land bodies. But
    economic region data is much more common, where quantities are
-   totalled across an entire political unit before they are
+   totaled across an entire political unit before they are
    reported. The region over which a data point is provided is the
    geographic unit.
 3. Gridded data provides information on a regular grid, almost always
