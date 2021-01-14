@@ -398,7 +398,7 @@ the climate econometric literature and the empirical methods used to
 identify them, a good resource is <a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
 </div>
 <div class="section" id="choosing-weather-variables-and-their-forms">
-<h2>Choosing weather variables and their forms<a class="headerlink" href="#choosing-weather-variables-and-their-forms" title="Permalink to this headline">¶</a></h2>
+<span id="content-choosing-weather-variables"></span><h2>Choosing weather variables and their forms<a class="headerlink" href="#choosing-weather-variables-and-their-forms" title="Permalink to this headline">¶</a></h2>
 <p>The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
 variable. For example, in the case of temperature, we can use
@@ -445,7 +445,7 @@ value for a given temperature. Specific humidity is the ratio of water vapor mas
 </div>
 <div class="section" id="precipitation">
 <h3><strong>Precipitation</strong><a class="headerlink" href="#precipitation" title="Permalink to this headline">¶</a></h3>
-<p>Precipitation is highly local (in space <em>and</em> time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see <a class="reference external" href="#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)">Section 1.5</a>. It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it’s still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):</p>
+<p>Precipitation is highly local (in space <em>and</em> time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see <a class="reference internal" href="working-with-data-product.html#content-warning-on-hydrological"><span class="std std-ref">a Warning on Hydrological Variables</span></a>. It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it’s still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):</p>
 <ol class="simple">
 <li><p><em>Total precipitation (e.g., over a year)</em>: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena.</p></li>
 <li><p><em>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</em>: often used to capture water stress.</p></li>
@@ -497,7 +497,7 @@ Oceania.</p></li>
 </div>
 </div>
 <div class="section" id="spatial-and-temporal-scales-of-economic-processes">
-<h2>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
+<span id="content-spatial-and-temporal-scales"></span><h2>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
 <p>The process of developing a reduced-form specification starts with a
 study of the “true model”, or data-generating process, that relates
 our dependent variable to our weather variables. A crucial aspect of
@@ -517,7 +517,8 @@ amount of each grid cell that lies within each region. This can be
 calculated as a transformation matrix, with a row for each region and
 a column for each cell. Once the matrix is calculated, it can be
 reused for each time step. More details for this process are described
-in sections 3 and 5.</p>
+in sections <a class="reference internal" href="weighting-schemes.html"><span class="doc std std-doc">weighting schemes</span></a> and <a class="reference internal" href="suggestions.html"><span class="doc std std-doc">suggestions for
+work organization</span></a>.</p>
 <p>Typically, relating weather to a dependent variable requires some
 non-linear transformation. For example, estimating a polynomial
 functional form requires raising the temperatures to various powers.
