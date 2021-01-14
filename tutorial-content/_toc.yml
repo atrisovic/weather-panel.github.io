@@ -4,6 +4,7 @@
 - part: Weather and Climate Data
   chapters:
   - file: content/weather-and-climate-data
+  - file: content/working-with-data-product
 
 - part: Developing a reduced-form specification
   chapters:
