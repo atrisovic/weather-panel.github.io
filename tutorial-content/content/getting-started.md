@@ -82,8 +82,7 @@ project:
 You can go through the sections one at a time or jump around.
 
 Most importantly, if you learn something in your own research process
-that you think would be of broad interest, see the *Contributions*
-section for how to include it here. Help us make this tutorial more
+that you think would be of broad interest, see [the contributor's guide](https://github.com/atrisovic/weather-panel.github.io) for how to include it here. Help us make this tutorial more
 useful for more people!
 
 # Some introductory concepts

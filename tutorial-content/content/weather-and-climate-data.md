@@ -86,7 +86,7 @@ or a CMIP6 filename format, of the form:
 - **timeframe**: frequently in `yyyymmdd-yyyymmdd` format.
 
 ```{seealso}
-For more information on "CMIP5" and "CMIP6" terminology, please see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html).
+For more information on "CMIP5" and "CMIP6" terminology, see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html).
 ```
 ````
 

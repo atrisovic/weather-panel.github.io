@@ -44,7 +44,7 @@ Say you're looking at agriculture in Ethiopia. You would like both temperature a
 Most weather products will require some bureaucracy (creating accounts, signing data agreements, etc.) to download data, and most have their own quirks about how they want data to be downloaded. CHIRPS and BEST do not require bureaucracy, but CHIRPS will require some scripting to download.
 ```
 
-These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in python. See also [weigthing schemes](weighting-schemes.md). 
+These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in python. See also [weigthing schemes](weighting-schemes). 
 
 
 ## Getting Started with a Data Product: ERA-5
@@ -105,6 +105,7 @@ If a regional observational dataset exists for the region and variables you wish
 
 Furthermore, check your results with multiple datasets from the latest generation! Consider performing your analysis with a purely station-based dataset and one that includes satellite data; or compare results to those from a reanalysis dataset if you are worried about statistical interpolation in your region of interest. This may not make a huge difference for more stable variables in areas with high station coverage (e.g. temperature in North America), but could be a useful robustness check for more problematic ones (e.g. precipitation). If the choice of 'historical' dataset changes your results, think about how their biases may interact with your analysis to figure out what's causing the discrepancy. 
 
+(content:warning-on-hydrological)=
 ## A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
 ![Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error.](https://imgs.xkcd.com/comics/meteorologist.png)
 
@@ -123,7 +124,7 @@ In general, rain gauges of most types are biased low. In strong wind conditions,
 
 Bias-correcting is integrated into weather data products, often involving assimilation of multiple data sources (satellites, radar, etc.) but significant biases remain (see above Figure).
 
-Precipitation is often recommended as a control in economic models, but its unique character makes it difficult to work with. Beyond the strong uncertainty in precipitation data, precipitation is highly non-gaussian and its correlation with temperature is time- and space- dependent. When using precipitation in your model, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data. Make sure to read studies evaluating your chosen data product - for example [Dinku et al. 2018](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.3244) for CHIRPS in Eastern Africa (a useful Google Scholar search for any product could be "[data product name] validation OR evaluation OR bias OR uncertainty"). Finally, make sure you think about what role precipitation plays in your model - see [2.1. Choosing weather variables](#2.1.-Choosing-weather-variables)!
+Precipitation is often recommended as a control in economic models, but its unique character makes it difficult to work with. Beyond the strong uncertainty in precipitation data, precipitation is highly non-gaussian and its correlation with temperature is time- and space- dependent. When using precipitation in your model, be aware of its limitations, check robustness against multiple data products, or on geographic subsets that have better station coverage and potentially less biased data. Make sure to read studies evaluating your chosen data product - for example [Dinku et al. 2018](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.3244) for CHIRPS in Eastern Africa (a useful Google Scholar search for any product could be "[data product name] validation OR evaluation OR bias OR uncertainty"). Finally, make sure you think about what role precipitation plays in your model - see [choosing weather variables](content:choosing-weather-variables)!
 
 ## A Final Note on Station Data
 

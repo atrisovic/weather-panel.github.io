@@ -24,7 +24,7 @@ the climate econometric literature and the empirical methods used to
 identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 ```
 
-
+(content:choosing-weather-variables)=
 ## Choosing weather variables and their forms
 
 The choice of weather variables depends on the question we are trying
@@ -72,7 +72,7 @@ value for a given temperature. Specific humidity is the ratio of water vapor mas
 
 ### **Precipitation** 
 
-Precipitation is highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [Section 1.5](#1.5-A-Warning-on-Hydrological-Variables-(Precipitation,-Humidity,-etc.)). It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
+Precipitation is highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [a Warning on Hydrological Variables](content:warning-on-hydrological). It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
 
 1. *Total precipitation (e.g., over a year)*: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
 2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: often used to capture water stress.
@@ -121,6 +121,7 @@ most important are available through [NOAA](https://www.ncdc.noaa.gov/teleconnec
         throughout East Africa, South and Southeast Asia, and
         Oceania.
 
+(content:spatial-and-temporal-scales)=
 ## Spatial and temporal scales of economic processes
 
 The process of developing a reduced-form specification starts with a
@@ -143,7 +144,8 @@ amount of each grid cell that lies within each region. This can be
 calculated as a transformation matrix, with a row for each region and
 a column for each cell. Once the matrix is calculated, it can be
 reused for each time step. More details for this process are described
-in sections 3 and 5.
+in sections [weighting schemes](weighting-schemes) and [suggestions for 
+work organization](suggestions).
 
 Typically, relating weather to a dependent variable requires some 
 non-linear transformation. For example, estimating a polynomial
