@@ -29,22 +29,54 @@ The [NetCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/N
 
 Through this section, we introduce relevant commands whenever possible for the following languages and packages:
 
-- Python
-    - [xarray](http://xarray.pydata.org/en/stable/) (recommended) - a package for dealing with N-dimensional data that natively supports NetCDF files
-    - [netcdf4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module
-- MATLAB (native support)
-- R ([ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package)
-- [nco](http://nco.sourceforge.net) (“NetCDF operators”) - command-line tools
-    - a series of tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language.
-    - important commands: `ncview` (to display spatial data), `ncks` (“nc kitchen sink” - to split or
-      concatenate files command line), and `ncdump` (to print contents of the file)
+````{tabbed} Python (xarray)
 
-For any python code chunks, it’s assumed that the xarray package is loaded as `xr` (`import xarray as xr`) or the NetCDF4-python module is loaded as `nc` (`import netCDF4 as nc`). For any R code chunks, it’s assumed the ncdf4 package is loaded (`library(ncdf4)`). 
+[`xarray`](http://xarray.pydata.org/en/stable/) (recommended) is a package for working with N-dimensional data that natively supports NetCDF files.
+
+For any Python (xarray) code chunks, it's assumed that the `xarray` package is loaded as `xr`: 
+
+```{code-block} python
+import xarray as xr
+```
+````
+
+````{tabbed} Matlab
+MATLAB has native support for working with N-dimensional data.
+````
+
+````{tabbed} R
+Support through the [ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package.
+
+For any R code chunks, it's assumed the `ncdf4` package is loaded with: 
+
+```{code-block} R 
+library(ncdf4)
+```
+````
+
+````{tabbed} Python (NetCDF4)
+Support through the [netCDF4](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module.
+
+For any Python (NetCDF4) code chunks, it's assumed that the `NetCDF4` package is loaded as `nc`:
+
+```{code-block} python
+import netCDF4 as nc
+```
+````
+
+````{tabbed} nco
+[nco](http://nco.sourceforge.net) ("NetCDF operators") - it is a series of command-line tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language. Here are a few important commands: 
+
+- `ncview` (to display spatial data), 
+- `ncks` ("nc kitchen sink" - to split or concatenate files command line), and 
+- `ncdump` (to print contents of the file).
+````
+
 
 ```{tip}
 If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:
 - Python (`xarray`): if you want tools specifically designed for modern uses of weather/climate data that do much of the annoying background work (dealing with different file structures, variable names, date formats, etc.) for you, at the expense of less flexibility for uncommon needs
-- MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management
+- MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management.
 ```
 
 ### NetCDF Contents
@@ -157,13 +189,6 @@ Here are some important common “attributes” of NetCDF files or variables:
 
 NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable `var`:
 
-````{tabbed} R
-```{code-block} R
-ncfile <- nc_open(fn)
-var <- ncvar_get(ncfile,'var')
-```
-````
-
 ````{tabbed} Python (xarray)
 ```{code-block} python
 ds = xr.open_dataset(fn)
@@ -171,6 +196,19 @@ ds.var
 ```
 
 Data is loaded slowly and only fully loaded when calculations are done - to force loading, run `ds.load()`
+````
+
+````{tabbed} Matlab
+```{code-block} matlab
+ncread(fn,var);
+```
+````
+
+````{tabbed} R
+```{code-block} R
+ncfile <- nc_open(fn)
+var <- ncvar_get(ncfile,'var')
+```
 ````
 
 ````{tabbed} Python (NetCDF4)
@@ -182,11 +220,6 @@ ncf.variables['var'][:]
 `ncf.variables[var]` will return a `float` object that keeps the attributes from the NetCDF file
 ````
 
-````{tabbed} Matlab
-```{code-block} matlab
-ncread(fn,var);
-```
-````
 
 You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with `xarray`, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:
 
