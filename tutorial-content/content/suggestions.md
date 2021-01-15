@@ -2,11 +2,11 @@
 
 ```{admonition} Key objectives
 :class: note
-- Understand how to organize your project materials 
-- Learn about useful tools that will help you work productively   
+- Understand how to organize your project data and code.
+- Learn about useful tools that will help you work productively.
 ```
 
-Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self). 
+Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. In computational research, reproducibility is the ability to obtain consistent results using the same input data, code, and methods. Considering these early on is particularly helpful when collaborating with other researchers (including a future self). 
 
 ## Organization of data and code
 
@@ -25,34 +25,64 @@ create your dataset with a lot of possible predictors and decide
 later.  Often merging together your panel dataset is laborious, and
 you do not want to do it more times than necessary.
 
-Even if you have organized your working directory perfectly, it is still good to include 
-some additional documentation in readme files (readme.txt, readme.md).
-Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. 
+Good naming practices should be applied to files and folders to make clear the contents of your project. Informative naming will help you understand the purpose of each file, and it will improve its findability. Here are a few recommendations:
+
+```{panels}
+Do's
+^^^
+✅ Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
+
+✅ Make sure file names are informative of their contents, and be consistent in using a naming scheme. 
+
+✅ If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
+
+✅ Use ASCII encoding if possible, with UTF-8 or UTF-16 as secondary options.
+---
+Don'ts
+^^^
+❎ Don't use spaces, punctuation, accented characters or case sensitivity. Use periods for file type only (e.g., `.csv`)
+
+❎ Don't use extra-long file and folder names, they should be as concise as possible while still being descriptive. 
+
+❎ Don't use proprietary file formats for storing image data. Images, pictures, or figures should be saved as JPEG or GIF files.
+```
 
 ```{admonition} Data storage 
 :class: tip
-Most universities typically have a data storage product available for their students and affiliates. 
+Most universities have a data storage product available for their students and affiliates. 
 We recommend you inquire at your university about what can be the best place to store data.
 ```
 
-```{admonition} Immutable data
-:class: warning
-Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
-Instead of making changes to the original data, you should create derived (new) datasets.
-This is important because the pre-processing performed on source data is as important as the final analysis steps.
-In addition, it will allow you to reuse the original data multiple times.
+## Documentation
+
+Even if you have organized your working directory perfectly, it is still good to include additional documentation in readme files (`readme.txt` or `README.md`). A README file is usually a plain text file stored in a top-level directory. Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. Project documentation will be primarily helpful to you later on (for example, if you need to reuse the code with some modifications), but also to your peers and collaborators in case you share your data and code. Here are a few tips on creating a good README file:
+
+
+```{panels}
+Do's
+^^^
+✅ Include a project description, explain how data was obtained and analyzed.
+
+✅ Include a breakdown of naming conventions that will apply to files and variables in the dataset.
+
+✅ Include names and contact information (when appropriate) of dataset creators and maintainers.
+---
+Don'ts
+^^^
+❎ Don't forget to document your code, add information on software versions, and how to run your code.
+
+❎ Don't use abbreviations, acronyms, or code names without defining them.
+
+❎ Don't include personal information about authors or maintainers without their consent.
 ```
 
-## Naming conventions
+```{note}
+All documentation should be stored in non-proprietary file formats, such as `.txt`, `.md`, `.xml` or `.pdf`.
+```
 
-Good naming practices should be applied to files and folders to make clear the contents of your project. 
-Informative naming makes it easier to understand the purpose of each item and can improve searchability. Here are a few recommendations:
-
-1. Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., `.csv`)
-2. Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
-3. Ensure file names are informative of their contents
-4. If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
-
+```{note}
+When data files cannot be converted into open formats (particularly geospatial vector data), make sure to document the software package, version, and native platform.
+```
 
 ## Version control
 
@@ -67,14 +97,6 @@ We recommend using version control to track changes to your code files. There ar
 
 ```{seealso}
 We highly recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
-```
-
-## Research dissemination 
-
-In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing, reproducibility and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called [Code Ocean](https://codeocean.com) facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a "research capsule".
-
-```{seealso}
-See a [demonstration of shared research material in CodeOcean](https://codeocean.com/capsule/8792614). This data and code were originally prepared and published with the paper "Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US'' by Olivier Deschênes and Michael Greenstone. 
 ```
 
 ## Workflow automation
@@ -107,6 +129,20 @@ python draw_plots.py
 echo "Finished with drawing plots"
 ```
 
+The analysis is then executed with a single command in the command prompt (Terminal):
+
+```bash
+sh run_all.sh
+```
+
+```{admonition} Immutable data
+:class: warning
+Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code. 
+Instead of making changes to the original data, you should create derived (new) datasets.
+This is important because the pre-processing performed on source data is as important as the final analysis steps.
+In addition, it will allow you to reuse the original data multiple times.
+```
+
 ```{admonition} Relative and absolute paths
 :class: caution
 A common problem when automating and packaging your project is the use of absolute paths.
@@ -114,8 +150,17 @@ An absolute or full path points to a location on the filesystem from the root, o
 A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). You should specify relative paths whenever that is possible.
 ```
 
-The analysis is then executed with a single command in the command prompt (Terminal):
+ ## Research dissemination
 
-```bash
-sh run_all.sh
+
+Research data repositories are a primary venue for data dissemination. Use [the Registry of Research Data Repositories (re3data.org)](https://www.re3data.org) to find the right repository for your research data. Alternatively, general-purpose repositories such as [Dataverse](https://dataverse.harvard.edu/), [Figshare](https://figshare.com/), or [Zenodo](https://zenodo.org/) are a good and freely-available option. However, before sharing or opening your data, make sure that there are no privacy, security, or license constraints. 
+
+If you'd like your research data and code to be reusable already in a web browser, consider using [one of the reproducibility platforms](https://researchintegrityjournal.biomedcentral.com/articles/10.1186/s41073-020-00095-y). For instance, the platform [Code Ocean](https://codeocean.com) facilitates data and code sharing in languages such as MATLAB, Stata, R, Python, C++, etc. This also means that code based on proprietary software (MATLAB or Stata) can be executed and reused online free of charge. See a [demonstration of shared research data and code in Code Ocean](https://codeocean.com/capsule/8792614) originally published in [(Deschênes & Greenstone)](https://www.aeaweb.org/articles?id=10.1257/app.3.4.152).
+
+```{note}
+When sharing your research data, don't forget to include licensing information. A standard license should be used. Don't ask users to "email authors about reuse," but instead pick a restrictive license.
+```
+
+```{seealso}
+For more information on data sharing, see [Mozilla Science Lab's Open Data Primers](https://mozillascience.github.io/open-data-primers/).
 ```
