@@ -273,8 +273,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#naming-conventions">
-   Naming conventions
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -283,13 +283,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#research-dissemination">
-   Research dissemination
+  <a class="reference internal nav-link" href="#workflow-automation">
+   Workflow automation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#workflow-automation">
-   Workflow automation
+  <a class="reference internal nav-link" href="#research-dissemination">
+   Research dissemination
   </a>
  </li>
 </ul>
@@ -308,11 +308,11 @@
 <div class="note admonition">
 <p class="admonition-title">Key objectives</p>
 <ul class="simple">
-<li><p>Understand how to organize your project materials</p></li>
-<li><p>Learn about useful tools that will help you work productively</p></li>
+<li><p>Understand how to organize your project data and code.</p></li>
+<li><p>Learn about useful tools that will help you work productively.</p></li>
 </ul>
 </div>
-<p>Following these suggestions will help you organize your research, which could improve <a class="reference external" href="https://the-turing-way.netlify.com">reproducibility</a> (replicability) and reusability of your code and results. These could be particularly helpful when collaborating with other researchers (including a future self).</p>
+<p>Following these suggestions will help you organize your research, which could improve <a class="reference external" href="https://the-turing-way.netlify.com">reproducibility</a> (replicability) and reusability of your code and results. In computational research, reproducibility is the ability to obtain consistent results using the same input data, code, and methods. Considering these early on is particularly helpful when collaborating with other researchers (including a future self).</p>
 <div class="section" id="organization-of-data-and-code">
 <h2>Organization of data and code<a class="headerlink" href="#organization-of-data-and-code" title="Permalink to this headline">¶</a></h2>
 <p>Having a single directory for a project, containing all data and code in subdirectories
@@ -329,32 +329,81 @@ However, try to keep your code and your data separate. A typical file organizati
 create your dataset with a lot of possible predictors and decide
 later.  Often merging together your panel dataset is laborious, and
 you do not want to do it more times than necessary.</p>
-<p>Even if you have organized your working directory perfectly, it is still good to include
-some additional documentation in readme files (readme.txt, readme.md).
-Describe the files and process in these files, and try to keep them up-to-date as things are added or changed.</p>
+<p>Good naming practices should be applied to files and folders to make clear the contents of your project. Informative naming will help you understand the purpose of each file, and it will improve its findability. Here are a few recommendations:</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header docutils">
+<p class="card-text">Do’s</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">✅ Use delimiters (such as underscores “_” or dashes “-“) to separate information contained in the file name.</p>
+<p class="card-text">✅ Make sure file names are informative of their contents, and be consistent in using a naming scheme.</p>
+<p class="card-text">✅ If you want to indicate sequence, start your file or folder names with numbers (e.g., <code class="docutils literal notranslate"><span class="pre">01_clean_data</span></code>, <code class="docutils literal notranslate"><span class="pre">02_analyze</span></code>, <code class="docutils literal notranslate"><span class="pre">03_results</span></code>)</p>
+<p class="card-text">✅ Use ASCII encoding if possible, with UTF-8 or UTF-16 as secondary options.</p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header docutils">
+<p class="card-text">Don’ts</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">❎ Don’t use spaces, punctuation, accented characters or case sensitivity. Use periods for file type only (e.g., <code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</p>
+<p class="card-text">❎ Don’t use extra-long file and folder names, they should be as concise as possible while still being descriptive.</p>
+<p class="card-text">❎ Don’t use proprietary file formats for storing image data. Images, pictures, or figures should be saved as JPEG or GIF files.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Data storage</p>
-<p>Most universities typically have a data storage product available for their students and affiliates.
+<p>Most universities have a data storage product available for their students and affiliates.
 We recommend you inquire at your university about what can be the best place to store data.</p>
 </div>
-<div class="warning admonition">
-<p class="admonition-title">Immutable data</p>
-<p>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code.
-Instead of making changes to the original data, you should create derived (new) datasets.
-This is important because the pre-processing performed on source data is as important as the final analysis steps.
-In addition, it will allow you to reuse the original data multiple times.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Even if you have organized your working directory perfectly, it is still good to include additional documentation in readme files (<code class="docutils literal notranslate"><span class="pre">readme.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">README.md</span></code>). A README file is usually a plain text file stored in a top-level directory. Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. Project documentation will be primarily helpful to you later on (for example, if you need to reuse the code with some modifications), but also to your peers and collaborators in case you share your data and code. Here are a few tips on creating a good README file:</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header docutils">
+<p class="card-text">Do’s</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">✅ Include a project description, explain how data was obtained and analyzed.</p>
+<p class="card-text">✅ Include a breakdown of naming conventions that will apply to files and variables in the dataset.</p>
+<p class="card-text">✅ Include names and contact information (when appropriate) of dataset creators and maintainers.</p>
 </div>
 </div>
-<div class="section" id="naming-conventions">
-<h2>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
-<p>Good naming practices should be applied to files and folders to make clear the contents of your project.
-Informative naming makes it easier to understand the purpose of each item and can improve searchability. Here are a few recommendations:</p>
-<ol class="simple">
-<li><p>Avoid spaces, punctuation, accented characters, case sensitivity. Use periods for file type only (e.g., <code class="docutils literal notranslate"><span class="pre">.csv</span></code>)</p></li>
-<li><p>Use delimiters (such as underscores “_” or dashes “-“) to separate information contained in the file name.</p></li>
-<li><p>Ensure file names are informative of their contents</p></li>
-<li><p>If you want to indicate sequence, start your file or folder names with numbers (e.g., <code class="docutils literal notranslate"><span class="pre">01_clean_data</span></code>, <code class="docutils literal notranslate"><span class="pre">02_analyze</span></code>, <code class="docutils literal notranslate"><span class="pre">03_results</span></code>)</p></li>
-</ol>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header docutils">
+<p class="card-text">Don’ts</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">❎ Don’t forget to document your code, add information on software versions, and how to run your code.</p>
+<p class="card-text">❎ Don’t use abbreviations, acronyms, or code names without defining them.</p>
+<p class="card-text">❎ Don’t include personal information about authors or maintainers without their consent.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All documentation should be stored in non-proprietary file formats, such as <code class="docutils literal notranslate"><span class="pre">.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.xml</span></code> or <code class="docutils literal notranslate"><span class="pre">.pdf</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When data files cannot be converted into open formats (particularly geospatial vector data), make sure to document the software package, version, and native platform.</p>
+</div>
 </div>
 <div class="section" id="version-control">
 <h2>Version control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h2>
@@ -369,14 +418,6 @@ Informative naming makes it easier to understand the purpose of each item and ca
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>We highly recommend you to go through <a class="reference external" href="https://swcarpentry.github.io/git-novice/">a tutorial on version control with git</a>.</p>
-</div>
-</div>
-<div class="section" id="research-dissemination">
-<h2>Research dissemination<a class="headerlink" href="#research-dissemination" title="Permalink to this headline">¶</a></h2>
-<p>In general, we recommend using free and open-source programming languages such as Python and R, as using proprietary software may hinder code sharing, reproducibility and reuse. However, it is possible to run MATLAB and Stata code online and free of charge. A cloud-based reproducibility tool called <a class="reference external" href="https://codeocean.com">Code Ocean</a> facilitates code sharing in the programming languages such as MATLAB, Stata, R, Python, C++, and others. Through a web browser, Code Ocean enables its users to run and share their code as a “research capsule”.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>See a <a class="reference external" href="https://codeocean.com/capsule/8792614">demonstration of shared research material in CodeOcean</a>. This data and code were originally prepared and published with the paper “Climate Change, Mortality, and Adaptation: Evidence from Annual Fluctuations in Weather in the US’’ by Olivier Deschênes and Michael Greenstone.</p>
 </div>
 </div>
 <div class="section" id="workflow-automation">
@@ -404,15 +445,35 @@ python draw_plots.py
 <span class="nb">echo</span> <span class="s2">&quot;Finished with drawing plots&quot;</span>
 </pre></div>
 </div>
+<p>The analysis is then executed with a single command in the command prompt (Terminal):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh run_all.sh
+</pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Immutable data</p>
+<p>Original data (or source or raw data) should be immutable, meaning that it should never be modified by your code.
+Instead of making changes to the original data, you should create derived (new) datasets.
+This is important because the pre-processing performed on source data is as important as the final analysis steps.
+In addition, it will allow you to reuse the original data multiple times.</p>
+</div>
 <div class="caution admonition">
 <p class="admonition-title">Relative and absolute paths</p>
 <p>A common problem when automating and packaging your project is the use of absolute paths.
 An absolute or full path points to a location on the filesystem from the root, often containing system-specific sub-directories (for example: <code class="docutils literal notranslate"><span class="pre">/home/username/project/data/input.csv</span></code>).
 A relative path, on the other hand, only assumes a local relationship between folders (for example: <code class="docutils literal notranslate"><span class="pre">../data/input.csv</span></code>, where “..” refers to the “parent” directory). You should specify relative paths whenever that is possible.</p>
 </div>
-<p>The analysis is then executed with a single command in the command prompt (Terminal):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sh run_all.sh
-</pre></div>
+</div>
+<div class="section" id="research-dissemination">
+<h2>Research dissemination<a class="headerlink" href="#research-dissemination" title="Permalink to this headline">¶</a></h2>
+<p>Research data repositories are a primary venue for data dissemination. Use <a class="reference external" href="https://www.re3data.org">the Registry of Research Data Repositories (re3data.org)</a> to find the right repository for your research data. Alternatively, general-purpose repositories such as <a class="reference external" href="https://dataverse.harvard.edu/">Dataverse</a>, <a class="reference external" href="https://figshare.com/">Figshare</a>, or <a class="reference external" href="https://zenodo.org/">Zenodo</a> are a good and freely-available option. However, before sharing or opening your data, make sure that there are no privacy, security, or license constraints.</p>
+<p>If you’d like your research data and code to be reusable already in a web browser, consider using <a class="reference external" href="https://researchintegrityjournal.biomedcentral.com/articles/10.1186/s41073-020-00095-y">one of the reproducibility platforms</a>. For instance, the platform <a class="reference external" href="https://codeocean.com">Code Ocean</a> facilitates data and code sharing in languages such as MATLAB, Stata, R, Python, C++, etc. This also means that code based on proprietary software (MATLAB or Stata) can be executed and reused online free of charge. See a <a class="reference external" href="https://codeocean.com/capsule/8792614">demonstration of shared research data and code in Code Ocean</a> originally published in <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/app.3.4.152">(Deschênes &amp; Greenstone)</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When sharing your research data, don’t forget to include licensing information. A standard license should be used. Don’t ask users to “email authors about reuse,” but instead pick a restrictive license.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information on data sharing, see <a class="reference external" href="https://mozillascience.github.io/open-data-primers/">Mozilla Science Lab’s Open Data Primers</a>.</p>
 </div>
 </div>
 </div>

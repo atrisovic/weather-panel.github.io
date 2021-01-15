@@ -493,8 +493,8 @@ need to project these back to latitude-longitude and regrid them.</p>
 <div class="section" id="implementation-notes-reading-gridded-data">
 <h3>Implementation Notes: Reading gridded data.<a class="headerlink" href="#implementation-notes-reading-gridded-data" title="Permalink to this headline">¶</a></h3>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f5b0300c-aa9e-4366-89ed-ae3fe899f106" name="139d8632-d1f1-4db3-97e8-909d7b174f6b" type="radio">
-</input><label class="tabbed-label" for="f5b0300c-aa9e-4366-89ed-ae3fe899f106">
+<input checked="checked" id="19c69e82-7cca-4576-9baf-d95c4eedb93f" name="5a4d236f-fd2a-409f-9c55-cdc71d6c83d7" type="radio">
+</input><label class="tabbed-label" for="19c69e82-7cca-4576-9baf-d95c4eedb93f">
 R</label><div class="tabbed-content docutils">
 <p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library. For example:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
@@ -502,8 +502,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d10fd55f-445d-443a-9362-a834eeeb868d" name="139d8632-d1f1-4db3-97e8-909d7b174f6b" type="radio">
-</input><label class="tabbed-label" for="d10fd55f-445d-443a-9362-a834eeeb868d">
+<input id="f0e195d0-a9a7-4fb8-8d6b-4dac8b97ec04" name="5a4d236f-fd2a-409f-9c55-cdc71d6c83d7" type="radio">
+</input><label class="tabbed-label" for="f0e195d0-a9a7-4fb8-8d6b-4dac8b97ec04">
 Python</label><div class="tabbed-content docutils">
 <p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p>
 </div>
@@ -540,15 +540,15 @@ upsampling, downsampling, and cropping.</p>
 <p>To increase the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without increasing the
 sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="9f2d0a8d-6857-4dad-ab71-99f6d49d1535" name="cb1e7b0a-da52-48d0-8076-de9bc490d6fe" type="radio">
-</input><label class="tabbed-label" for="9f2d0a8d-6857-4dad-ab71-99f6d49d1535">
+<input checked="checked" id="5266b912-d8b3-4c25-bd7b-2730e81401f9" name="912c57eb-6af4-4cd9-b408-a14c0f55aad2" type="radio">
+</input><label class="tabbed-label" for="5266b912-d8b3-4c25-bd7b-2730e81401f9">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="ddf930dc-d8ca-440e-8a88-2e95771b55cb" name="cb1e7b0a-da52-48d0-8076-de9bc490d6fe" type="radio">
-</input><label class="tabbed-label" for="ddf930dc-d8ca-440e-8a88-2e95771b55cb">
+<input id="163660b9-d3f6-449e-b360-c3b1ba265a1e" name="912c57eb-6af4-4cd9-b408-a14c0f55aad2" type="radio">
+</input><label class="tabbed-label" for="163660b9-d3f6-449e-b360-c3b1ba265a1e">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
@@ -561,15 +561,15 @@ Python</label><div class="tabbed-content docutils">
 <p>To decrease the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without
 decreasing the sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="66f8fc17-fe37-4c84-97fe-ac5728e1bd42" name="36fea739-3f7d-4567-874e-799d25edb87c" type="radio">
-</input><label class="tabbed-label" for="66f8fc17-fe37-4c84-97fe-ac5728e1bd42">
+<input checked="checked" id="f58cdbab-3b21-46b7-8b00-79a4e3be784c" name="4be6da24-276d-4fda-8d25-0610af5ed915" type="radio">
+</input><label class="tabbed-label" for="f58cdbab-3b21-46b7-8b00-79a4e3be784c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="89898e71-167f-4d27-bd51-d8ff0e6de7e7" name="36fea739-3f7d-4567-874e-799d25edb87c" type="radio">
-</input><label class="tabbed-label" for="89898e71-167f-4d27-bd51-d8ff0e6de7e7">
+<input id="baa28655-51e6-4d11-a081-09ab0682c60e" name="4be6da24-276d-4fda-8d25-0610af5ed915" type="radio">
+</input><label class="tabbed-label" for="baa28655-51e6-4d11-a081-09ab0682c60e">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -586,15 +586,15 @@ Python</label><div class="tabbed-content docutils">
 to a box from the longitudinal range <code class="docutils literal notranslate"><span class="pre">WW</span></code> to <code class="docutils literal notranslate"><span class="pre">EE</span></code> and the latitudinal
 range from <code class="docutils literal notranslate"><span class="pre">SS</span></code> to <code class="docutils literal notranslate"><span class="pre">NN</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="dd862323-1ec3-4366-aa39-0772b454c703" name="dbdaff12-9af7-48ce-94ce-0e354e0f91b3" type="radio">
-</input><label class="tabbed-label" for="dd862323-1ec3-4366-aa39-0772b454c703">
+<input checked="checked" id="26820d92-6bd7-4728-91a3-5b0ecffe95d3" name="bf996f7f-1236-4a2f-b37e-64c8daf984f0" type="radio">
+</input><label class="tabbed-label" for="26820d92-6bd7-4728-91a3-5b0ecffe95d3">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="n">WW</span><span class="p">,</span> <span class="n">SS</span><span class="p">,</span> <span class="n">EE</span><span class="p">,</span> <span class="n">NN</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<input id="45538a37-a77f-4b0d-a1ab-62652bb7fc11" name="dbdaff12-9af7-48ce-94ce-0e354e0f91b3" type="radio">
-</input><label class="tabbed-label" for="45538a37-a77f-4b0d-a1ab-62652bb7fc11">
+<input id="b1f3effc-4742-4d39-92a9-ca01fe02ade5" name="bf996f7f-1236-4a2f-b37e-64c8daf984f0" type="radio">
+</input><label class="tabbed-label" for="b1f3effc-4742-4d39-92a9-ca01fe02ade5">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)</span>
 
