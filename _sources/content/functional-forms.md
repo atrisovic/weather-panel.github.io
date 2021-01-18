@@ -63,7 +63,7 @@ The dose-response regression would then be applied as follows
 
 $$F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)$$
 	
-while the coefficients can be interepted as describing a local
+while the coefficients can be interpreted as describing a local
 dose-response relationship:
 
 $$F(T_{pit})=\sum_{k} \beta_k T_{pit}^k$$
@@ -85,7 +85,7 @@ number of knots and their placement. The reference in this subsection
 title on cubic splines can be helpful in deciding the knot
 specifications.
 
-Once knot locations are determiend, the weather data needs to be
+Once knot locations are determined, the weather data needs to be
 translated into RCS terms. As before let the gridded weather be $T_{p
 i t}$ and let there be $n$ knots, placed at $T_1<T_2<...<T_n$. Then we
 have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
@@ -108,7 +108,7 @@ As with the polynomial, the dose-response regression would then be applied as fo
 
 $$F(T_{it})=\sum_{k} \beta_k f(T_{it})_k$$
 	
-while the coefficients can be interepted as describing a local
+while the coefficients can be interpreted as describing a local
 dose-response relationship:
 
 $$F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k$$
@@ -116,11 +116,11 @@ $$F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k$$
 ## [Linear spline](https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)
 
 A linear spline provides a balance between the smoothness of RCS and
-the direct response curve to temperature correspondance of bins. The
+the direct response curve to temperature correspondence of bins. The
 segments between knots here are lines. As with RCS, the choice of knot
 locations is very important.
 
-One defition of terms for a linear spline for a spline with $n$ knots at
+One definition of terms for a linear spline for a spline with $n$ knots at
 $T_1<T_2<...<T_n$ is:
     
 $$f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}$$
