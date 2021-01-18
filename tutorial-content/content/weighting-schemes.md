@@ -107,9 +107,9 @@ is important for visualizing maps, it can just be a nuisance for
 gridded datasets. The most common “projection” for gridded datasets is
 an equirectangular projection, and we have been assuming this
 above. This is variously referred to as `1`, `ll`, `WGS 84`, and
-`EPSG: 4326` (techically, WGS 84 species how latitude and longitude
+`EPSG: 4326` (technically, WGS 84 species how latitude and longitude
 are defined, and EPSG:4326 specifies a drawing scheme where x =
-longitude and y = latitude). However, you will sometimes enounter
+longitude and y = latitude). However, you will sometimes encounter
 grids in terms of km north and km east of a point, and then you may
 need to project these back to latitude-longitude and regrid them.
 

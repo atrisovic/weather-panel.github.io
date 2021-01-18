@@ -271,7 +271,7 @@ ds.tas.isel(time=1).plot()
 # (for the time mean, you can use ds.tas.mean(time).plot() 
 # similarly)
     
-## Example with gegographic information:
+## Example with geographic information:
 import cartopy.crs as ccrs    
 # (see resources below on why transforms/projections 
 # need to be explicitly noted)

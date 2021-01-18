@@ -44,7 +44,7 @@ Say you're looking at agriculture in Ethiopia. You would like both temperature a
 Most weather products will require some bureaucracy (creating accounts, signing data agreements, etc.) to download data, and most have their own quirks about how they want data to be downloaded. CHIRPS and BEST do not require bureaucracy, but CHIRPS will require some scripting to download.
 ```
 
-These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in python. See also [weigthing schemes](weighting-schemes). 
+These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in python. See also [weighting schemes](weighting-schemes). 
 
 
 ## Getting Started with a Data Product: ERA-5

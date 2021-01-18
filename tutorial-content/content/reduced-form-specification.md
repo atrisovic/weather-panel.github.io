@@ -62,7 +62,7 @@ Temperature relationships are often preferred in climate impacts research, becau
 ### **Humidity** 
 
 There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air,
-expressed in grams per cubic metre or grams per kilogram. Relative
+expressed in grams per cubic meter or grams per kilogram. Relative
 humidity is defined as a percentage relative to a maximum humidity
 value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
 
@@ -104,7 +104,7 @@ Shortwave radiation (visible light) contains a lot of energy; longwave radiation
 
 SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.  
 
-### **Climatic indicies** 
+### **Climatic indices** 
 
 A wide range of metrics has been developed to understand the state of the ocean-atmosphere system at large scales. These are measured in a standardized way (e.g., by comparing temperature at two points or by extracting a mean over a region),
 and often have long time-series, often at the monthly level. However, they do not vary over space. Data for some of the
