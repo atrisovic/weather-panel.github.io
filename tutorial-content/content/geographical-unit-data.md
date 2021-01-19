@@ -77,10 +77,10 @@ In some cases, you will need to create a shapefile from scratch. The most common
 
 ## Working with shapefiles
 
-Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to make sure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:
+Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to ensure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:
 
 ````{tabbed} R
-To read shape files you could use a package like `maptools`, `rgdal`, `sf`, or `PBSmapping`.
+To read shapefiles you could use a package like `maptools`, `rgdal`, `sf`, or `PBSmapping`.
  
 ```{code-block} R
 library(maptools)

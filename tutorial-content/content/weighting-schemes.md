@@ -25,7 +25,7 @@ perform a weighted aggregation of gridded data to data regions.
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
 As described in section
-[Dealing with the spatial and temporal scales of economic processes](reduced-form-specification#Dealing-with-the-spatial-and-temporal-scales-of-economic-processes),
+[spatial and temporal scales of economic processes](content:spatial-and-temporal-scales),
 the scale of a phenomenon matters. Many processes occur at a more
 local scale than that which data is collected. The motivation for
 weighting is different for aggregation that represents averaged
@@ -37,7 +37,7 @@ When the phenomenon occurs locally, in response to local weather, we perform wei
 1. Transform weather into the terms of the model specification.
 2. Average these transformed terms across space using a weighting scheme.
 
-When the phenomenon occurs at a data region level, in response to averaged weather, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from a shore could be important to predict the declaration of states of emergency. The order of operations is:
+When the phenomenon occurs at a data region level, in response to averaged weather, the weighting scheme reflects the relative importance of weather in different regions to the whole. For example, weighting rainfall by the distance from ashore could be important to predict the declaration of states of emergency. The order of operations is:
 
 1. Average the weather across space using a weighting scheme.
 2. Transform the averaged weather to the model specification.
@@ -62,6 +62,7 @@ Below are some common data sources for various weighting schemes.
     - Also consider gridded land use datasets: https://www.atmos.illinois.edu/~meiyapp2/datasets.htm
 - Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
 
+(content:working-with-gridded-data)=
 ## Working with gridded weighting data
 
 Weighting data files come in a wide range of file formats, since any
@@ -106,9 +107,9 @@ is important for visualizing maps, it can just be a nuisance for
 gridded datasets. The most common “projection” for gridded datasets is
 an equirectangular projection, and we have been assuming this
 above. This is variously referred to as `1`, `ll`, `WGS 84`, and
-`EPSG: 4326` (techically, WGS 84 species how latitude and longitude
+`EPSG: 4326` (technically, WGS 84 species how latitude and longitude
 are defined, and EPSG:4326 specifies a drawing scheme where x =
-longitude and y = latitude). However, you will sometimes enounter
+longitude and y = latitude). However, you will sometimes encounter
 grids in terms of km north and km east of a point, and then you may
 need to project these back to latitude-longitude and regrid them.
 
@@ -147,7 +148,7 @@ resolution by some factor. You want to do this so that two conditions to be met 
 Here we
 assume that both are regular latitude-longitude
 grids. See
-[Working with gridded weighting data](#Working-with-gridded-weighting-data) to
+[working with gridded weighting data](content:working-with-gridded-data) to
 understand the grid scheme for your weighting file; note that gridded
 weather data often reports the center of each grid cell, rather than
 the corner.
@@ -396,6 +397,7 @@ this
 the how Randall Monroe thinks about them:
 
 ![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
+
 Source: [XKCD 977](https://www.xkcd.com/977/).
 
 Using the projection, we can now make the final version of this
