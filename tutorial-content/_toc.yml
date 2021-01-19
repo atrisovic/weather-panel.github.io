@@ -8,6 +8,7 @@
 - part: Weighting schemes
   chapters:
   - file: content/weighting-schemes
+  - file: content/example-step2
 
 - part: Developing a reduced-form specification
   chapters:
