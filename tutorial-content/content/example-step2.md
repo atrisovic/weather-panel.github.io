@@ -1,6 +1,6 @@
-## Weather Mortality in the United States, Step 2: Understanding the outcomes
+# Weather Mortality in the United States, Step 2: Understanding the outcomes
 
-### Thinking about the data-generating process
+## Thinking about the data-generating process
 
 First, let us think about the process that relates mortality to
 weather. Weather fluctations can have impacts on all scales, but
@@ -32,7 +32,7 @@ $$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{
 
 where $\psi_{p}$ is the population in gridcell $p$.
 
-### Download the population data
+## Download the population data
 
 https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count
 
@@ -48,7 +48,7 @@ writeRaster(rr3, "~/groups/weatherpanels/weather-panel.github.io/example/data/pc
  xname="lon", yname="lat")
 ```
 
-### Downloading the mortality data
+## Downloading the mortality data
 
 The Compressed Mortality File (CMF) provides comprehensive,
 county-scale mortality data for the United States. The data through
