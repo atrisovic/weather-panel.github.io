@@ -16,7 +16,7 @@ https://community.esri.com/ccqpr47374/attachments/ccqpr47374/enterprise-portal/4
 Save its contents to a folder `geo_data` in the `data` directory. The
 following code should be run from the `data` directory.
 
-# Setting up the environment
+## Setting up the environment
 
 The approach uses `xarray` for gridded data, `geopandas` to work with shapefiles, and `xagg` to aggregate gridded data onto shapefiles. 
 
@@ -83,7 +83,7 @@ The output of this function now gives, for each county, a 10-year time series of
 (`aggregated` is an object specific to the `xagg` package; we need to modify it to be useable, for example using `aggregated.to_dataset()` or `aggregated.to_csv` as we do below - see the `xagg` docs for more info). 
 
 ```python
-aggregated = xa.aggregate(ds_tas,weightmap)
+aggregated = xa.aggregate(ds_tas, weightmap)
 ```
 
 ## Export this as a .csv file to be used elsewhere
@@ -97,5 +97,5 @@ tools. The data will be reshaped 'wide' by `xagg` - so every row is a
 county, and every column is a timestep of the variables. 
 
 ```python
-aggregated.to_csv('agg_vars.csv')
+aggregated.to_csv('climate_data/agg_vars.csv')
 ```

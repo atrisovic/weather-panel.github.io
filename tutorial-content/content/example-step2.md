@@ -34,16 +34,24 @@ where $\psi_{p}$ is the population in gridcell $p$.
 
 ## Download the population data
 
+We can use the gridded population data from Gridded Population of the
+World, since the weather data is not very high resolution. Download it
+from
 https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count
+
+This is global data, so it will be useful to clip it to the US and
+aggregate it to the scale of the weather. We also need it in NetCDF
+format, for the aggregation step. Again, this code assumes that it is
+being run from a directory `code`, sister to the `data` directory.
 
 ```R
 library(raster)
-rr <- raster("~/groups/weatherpanels/weather-panel.github.io/example/data/pcount/usap90ag.bil")
+rr <- raster("../data/pcount/usap90ag.bil")
 
 rr2 <- aggregate(rr, fact=24, fun=sum)
 rr3 <- crop(rr2, extent(-126, -65, 23, 51))
 
-writeRaster(rr3, "~/groups/weatherpanels/weather-panel.github.io/example/data/pcount/usap90ag.nc4",
+writeRaster(rr3, "../data/pcount/usap90ag.nc4",
  overwrite=TRUE, format="CDF", varname="Population", varunit="people",
  xname="lon", yname="lat")
 ```
@@ -79,3 +87,32 @@ each of 12 age groups is reported with 8 characters per age group
 number (so, the first age group, 1 - 4 year-olds, is characters 19 -
 26; then 5 - 9 year-olds is reported in characters 27 - 34; and so
 on).
+
+## Preparing the mortality data
+
+Here we sum across all races and ages and merge the mortality and
+population data.
+
+```R
+library(dplyr)
+
+df.mort <- read.fwf("../data/cmf/Mort7988.txt",
+   c(5, 4, 10, 4), col.names=c('fips', 'year', 'ignore', 'deaths'))
+
+df2.mort <- df.mort %>% group_by(fips, year) %>% summarize(deaths=sum(deaths))
+
+df.pop <- read.fwf("../data/cmf/Pop7988.txt",
+   c(5, 4, 9, rep(8, 12), 25, 1), col.names=c('fips', 'year',
+   'ignore', paste0('pop', 1:12), 'county', 'type'))
+
+df2.pop <- df.pop %>% group_by(fips, year) %>% summarize(pop=sum(pop1 +
+    pop2 + pop3 + pop4 + pop5 + pop6 + pop7 + pop8 + pop9 + pop10 +
+    pop11 + pop12), type=type[1])
+
+df3 <- df2.pop %>% left_join(df2.mort, by=c('fips', 'year'))
+df3$deaths[is.na(df3$deaths)] <- 0
+
+df4 <- subset(df3, type == 3)
+
+write.csv(df4[, -which(names(df4) == 'type')], "../data/cmf/merged.csv", row.names=F)
+```
