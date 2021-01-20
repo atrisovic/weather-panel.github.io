@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Constructing weather averages within spatial units" href="working-with-shapefiles.html" />
-    <link rel="prev" title="Weighting schemes" href="weighting-schemes.html" />
+    <link rel="prev" title="Weather Mortality in the United States, Step 2: Understanding the outcomes" href="example-step2.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -109,6 +109,11 @@
    How to Start Working with a Data Product
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step1.html">
+   Weather Mortality in the United States, Step 1: Preparing the Weather Data
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -126,16 +131,9 @@
    Functional forms: pros, cons, and methods
   </a>
  </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Weighting schemes
- </span>
-</p>
-<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="weighting-schemes.html">
-   Weighting schemes
+  <a class="reference internal" href="example-step2.html">
+   Weather Mortality in the United States, Step 2: Understanding the outcomes
   </a>
  </li>
 </ul>
@@ -155,6 +153,16 @@
    Constructing weather averages within spatial units
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="weighting-schemes.html">
+   Weighting schemes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step3.html">
+   Weather Mortality in the United States, Step 3: Aggregating the data
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -165,6 +173,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="suggestions.html">
    Suggestions for work organization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step4.html">
+   Weather Mortality in the United States, Step 4: Producing results
   </a>
  </li>
 </ul>
@@ -381,8 +394,8 @@
 <h2>Working with shapefiles<a class="headerlink" href="#working-with-shapefiles" title="Permalink to this headline">¶</a></h2>
 <p>Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to ensure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="021ecf6f-a6e9-4fad-809b-b88c85ba81e8" name="d9634969-2ab2-4c8e-a9a8-04cc5ef30583" type="radio">
-</input><label class="tabbed-label" for="021ecf6f-a6e9-4fad-809b-b88c85ba81e8">
+<input checked="checked" id="bca68e82-edf8-4f45-8cdd-119837b0c822" name="9b827a62-cb80-4f5c-bce8-d23f2eedbfc7" type="radio">
+</input><label class="tabbed-label" for="bca68e82-edf8-4f45-8cdd-119837b0c822">
 R</label><div class="tabbed-content docutils">
 <p>To read shapefiles you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>, <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
@@ -395,8 +408,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a46ab7ec-4322-4d1b-b954-c65a713fa4ee" name="d9634969-2ab2-4c8e-a9a8-04cc5ef30583" type="radio">
-</input><label class="tabbed-label" for="a46ab7ec-4322-4d1b-b954-c65a713fa4ee">
+<input id="1798af46-9372-4c51-b3f2-b617429bbf3a" name="9b827a62-cb80-4f5c-bce8-d23f2eedbfc7" type="radio">
+</input><label class="tabbed-label" for="1798af46-9372-4c51-b3f2-b617429bbf3a">
 Python</label><div class="tabbed-content docutils">
 <p>Shapefiles can be opened with Python packages in a few different ways:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
@@ -459,7 +472,7 @@ Python</label><div class="tabbed-content docutils">
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="weighting-schemes.html" title="previous page">Weighting schemes</a>
+    <a class='left-prev' id="prev-link" href="example-step2.html" title="previous page">Weather Mortality in the United States, Step 2: Understanding the outcomes</a>
     <a class='right-next' id="next-link" href="working-with-shapefiles.html" title="next page">Constructing weather averages within spatial units</a>
 
     </div>

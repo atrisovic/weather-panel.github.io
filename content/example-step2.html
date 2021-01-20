@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Mortality in the United States, Step 2: Understanding the outcomes</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Generating geographical unit data" href="geographical-unit-data.html" />
+    <link rel="prev" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+  
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="getting-started.html">
+   Introduction to the Tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Weather and Climate Data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weather-and-climate-data.html">
+   Using Weather and Climate Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-data-product.html">
+   How to Start Working with a Data Product
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step1.html">
+   Weather Mortality in the United States, Step 1: Preparing the Weather Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Developing a reduced-form specification
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html">
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Weather Mortality in the United States, Step 2: Understanding the outcomes
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Geographical unit data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geographical-unit-data.html">
+   Generating geographical unit data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-shapefiles.html">
+   Constructing weather averages within spatial units
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="weighting-schemes.html">
+   Weighting schemes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step3.html">
+   Weather Mortality in the United States, Step 3: Aggregating the data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Suggestions for work organization
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="suggestions.html">
+   Suggestions for work organization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step4.html">
+   Weather Mortality in the United States, Step 4: Producing results
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Contributors
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/example-step2.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/example-step2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/example-step2.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thinking-about-the-data-generating-process">
+   Thinking about the data-generating process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-the-population-data">
+   Download the population data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#downloading-the-mortality-data">
+   Downloading the mortality data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-the-mortality-data">
+   Preparing the mortality data
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="weather-mortality-in-the-united-states-step-2-understanding-the-outcomes">
+<h1>Weather Mortality in the United States, Step 2: Understanding the outcomes<a class="headerlink" href="#weather-mortality-in-the-united-states-step-2-understanding-the-outcomes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="thinking-about-the-data-generating-process">
+<h2>Thinking about the data-generating process<a class="headerlink" href="#thinking-about-the-data-generating-process" title="Permalink to this headline">¶</a></h2>
+<p>First, let us think about the process that relates mortality to
+weather. Weather fluctations can have impacts on all scales, but
+generally when we are thinking of heat waves killing people, it is
+because of direct exposure. The main data-generating process is local.</p>
+<p>It is also non-linear. Both cold and hot weather kills people,
+relative to deaths at moderate (pleasant) temperatures. We can model
+this with a quadratic relationship. We need to choose some baseline
+temperature for comparison purposes. For our example, we will use 20
+C. The dose-response function will describe excess mortality, relative
+to a day with an average temperature of 20 C.</p>
+<p>We also need to weight our pixel data. We want the dose-response
+function to be representative of a random individual, not a random
+region-year data point, so we will weight gridcells by population.</p>
+<p>Finally, the mortality data we will use is annual, while the weather
+data is daily. We still want to estimate a daily dose-response
+function, so we will say that take sums over all days of both the
+weather and outcome data. The sum over daily death data is annual
+death data, which is what we have.</p>
+<p>Then, we want to transform the weather data by creating two predictor
+variables, for the linear and quadratic terms relative to 20 C.</p>
+<div class="math notranslate nohighlight">
+\[X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t} - 20)\]</div>
+<div class="math notranslate nohighlight">
+\[X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}^2 - 20^2)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the population in gridcell <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</div>
+<div class="section" id="download-the-population-data">
+<h2>Download the population data<a class="headerlink" href="#download-the-population-data" title="Permalink to this headline">¶</a></h2>
+<p>We can use the gridded population data from Gridded Population of the
+World, since the weather data is not very high resolution. Download it
+from
+https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count</p>
+<p>This is global data, so it will be useful to clip it to the US and
+aggregate it to the scale of the weather. We also need it in NetCDF
+format, for the aggregation step. Again, this code assumes that it is
+being run from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
+<span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
+
+<span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">24</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
+<span class="n">rr3</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr2</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span> <span class="m">-65</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="m">51</span><span class="p">))</span>
+
+<span class="nf">writeRaster</span><span class="p">(</span><span class="n">rr3</span><span class="p">,</span> <span class="s">&quot;../data/pcount/usap90ag.nc4&quot;</span><span class="p">,</span>
+ <span class="n">overwrite</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">varname</span><span class="o">=</span><span class="s">&quot;Population&quot;</span><span class="p">,</span> <span class="n">varunit</span><span class="o">=</span><span class="s">&quot;people&quot;</span><span class="p">,</span>
+ <span class="n">xname</span><span class="o">=</span><span class="s">&quot;lon&quot;</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="s">&quot;lat&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="downloading-the-mortality-data">
+<h2>Downloading the mortality data<a class="headerlink" href="#downloading-the-mortality-data" title="Permalink to this headline">¶</a></h2>
+<p>The Compressed Mortality File (CMF) provides comprehensive,
+county-scale mortality data for the United States. The data through
+1988 is publically available, so we will use this for our analysis.</p>
+<ol class="simple">
+<li><p>Go to the CMF information page,
+https://www.cdc.gov/nchs/data_access/cmf.htm</p></li>
+<li><p>Under “Data Availability”, find the mortality and population files
+for 1979 - 1988, and download these.</p></li>
+<li><p>Unzip these files, and place the resulting text files,
+<code class="docutils literal notranslate"><span class="pre">Mort7988.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">Pop7988.txt</span></code> into the <code class="docutils literal notranslate"><span class="pre">data/cmf</span></code> folder.</p></li>
+</ol>
+<p>These files report data as fixed-width ASCII text, meaning that spans
+of characters on each line represent columns of the data.</p>
+<p>In the mortality data file, <code class="docutils literal notranslate"><span class="pre">Mort7988.txt</span></code>, here are the elements of
+interest: Characters 1 - 5 provide the FIPS code (FIPS is a 5 digit
+code uniquely identifying each county in the US). Characters 6 - 9
+report the year of death. The next few columns give the race, age, and
+cause of death, but we will combine results across all of
+these. Characters 20 - 23 report the number of deaths that correspond
+to that county, year, race, age, and cause.</p>
+<p>In the population data file, <code class="docutils literal notranslate"><span class="pre">Pop7988.txt</span></code>, the lines start with FIPS
+codes and years, like the mortality data. But then the age groups are
+all listed on the line: starting with character 19, the population in
+each of 12 age groups is reported with 8 characters per age group
+number (so, the first age group, 1 - 4 year-olds, is characters 19 -
+26; then 5 - 9 year-olds is reported in characters 27 - 34; and so
+on).</p>
+</div>
+<div class="section" id="preparing-the-mortality-data">
+<h2>Preparing the mortality data<a class="headerlink" href="#preparing-the-mortality-data" title="Permalink to this headline">¶</a></h2>
+<p>Here we sum across all races and ages and merge the mortality and
+population data.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+
+<span class="n">df.mort</span> <span class="o">&lt;-</span> <span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span>
+   <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> <span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="s">&#39;deaths&#39;</span><span class="p">))</span>
+
+<span class="n">df2.mort</span> <span class="o">&lt;-</span> <span class="n">df.mort</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">deaths</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">deaths</span><span class="p">))</span>
+
+<span class="n">df.pop</span> <span class="o">&lt;-</span> <span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Pop7988.txt&quot;</span><span class="p">,</span>
+   <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="m">12</span><span class="p">),</span> <span class="m">25</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">,</span>
+   <span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#39;pop&#39;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">),</span> <span class="s">&#39;county&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">))</span>
+
+<span class="n">df2.pop</span> <span class="o">&lt;-</span> <span class="n">df.pop</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">pop</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">pop1</span> <span class="o">+</span>
+    <span class="n">pop2</span> <span class="o">+</span> <span class="n">pop3</span> <span class="o">+</span> <span class="n">pop4</span> <span class="o">+</span> <span class="n">pop5</span> <span class="o">+</span> <span class="n">pop6</span> <span class="o">+</span> <span class="n">pop7</span> <span class="o">+</span> <span class="n">pop8</span> <span class="o">+</span> <span class="n">pop9</span> <span class="o">+</span> <span class="n">pop10</span> <span class="o">+</span>
+    <span class="n">pop11</span> <span class="o">+</span> <span class="n">pop12</span><span class="p">),</span> <span class="n">type</span><span class="o">=</span><span class="n">type</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
+
+<span class="n">df3</span> <span class="o">&lt;-</span> <span class="n">df2.pop</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df2.mort</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">))</span>
+<span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="n">df4</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="n">type</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span>
+
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">df4</span><span class="p">[,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df4</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;type&#39;</span><span class="p">)],</span> <span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="functional-forms.html" title="previous page">Functional forms: pros, cons, and methods</a>
+    <a class='right-next' id="next-link" href="geographical-unit-data.html" title="next page">Generating geographical unit data</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

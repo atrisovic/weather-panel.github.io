@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Mortality in the United States, Step 1: Preparing the Weather Data</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developing a reduced-form specification" href="reduced-form-specification.html" />
+    <link rel="prev" title="How to Start Working with a Data Product" href="working-with-data-product.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+  
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="getting-started.html">
+   Introduction to the Tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Weather and Climate Data
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="weather-and-climate-data.html">
+   Using Weather and Climate Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-data-product.html">
+   How to Start Working with a Data Product
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Weather Mortality in the United States, Step 1: Preparing the Weather Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Developing a reduced-form specification
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reduced-form-specification.html">
+   Developing a reduced-form specification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional-forms.html">
+   Functional forms: pros, cons, and methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step2.html">
+   Weather Mortality in the United States, Step 2: Understanding the outcomes
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Geographical unit data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geographical-unit-data.html">
+   Generating geographical unit data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working-with-shapefiles.html">
+   Constructing weather averages within spatial units
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="weighting-schemes.html">
+   Weighting schemes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step3.html">
+   Weather Mortality in the United States, Step 3: Aggregating the data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Suggestions for work organization
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="suggestions.html">
+   Suggestions for work organization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example-step4.html">
+   Weather Mortality in the United States, Step 4: Producing results
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Contributors
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/example-step1.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/example-step1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/example-step1.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#downloading-the-data">
+   Downloading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-data">
+   Loading the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-temperature-levels">
+   Constructing temperature levels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subset-it-geographically">
+   Subset it geographically
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-the-result">
+   Save the result
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="weather-mortality-in-the-united-states-step-1-preparing-the-weather-data">
+<h1>Weather Mortality in the United States, Step 1: Preparing the Weather Data<a class="headerlink" href="#weather-mortality-in-the-united-states-step-1-preparing-the-weather-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="downloading-the-data">
+<h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this headline">¶</a></h2>
+<p>In our example, we will use Berkeley Earth (BEST) data. BEST data is
+available as national timeseries (area-weighted, so not usually useful
+even for studying national-level data) and as a 1-degree grid.</p>
+<ol class="simple">
+<li><p>Go to the BEST archive, http://berkeleyearth.org/archive/data/</p></li>
+<li><p>Scroll down to the Gridded Data (ignore the Time Series Data which
+is listed first).</p></li>
+<li><p>Under Gridded Data, find “Daily Land (Experimental; 1880 –
+Recent)”.</p></li>
+<li><p>Download the Average Temperature (TAVG) data in 1-degree gridded
+form for 1980 - 1989.</p></li>
+<li><p>Place this file (<code class="docutils literal notranslate"><span class="pre">Complete_TAVG_Daily_LatLong1_1980.nc</span></code>) in the
+<code class="docutils literal notranslate"><span class="pre">data/climate_data</span></code> folder.</p></li>
+</ol>
+<p>As a first pre-processing step, we will clip this file to the United
+States.</p>
+</div>
+<div class="section" id="loading-the-data">
+<h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s load all of the data into memory. This code assumes that
+it (the code) is stored in a file (call it <code class="docutils literal notranslate"><span class="pre">preprocess_best.m</span></code> or
+<code class="docutils literal notranslate"><span class="pre">preprocess_best.py</span></code>) in a directory <code class="docutils literal notranslate"><span class="pre">code/</span></code>, a sister to the <code class="docutils literal notranslate"><span class="pre">data/</span></code>
+directory.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="d075aef5-c77c-44b0-905c-de8dfc618e79" name="d0317e56-b4a2-4c9e-a3ec-017fa5c30d7c" type="radio">
+</input><label class="tabbed-label" for="d075aef5-c77c-44b0-905c-de8dfc618e79">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create time variable, which wasn&#39;t auto-generated from the netcdf due to BEST&#39;s ambiguous timing</span>
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;time&#39;</span><span class="p">),</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="9e4818e6-971d-42a1-b653-677010d45210" name="d0317e56-b4a2-4c9e-a3ec-017fa5c30d7c" type="radio">
+</input><label class="tabbed-label" for="9e4818e6-971d-42a1-b653-677010d45210">
+Matlab</label><div class="tabbed-content docutils">
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/&#39;</span><span class="p">;</span>
+<span class="n">filename</span> <span class="p">=</span> <span class="s">&#39;Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">;</span>
+	   
+<span class="n">clim_tmp</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;climatology&#39;</span><span class="p">);</span>
+<span class="n">anom_tmp</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;temperature&#39;</span><span class="p">);</span>
+<span class="n">doy_tmp</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;day_of_year&#39;</span><span class="p">);</span>
+
+<span class="c">% Also loading the &quot;months&quot; variable - most datasets don&#39;t have it, but</span>
+<span class="c">% it will make more sophisticated projecting methods easier. This is</span>
+<span class="c">% particularly useful because of the gregorian calendar (which includes</span>
+<span class="c">% leap days, and therefore would otherwise add an extra step to</span>
+<span class="c">% determining which month each datastep is)</span>
+<span class="n">months</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;month&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="constructing-temperature-levels">
+<h2>Constructing temperature levels<a class="headerlink" href="#constructing-temperature-levels" title="Permalink to this headline">¶</a></h2>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">temperature</span></code> in BEST is actually the temperature
+<em>anomaly</em>; the actual temperature is formed by adding it to the
+<code class="docutils literal notranslate"><span class="pre">climatology</span></code> variable. Unfortunately, the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> variable only
+accounts for days 1:365 of the year, and ignores leap days (which the
+<code class="docutils literal notranslate"><span class="pre">temperature</span></code> variable does not). This section doubles the climatology
+for Feb 28th to also work on Feb 29th, and creates a <code class="docutils literal notranslate"><span class="pre">tas</span></code> variable
+that’s the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> + <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="ba2222e8-2d76-4c34-8ff2-a0a93c301a47" name="fa7d5e10-3a39-42cf-873c-651147f9c9fd" type="radio">
+</input><label class="tabbed-label" for="ba2222e8-2d76-4c34-8ff2-a0a93c301a47">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calendar</span>
+
+<span class="c1"># Expand climatology to span all days</span>
+<span class="n">clim_tmp</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span><span class="s1">&#39;longitude&#39;</span><span class="p">),</span>
+                        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="n">ds</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="n">ds</span><span class="o">.</span><span class="n">longitude</span><span class="p">},</span>
+                        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">],</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="c1"># Sub in variables one year at a time</span>
+<span class="k">for</span> <span class="n">yr</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">calendar</span><span class="o">.</span><span class="n">isleap</span><span class="p">(</span><span class="n">yr</span><span class="p">):</span>
+        <span class="n">clim_tmp</span><span class="o">.</span><span class="n">loc</span><span class="p">[{</span><span class="s1">&#39;time&#39;</span><span class="p">:(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">==</span><span class="n">yr</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofyear</span><span class="o">&lt;=</span><span class="mi">59</span><span class="p">)}]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">climatology</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">59</span><span class="p">]</span>
+        <span class="n">clim_tmp</span><span class="o">.</span><span class="n">loc</span><span class="p">[{</span><span class="s1">&#39;time&#39;</span><span class="p">:(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">==</span><span class="n">yr</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofyear</span><span class="o">==</span><span class="mi">60</span><span class="p">)}]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">climatology</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">59</span><span class="p">]</span>
+        <span class="n">clim_tmp</span><span class="o">.</span><span class="n">loc</span><span class="p">[{</span><span class="s1">&#39;time&#39;</span><span class="p">:(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">==</span><span class="n">yr</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofyear</span><span class="o">&gt;</span><span class="mi">60</span><span class="p">)}]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">climatology</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">59</span><span class="p">:</span><span class="mi">365</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">clim_tmp</span><span class="o">.</span><span class="n">loc</span><span class="p">[{</span><span class="s1">&#39;time&#39;</span><span class="p">:(</span><span class="n">clim_tmp</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">==</span><span class="n">yr</span><span class="p">)}]</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">climatology</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;climatology&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">clim_tmp</span>
+
+<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;climatology&#39;</span><span class="p">]</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span><span class="s1">&#39;climatology&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<input id="b1682466-26e9-4c04-ae2d-3fa83cb61801" name="fa7d5e10-3a39-42cf-873c-651147f9c9fd" type="radio">
+</input><label class="tabbed-label" for="b1682466-26e9-4c04-ae2d-3fa83cb61801">
+Matlab</label><div class="tabbed-content docutils">
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% BEST data is given in terms of anomalies from the underlying</span>
+<span class="c">% climatology. So, the climatology has to be loaded first.</span>
+<span class="n">tas</span> <span class="p">=</span> <span class="n">anom_tmp</span> <span class="o">+</span> <span class="n">clim_tmp</span><span class="p">(:,:,</span><span class="n">doy_tmp</span><span class="p">);</span> 
+
+<span class="n">clear</span> <span class="s">clim_tmp,</span> <span class="s">anom_tmp,</span> <span class="s">doy_tmp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="subset-it-geographically">
+<h2>Subset it geographically<a class="headerlink" href="#subset-it-geographically" title="Permalink to this headline">¶</a></h2>
+<p>We can drop a lot of the global data. This can also happen earlier in
+the process.</p>
+<p>Using the extreme points of the continental United States (see e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States">here</a>) + 1 degree of wiggle room.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="11e0724e-155c-48a6-a598-fac4ecd58b2a" name="90f7168e-4bf9-4492-8f18-8f1959e256d0" type="radio">
+</input><label class="tabbed-label" for="11e0724e-155c-48a6-a598-fac4ecd58b2a">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">],</span><span class="s1">&#39;lon&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">]}</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">geo_lims</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]),</span><span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">geo_lims</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input id="b93bff9d-ceb0-45b0-a72f-f719bde99e0c" name="90f7168e-4bf9-4492-8f18-8f1959e256d0" type="radio">
+</input><label class="tabbed-label" for="b93bff9d-ceb0-45b0-a72f-f719bde99e0c">
+Matlab</label><div class="tabbed-content docutils">
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;latitude&#39;</span><span class="p">);</span>
+<span class="n">lon</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;longitude&#39;</span><span class="p">);</span>
+
+<span class="c">%% Subset to continental United States</span>
+<span class="n">lon_idxs</span> <span class="p">=</span> <span class="p">((</span><span class="n">lon</span><span class="o">&gt;=</span><span class="n">geo_lims</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lon</span><span class="o">&lt;=</span><span class="n">geo_lims</span><span class="p">(</span><span class="mi">2</span><span class="p">)));</span>
+<span class="n">lat_idxs</span> <span class="p">=</span> <span class="p">((</span><span class="n">lat</span><span class="o">&gt;=</span><span class="n">geo_lims</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lat</span><span class="o">&lt;=</span><span class="n">geo_lims</span><span class="p">(</span><span class="mi">4</span><span class="p">)));</span>
+
+<span class="n">tas</span> <span class="p">=</span> <span class="n">tas</span><span class="p">(</span><span class="n">lon_idxs</span><span class="p">,</span><span class="n">lat_idxs</span><span class="p">,:);</span>
+<span class="n">lon</span> <span class="p">=</span> <span class="n">lon</span><span class="p">(</span><span class="n">lon_idxs</span><span class="p">);</span>
+<span class="n">lat</span> <span class="p">=</span> <span class="n">lat</span><span class="p">(</span><span class="n">lat_idxs</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-the-result">
+<h2>Save the result<a class="headerlink" href="#save-the-result" title="Permalink to this headline">¶</a></h2>
+<p>We will write out the clipped, concatenated data to a single file for
+future processing. We make some changes in the process to conform to
+the standards used in CMIP5 datasets.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="fc7285f6-88d1-4e5c-ae15-478cc421a07f" name="86c658cb-5f96-4d7e-8385-3d8dd22fba3c" type="radio">
+</input><label class="tabbed-label" for="fc7285f6-88d1-4e5c-ae15-478cc421a07f">
+Python</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;origin_script&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;preprocess_best.py&#39;</span>
+
+<span class="c1"># Rename to lat/lon to fit CMIP5 defaults</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="s1">&#39;lon&#39;</span><span class="p">})</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">output_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="e31d46c7-a98b-489a-8d42-a7cebdfc16fd" name="86c658cb-5f96-4d7e-8385-3d8dd22fba3c" type="radio">
+</input><label class="tabbed-label" for="e31d46c7-a98b-489a-8d42-a7cebdfc16fd">
+Matlab</label><div class="tabbed-content docutils">
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename</span>
+<span class="n">fn_out</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
+
+<span class="c">% Write temperature data to netcdf </span>
+<span class="n">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)})</span>
+<span class="n">ncwrite</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="n">tas</span><span class="p">);</span>
+<span class="c">% These attributes aren&#39;t strictly necessary, but very helpful to have in</span>
+<span class="c">% the file</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="s">&#39;long_name&#39;</span><span class="p">,</span><span class="s">&#39;near-surface air temperature&#39;</span><span class="p">);</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="s">&#39;units&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">);</span>
+
+<span class="c">% Write lat/lon data to netcdf file</span>
+<span class="n">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">2</span><span class="p">)})</span>
+<span class="n">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">1</span><span class="p">)})</span>
+<span class="n">ncwrite</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="n">lat</span><span class="p">);</span>
+<span class="n">ncwrite</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="n">lon</span><span class="p">);</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="s">&#39;long_name&#39;</span><span class="p">,</span><span class="s">&#39;latitude&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="s">&#39;long_name&#39;</span><span class="p">,</span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="s">&#39;units&#39;</span><span class="p">,</span><span class="s">&#39;degrees&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="s">&#39;units&#39;</span><span class="p">,</span><span class="s">&#39;degrees&#39;</span><span class="p">)</span>
+
+<span class="c">% Write time dimension to netcdf file</span>
+<span class="n">time_idxs</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:(</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)})</span>
+<span class="n">ncwrite</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="n">time_idxs</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="s">&#39;units&#39;</span><span class="p">,</span><span class="s">&#39;days since 1980-01-01&#39;</span><span class="p">)</span>
+
+<span class="n">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;month&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)})</span>
+<span class="n">ncwrite</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;month&#39;</span><span class="p">,</span><span class="n">months</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;month&#39;</span><span class="p">,</span><span class="s">&#39;units&#39;</span><span class="p">,</span><span class="s">&#39;month number&#39;</span><span class="p">)</span>
+
+<span class="c">% Write global attributes (again, not strictly necessary, but very useful);</span>
+<span class="c">% using the &#39;/&#39; name for global</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;variable&#39;</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;variable_long&#39;</span><span class="p">,</span><span class="s">&#39;near-surface air temperature&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;source&#39;</span><span class="p">,</span><span class="s">&#39;Berkeley Earth Surface Temperature Project&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;origin_script&#39;</span><span class="p">,</span><span class="s">&#39;preprocess_best.m&#39;</span><span class="p">)</span>
+<span class="n">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;calendar&#39;</span><span class="p">,</span><span class="s">&#39;gregorian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="working-with-data-product.html" title="previous page">How to Start Working with a Data Product</a>
+    <a class='right-next' id="next-link" href="reduced-form-specification.html" title="next page">Developing a reduced-form specification</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
