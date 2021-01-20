@@ -262,7 +262,7 @@ You may want to visualize your weather or climate data, either for internal diag
 
 ````{tabbed} Python (xarray)
 
-```{code-block} python 
+```{code-block} python
 # Assuming your variable is a 3-D (lat,lon,time, in any order) 
 # variable called "tas", in a dataset loaded using 
 # ds = xr.open_dataset() as above. This will get you a 
@@ -377,4 +377,3 @@ See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/cli
 
 ### Regional Datasets
 Observational datasets exist with both global coverage (e.g. GISTEMP, HadCRUT, etc.) or regional coverage (e.g. PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g. the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
-

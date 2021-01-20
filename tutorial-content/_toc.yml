@@ -5,24 +5,25 @@
   chapters:
   - file: content/weather-and-climate-data
   - file: content/working-with-data-product
+  - file: content/example-step1
 
 - part: Developing a reduced-form specification
   chapters:
   - file: content/reduced-form-specification
   - file: content/functional-forms
-
-- part: Weighting schemes
-  chapters:
-  - file: content/weighting-schemes
+  - file: content/example-step2
 
 - part:  Geographical unit data
   chapters:
   - file: content/geographical-unit-data
   - file: content/working-with-shapefiles
+  - file: content/weighting-schemes
+  - file: content/example-step3
 
 - part: Suggestions for work organization 
   chapters:
   - file: content/suggestions
+  - file: content/example-step4
 
 - part: Contributors
   chapters:
