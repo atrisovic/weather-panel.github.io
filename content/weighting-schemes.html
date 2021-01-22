@@ -57,7 +57,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Weather Mortality in the United States, Step 3: Aggregating the data" href="example-step3.html" />
+    <link rel="next" title="Hands-On Exercise, Step 3: Aggregating the data" href="example-step3.html" />
     <link rel="prev" title="Constructing weather averages within spatial units" href="working-with-shapefiles.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -111,7 +111,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="example-step1.html">
-   Weather Mortality in the United States, Step 1: Preparing the Weather Data
+   Hands-On Exercise, Step 1: Preparing the Weather Data
   </a>
  </li>
 </ul>
@@ -133,7 +133,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="example-step2.html">
-   Weather Mortality in the United States, Step 2: Understanding the outcomes
+   Hands-On Exercise, Step 2: Understanding the outcomes
   </a>
  </li>
 </ul>
@@ -160,7 +160,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="example-step3.html">
-   Weather Mortality in the United States, Step 3: Aggregating the data
+   Hands-On Exercise, Step 3: Aggregating the data
   </a>
  </li>
 </ul>
@@ -177,7 +177,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="example-step4.html">
-   Weather Mortality in the United States, Step 4: Producing results
+   Hands-On Exercise, Step 4: Producing results
   </a>
  </li>
 </ul>
@@ -506,8 +506,8 @@ need to project these back to latitude-longitude and regrid them.</p>
 <div class="section" id="implementation-notes-reading-gridded-data">
 <h3>Implementation Notes: Reading gridded data.<a class="headerlink" href="#implementation-notes-reading-gridded-data" title="Permalink to this headline">¶</a></h3>
 <div class="tabbed-set docutils">
-<input checked="checked" id="29f2b6f7-5c8c-45d1-9363-7976d8bc35e0" name="9e7ca114-4ff6-42c0-9ef8-85f280064ec8" type="radio">
-</input><label class="tabbed-label" for="29f2b6f7-5c8c-45d1-9363-7976d8bc35e0">
+<input checked="checked" id="26411251-5cd3-48b1-97c9-de11238aaf62" name="b82218dc-d8ca-4eb2-bbea-a6ac5515c6dd" type="radio">
+</input><label class="tabbed-label" for="26411251-5cd3-48b1-97c9-de11238aaf62">
 R</label><div class="tabbed-content docutils">
 <p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library. For example:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
@@ -515,8 +515,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="33675006-f82d-4657-a365-83e7f029fd43" name="9e7ca114-4ff6-42c0-9ef8-85f280064ec8" type="radio">
-</input><label class="tabbed-label" for="33675006-f82d-4657-a365-83e7f029fd43">
+<input id="081d9347-36ee-4894-aecc-69c5749c65ad" name="b82218dc-d8ca-4eb2-bbea-a6ac5515c6dd" type="radio">
+</input><label class="tabbed-label" for="081d9347-36ee-4894-aecc-69c5749c65ad">
 Python</label><div class="tabbed-content docutils">
 <p>Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.</p>
 </div>
@@ -553,15 +553,15 @@ upsampling, downsampling, and cropping.</p>
 <p>To increase the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without increasing the
 sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e37ef447-5d85-47af-bbfd-13a32cd235ef" name="1ded34a8-0907-4659-b46a-a7319eab0759" type="radio">
-</input><label class="tabbed-label" for="e37ef447-5d85-47af-bbfd-13a32cd235ef">
+<input checked="checked" id="e69f5b72-aa01-4f93-8cf8-7ac9737df8a1" name="70bfb32f-5209-4ad1-8d47-b1d60da3d43f" type="radio">
+</input><label class="tabbed-label" for="e69f5b72-aa01-4f93-8cf8-7ac9737df8a1">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="4913d53a-dff2-465b-ac98-dedb0b6d1001" name="1ded34a8-0907-4659-b46a-a7319eab0759" type="radio">
-</input><label class="tabbed-label" for="4913d53a-dff2-465b-ac98-dedb0b6d1001">
+<input id="011f608f-7697-4421-a0dc-4d36af6b8d43" name="70bfb32f-5209-4ad1-8d47-b1d60da3d43f" type="radio">
+</input><label class="tabbed-label" for="011f608f-7697-4421-a0dc-4d36af6b8d43">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
@@ -574,15 +574,15 @@ Python</label><div class="tabbed-content docutils">
 <p>To decrease the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without
 decreasing the sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="08565675-3147-47b4-925a-33212c9857d0" name="154e6774-fca4-486b-882d-772c373de420" type="radio">
-</input><label class="tabbed-label" for="08565675-3147-47b4-925a-33212c9857d0">
+<input checked="checked" id="1067adf5-e198-422a-a2bc-c53e2c723f34" name="be557288-ac6b-43a4-9e9a-7dabc7099369" type="radio">
+</input><label class="tabbed-label" for="1067adf5-e198-422a-a2bc-c53e2c723f34">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="484f2630-ee1b-42a1-b003-9729acf80732" name="154e6774-fca4-486b-882d-772c373de420" type="radio">
-</input><label class="tabbed-label" for="484f2630-ee1b-42a1-b003-9729acf80732">
+<input id="df56c4b8-c111-49ea-bd54-b083872082d4" name="be557288-ac6b-43a4-9e9a-7dabc7099369" type="radio">
+</input><label class="tabbed-label" for="df56c4b8-c111-49ea-bd54-b083872082d4">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -599,15 +599,15 @@ Python</label><div class="tabbed-content docutils">
 to a box from the longitudinal range <code class="docutils literal notranslate"><span class="pre">WW</span></code> to <code class="docutils literal notranslate"><span class="pre">EE</span></code> and the latitudinal
 range from <code class="docutils literal notranslate"><span class="pre">SS</span></code> to <code class="docutils literal notranslate"><span class="pre">NN</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="303096e6-df9d-41ca-abe4-f8cd0a815437" name="95b6a4ce-0084-479e-afb1-5c085ccc3d7c" type="radio">
-</input><label class="tabbed-label" for="303096e6-df9d-41ca-abe4-f8cd0a815437">
+<input checked="checked" id="1a704be5-9bd2-4022-a70d-9c8589d4cd19" name="4e61f2e3-bcbf-4a2c-9133-5ab37eba4837" type="radio">
+</input><label class="tabbed-label" for="1a704be5-9bd2-4022-a70d-9c8589d4cd19">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="n">WW</span><span class="p">,</span> <span class="n">SS</span><span class="p">,</span> <span class="n">EE</span><span class="p">,</span> <span class="n">NN</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<input id="78b6da6b-b727-4159-b48a-e90c09af89b0" name="95b6a4ce-0084-479e-afb1-5c085ccc3d7c" type="radio">
-</input><label class="tabbed-label" for="78b6da6b-b727-4159-b48a-e90c09af89b0">
+<input id="412af505-42ec-41af-8f2c-3f8ec7869460" name="4e61f2e3-bcbf-4a2c-9133-5ab37eba4837" type="radio">
+</input><label class="tabbed-label" for="412af505-42ec-41af-8f2c-3f8ec7869460">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)</span>
 
@@ -821,7 +821,7 @@ choosing colors.</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="working-with-shapefiles.html" title="previous page">Constructing weather averages within spatial units</a>
-    <a class='right-next' id="next-link" href="example-step3.html" title="next page">Weather Mortality in the United States, Step 3: Aggregating the data</a>
+    <a class='right-next' id="next-link" href="example-step3.html" title="next page">Hands-On Exercise, Step 3: Aggregating the data</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
