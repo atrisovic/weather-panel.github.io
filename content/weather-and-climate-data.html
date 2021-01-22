@@ -389,8 +389,8 @@
 <h3>Supported Languages<a class="headerlink" href="#supported-languages" title="Permalink to this headline">¶</a></h3>
 <p>Through this section, we introduce relevant commands whenever possible for the following languages and packages:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="aa62c019-ce50-4a5a-aff6-24810c36c261" name="786a9d73-6abc-47bb-9744-167107251637" type="radio">
-</input><label class="tabbed-label" for="aa62c019-ce50-4a5a-aff6-24810c36c261">
+<input checked="checked" id="55e44382-e4a5-42c9-a7fe-1f15799a3f95" name="6e29c927-eecd-4d6a-be8e-f78017dcfd57" type="radio">
+</input><label class="tabbed-label" for="55e44382-e4a5-42c9-a7fe-1f15799a3f95">
 Python (xarray)</label><div class="tabbed-content docutils">
 <p><a class="reference external" href="http://xarray.pydata.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">xarray</span></code></a> (recommended) is a package for working with N-dimensional data that natively supports NetCDF files.</p>
 <p>For any Python (xarray) code chunks, it’s assumed that the <code class="docutils literal notranslate"><span class="pre">xarray</span></code> package is loaded as <code class="docutils literal notranslate"><span class="pre">xr</span></code>:</p>
@@ -398,13 +398,13 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e50e2dff-496e-4069-aed7-6636aaa5f80e" name="786a9d73-6abc-47bb-9744-167107251637" type="radio">
-</input><label class="tabbed-label" for="e50e2dff-496e-4069-aed7-6636aaa5f80e">
+<input id="2c6ab627-6f2d-4a12-acc3-a191263c734c" name="6e29c927-eecd-4d6a-be8e-f78017dcfd57" type="radio">
+</input><label class="tabbed-label" for="2c6ab627-6f2d-4a12-acc3-a191263c734c">
 Matlab</label><div class="tabbed-content docutils">
 <p>MATLAB has native support for working with N-dimensional data.</p>
 </div>
-<input id="4256be05-5b68-45f5-9405-db81749040a5" name="786a9d73-6abc-47bb-9744-167107251637" type="radio">
-</input><label class="tabbed-label" for="4256be05-5b68-45f5-9405-db81749040a5">
+<input id="14ca7cc0-dc19-43b6-85f6-591abfcdc45d" name="6e29c927-eecd-4d6a-be8e-f78017dcfd57" type="radio">
+</input><label class="tabbed-label" for="14ca7cc0-dc19-43b6-85f6-591abfcdc45d">
 R</label><div class="tabbed-content docutils">
 <p>Support through the <a class="reference external" href="https://cran.r-project.org/web/packages/ncdf4/index.html">ncdf4</a> package.</p>
 <p>For any R code chunks, it’s assumed the <code class="docutils literal notranslate"><span class="pre">ncdf4</span></code> package is loaded with:</p>
@@ -412,8 +412,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="17570e64-8c2a-49fc-b392-1f4b05703e66" name="786a9d73-6abc-47bb-9744-167107251637" type="radio">
-</input><label class="tabbed-label" for="17570e64-8c2a-49fc-b392-1f4b05703e66">
+<input id="1a244009-cd35-4c2d-b58e-40af84c6060b" name="6e29c927-eecd-4d6a-be8e-f78017dcfd57" type="radio">
+</input><label class="tabbed-label" for="1a244009-cd35-4c2d-b58e-40af84c6060b">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <p>Support through the <a class="reference external" href="https://unidata.github.io/netcdf4-python/netCDF4/index.html">netCDF4</a> module.</p>
 <p>For any Python (NetCDF4) code chunks, it’s assumed that the <code class="docutils literal notranslate"><span class="pre">NetCDF4</span></code> package is loaded as <code class="docutils literal notranslate"><span class="pre">nc</span></code>:</p>
@@ -421,8 +421,8 @@ Python (NetCDF4)</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="adacd9ca-81ee-4f7b-897e-9ac78aacbd5b" name="786a9d73-6abc-47bb-9744-167107251637" type="radio">
-</input><label class="tabbed-label" for="adacd9ca-81ee-4f7b-897e-9ac78aacbd5b">
+<input id="1a11e488-75dc-4000-ae63-358f797c49ce" name="6e29c927-eecd-4d6a-be8e-f78017dcfd57" type="radio">
+</input><label class="tabbed-label" for="1a11e488-75dc-4000-ae63-358f797c49ce">
 nco</label><div class="tabbed-content docutils">
 <p><a class="reference external" href="http://nco.sourceforge.net">nco</a> (“NetCDF operators”) - it is a series of command-line tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language. Here are a few important commands:</p>
 <ul class="simple">
@@ -493,39 +493,39 @@ nco</label><div class="tabbed-content docutils">
 <h3>The NetCDF Header<a class="headerlink" href="#the-netcdf-header" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files are self-describing, meaning that they contain information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, etc. Here are the commands to print the header for NetCDF filename <code class="docutils literal notranslate"><span class="pre">fn</span></code>, for each mentioned tool above:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5b2c84da-5d8f-4fc4-93a3-533ff63eed36" name="310938ea-b335-46cb-8ec5-1c1172d232f0" type="radio">
-</input><label class="tabbed-label" for="5b2c84da-5d8f-4fc4-93a3-533ff63eed36">
+<input checked="checked" id="718579d0-6416-4fed-a1c7-34cd2df0b11a" name="364f54ba-c9fc-42b5-a5d9-890b06849d80" type="radio">
+</input><label class="tabbed-label" for="718579d0-6416-4fed-a1c7-34cd2df0b11a">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="4032d40c-6559-46b8-a961-a3e20f86a18b" name="310938ea-b335-46cb-8ec5-1c1172d232f0" type="radio">
-</input><label class="tabbed-label" for="4032d40c-6559-46b8-a961-a3e20f86a18b">
+<input id="21e046be-1b41-4ddf-af7e-4d24b0916ffc" name="364f54ba-c9fc-42b5-a5d9-890b06849d80" type="radio">
+</input><label class="tabbed-label" for="21e046be-1b41-4ddf-af7e-4d24b0916ffc">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncdisp</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="9f8d369a-edb8-49b5-9436-02f6da01a8a5" name="310938ea-b335-46cb-8ec5-1c1172d232f0" type="radio">
-</input><label class="tabbed-label" for="9f8d369a-edb8-49b5-9436-02f6da01a8a5">
+<input id="46f46dc3-a6fd-4728-869d-df401dbfb3c0" name="364f54ba-c9fc-42b5-a5d9-890b06849d80" type="radio">
+</input><label class="tabbed-label" for="46f46dc3-a6fd-4728-869d-df401dbfb3c0">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncfile</span>
 </pre></div>
 </div>
 </div>
-<input id="8f0e35d0-1c7d-415d-a764-bba95d007888" name="310938ea-b335-46cb-8ec5-1c1172d232f0" type="radio">
-</input><label class="tabbed-label" for="8f0e35d0-1c7d-415d-a764-bba95d007888">
+<input id="e2bd67fa-fc8d-4e41-ba2d-7a84274fa3a2" name="364f54ba-c9fc-42b5-a5d9-890b06849d80" type="radio">
+</input><label class="tabbed-label" for="e2bd67fa-fc8d-4e41-ba2d-7a84274fa3a2">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
 </div>
-<input id="c668f35e-2f13-492c-a8e3-2f26434740b6" name="310938ea-b335-46cb-8ec5-1c1172d232f0" type="radio">
-</input><label class="tabbed-label" for="c668f35e-2f13-492c-a8e3-2f26434740b6">
+<input id="42cb1a16-2995-48eb-9419-ebb5dea0260d" name="364f54ba-c9fc-42b5-a5d9-890b06849d80" type="radio">
+</input><label class="tabbed-label" for="42cb1a16-2995-48eb-9419-ebb5dea0260d">
 nco</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># </span>
 <span class="n">ncdump</span> <span class="o">-</span><span class="n">h</span> <span class="n">fn</span>
@@ -560,8 +560,8 @@ nco</label><div class="tabbed-content docutils">
 <h3>Reading NetCDF data<a class="headerlink" href="#reading-netcdf-data" title="Permalink to this headline">¶</a></h3>
 <p>NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable <code class="docutils literal notranslate"><span class="pre">var</span></code>:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="db6fe228-9c2a-438f-9ba8-9cddd4fc5d5c" name="eeafb9d5-a8e1-4fda-a636-7f948fb958c0" type="radio">
-</input><label class="tabbed-label" for="db6fe228-9c2a-438f-9ba8-9cddd4fc5d5c">
+<input checked="checked" id="a0bdfdf1-d577-4aff-bf94-78d53427598c" name="f54980b9-7a6a-4cae-bc42-fa788a30c919" type="radio">
+</input><label class="tabbed-label" for="a0bdfdf1-d577-4aff-bf94-78d53427598c">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="n">var</span>
@@ -569,23 +569,23 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </div>
 <p>Data is loaded slowly and only fully loaded when calculations are done - to force loading, run <code class="docutils literal notranslate"><span class="pre">ds.load()</span></code></p>
 </div>
-<input id="648f73a8-9cc9-48ad-b605-4251377250ce" name="eeafb9d5-a8e1-4fda-a636-7f948fb958c0" type="radio">
-</input><label class="tabbed-label" for="648f73a8-9cc9-48ad-b605-4251377250ce">
+<input id="f9c664f9-7c38-4e5f-9349-c30853ee03ba" name="f54980b9-7a6a-4cae-bc42-fa788a30c919" type="radio">
+</input><label class="tabbed-label" for="f9c664f9-7c38-4e5f-9349-c30853ee03ba">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<input id="d6afc5d1-9354-4849-a373-cd88bd65ef96" name="eeafb9d5-a8e1-4fda-a636-7f948fb958c0" type="radio">
-</input><label class="tabbed-label" for="d6afc5d1-9354-4849-a373-cd88bd65ef96">
+<input id="055cb8d6-8d40-4b7c-8e46-70ab6a211905" name="f54980b9-7a6a-4cae-bc42-fa788a30c919" type="radio">
+</input><label class="tabbed-label" for="055cb8d6-8d40-4b7c-8e46-70ab6a211905">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="eb9e8210-10f3-4f4c-b6b6-76d3d3b12ef9" name="eeafb9d5-a8e1-4fda-a636-7f948fb958c0" type="radio">
-</input><label class="tabbed-label" for="eb9e8210-10f3-4f4c-b6b6-76d3d3b12ef9">
+<input id="caa08cb2-6c51-4b40-b0d5-b099fa0f2c21" name="f54980b9-7a6a-4cae-bc42-fa788a30c919" type="radio">
+</input><label class="tabbed-label" for="caa08cb2-6c51-4b40-b0d5-b099fa0f2c21">
 Python (NetCDF4)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ncf</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">ncf</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">][:]</span>
@@ -596,8 +596,8 @@ Python (NetCDF4)</label><div class="tabbed-content docutils">
 </div>
 <p>You’ll often only want or need a subset of a variable. In this case, make sure you know in what order the dimensions of the variable are saved at (see above; unless you are working with <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, which handles this for you. Check the docs.). Say, if you want only a 5 x 5 x 365 subset of the data, you’d use:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1a0ec7fc-c17d-4c4f-83ad-224b3e12fe5c" name="f8967f87-0e55-4ac3-abb1-1552712fa235" type="radio">
-</input><label class="tabbed-label" for="1a0ec7fc-c17d-4c4f-83ad-224b3e12fe5c">
+<input checked="checked" id="ffcb7d3b-6518-46b6-a821-927c7f1d5c73" name="11209141-880f-4f56-ab66-f6fd6801df55" type="radio">
+</input><label class="tabbed-label" for="ffcb7d3b-6518-46b6-a821-927c7f1d5c73">
 Python (xarray)</label><div class="tabbed-content docutils">
 <p>Data is loaded slowly and only fully loaded when calculations are done, so you can slice data without loading it into memory. Slicing can be done by time, variable, etc.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
@@ -611,16 +611,16 @@ Python (xarray)</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="9454b71d-6b6a-4282-8cd3-34aedc643c17" name="f8967f87-0e55-4ac3-abb1-1552712fa235" type="radio">
-</input><label class="tabbed-label" for="9454b71d-6b6a-4282-8cd3-34aedc643c17">
+<input id="8420c7cb-b972-4f84-976d-b42f4c9d6cbb" name="11209141-880f-4f56-ab66-f6fd6801df55" type="radio">
+</input><label class="tabbed-label" for="8420c7cb-b972-4f84-976d-b42f4c9d6cbb">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% in the format ncread(filename,variable name,start idx,count)</span>
 <span class="n">ncread</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="n">var</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">5</span> <span class="mi">5</span> <span class="mi">365</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
-<input id="6b7b7e09-5459-4341-9133-e7e72159f1bc" name="f8967f87-0e55-4ac3-abb1-1552712fa235" type="radio">
-</input><label class="tabbed-label" for="6b7b7e09-5459-4341-9133-e7e72159f1bc">
+<input id="6c2fd199-5375-44d7-8034-2e8e796d900d" name="11209141-880f-4f56-ab66-f6fd6801df55" type="radio">
+</input><label class="tabbed-label" for="6c2fd199-5375-44d7-8034-2e8e796d900d">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span> <span class="o">&lt;-</span> <span class="nf">nc_open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="n">vardata</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">365</span><span class="p">))</span>
@@ -635,8 +635,8 @@ R</label><div class="tabbed-content docutils">
 <h3>Diagnostic Maps of Climate Data<a class="headerlink" href="#diagnostic-maps-of-climate-data" title="Permalink to this headline">¶</a></h3>
 <p>You may want to visualize your weather or climate data, either for internal diagnostics or for production figures showing your data. It’s generally good practice to double-check that your data downloaded and processed correctly, by making sure there aren’t suspiciously many NAs/NaNs, that the lat/lon grid matches up with where the data should go (first-order check: does your temperature/precipitation field trace out major land/ocean boundaries, etc.), and that the data is consistent. Here are easy ways to plot the first timestep of a gridded dataset:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d7a6421f-34fb-4da4-9799-4789a0d5feac" name="543215c7-8d82-4336-945f-7eaddb330135" type="radio">
-</input><label class="tabbed-label" for="d7a6421f-34fb-4da4-9799-4789a0d5feac">
+<input checked="checked" id="42a62d9e-a516-4b97-982a-088e697905a5" name="277ded86-ac40-446d-89ad-1a1cc1e6fbfc" type="radio">
+</input><label class="tabbed-label" for="42a62d9e-a516-4b97-982a-088e697905a5">
 Python (xarray)</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming your variable is a 3-D (lat,lon,time, in any order) </span>
 <span class="c1"># variable called &quot;tas&quot;, in a dataset loaded using </span>
@@ -660,8 +660,8 @@ Python (xarray)</label><div class="tabbed-content docutils">
 <p>For more information on plotting geographic data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, we highly recommend the <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">“Earth and Environmental Science” with python guide</a>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html%5D">“Making Maps with Cartopy”</a></p>
 </div>
 </div>
-<input id="44a4fc92-4282-4c86-bc61-5af04357c8ac" name="543215c7-8d82-4336-945f-7eaddb330135" type="radio">
-</input><label class="tabbed-label" for="44a4fc92-4282-4c86-bc61-5af04357c8ac">
+<input id="863f463e-57e6-424c-9cdb-d13a3d260923" name="277ded86-ac40-446d-89ad-1a1cc1e6fbfc" type="radio">
+</input><label class="tabbed-label" for="863f463e-57e6-424c-9cdb-d13a3d260923">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Assuming your dataset is called &quot;tas&quot; (lon,lat,time)</span>
 <span class="c">% This will just plot a heatmap of your data:</span>
