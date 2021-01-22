@@ -1,4 +1,4 @@
-# Weather Mortality in the United States, Step 1: Preparing the Weather Data
+# Hands-On Exercise, Step 1: Preparing the Weather Data
 
 ## Downloading the data 
 
