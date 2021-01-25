@@ -1,5 +1,10 @@
 # Producing results
 
+```{admonition} Key objectives
+:class: note
+- Offer some advice on running regressions and plotting results.
+```
+
 Once you have translated physical weather data into observations that
 match the geographic units, much of the work of climate econometrics
 follows the patterns laid down in other econometrics. This section
