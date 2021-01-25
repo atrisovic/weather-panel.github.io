@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contributors</title>
+    <title>Producing results</title>
     
   <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Hands-On Exercise, Step 4: Producing results" href="example-step4.html" />
+    <link rel="next" title="Suggestions for work organization" href="suggestions.html" />
+    <link rel="prev" title="Hands-On Exercise, Step 3: Aggregating the data" href="example-step3.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -168,9 +169,9 @@
   Bringing it all together
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="producing-results.html">
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Producing results
   </a>
  </li>
@@ -190,9 +191,9 @@
   Contributors
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
    Contributors
   </a>
  </li>
@@ -236,7 +237,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/contributors.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/content/producing-results.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -256,10 +257,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/contributors.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/producing-results.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/contributors.md"><button
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/producing-results.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -285,13 +286,18 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#citing-this-tutorial">
-   Citing this tutorial
+  <a class="reference internal nav-link" href="#performing-regressions">
+   Performing regressions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#contributions">
-   Contributions
+  <a class="reference internal nav-link" href="#spatial-and-temporal-error-term-covariance">
+   Spatial and temporal error term covariance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-dose-response-functions">
+   Plotting dose-response functions
   </a>
  </li>
 </ul>
@@ -305,29 +311,56 @@
         
               <div>
                 
-  <div class="section" id="contributors">
-<h1>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h1>
-<p>The core contributors of this tutorial are, in alphabetic order:</p>
+  <div class="section" id="producing-results">
+<h1>Producing results<a class="headerlink" href="#producing-results" title="Permalink to this headline">¶</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Key objectives</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://azharhsain.github.io/">Azhar Hussain</a></p></li>
-<li><p><a class="reference external" href="http://existencia.org/pro">James Rising</a></p></li>
-<li><p><a class="reference external" href="https://iri.columbia.edu/contact/staff-directory/kevin-schwarzwald/">Kevin Schwarzwald</a></p></li>
-<li><p><a class="reference external" href="https://anatrisovic.com">Ana Trisovic</a></p></li>
+<li><p>Offer some advice on running regressions and plotting results.</p></li>
 </ul>
-<div class="section" id="citing-this-tutorial">
-<h2>Citing this tutorial<a class="headerlink" href="#citing-this-tutorial" title="Permalink to this headline">¶</a></h2>
-<p>You can reference this tutorial with the DOI 10.5281/zenodo.3629801.
-This DOI represents all versions, and will always resolve to the latest one.</p>
-<p>Cite the tutorial as:</p>
-<blockquote>
-<div><p>James Rising, Azhar Hussain, Kevin Schwarzwald, &amp; Ana Trisovic. (2020, March). Weather Panel Tutorial (Version v1.1). Zenodo. http://doi.org/10.5281/zenodo.3732015</p>
-</div></blockquote>
 </div>
-<div class="section" id="contributions">
-<h2>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline">¶</a></h2>
-<p>We welcome any contributions to this tutorial.
-If you see a mistake, please don’t hesitate to <a class="reference external" href="https://github.com/atrisovic/weather-panel.github.io/issues">open an issue</a>
-or send us a pull request on <a class="reference external" href="https://github.com/atrisovic/weather-panel.github.io">GitHub</a>.</p>
+<p>Once you have translated physical weather data into observations that
+match the geographic units, much of the work of climate econometrics
+follows the patterns laid down in other econometrics. This section
+just provides a few pointers for problems that are common when working
+with weather relationships.</p>
+<div class="section" id="performing-regressions">
+<h2>Performing regressions<a class="headerlink" href="#performing-regressions" title="Permalink to this headline">¶</a></h2>
+<p>Weather regressions require careful fixed-effect (FE) definitions. A
+geographic unit fixed effect is essential, but several other fixed
+effects are important to consider:</p>
+<ul class="simple">
+<li><p>Time unit FEs, or high-order polynomial trends.</p></li>
+<li><p>FEs or trends as above, at the level of groups of geographic units
+(e.g. ADM1, if the observations are at ADM2).</p></li>
+<li><p>Day of week or day of year FEs, for many social/economic behaviors.</p></li>
+</ul>
+<p>If you have multiple groups (e.g., data for different ages, races, or
+sexes) and want to estimate different effects for different groups,
+make sure you use Seemingly Unrelated Regressions.</p>
+</div>
+<div class="section" id="spatial-and-temporal-error-term-covariance">
+<h2>Spatial and temporal error term covariance<a class="headerlink" href="#spatial-and-temporal-error-term-covariance" title="Permalink to this headline">¶</a></h2>
+<p>As the resolution of the spatial and temporal units increases, the
+coviariance between them will also increase. Those additional
+observations may not provide as much unique information as they appear
+to. In most cases, it is necessary to use Conley-White standard
+errors. Sol Hsiang has code for this in Matlab and Stata:
+<a class="reference external" href="http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html">http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html</a>.</p>
+<p>For corresponding code in R, see <a class="reference external" href="https://github.com/darinchristensen/conley-se">https://github.com/darinchristensen/conley-se</a></p>
+</div>
+<div class="section" id="plotting-dose-response-functions">
+<h2>Plotting dose-response functions<a class="headerlink" href="#plotting-dose-response-functions" title="Permalink to this headline">¶</a></h2>
+<p>Regressino results are always relative to some baseline, and for
+dose-response functions, that baseline is often defined as a
+particular value of the weather variable (e.g., a day at 20 C). At
+this same point, the standard errors go to 0 (if there are no other
+variables being projected). To produce this effect, when predicting
+the dose-response function (e.g., with <code class="docutils literal notranslate"><span class="pre">predict</span></code> in R), define
+variables that are 0 at the point. So, for example, if you are
+plotting a quadratic in temperature relative to 20 C, define your
+linear term as <span class="math notranslate nohighlight">\(T-20^\circ C\)</span> and your quadratic term as <span class="math notranslate nohighlight">\(T^2 -
+(20^\circ C)^2\)</span>.</p>
 </div>
 </div>
 
@@ -359,7 +392,8 @@ or send us a pull request on <a class="reference external" href="https://github.
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="example-step4.html" title="previous page">Hands-On Exercise, Step 4: Producing results</a>
+    <a class='left-prev' id="prev-link" href="example-step3.html" title="previous page">Hands-On Exercise, Step 3: Aggregating the data</a>
+    <a class='right-next' id="next-link" href="suggestions.html" title="next page">Suggestions for work organization</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
