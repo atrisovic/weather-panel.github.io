@@ -5,7 +5,7 @@
 
 Objectives:
 - Understand what geographical unit and administrative unit data are
-- Understand sharefiles, how to obtain them and how to work with them
+- Understand shapefiles, how to obtain them and how to work with them
 
 Decision points:
 - How to incorporate geographical and administrative units in your analysis?
