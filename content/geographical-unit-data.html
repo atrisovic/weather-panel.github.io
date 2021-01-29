@@ -55,6 +55,7 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Constructing weather averages within spatial units" href="working-with-shapefiles.html" />
@@ -260,7 +261,7 @@
             href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/geographical-unit-data.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/content/geographical-unit-data.md"><button
+        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/geographical-unit-data.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -318,7 +319,7 @@
 <p>Objectives:</p>
 <ul class="simple">
 <li><p>Understand what geographical unit and administrative unit data are</p></li>
-<li><p>Understand sharefiles, how to obtain them and how to work with them</p></li>
+<li><p>Understand shapefiles, how to obtain them and how to work with them</p></li>
 </ul>
 <p>Decision points:</p>
 <ul class="simple">
@@ -399,8 +400,8 @@
 <h2>Working with shapefiles<a class="headerlink" href="#working-with-shapefiles" title="Permalink to this headline">¶</a></h2>
 <p>Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to ensure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1ff9a57a-6bda-49d6-b580-52f3750b661f" name="ee298966-267f-48af-8bc5-8ef67f8ba22e" type="radio">
-</input><label class="tabbed-label" for="1ff9a57a-6bda-49d6-b580-52f3750b661f">
+<input checked="checked" id="d773c928-71be-49e7-a63a-0194729fe3f5" name="7d8eedde-f6f6-494f-aa03-cd82f5e52560" type="radio">
+</input><label class="tabbed-label" for="d773c928-71be-49e7-a63a-0194729fe3f5">
 R</label><div class="tabbed-content docutils">
 <p>To read shapefiles you could use a package like <code class="docutils literal notranslate"><span class="pre">maptools</span></code>, <code class="docutils literal notranslate"><span class="pre">rgdal</span></code>, <code class="docutils literal notranslate"><span class="pre">sf</span></code>, or <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">maptools</span><span class="p">)</span>
@@ -413,8 +414,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a3a67276-15a2-4bd3-b963-ef5a85e657c4" name="ee298966-267f-48af-8bc5-8ef67f8ba22e" type="radio">
-</input><label class="tabbed-label" for="a3a67276-15a2-4bd3-b963-ef5a85e657c4">
+<input id="d889d0fe-08b1-4045-9511-e05ad3435c08" name="7d8eedde-f6f6-494f-aa03-cd82f5e52560" type="radio">
+</input><label class="tabbed-label" for="d889d0fe-08b1-4045-9511-e05ad3435c08">
 Python</label><div class="tabbed-content docutils">
 <p>Shapefiles can be opened with Python packages in a few different ways:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>

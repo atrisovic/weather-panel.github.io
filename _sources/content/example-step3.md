@@ -40,7 +40,7 @@ ds_pop = xr.open_dataset('pcount/usap90ag.nc')
 gdf_counties = gpd.read_file('geo_data/UScounties.shp')
 ```
 
-## Traansforming the data
+## Transforming the data
 
 Next, we need to construct any nonlinear transformations of the data.
 
@@ -80,7 +80,7 @@ Using the weight map calculated above, `xagg` now aggregates all the gridded var
 
 The output of this function now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.  
 
-(`aggregated` is an object specific to the `xagg` package; we need to modify it to be useable, for example using `aggregated.to_dataset()` or `aggregated.to_csv` as we do below - see the `xagg` docs for more info). 
+(`aggregated` is an object specific to the `xagg` package; we need to modify it to be usable, for example using `aggregated.to_dataset()` or `aggregated.to_csv` as we do below - see the `xagg` docs for more info). 
 
 ```python
 aggregated = xa.aggregate(ds_tas, weightmap)
