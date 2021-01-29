@@ -1,4 +1,4 @@
-# Weather Mortality in the United States, Step 4: Producing results
+# Hands-On Exercise, Step 4: Producing results
 
 ## Constructing annual polynomials summed over days
 

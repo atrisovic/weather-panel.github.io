@@ -1,4 +1,4 @@
-# Weather Mortality in the United States, Step 2: Understanding the outcomes
+# Hands-On Exercise, Step 2: Understanding the outcomes
 
 ## Thinking about the data-generating process
 

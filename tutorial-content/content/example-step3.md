@@ -1,4 +1,4 @@
-# Weather Mortality in the United States, Step 3: Aggregating the data
+# Hands-On Exercise, Step 3: Aggregating the data
 
 ## Aggregating the weather data
 
