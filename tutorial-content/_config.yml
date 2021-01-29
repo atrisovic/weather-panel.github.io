@@ -8,14 +8,17 @@ latex:
 
 repository:
   url: https://github.com/atrisovic/weather-panel.github.io/ 
+  branch: master
+  path_to_book: tutorial-content
+
 html:
   use_repository_button: true
   use_issues_button: true
   use_edit_page_button: true
+  favicon: content/images/favicon.png
 
 parse:
   myst_extended_syntax: true
 
 execute:
   execute_notebooks: "off"
-
