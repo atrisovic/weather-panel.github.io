@@ -350,8 +350,8 @@ it (the code) is stored in a file (call it <code class="docutils literal notrans
 <code class="docutils literal notranslate"><span class="pre">preprocess_best.py</span></code>) in a directory <code class="docutils literal notranslate"><span class="pre">code/</span></code>, a sister to the <code class="docutils literal notranslate"><span class="pre">data/</span></code>
 directory.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7581bbc0-dbc4-415c-89ee-fc6adb7fa5c8" name="c39d4872-ee12-486e-8b14-5b89fc8aa3f9" type="radio">
-</input><label class="tabbed-label" for="7581bbc0-dbc4-415c-89ee-fc6adb7fa5c8">
+<input checked="checked" id="23a5b5b2-09c6-4fea-b44a-cdbfb17fb42b" name="f538fa8d-aff7-46bc-881b-a4b3f931935f" type="radio">
+</input><label class="tabbed-label" for="23a5b5b2-09c6-4fea-b44a-cdbfb17fb42b">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -364,8 +364,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0fb8e2d1-43a5-4d7b-a95c-180287dc2cf2" name="c39d4872-ee12-486e-8b14-5b89fc8aa3f9" type="radio">
-</input><label class="tabbed-label" for="0fb8e2d1-43a5-4d7b-a95c-180287dc2cf2">
+<input id="0fa4578c-58f5-426a-a613-907d3d637202" name="f538fa8d-aff7-46bc-881b-a4b3f931935f" type="radio">
+</input><label class="tabbed-label" for="0fa4578c-58f5-426a-a613-907d3d637202">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/&#39;</span><span class="p">;</span>
 <span class="n">filename</span> <span class="p">=</span> <span class="s">&#39;Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">;</span>
@@ -395,8 +395,8 @@ accounts for days 1:365 of the year, and ignores leap days (which the
 for Feb 28th to also work on Feb 29th, and creates a <code class="docutils literal notranslate"><span class="pre">tas</span></code> variable
 that’s the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> + <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="cd6bca0e-25ba-4f57-889d-5e2fef7ba5d5" name="1948d953-b6ec-4834-83bc-529ab7ad6296" type="radio">
-</input><label class="tabbed-label" for="cd6bca0e-25ba-4f57-889d-5e2fef7ba5d5">
+<input checked="checked" id="3f23a3de-381c-4352-9405-3a8c395e7178" name="06347d4e-05a6-4cd9-8ccb-fefa21906a4e" type="radio">
+</input><label class="tabbed-label" for="3f23a3de-381c-4352-9405-3a8c395e7178">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calendar</span>
 
@@ -421,8 +421,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="975be6e2-79c4-4108-8d14-31ab4f678659" name="1948d953-b6ec-4834-83bc-529ab7ad6296" type="radio">
-</input><label class="tabbed-label" for="975be6e2-79c4-4108-8d14-31ab4f678659">
+<input id="b76b742f-1ddb-482f-98f4-17e129070885" name="06347d4e-05a6-4cd9-8ccb-fefa21906a4e" type="radio">
+</input><label class="tabbed-label" for="b76b742f-1ddb-482f-98f4-17e129070885">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% BEST data is given in terms of anomalies from the underlying</span>
 <span class="c">% climatology. So, the climatology has to be loaded first.</span>
@@ -440,8 +440,8 @@ Matlab</label><div class="tabbed-content docutils">
 the process.</p>
 <p>Using the extreme points of the continental United States (see e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States">here</a>) + 1 degree of wiggle room.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0248d3f4-26b6-49d4-99f8-88a3f30c6034" name="4325bcfe-fa33-4ca3-b295-818c38386e68" type="radio">
-</input><label class="tabbed-label" for="0248d3f4-26b6-49d4-99f8-88a3f30c6034">
+<input checked="checked" id="94d80f89-2f09-4264-a871-8e40b2614aee" name="fd1f9944-8442-41a8-a2e1-8d1ba2482e91" type="radio">
+</input><label class="tabbed-label" for="94d80f89-2f09-4264-a871-8e40b2614aee">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">],</span><span class="s1">&#39;lon&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">]}</span>
 
@@ -449,8 +449,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="93fa445a-b7f1-4e0f-99d2-0ccba852b0cd" name="4325bcfe-fa33-4ca3-b295-818c38386e68" type="radio">
-</input><label class="tabbed-label" for="93fa445a-b7f1-4e0f-99d2-0ccba852b0cd">
+<input id="ddc8c8ce-ef07-42bc-b248-8989131fcabd" name="fd1f9944-8442-41a8-a2e1-8d1ba2482e91" type="radio">
+</input><label class="tabbed-label" for="ddc8c8ce-ef07-42bc-b248-8989131fcabd">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;latitude&#39;</span><span class="p">);</span>
 <span class="n">lon</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;longitude&#39;</span><span class="p">);</span>
@@ -473,8 +473,8 @@ Matlab</label><div class="tabbed-content docutils">
 future processing. We make some changes in the process to conform to
 the standards used in CMIP5 datasets.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="db4bcd63-f737-4229-a218-8421afffb464" name="7e83eb4d-9470-4a80-89df-6331a7d1ccf7" type="radio">
-</input><label class="tabbed-label" for="db4bcd63-f737-4229-a218-8421afffb464">
+<input checked="checked" id="185f04af-1c15-4c1a-8342-031925822f03" name="51ed1487-3790-4254-8cb7-0b9804e90c4a" type="radio">
+</input><label class="tabbed-label" for="185f04af-1c15-4c1a-8342-031925822f03">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
 
@@ -487,8 +487,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f3da758c-5067-4538-872c-19e9b7ad4845" name="7e83eb4d-9470-4a80-89df-6331a7d1ccf7" type="radio">
-</input><label class="tabbed-label" for="f3da758c-5067-4538-872c-19e9b7ad4845">
+<input id="41519f14-f392-4bc1-85bf-6eadaf797cfc" name="51ed1487-3790-4254-8cb7-0b9804e90c4a" type="radio">
+</input><label class="tabbed-label" for="41519f14-f392-4bc1-85bf-6eadaf797cfc">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename</span>
 <span class="n">fn_out</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
