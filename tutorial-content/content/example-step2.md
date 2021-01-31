@@ -44,7 +44,8 @@ aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
 being run from a directory `code`, sister to the `data` directory.
 
-```R
+````{tabbed} R
+```{code-block} R
 library(raster)
 rr <- raster("../data/pcount/usap90ag.bil")
 
@@ -55,6 +56,29 @@ writeRaster(rr3, "../data/pcount/usap90ag.nc4",
  overwrite=TRUE, format="CDF", varname="Population", varunit="people",
  xname="lon", yname="lat")
 ```
+````
+ 
+````{tabbed} Python
+```{code-block} python
+#!pip install rasterio # will work in Jupyter Notebook
+import xarray as xr
+rr = xr.open_rasterio("../data/pcount/usap90ag.bil")
+
+#TODO rr2 <- aggregate(rr, fact=24, fun=sum)
+
+xmin = -126
+xmax = -65
+ymin = 23
+ymax = 51
+
+sel_lon = (rr2.x >= xmin) & (rr2.x <= xmax)
+sel_lat = (rr2.y >= ymin) & (rr2.x >= ymax)
+rr3 = rr2.where(sel_lon & sel_lat, drop=True)
+
+rr3.rename({'x': 'lon','y': 'lat'})
+rr3.to_netcdf("../data/pcount/usap90ag.nc4")
+```
+````
 
 ## Downloading the mortality data
 
@@ -93,7 +117,8 @@ on).
 Here we sum across all races and ages and merge the mortality and
 population data.
 
-```R
+````{tabbed} R
+```{code-block} R
 library(dplyr)
 
 df.mort <- read.fwf("../data/cmf/Mort7988.txt",
@@ -116,3 +141,79 @@ df4 <- subset(df3, type == 3)
 
 write.csv(df4[, -which(names(df4) == 'type')], "../data/cmf/merged.csv", row.names=F)
 ```
+````
+ 
+````{tabbed} Python
+```{code-block} python
+import pandas as pd
+df_mort = pd.read_csv("../data/cmf/Mort7988.txt", names = ['input'])
+
+# parse input
+df_mort[['fips', 'year', 'ignore', 'deaths']] = df_mort.input.apply(
+    lambda x: [
+        x[slice(*slc)] for slc in [(0,5), (5,9), (9,20), (20,len(x))]]).tolist()
+df_mort = df_mort.drop(columns=['input'])
+
+cols = ['fips', 'year', 'deaths']
+df_mort = df_mort[cols].apply(pd.to_numeric, errors='coerce')
+
+df_mort.deaths = pd.to_numeric(df_mort.deaths)
+df2_mort = df_mort.groupby(['fips', 'year']).sum()
+df2_mort.head()
+```
+| fips, year   |   deaths |
+|:-------------|---------:|
+| (1001, 1979) |      225 |
+| (1001, 1980) |      221 |
+| (1001, 1981) |      221 |
+| (1001, 1982) |      223 |
+| (1001, 1983) |      267 |
+
+```{code-block} python
+df_pop = pd.read_csv("cmf/Pop7988.txt", names = ['input'])
+
+slices = [(0, 5), (5, 9), (9,18)] + \
+         [(n, n+8) for n in range(18, 114, 8)] + \
+         [(114, 139), (139, 140)]
+
+# parse input
+df_pop[['fips', 'year', 'ignore'] + ["pop" + str(i) for i in range(1,13)] + \
+   ['county', 'type']] = df_pop.input.apply(
+    lambda x: [
+        x[slice(*slc)] for slc in slices]).tolist()
+df_pop = df_pop.drop(columns=['input'])
+
+cols = ['fips', 'year'] + ["pop" + str(i) for i in range(1,13)] + ['type']
+df_pop = df_pop[cols].apply(pd.to_numeric, errors='coerce')
+
+df_pop = df_pop[df_pop.type == 3]
+df2_pop = df_pop.groupby(['fips', 'year', 'type']).sum()
+df2_pop.head()
+```
+
+|                 |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |
+|:----------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|
+| (1001, 1979, 3) |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 |
+| (1001, 1980, 3) |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 |
+| (1001, 1981, 3) |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 |
+| (1001, 1982, 3) |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 |
+| (1001, 1983, 3) |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 |
+
+
+```{code-block} python
+df = df2_pop.merge(df2_mort, how='left', on=['fips', 'year'])
+df.head()
+```
+		
+|              |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   deaths |
+|:-------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|---------:|
+| (1001, 1979) |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 |      225 |
+| (1001, 1980) |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 |      221 |
+| (1001, 1981) |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 |      221 |
+| (1001, 1982) |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 |      223 |
+| (1001, 1983) |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 |      267 |
+
+```{code-block} python
+df.to_csv("../data/cmf/merged.csv", index = False, header=True)
+```
+````
