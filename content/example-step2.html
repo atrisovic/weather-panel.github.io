@@ -358,8 +358,8 @@ aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
 being run from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="2bba3a33-b672-4b61-a3fb-39120f7d297e" name="957a7e76-6859-49fb-8f22-6f3fc4205681" type="radio">
-</input><label class="tabbed-label" for="2bba3a33-b672-4b61-a3fb-39120f7d297e">
+<input checked="checked" id="af820771-c19c-4ef8-bb05-c9f8b604411b" name="a8bd5047-f56c-48f8-8f24-a57ede446bfe" type="radio">
+</input><label class="tabbed-label" for="af820771-c19c-4ef8-bb05-c9f8b604411b">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
@@ -373,8 +373,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="81fca042-b325-4ce8-a7ca-21ee3ed101ff" name="957a7e76-6859-49fb-8f22-6f3fc4205681" type="radio">
-</input><label class="tabbed-label" for="81fca042-b325-4ce8-a7ca-21ee3ed101ff">
+<input id="67e662c9-40f9-47b9-878a-6f352e9ef2ac" name="a8bd5047-f56c-48f8-8f24-a57ede446bfe" type="radio">
+</input><label class="tabbed-label" for="67e662c9-40f9-47b9-878a-6f352e9ef2ac">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rasterio # will work in Jupyter Notebook</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -436,8 +436,8 @@ on).</p>
 <p>Here we sum across all races and ages and merge the mortality and
 population data.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="096ecde5-fff9-4759-9ef4-106eba31d5a8" name="91e65de8-6b73-44d4-8ec4-879b2b457e3a" type="radio">
-</input><label class="tabbed-label" for="096ecde5-fff9-4759-9ef4-106eba31d5a8">
+<input checked="checked" id="65a45156-07fa-471e-a1c6-0055e345c30c" name="71d6412e-277d-40c7-bbc1-615969bbabd5" type="radio">
+</input><label class="tabbed-label" for="65a45156-07fa-471e-a1c6-0055e345c30c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
@@ -463,8 +463,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="aec20683-cd52-4650-80d9-4ed40f72c223" name="91e65de8-6b73-44d4-8ec4-879b2b457e3a" type="radio">
-</input><label class="tabbed-label" for="aec20683-cd52-4650-80d9-4ed40f72c223">
+<input id="9910e73b-a801-46b1-a1c9-423e3756691a" name="71d6412e-277d-40c7-bbc1-615969bbabd5" type="radio">
+</input><label class="tabbed-label" for="9910e73b-a801-46b1-a1c9-423e3756691a">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">df_mort</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>

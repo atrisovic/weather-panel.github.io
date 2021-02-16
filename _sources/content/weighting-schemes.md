@@ -126,15 +126,15 @@ Use the `raster` library. For example:
 library(raster)
 rr <- raster(filename)
 ```
+
+``` {seealso}
+If you are using R, take a look at the [Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/),
+which has some extensive examples of working with geospatial raster data.
+```
 ````
 ````{tabbed} Python
 Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
-
-If you are using R, take a look at
-the
-[Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/),
-which has some extensive examples of working with geospatial raster data.
 
 In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.
 
@@ -316,9 +316,9 @@ raster("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_20
 ## Display it!
 image(rr)
 ```
-````
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
+````
 
 But that wasn't any fun. Let's try again with something more
 complicated.
@@ -337,9 +337,9 @@ temp <- ncvar_get(nc, 'temp')
 ## Display it!
 image(temp)
 ```
-````
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
+````
 
 This is R's default way of showing matrices, with axes that go from
 0 - 1. What's worse, the map is up-side-down, though it will take some
@@ -368,9 +368,9 @@ library(maps)
 image(lon2, rev(lat), temp2[,ncol(temp2):1])
 map("world", add=T)
 ```
-````
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
+````
 
 Now, for our production-ready map, we're going to switch to
 `ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
@@ -394,29 +394,31 @@ ggplot() +
     geom_raster(data=temp3, aes(x=lon, y=lat, fill=value)) +
     geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA)
 ```
-````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
+````
 
 And now we're ready to production-ready graph! The biggest change
 will be the addition of a map projection. As mentioned above, map
 projections translate points on a globe into points on a screen. You'll want to choose your
 projection carefully, since people are bound to judge you for
-it. Choosing a map projection is beyond the scope of this tutorial,
-but take a look at
-this
-[Overview from Jochen Albrecht](http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm) or
-the how Randall Monroe thinks about them:
+it. 
+``` {seealso}
+Choosing a map projection is beyond the scope of this tutorial, however, you can take a 
+look at this [overview from Jochen Albrecht](http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm) or how Randall Munroe [thinks about them](https://imgs.xkcd.com/comics/map_projections.png).
+```
 
-![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
-
-Source: [XKCD 977](https://www.xkcd.com/977/).
+```{figure} https://imgs.xkcd.com/comics/map_projections.png
+---
+---
+Considerations for projections. Source: [XKCD 977](https://www.xkcd.com/977/).
+```
 
 Using the projection, we can now make the final version of this
 figure. Note that you will need to use `geom_tile` rather than
 `geom_raster` when plotting grids over projections, and this can be
-quite a bit slower. I also use a color palette from
-[ColorBrewer](http://colorbrewer2.org/), an excellent resource for
+quite a bit slower. We use a color palette from
+[ColorBrewer](http://colorbrewer2.org/), which is an excellent resource for
 choosing colors.
 
 ````{tabbed} R
@@ -427,9 +429,11 @@ ggplot() +
     geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA, lwd=.2) +
     coord_map(projection="mollweide", ylim=c(-65, 65)) + xlim(-180, 180) +
     theme_light() + theme(panel.ontop=TRUE, panel.background=element_blank()) +
-    xlab(NULL) + ylab(NULL) + scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
+    xlab(NULL) + ylab(NULL) + 
+    scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
     theme(legend.justification=c(0,0), legend.position=c(.01,.01))
 ```
-````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
+````
+

@@ -488,25 +488,26 @@ need to project these back to latitude-longitude and regrid them.</p>
 <div class="section" id="implementation-notes-reading-gridded-data">
 <h3>Implementation Notes: Reading gridded data.<a class="headerlink" href="#implementation-notes-reading-gridded-data" title="Permalink to this headline">¶</a></h3>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d11710d6-8c58-41e9-8b7a-593e5ed5c327" name="cd85280e-9c7f-4cfc-a7c5-90aa6b6b0f33" type="radio">
-</input><label class="tabbed-label" for="d11710d6-8c58-41e9-8b7a-593e5ed5c327">
+<input checked="checked" id="38142558-ee06-4bd7-9610-74c5aafb2fdb" name="5f0fcbae-d689-49eb-a4e5-6f957b5cb49e" type="radio">
+</input><label class="tabbed-label" for="38142558-ee06-4bd7-9610-74c5aafb2fdb">
 R</label><div class="tabbed-content docutils">
 <p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library. For example:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are using R, take a look at the <a class="reference external" href="https://datacarpentry.org/r-raster-vector-geospatial/">Introduction to Geospatial Raster and Vector Data with R</a>,
+which has some extensive examples of working with geospatial raster data.</p>
 </div>
-<input id="d778b32a-242b-46b8-88ef-87fb877b9803" name="cd85280e-9c7f-4cfc-a7c5-90aa6b6b0f33" type="radio">
-</input><label class="tabbed-label" for="d778b32a-242b-46b8-88ef-87fb877b9803">
+</div>
+<input id="a475fa42-993a-4e73-97d6-a1fb60949619" name="5f0fcbae-d689-49eb-a4e5-6f957b5cb49e" type="radio">
+</input><label class="tabbed-label" for="a475fa42-993a-4e73-97d6-a1fb60949619">
 Python</label><div class="tabbed-content docutils">
 <p>Take a look at <a class="reference external" href="https://github.com/jrising/research-common/tree/master/python/geogrid">https://github.com/jrising/research-common/tree/master/python/geogrid</a>.</p>
 </div>
 </div>
-<p>If you are using R, take a look at
-the
-<a class="reference external" href="https://datacarpentry.org/r-raster-vector-geospatial/">Introduction to Geospatial Raster and Vector Data with R</a>,
-which has some extensive examples of working with geospatial raster data.</p>
 <p>In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.</p>
 </div>
 </div>
@@ -535,15 +536,15 @@ upsampling, downsampling, and cropping.</p>
 <p>To increase the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without increasing the
 sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="265a3b90-7fd7-4598-bbed-a82ad2615948" name="d7bc0e42-6bda-4fcc-8b05-c6bffb8e742c" type="radio">
-</input><label class="tabbed-label" for="265a3b90-7fd7-4598-bbed-a82ad2615948">
+<input checked="checked" id="167b6218-af3e-4423-84af-8da90cdee8a9" name="4e1ae05a-c907-4c68-ac9f-67ce3cf3bc78" type="radio">
+</input><label class="tabbed-label" for="167b6218-af3e-4423-84af-8da90cdee8a9">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="993c3e07-4579-4dd2-90a7-0c01fc7119ba" name="d7bc0e42-6bda-4fcc-8b05-c6bffb8e742c" type="radio">
-</input><label class="tabbed-label" for="993c3e07-4579-4dd2-90a7-0c01fc7119ba">
+<input id="73d3f5c8-fc6a-4898-a049-f56b86c30f4f" name="4e1ae05a-c907-4c68-ac9f-67ce3cf3bc78" type="radio">
+</input><label class="tabbed-label" for="73d3f5c8-fc6a-4898-a049-f56b86c30f4f">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
@@ -556,15 +557,15 @@ Python</label><div class="tabbed-content docutils">
 <p>To decrease the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without
 decreasing the sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="8c370f2c-ae2d-43fd-b8d2-f865b43ad037" name="0d7aa0cf-3be8-450f-a76c-1e5de21d8b72" type="radio">
-</input><label class="tabbed-label" for="8c370f2c-ae2d-43fd-b8d2-f865b43ad037">
+<input checked="checked" id="6adaaaaf-1b54-4ac2-9cd8-c7c4b4fd5dc0" name="f1edee01-e09f-4d8c-9e3d-2d813fe6db9e" type="radio">
+</input><label class="tabbed-label" for="6adaaaaf-1b54-4ac2-9cd8-c7c4b4fd5dc0">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="79efb5d3-a695-469e-8638-bf8f0c3c2d0f" name="0d7aa0cf-3be8-450f-a76c-1e5de21d8b72" type="radio">
-</input><label class="tabbed-label" for="79efb5d3-a695-469e-8638-bf8f0c3c2d0f">
+<input id="e4da62bf-b1c1-4095-89d3-cd66e4eb450e" name="f1edee01-e09f-4d8c-9e3d-2d813fe6db9e" type="radio">
+</input><label class="tabbed-label" for="e4da62bf-b1c1-4095-89d3-cd66e4eb450e">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -581,15 +582,15 @@ Python</label><div class="tabbed-content docutils">
 to a box from the longitudinal range <code class="docutils literal notranslate"><span class="pre">WW</span></code> to <code class="docutils literal notranslate"><span class="pre">EE</span></code> and the latitudinal
 range from <code class="docutils literal notranslate"><span class="pre">SS</span></code> to <code class="docutils literal notranslate"><span class="pre">NN</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="9a75cbb8-b3d1-493f-a915-18b30f2756d8" name="0243e321-3761-44bc-988e-e2be38523ce1" type="radio">
-</input><label class="tabbed-label" for="9a75cbb8-b3d1-493f-a915-18b30f2756d8">
+<input checked="checked" id="2cb34b14-f951-4f84-81a2-4a93d389baa2" name="91c2f2fc-ed91-4ab2-94b5-6c996215e462" type="radio">
+</input><label class="tabbed-label" for="2cb34b14-f951-4f84-81a2-4a93d389baa2">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="n">WW</span><span class="p">,</span> <span class="n">SS</span><span class="p">,</span> <span class="n">EE</span><span class="p">,</span> <span class="n">NN</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<input id="4836c288-9a8e-4de3-bf16-a451728d9fe8" name="0243e321-3761-44bc-988e-e2be38523ce1" type="radio">
-</input><label class="tabbed-label" for="4836c288-9a8e-4de3-bf16-a451728d9fe8">
+<input id="4178a0cb-335f-48c1-b00d-f1fc3654dc0a" name="91c2f2fc-ed91-4ab2-94b5-6c996215e462" type="radio">
+</input><label class="tabbed-label" for="4178a0cb-335f-48c1-b00d-f1fc3654dc0a">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)</span>
 
@@ -616,8 +617,8 @@ exact same extent.</p></li>
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="59bb8f35-07c7-44e3-8b83-dcce09fbc103" name="7f1cc6f2-c4cc-46d4-978a-8089996204cf" type="radio">
-</input><label class="tabbed-label" for="59bb8f35-07c7-44e3-8b83-dcce09fbc103">
+<input checked="checked" id="75d779dc-cb08-4941-98f1-7ff5a7af74e1" name="ded51b19-687b-459a-8736-b30a407e6f34" type="radio">
+</input><label class="tabbed-label" for="75d779dc-cb08-4941-98f1-7ff5a7af74e1">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;…/w001001.adf&quot;</span><span class="p">)</span>
 <span class="n">landscan</span>
@@ -638,8 +639,8 @@ R</label><div class="tabbed-content docutils">
 <p>Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="addd109e-ced8-4fee-b7e9-84e3dd1e25ed" name="ae24cd1c-9988-477b-994e-ea8973aad3dc" type="radio">
-</input><label class="tabbed-label" for="addd109e-ced8-4fee-b7e9-84e3dd1e25ed">
+<input checked="checked" id="db52f357-ae58-4b6d-b337-f1db65e40868" name="024d8515-d6ba-4147-9c8a-9d7eabba07fc" type="radio">
+</input><label class="tabbed-label" for="db52f357-ae58-4b6d-b337-f1db65e40868">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span> <span class="m">-66</span><span class="p">,</span> <span class="m">24</span><span class="p">,</span> <span class="m">50</span><span class="p">))</span>
 </pre></div>
@@ -650,8 +651,8 @@ R</label><div class="tabbed-content docutils">
 120 * (180 - 125.0208) = 6597.5
 That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f98e5d1a-e26e-4207-b8d9-ed7116472c17" name="e9cf7a3a-1b46-4647-86f1-5098f44c416a" type="radio">
-</input><label class="tabbed-label" for="f98e5d1a-e26e-4207-b8d9-ed7116472c17">
+<input checked="checked" id="989ffe2f-f239-42bb-a10e-bb65ab94358c" name="6b4d45e2-683d-4e26-80da-b7d6625c26f5" type="radio">
+</input><label class="tabbed-label" for="989ffe2f-f239-42bb-a10e-bb65ab94358c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">/</span> <span class="m">4</span>
 </pre></div>
@@ -661,8 +662,8 @@ R</label><div class="tabbed-content docutils">
 <p>We divide by 4 so that the total population remains the same.</p>
 <p>After increasing the resolution of the LandScan data, we clip it again.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f431c43c-4681-4ade-ad33-2ccb2003f21c" name="a2ebe65c-627a-430d-814d-126cb27d72cf" type="radio">
-</input><label class="tabbed-label" for="f431c43c-4681-4ade-ad33-2ccb2003f21c">
+<input checked="checked" id="652c35b5-7aa4-4589-9109-fbf5accf8ccb" name="2a51f5cd-277a-4026-ad71-ad1a0ded4e60" type="radio">
+</input><label class="tabbed-label" for="652c35b5-7aa4-4589-9109-fbf5accf8ccb">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-125.0208</span><span class="p">,</span> <span class="m">-66.47917</span><span class="p">,</span> <span class="m">24.0625</span><span class="p">,</span> <span class="m">49.9375</span><span class="p">))</span>
 </pre></div>
@@ -672,8 +673,8 @@ R</label><div class="tabbed-content docutils">
 <p>Now, the resolution of the dataset has become 1/240th, and we can
 write aggregate by a factor of 10 for it to match the PRISM data:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="26767e8b-d9b7-4f6d-9537-f3c82e6ecc64" name="968200a1-924f-44aa-b940-06df274a1139" type="radio">
-</input><label class="tabbed-label" for="26767e8b-d9b7-4f6d-9537-f3c82e6ecc64">
+<input checked="checked" id="fce4c17a-b8ec-4ceb-804c-eb69d473a342" name="a36e95a0-12f3-4de0-9815-29a5142eae89" type="radio">
+</input><label class="tabbed-label" for="fce4c17a-b8ec-4ceb-804c-eb69d473a342">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
@@ -696,8 +697,8 @@ Population of the
 World</a>
 dataset.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="526ce6a0-be83-4b3d-a52e-ae577dea9918" name="b721e21f-8112-4683-818f-950168459407" type="radio">
-</input><label class="tabbed-label" for="526ce6a0-be83-4b3d-a52e-ae577dea9918">
+<input checked="checked" id="bcc953cd-b22e-45f4-9cd7-e7196ac22b80" name="b246a547-0414-4457-ab92-8ef408106b6e" type="radio">
+</input><label class="tabbed-label" for="bcc953cd-b22e-45f4-9cd7-e7196ac22b80">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="c1">## Load the data</span>
@@ -708,16 +709,16 @@ R</label><div class="tabbed-content docutils">
 <span class="nf">image</span><span class="p">(</span><span class="n">rr</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><img alt="Result of ." src="../_images/image-gpw.png" /></p>
+</div>
+</div>
 <p>But that wasn’t any fun. Let’s try again with something more
 complicated.</p>
 <p>First, we’ll download <a class="reference external" href="https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/%5BT+%5Daverage/">historical maximum temperature</a> data from the
 easy-to-use IRI data library.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="901250fc-01a5-4f71-9c64-8cb08691552f" name="07c0a285-76e3-4f2a-a16d-e9e0a3db68f6" type="radio">
-</input><label class="tabbed-label" for="901250fc-01a5-4f71-9c64-8cb08691552f">
+<input checked="checked" id="11a79456-def9-4933-ba76-749c940349cf" name="5fbe7ae2-801e-4833-9205-2a8a0cb4e9f0" type="radio">
+</input><label class="tabbed-label" for="11a79456-def9-4933-ba76-749c940349cf">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
 
@@ -729,9 +730,9 @@ R</label><div class="tabbed-content docutils">
 <span class="nf">image</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><img alt="Result of ." src="../_images/image-tmax.png" /></p>
+</div>
+</div>
 <p>This is R’s default way of showing matrices, with axes that go from
 0 - 1. What’s worse, the map is up-side-down, though it will take some
 staring to convince yourself ot this. The reason is that NetCDFs
@@ -743,8 +744,8 @@ interpret. And to do that, we need to rearrange the data so it goes
 from -180 to 180, rather than 0 to 360 as currently. Here’s our second
 attempt:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="19d6707f-136a-4593-803a-73065ed62495" name="f3f632e7-7639-4e87-855f-23bd6c0dd140" type="radio">
-</input><label class="tabbed-label" for="19d6707f-136a-4593-803a-73065ed62495">
+<input checked="checked" id="d8d3291e-381e-41da-8bd4-3126c06a295d" name="bde52e4c-94fa-4db2-970e-5b62f0dde436" type="radio">
+</input><label class="tabbed-label" for="d8d3291e-381e-41da-8bd4-3126c06a295d">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Extract the coordinate values</span>
 <span class="n">lon</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&quot;X&quot;</span><span class="p">)</span>
@@ -760,16 +761,16 @@ R</label><div class="tabbed-content docutils">
 <span class="nf">map</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><img alt="Result after ." src="../_images/image-tmax-flip.png" /></p>
+</div>
+</div>
 <p>Now, for our production-ready map, we’re going to switch to
 <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>. In <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>, all data needs to be as dataframes, so we need
 to convert the matrix into a dataframe (with <code class="docutils literal notranslate"><span class="pre">melt</span></code>) and the map into
 a dataframe (with <code class="docutils literal notranslate"><span class="pre">map_data</span></code>):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c52a7942-317d-42f3-a7d0-9cc594bf26be" name="ace385db-c056-431b-a3c8-cd20139b61a7" type="radio">
-</input><label class="tabbed-label" for="c52a7942-317d-42f3-a7d0-9cc594bf26be">
+<input checked="checked" id="f1477f1c-9ae7-4050-9616-a04abf761b9d" name="28fdeb43-3cd6-46b8-b7d7-bc849e5f2f0e" type="radio">
+</input><label class="tabbed-label" for="f1477f1c-9ae7-4050-9616-a04abf761b9d">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Convert temp2 to a dataframe</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
@@ -787,29 +788,32 @@ R</label><div class="tabbed-content docutils">
     <span class="nf">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">long</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">),</span> <span class="n">colour</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><img alt="Result after ." src="../_images/ggplot-tmax.png" /></p>
+</div>
+</div>
 <p>And now we’re ready to production-ready graph! The biggest change
 will be the addition of a map projection. As mentioned above, map
 projections translate points on a globe into points on a screen. You’ll want to choose your
 projection carefully, since people are bound to judge you for
-it. Choosing a map projection is beyond the scope of this tutorial,
-but take a look at
-this
-<a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm">Overview from Jochen Albrecht</a> or
-the how Randall Monroe thinks about them:</p>
-<p><img alt="Considerations for projections." src="https://imgs.xkcd.com/comics/map_projections.png" /></p>
-<p>Source: <a class="reference external" href="https://www.xkcd.com/977/">XKCD 977</a>.</p>
+it.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Choosing a map projection is beyond the scope of this tutorial, however, you can take a
+look at this <a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm">overview from Jochen Albrecht</a> or how Randall Munroe <a class="reference external" href="https://imgs.xkcd.com/comics/map_projections.png">thinks about them</a>.</p>
+</div>
+<div class="figure align-default" id="id1">
+<img alt="https://imgs.xkcd.com/comics/map_projections.png" src="https://imgs.xkcd.com/comics/map_projections.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Considerations for projections. Source: <a class="reference external" href="https://www.xkcd.com/977/">XKCD 977</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 <p>Using the projection, we can now make the final version of this
 figure. Note that you will need to use <code class="docutils literal notranslate"><span class="pre">geom_tile</span></code> rather than
 <code class="docutils literal notranslate"><span class="pre">geom_raster</span></code> when plotting grids over projections, and this can be
-quite a bit slower. I also use a color palette from
-<a class="reference external" href="http://colorbrewer2.org/">ColorBrewer</a>, an excellent resource for
+quite a bit slower. We use a color palette from
+<a class="reference external" href="http://colorbrewer2.org/">ColorBrewer</a>, which is an excellent resource for
 choosing colors.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5303a5e4-2f8d-4b6f-80da-775164fd11bd" name="46248a65-998e-4ea9-bd4c-ddf95bb497b6" type="radio">
-</input><label class="tabbed-label" for="5303a5e4-2f8d-4b6f-80da-775164fd11bd">
+<input checked="checked" id="4925e8ab-3c88-4bd2-a731-faee944d031c" name="8541a086-77f9-4afa-87ad-1afe9c0e9c05" type="radio">
+</input><label class="tabbed-label" for="4925e8ab-3c88-4bd2-a731-faee944d031c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
 <span class="nf">ggplot</span><span class="p">()</span> <span class="o">+</span>
@@ -817,13 +821,14 @@ R</label><div class="tabbed-content docutils">
     <span class="nf">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">long</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">),</span> <span class="n">colour</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="n">.</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span>
     <span class="nf">coord_map</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s">&quot;mollweide&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-65</span><span class="p">,</span> <span class="m">65</span><span class="p">))</span> <span class="o">+</span> <span class="nf">xlim</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span> <span class="m">180</span><span class="p">)</span> <span class="o">+</span>
     <span class="nf">theme_light</span><span class="p">()</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span><span class="n">panel.ontop</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">panel.background</span><span class="o">=</span><span class="nf">element_blank</span><span class="p">())</span> <span class="o">+</span>
-    <span class="nf">xlab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_fill_distiller</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Average\nMax T.&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">xlab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span> <span class="o">+</span> 
+    <span class="nf">scale_fill_distiller</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Average\nMax T.&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&quot;YlOrRd&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
     <span class="nf">theme</span><span class="p">(</span><span class="n">legend.justification</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">legend.position</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">.</span><span class="m">01</span><span class="p">,</span><span class="n">.</span><span class="m">01</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><img alt="Result after ." src="../_images/ggplot-tmax-final.png" /></p>
+</div>
+</div>
 </div>
 </div>
 
