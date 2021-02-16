@@ -83,7 +83,7 @@ CSV, spaces for ASC).
 
 The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.
     - The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.
-    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as 0.0083333333333 = 1 / 120 of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
+    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as $0.0083333333333 = 1 / 120$ of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
     - The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.
 
 
@@ -126,15 +126,15 @@ Use the `raster` library. For example:
 library(raster)
 rr <- raster(filename)
 ```
+
+``` {seealso}
+If you are using R, take a look at the [Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/),
+which has some extensive examples of working with geospatial raster data.
+```
 ````
 ````{tabbed} Python
 Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
-
-If you are using R, take a look at
-the
-[Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/),
-which has some extensive examples of working with geospatial raster data.
 
 In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.
 
@@ -220,9 +220,9 @@ The following recipe should work for most cases to align weighting data with a w
 1. **Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.** Start by considering the southwest corner of each dataset. Even if the
 datasets are of the same resolution, upsampling may be required to
 make the grid cells line up. For example, if the weighting data has a
-southwest corner of (0 N, 0 E) and a resolution of 1 degree, while the weather data starts at (0.5
-N, 0.5 E) and a resolution of 1 degree, the weighting data will need
-to be upsampled by a factor of 2, so that it provides a grid line at
+southwest corner of (0 N, 0 E) and a resolution of $1$ degree, while the weather data starts at (0.5
+N, 0.5 E) and a resolution of $1$ degree, the weighting data will need
+to be upsampled by a factor of $2$, so that it provides a grid line at
 (0.5 N, 0.5 E).
 
 2. **Clip the two datasets so that they line up.** After step 1, it should be possible to clip the two datasets to the
@@ -232,7 +232,7 @@ exact same extent.
 
 ### Example
 
-Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
+Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent $125.0208$ to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
 ````{tabbed} R
 ```R
@@ -261,7 +261,7 @@ landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ````
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
-    120 * (180 - 125.0208) = 6597.5
+    $120 * (180 - 125.0208) = 6597.5$
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
 ````{tabbed} R
@@ -281,7 +281,7 @@ landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ````
 
 Now, the resolution of the dataset has become 1/240th, and we can
-write aggregate by a factor of 10 for it to match the PRISM data:
+write aggregate by a factor of $10$ for it to match the PRISM data:
 
 ````{tabbed} R
 ```R
@@ -316,9 +316,9 @@ raster("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_20
 ## Display it!
 image(rr)
 ```
-````
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
+````
 
 But that wasn't any fun. Let's try again with something more
 complicated.
@@ -337,9 +337,9 @@ temp <- ncvar_get(nc, 'temp')
 ## Display it!
 image(temp)
 ```
-````
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
+````
 
 This is R's default way of showing matrices, with axes that go from
 0 - 1. What's worse, the map is up-side-down, though it will take some
@@ -368,9 +368,9 @@ library(maps)
 image(lon2, rev(lat), temp2[,ncol(temp2):1])
 map("world", add=T)
 ```
-````
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
+````
 
 Now, for our production-ready map, we're going to switch to
 `ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
@@ -394,29 +394,31 @@ ggplot() +
     geom_raster(data=temp3, aes(x=lon, y=lat, fill=value)) +
     geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA)
 ```
-````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
+````
 
 And now we're ready to production-ready graph! The biggest change
 will be the addition of a map projection. As mentioned above, map
 projections translate points on a globe into points on a screen. You'll want to choose your
 projection carefully, since people are bound to judge you for
-it. Choosing a map projection is beyond the scope of this tutorial,
-but take a look at
-this
-[Overview from Jochen Albrecht](http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm) or
-the how Randall Monroe thinks about them:
+it. 
+``` {seealso}
+Choosing a map projection is beyond the scope of this tutorial, however, you can take a 
+look at this [overview from Jochen Albrecht](http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/map%20coordinate%20systems/how%20to%20choose%20a%20projection.htm) or how Randall Munroe [thinks about them](https://imgs.xkcd.com/comics/map_projections.png).
+```
 
-![Considerations for projections.](https://imgs.xkcd.com/comics/map_projections.png)
-
-Source: [XKCD 977](https://www.xkcd.com/977/).
+```{figure} https://imgs.xkcd.com/comics/map_projections.png
+---
+---
+Considerations for projections. Source: [XKCD 977](https://www.xkcd.com/977/).
+```
 
 Using the projection, we can now make the final version of this
 figure. Note that you will need to use `geom_tile` rather than
 `geom_raster` when plotting grids over projections, and this can be
-quite a bit slower. I also use a color palette from
-[ColorBrewer](http://colorbrewer2.org/), an excellent resource for
+quite a bit slower. We use a color palette from
+[ColorBrewer](http://colorbrewer2.org/), which is an excellent resource for
 choosing colors.
 
 ````{tabbed} R
@@ -427,9 +429,11 @@ ggplot() +
     geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA, lwd=.2) +
     coord_map(projection="mollweide", ylim=c(-65, 65)) + xlim(-180, 180) +
     theme_light() + theme(panel.ontop=TRUE, panel.background=element_blank()) +
-    xlab(NULL) + ylab(NULL) + scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
+    xlab(NULL) + ylab(NULL) + 
+    scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
     theme(legend.justification=c(0,0), legend.position=c(.01,.01))
 ```
-````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
+````
+

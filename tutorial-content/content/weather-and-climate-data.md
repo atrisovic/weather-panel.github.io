@@ -122,14 +122,15 @@ The following terminology will be useful to recognize even when filenames are no
 ```{seealso}
 For more information on "CMIP5" and "CMIP6" terminology, see: [CMIP6 Guidance for Data Users](https://pcmdi.llnl.gov/CMIP6/Guide/dataUsers.html) or the [CMIP5 Standard Output](https://pcmdi.llnl.gov/mips/cmip5/requirements.html).
 ```
-
+```{caution}
 Weather and climate variables in NetCDF files may be organized in a few different ways:
 
-- one variables per file: each file contains a single variable over the whole (or some large subset) of the time domain
+- one variable per file: each file contains a single variable over a time domain
 - one timestep per file: each file contains a single timestep with a suite of variables
-- combination: file contains many variables over a large time domain (rare due to size constraints)
+- combination: file contains many variables over a time domain (rare due to size constraints)
 
-To figure out which file saving convention your NetCDF file uses, and what is contained, check the header of the file.
+To figure out which file saving convention your NetCDF file uses and what is contained, you'll need to check the header of the file.
+```
 
 ### The NetCDF Header
 
@@ -265,7 +266,7 @@ These files also include variables that give values for indices along each dimen
 Longitude can be either of the form `-180:180` or `0:360`. In the latter form, `359` is 1$^\circ$W and so forth. 
 ```
 
-The `time` variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using python, the `xarray` package has the ability to interpret some of these time representations for you and translates them into the `datetime64` class, which makes some kinds of manipulation, like [averaging over months](http://xarray.pydata.org/en/stable/time-series.html), easier.
+The `time` variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using Python, the `xarray` package has the ability to interpret some of these time representations for you and translates them into the `datetime64` class, which makes some kinds of manipulation, like [averaging over months](http://xarray.pydata.org/en/stable/time-series.html), easier.
 
 Now that you have loaded your weather and climate data, a good practice is to double-check that it is downloaded and processed correctly. Common red flags include suspiciously many `NA` / `NaN` values, suspiciously high or low values, or variables that unexpectedly don't line up with geographic features. Plotting your data can be a good first-order check: 
 
@@ -434,24 +435,29 @@ See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/cli
 ### Regional Datasets
 Observational datasets exist with both global coverage (e.g., GISTEMP, HadCRUT, etc.) or regional coverage (e.g., PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g., the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
 
-### Using Gridded Weather Data
-On the [next page](content:working-with-data), we will get into how to choose and work with weather data products - but before that, we'd like to leave you with two warnings on using [hydrological variables](content:warning-on-hydrological) and using [station data](content:station-data).
+Next, we will get into how to [choose and work with weather data products](content:working-with-data) - but before that, we'd like to leave you with two warnings on using [hydrological variables](content:warning-on-hydrological) and using [station data](content:station-data).
 
 
 (content:warning-on-hydrological)=
 ## A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
-![Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error.](https://imgs.xkcd.com/comics/meteorologist.png)
-
-*[XKCD](https://imgs.xkcd.com/comics/meteorologist.png) describing several common dilemmas when using rain data*
 
 Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately. Unfortunately, since rain (or lack thereof) can have tremendous impacts on humans, we often have to find ways to work with rain observations.
-
-![Data from [Bosliovich et al. (2015)](https://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf); gridded data products disagree on average global monthly precipitation by up to 40%, and aren't always consistent!](images/global_monthly.png)
-*Data from [Bosilovich et al. (2015)](https://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf); gridded data products disagree on average global monthly precipitation by up to 40%, and aren't always consistent!*
 
 Unlike temperature, which is relatively uniform spatiotemporally and can be interpolated with a relatively high degree of confidence, precipitation data is very difficult to interpolate and requires a more sophisticated understanding of regional precipitation patterns to assimilate into gridded products. Consequently, gridded precipitation data should be used with ["extreme caution"](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables), and its uncertainties should not be underestimated. 
 
 Even 'raw' precipitation data from weather stations and rain gauges are problematic. Developing a reliable, easily scaled rain gauge network is a difficult task. For example, a common type of rain gauge, the 'tipping bucket', only records rain in discrete intervals (when the bucket fills and subsequently 'tips'), and therefore could record a rainstorm if a drizzle tips an already-full bucket. In rare cases, tipping buckets stationed in remote areas may be stuck in the "tipped" position for some time before anyone notices or can repair them.
+
+```{figure} https://imgs.xkcd.com/comics/meteorologist.png
+---
+---
+"Hi, I'm your new meteorologist and a former software developer. Hey, when we say 12pm, does that mean the hour from 12pm to 1pm, or the hour centered on 12pm? Or is it a snapshot at 12:00 exactly? Because our 24-hour forecast has midnight at both ends, and I'm worried we have an off-by-one error." - Several common dilemmas when using rain data
+```
+
+```{figure} images/global_monthly.png
+---
+---
+Data from [Bosilovich et al. (2015)](https://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf). Gridded data products disagree on average global monthly precipitation by up to 40%, and aren't always consistent!
+```
 
 In general, rain gauges of most types are biased low. In strong wind conditions, many drops may not enter the rain catch in a gauge due to turbulence; in strong storms, point estimates may miss areas of greatest intensity. Rain data averaged over areas with complex terrain is biased because of the vertical profile of precipitation (stations are generally in valleys). Kenji Matsuura (of the UDel dataset fame) in his [expert guidance](https://climatedataguide.ucar.edu/climate-data/global-land-precipitation-and-temperature-willmott-matsuura-university-delaware) on his dataset explains: “Under-catch bias can be nontrivial and very difficult to estimate adequately, especially over extensive areas...”
 
@@ -464,7 +470,7 @@ A useful [Google Scholar](https://scholar.google.com/) search for any product co
 ```
 
 (content:station-data)=
-## Station Data
+## A Warning on Using Station Data
 
 Station data (e.g., [Global Historical Climatology Network (GHCN)](https://www.ncdc.noaa.gov/data-access/land-based-station-data/land-based-datasets/global-historical-climatology-network-ghcn) and the Global Summary of the Day) *can* be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. Especially if you are working with urban areas, station data will likely capture the urban heat island effect more accurately than any gridded product. 
 

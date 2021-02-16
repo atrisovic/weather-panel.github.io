@@ -95,10 +95,10 @@ aggregated = xa.aggregate(ds_tas, weightmap)
 ```
 ````
 
-## Export this as a .csv file to be used elsewhere
+## Export this as a `.csv` file to be used elsewhere
 
 Finally, we need to export this data to be used elsewhere. For this tutorial, we want to allow a variety of tools, so we'll
-export the aggregated data into a .csv (comma-separated value) file,
+export the aggregated data into a `.csv` (comma-separated value) file,
 which can easily be read by R, STATA, and most other programming
 tools. The data will be reshaped 'wide' by `xagg` - so every row is a
 county, and every column is a timestep of the variables. 
