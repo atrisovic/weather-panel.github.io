@@ -32,10 +32,15 @@ As the resolution of the spatial and temporal units increases, the
 coviariance between them will also increase. Those additional
 observations may not provide as much unique information as they appear
 to. In most cases, it is necessary to use Conley-White standard
-errors. Sol Hsiang has code for this in Matlab and Stata:
-[http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html](http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html).
+errors. 
 
-For corresponding code in R, see [https://github.com/darinchristensen/conley-se](https://github.com/darinchristensen/conley-se)
+````{tabbed} Matlab and Stata
+Sol Hsiang has code for this in Matlab and Stata:
+<http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
+````
+````{tabbed} R
+For corresponding code in R, see <https://github.com/darinchristensen/conley-se>.
+````
 
 ## Plotting dose-response functions
 

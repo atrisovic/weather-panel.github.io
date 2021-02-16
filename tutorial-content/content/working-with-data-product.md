@@ -21,7 +21,7 @@ Generally, it's good practice to first research which data products are appropri
 - are the data available at the resolution I need? 
 - are biases reasonable for the variable and region of interest?
 
-The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the [UCAR Climate Data Guide](https://climatedataguide.ucar.edu) introduced above is a good first place to look. A google scholar search of the form "[data product name] validation OR evaluation OR bias OR uncertainty" may be useful as well. 
+The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the [UCAR Climate Data Guide](https://climatedataguide.ucar.edu) introduced above is a good first place to look. A [Google Scholar](https://scholar.google.com/) search of the form `[data product name] validation OR evaluation OR bias OR uncertainty` may be useful as well. 
 
 ## Getting Started with a Data Product: BEST and CHIRPS
 
@@ -69,7 +69,7 @@ Say you’re studying heat waves in the Sahel. Weather station data is low, so y
   - 1. You first consult the [ERA5 page](https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis) on UCAR's Climate Data Guide, which tells you ERA5 has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just because the data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.
     2. You see that it even gives you an estimate of the internal model uncertainty by rerunning the same analysis 10 times (10 “ensemble members”), though in “weaknesses” you note that the uncertainty may be underestimated.
     3. You notice that ERA5 extends back to 1979 for now (1979 is a common cutoff point due to the start of satellite observations in 1978).
-    4. You notice that most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest. However, you double-check whether ERA5 is appropriate by searching Google Scholar for any relevant evaluation studies (sample search: "ERA5 Sahel temperature validation OR evaluation OR bias OR uncertainty")
+    4. You notice that most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest. However, you double-check whether ERA5 is appropriate by searching [Google Scholar](https://scholar.google.com/) for any relevant evaluation studies (sample search: `ERA5 Sahel temperature validation OR evaluation OR bias OR uncertainty`)
 
 * - *2. Prepare to Download the Data*
   - 1. You click on ‘Get Data (external)’ in the Data Guide to find a [link](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset) to the Copernicus climate data store. There, you realize that you’ll need to sign up for an account (modern data products from larger institutions such as the ECMWF will thankfully have an automated system for this; some smaller products may require you to wait until someone manually approves your account), which just asks you to sign a data use agreement (remember to correctly cite data sources!).

@@ -6,7 +6,7 @@ In our example, we will use Berkeley Earth (BEST) data. BEST data is
 available as national timeseries (area-weighted, so not usually useful
 even for studying national-level data) and as a 1-degree grid.
 
-1. Go to the BEST archive, http://berkeleyearth.org/archive/data/
+1. Go to the BEST archive, <http://berkeleyearth.org/archive/data/>
 2. Scroll down to the Gridded Data (ignore the Time Series Data which
    is listed first).
 3. Under Gridded Data, find "Daily Land (Experimental; 1880 –
@@ -34,8 +34,10 @@ import datetime as dt
 
 ds = xr.open_dataset('../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc')
 
-# Create time variable, which wasn't auto-generated from the netcdf due to BEST's ambiguous timing
-ds['time'] = (('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
+# Create time variable, which wasn't auto-generated from the netcdf 
+# due to BEST's ambiguous timing
+ds['time'] = (
+    ('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
 ```
 ````
 
@@ -107,7 +109,7 @@ clear clim_tmp, anom_tmp, doy_tmp
 We can drop a lot of the global data. This can also happen earlier in
 the process.
 
-Using the extreme points of the continental United States (see e.g. [here](https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States)) + 1 degree of wiggle room.
+Using the extreme points of the continental United States (see e.g., [here](https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States)) + 1 degree of wiggle room.
 
 ````{tabbed} Python
 ```{code-block} python

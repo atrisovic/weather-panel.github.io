@@ -48,19 +48,19 @@ $$T_{it} = \sum_{p \in P(i)} w_p T_{pt} \text{ such that } \sum_p w_{p \in P(i)}
 
 where $w_p$ is the weight for pixel $p$, and $P(i)$ is the set of pixels in data region $i$.
 
-## Where to get spatial weighting data.
+## Where to get spatial weighting data
 
 Below are some common data sources for various weighting schemes.
 
-- Population is an important weighting scheme for social impacts.
-    - Gridded Population of the World: https://sedac.ciesin.columbia.edu/data/collection/gpw-v4
-        This is open-source, available at 30 arc-second resolution every 5 years from 2000 (or before with their previous version).
-    - LandScan: https://landscan.ornl.gov/landscan-datasets
-        LandScan is available at 30 arc-second resolution, annually, but previous years need to be purchased. As at your institution, as many already have it.
-- Gridded agriculture information
-    - Global Agricultural Lands in the Year 2000: https://sedac.ciesin.columbia.edu/data/collection/aglands
-    - Also consider gridded land use datasets: https://www.atmos.illinois.edu/~meiyapp2/datasets.htm
-- Look at the IRI Data Library for a large variety of datasets, available in any format: https://iridl.ldeo.columbia.edu/
+- 📚  Population is an important weighting scheme for social impacts.
+    - [Gridded Population of the World](https://sedac.ciesin.columbia.edu/data/collection/gpw-v4)
+    : Open-source, available at 30 arc-second resolution every 5 years from 2000 (or before with their previous version).
+    - [LandScan](https://landscan.ornl.gov/landscan-datasets)
+    : LandScan is available at 30 arc-second resolution, annually, but previous years need to be purchased. Ask at your institution, as many already have it.
+- 📚  Gridded agriculture information
+    - [Global Agricultural Lands in the Year 2000](https://sedac.ciesin.columbia.edu/data/collection/aglands)
+    - Also consider [gridded land use datasets](https://www.atmos.illinois.edu/~meiyapp2/datasets.htm)
+- 📚  Look at the [IRI Data Library](https://iridl.ldeo.columbia.edu/) for a large variety of datasets, available in any format.
 
 (content:working-with-gridded-data)=
 ## Working with gridded weighting data
@@ -128,7 +128,7 @@ rr <- raster(filename)
 ```
 ````
 ````{tabbed} Python
-Take a look at https://github.com/jrising/research-common/tree/master/python/geogrid.
+Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
 
 If you are using R, take a look at
@@ -217,9 +217,7 @@ rr2 = rr[int((SS - S0)/D):int((NN - S0)/D), int((WW - W0)/D):int((EE - W0)/D)]
 
 The following recipe should work for most cases to align weighting data with a weather grid.
 
-### Step 1: **Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.**
-
-Start by considering the southwest corner of each dataset. Even if the
+1. **Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.** Start by considering the southwest corner of each dataset. Even if the
 datasets are of the same resolution, upsampling may be required to
 make the grid cells line up. For example, if the weighting data has a
 southwest corner of (0 N, 0 E) and a resolution of 1 degree, while the weather data starts at (0.5
@@ -227,19 +225,16 @@ N, 0.5 E) and a resolution of 1 degree, the weighting data will need
 to be upsampled by a factor of 2, so that it provides a grid line at
 (0.5 N, 0.5 E).
 
-### Step 2: **Clip the two datasets so that they line up.**
-
-After step 1, it should be possible to clip the two datasets to the
+2. **Clip the two datasets so that they line up.** After step 1, it should be possible to clip the two datasets to the
 exact same extent.
 
-### Step 3: **Re-aggregate the weighting data.**
-
-Now, downsample the weighting data to the resolution of the weather data.
+3. **Re-aggregate the weighting data.** Now, downsample the weighting data to the resolution of the weather data.
 
 ### Example
 
 Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
+````{tabbed} R
 ```R
 landscan <- raster("…/w001001.adf")
 landscan
@@ -254,36 +249,45 @@ prism
 ## resolution  : 0.04166667, 0.04166667  (x, y)
 ## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
 ```
+````
 
 Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.
 
+````{tabbed} R
 ```R
 landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ```
+````
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     120 * (180 - 125.0208) = 6597.5
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
+````{tabbed} R
 ```R
 landscan <- disaggregate(landscan, fact=2) / 4
 ```
+````
 
 We divide by 4 so that the total population remains the same.
 
 After increasing the resolution of the LandScan data, we clip it again.
 
+````{tabbed} R
 ```R
 landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ```
+````
 
 Now, the resolution of the dataset has become 1/240th, and we can
 write aggregate by a factor of 10 for it to match the PRISM data:
 
+````{tabbed} R
 ```R
 landscan <- aggregate(landscan, fact=10, fun=sum)
 ```
+````
 
 
 ## Plotting your results
@@ -302,6 +306,7 @@ Population of the
 World](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download)
 dataset.
 
+````{tabbed} R
 ```R
 library(raster)
 ## Load the data
@@ -311,6 +316,7 @@ raster("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_20
 ## Display it!
 image(rr)
 ```
+````
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
 
@@ -320,6 +326,7 @@ complicated.
 First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
 easy-to-use IRI data library.
 
+````{tabbed} R
 ```R
 library(ncdf4)
 
@@ -330,6 +337,7 @@ temp <- ncvar_get(nc, 'temp')
 ## Display it!
 image(temp)
 ```
+````
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
 
@@ -345,6 +353,7 @@ interpret. And to do that, we need to rearrange the data so it goes
 from -180 to 180, rather than 0 to 360 as currently. Here's our second
 attempt:
 
+````{tabbed} R
 ```R
 ## Extract the coordinate values
 lon <- ncvar_get(nc, "X")
@@ -359,6 +368,7 @@ library(maps)
 image(lon2, rev(lat), temp2[,ncol(temp2):1])
 map("world", add=T)
 ```
+````
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
 
@@ -367,6 +377,7 @@ Now, for our production-ready map, we're going to switch to
 to convert the matrix into a dataframe (with `melt`) and the map into
 a dataframe (with `map_data`):
 
+````{tabbed} R
 ```R
 ## Convert temp2 to a dataframe
 library(reshape2)
@@ -383,6 +394,7 @@ ggplot() +
     geom_raster(data=temp3, aes(x=lon, y=lat, fill=value)) +
     geom_polygon(data=world, aes(x=long, y=lat, group=group), colour='black', fill=NA)
 ```
+````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
 
@@ -407,6 +419,7 @@ quite a bit slower. I also use a color palette from
 [ColorBrewer](http://colorbrewer2.org/), an excellent resource for
 choosing colors.
 
+````{tabbed} R
 ```R
 library(RColorBrewer)
 ggplot() +
@@ -417,5 +430,6 @@ ggplot() +
     xlab(NULL) + ylab(NULL) + scale_fill_distiller(name="Average\nMax T.", palette="YlOrRd", direction=1) +
     theme(legend.justification=c(0,0), legend.position=c(.01,.01))
 ```
+````
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
