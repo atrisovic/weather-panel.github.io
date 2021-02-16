@@ -14,7 +14,7 @@ Decision points:
 
 Socioeconomic data is collected and corresponding to geographical units, such as states, countries, provinces, or municipalities, which is a portion of a country delineated for administration, and hence, often called  "administrative units". For that reason, administrative units (or politically-defined regions) are frequently used in economic analysis rather than regular grids. Communicating data analysis results in administrative units is also particularly effective since politically defined regions are relevant for policy-makers. 
 
-The top-level of this hierarchy of administrative units is "ADM0", referring to countries; "ADM1" is the first level of political division, usually called states or provinces; "ADM2" is the second level of division, and has a wider range of names across the globe (see example below).
+The top-level of this hierarchy of administrative units is **ADM0**, referring to countries; **ADM1** is the first level of political division, usually called states or provinces; **ADM2** is the second level of division, and has a wider range of names across the globe (see example below).
  
 ```{list-table} Example of administrative units table for [Philippines](http://www.eki.ee/knab/adm2.htm)
 :header-rows: 1

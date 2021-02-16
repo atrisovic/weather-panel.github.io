@@ -83,7 +83,7 @@ CSV, spaces for ASC).
 
 The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.
     - The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.
-    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as 0.0083333333333 = 1 / 120 of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
+    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as $0.0083333333333 = 1 / 120$ of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
     - The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.
 
 
@@ -220,9 +220,9 @@ The following recipe should work for most cases to align weighting data with a w
 1. **Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.** Start by considering the southwest corner of each dataset. Even if the
 datasets are of the same resolution, upsampling may be required to
 make the grid cells line up. For example, if the weighting data has a
-southwest corner of (0 N, 0 E) and a resolution of 1 degree, while the weather data starts at (0.5
-N, 0.5 E) and a resolution of 1 degree, the weighting data will need
-to be upsampled by a factor of 2, so that it provides a grid line at
+southwest corner of (0 N, 0 E) and a resolution of $1$ degree, while the weather data starts at (0.5
+N, 0.5 E) and a resolution of $1$ degree, the weighting data will need
+to be upsampled by a factor of $2$, so that it provides a grid line at
 (0.5 N, 0.5 E).
 
 2. **Clip the two datasets so that they line up.** After step 1, it should be possible to clip the two datasets to the
@@ -232,7 +232,7 @@ exact same extent.
 
 ### Example
 
-Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent 125.0208 to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
+Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent $125.0208$ to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
 ````{tabbed} R
 ```R
@@ -261,7 +261,7 @@ landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ````
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
-    120 * (180 - 125.0208) = 6597.5
+    $120 * (180 - 125.0208) = 6597.5$
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
 ````{tabbed} R
@@ -281,7 +281,7 @@ landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ````
 
 Now, the resolution of the dataset has become 1/240th, and we can
-write aggregate by a factor of 10 for it to match the PRISM data:
+write aggregate by a factor of $10$ for it to match the PRISM data:
 
 ````{tabbed} R
 ```R

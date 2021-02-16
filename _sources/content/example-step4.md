@@ -103,6 +103,7 @@ ggplot(plotdf2, aes(tas, fit)) +
     ylab("Deaths per 100,000 people") +
     ggtitle("Excess death rate as a function of temperature") + theme_bw()
 ```
-````
 
 <img src="images/doseresp.png" alt="Dose-response function" width="750"/>
+````
+

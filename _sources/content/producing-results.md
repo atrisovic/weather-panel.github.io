@@ -19,7 +19,7 @@ effects are important to consider:
 
  - Time unit FEs, or high-order polynomial trends.
  - FEs or trends as above, at the level of groups of geographic units
-   (e.g. ADM1, if the observations are at ADM2).
+   (e.g. **ADM1**, if the observations are at **ADM2**).
  - Day of week or day of year FEs, for many social/economic behaviors.
 
 If you have multiple groups (e.g., data for different ages, races, or

@@ -341,21 +341,21 @@ about the order of the entries, and order the columns of <span class="math notra
 same way.</p></li>
 </ol>
 <div class="tabbed-set docutils">
-<input checked="checked" id="54403c20-5b32-4960-ad10-2255c8c8d117" name="8f44e387-9828-4543-816e-fbf101e4a57a" type="radio">
-</input><label class="tabbed-label" for="54403c20-5b32-4960-ad10-2255c8c8d117">
+<input checked="checked" id="8a4c5299-4bd9-4d02-bc73-1dd000525526" name="246ad258-f746-4caf-a65f-271cc7e0bfc3" type="radio">
+</input><label class="tabbed-label" for="8a4c5299-4bd9-4d02-bc73-1dd000525526">
 R</label><div class="tabbed-content docutils">
 <p>In R, <code class="docutils literal notranslate"><span class="pre">as.vector</span></code> will convert from a matrix to a vector, with each
 <em>column</em> being listed in full before moving on to the next column.</p>
 </div>
-<input id="8444cf72-c648-4d3a-aee4-8307d7b853ef" name="8f44e387-9828-4543-816e-fbf101e4a57a" type="radio">
-</input><label class="tabbed-label" for="8444cf72-c648-4d3a-aee4-8307d7b853ef">
+<input id="cc96c893-e683-455c-b615-2d885a50fa40" name="246ad258-f746-4caf-a65f-271cc7e0bfc3" type="radio">
+</input><label class="tabbed-label" for="cc96c893-e683-455c-b615-2d885a50fa40">
 Python</label><div class="tabbed-content docutils">
 <p>In python, <code class="docutils literal notranslate"><span class="pre">numpy.flatten</span></code> will convert a numpy matrix to a vector,
 with each <em>row</em> being listed in full before moving on to the next
 row.</p>
 </div>
-<input id="40d95eb9-01db-4669-a3d1-9cfa39fb45e8" name="8f44e387-9828-4543-816e-fbf101e4a57a" type="radio">
-</input><label class="tabbed-label" for="40d95eb9-01db-4669-a3d1-9cfa39fb45e8">
+<input id="ac2cad92-309f-407b-8fe4-44d14d8c81b3" name="246ad258-f746-4caf-a65f-271cc7e0bfc3" type="radio">
+</input><label class="tabbed-label" for="ac2cad92-309f-407b-8fe4-44d14d8c81b3">
 Matlab</label><div class="tabbed-content docutils">
 <p>In Matlab, indexing the grid with <code class="docutils literal notranslate"><span class="pre">(:)</span></code> will convert from an array
 to a vector, with each <em>column</em> being listed in full before moving
@@ -370,8 +370,8 @@ cell. This approach can be used without generating an <span class="math notransl
 but the matrix method improves efficiency.</p>
 <p>As an example, in R, you generate these points like so:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="a76b482b-d33c-4255-94ce-60aae6ddf102" name="c56da5ac-df34-4ecc-a6c0-cc2061d6a2e4" type="radio">
-</input><label class="tabbed-label" for="a76b482b-d33c-4255-94ce-60aae6ddf102">
+<input checked="checked" id="4056a462-c894-46c8-903e-d50d514eb31f" name="52987bf8-575e-4f7e-b492-5abe3bb4633d" type="radio">
+</input><label class="tabbed-label" for="4056a462-c894-46c8-903e-d50d514eb31f">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">longitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
 <span class="n">latitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
@@ -384,8 +384,8 @@ R</label><div class="tabbed-content docutils">
 points within each region. Here’s how you would do that with the
 <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code> library in R:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="204fe3e1-4b20-41da-9509-7baa2f5448c7" name="1feebe85-6836-47fc-8e47-c60ef7d76d47" type="radio">
-</input><label class="tabbed-label" for="204fe3e1-4b20-41da-9509-7baa2f5448c7">
+<input checked="checked" id="620ed937-e718-4fcf-b637-1ff36caa3576" name="1938b223-94d4-4d76-a1a5-1bd6fbb0e267" type="radio">
+</input><label class="tabbed-label" for="620ed937-e718-4fcf-b637-1ff36caa3576">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span> <span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
 <span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span>
@@ -401,8 +401,8 @@ fill in the entries of your transformation matrix.</p>
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="500717a9-fc3d-447f-98b0-205cee712376" name="831dec98-51d1-47ee-a0ba-dbf171ee3775" type="radio">
-</input><label class="tabbed-label" for="500717a9-fc3d-447f-98b0-205cee712376">
+<input checked="checked" id="76d77100-af4d-49be-9bd6-fe711dcce0fc" name="52452566-9e96-4877-8f6d-9895849eeacb" type="radio">
+</input><label class="tabbed-label" for="76d77100-af4d-49be-9bd6-fe711dcce0fc">
 R</label><div class="tabbed-content docutils">
 <p>For example, in R, using <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">centroid</span> <span class="o">&lt;-</span> <span class="nf">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
@@ -428,7 +428,7 @@ the portion of grid cells to use.</p>
 </div>
 <div class="section" id="matching-geographical-unit-observations">
 <h2>Matching geographical unit observations<a class="headerlink" href="#matching-geographical-unit-observations" title="Permalink to this headline">¶</a></h2>
-<p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.</p>
+<p>It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the <strong>GADM</strong> shapefiles.</p>
 <p>Matching observations by name can be very time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People’s Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets. Here are some suggestions for solving this problem:</p>
 <ol class="simple">
 <li><p>Try to perform all merging on abbreviation codes rather than names. At the level of countries, use <a class="reference external" href="https://www.nationsonline.org/oneworld/country_code_list.htm">ISO alpha-3 codes</a> if possible.</p></li>

@@ -328,8 +328,8 @@ directory.</p>
 <p>Let’s first turn the data from wide form into long form and label the
 years.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5291b95c-3a00-4505-804c-8f5edab9526a" name="8088ae78-146b-4cdc-93d2-31ce6593e898" type="radio">
-</input><label class="tabbed-label" for="5291b95c-3a00-4505-804c-8f5edab9526a">
+<input checked="checked" id="4cb4c62a-3fa2-4a3b-8828-97b7987ae217" name="2a9df87a-9ff4-4502-9e62-3fe5ae7ad118" type="radio">
+</input><label class="tabbed-label" for="4cb4c62a-3fa2-4a3b-8828-97b7987ae217">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
 
@@ -346,8 +346,8 @@ R</label><div class="tabbed-content docutils">
 the first several characters of the column names (not variable row
 values).</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="071d5e59-4fba-4019-808c-8507bb5cc589" name="60ee8741-b4ad-4eab-950d-b52477c8370b" type="radio">
-</input><label class="tabbed-label" for="071d5e59-4fba-4019-808c-8507bb5cc589">
+<input checked="checked" id="02057d82-00f4-44e8-a0a7-606da310190f" name="fe087c20-4c4c-49b0-8aa5-cb979378d27f" type="radio">
+</input><label class="tabbed-label" for="02057d82-00f4-44e8-a0a7-606da310190f">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
@@ -363,8 +363,8 @@ R</label><div class="tabbed-content docutils">
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e92a5c66-9eba-4223-8179-96eed8ef6da2" name="8f01e3b0-2aa9-4b1b-b33f-04ef318e55ee" type="radio">
-</input><label class="tabbed-label" for="e92a5c66-9eba-4223-8179-96eed8ef6da2">
+<input checked="checked" id="653a376f-30b3-4f1a-b158-6f2b18b566b4" name="d2378069-af37-4573-8f93-41e2b36b43a4" type="radio">
+</input><label class="tabbed-label" for="653a376f-30b3-4f1a-b158-6f2b18b566b4">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
 
@@ -386,8 +386,8 @@ result, it is not ideal for future projections.</p>
 <p>For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7743b196-f799-4ba0-ada7-98e100200d01" name="4f01904c-2d68-4cf7-99bf-212b64a29d4a" type="radio">
-</input><label class="tabbed-label" for="7743b196-f799-4ba0-ada7-98e100200d01">
+<input checked="checked" id="a1d5bd1e-8571-4ebd-a5b8-98804327ebf4" name="abf5c21d-43d2-4259-9ee5-830172c723b1" type="radio">
+</input><label class="tabbed-label" for="a1d5bd1e-8571-4ebd-a5b8-98804327ebf4">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">lfe</span><span class="p">)</span>
 
@@ -410,8 +410,8 @@ so there are no confidence intervals at this point.</p>
 <code class="docutils literal notranslate"><span class="pre">predict.felm</span></code> function from the <code class="docutils literal notranslate"><span class="pre">felm-tools.R</span></code> library at
 https://github.com/jrising/research-common/blob/master/R/felm-tools.R</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7f14a19c-4b08-4da0-8553-a9628c5cf00f" name="0fe84cd0-7ca5-4b56-a5d0-a7b7d4f17113" type="radio">
-</input><label class="tabbed-label" for="7f14a19c-4b08-4da0-8553-a9628c5cf00f">
+<input checked="checked" id="9bc04637-b078-4e26-8490-9cf7045ac60c" name="5ad42adc-e09d-48e7-8237-da427f209220" type="radio">
+</input><label class="tabbed-label" for="9bc04637-b078-4e26-8490-9cf7045ac60c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">plotdf</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">tas</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">-20</span><span class="p">,</span> <span class="m">40</span><span class="p">))</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_adj</span> <span class="o">&lt;-</span> <span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span> <span class="o">-</span> <span class="m">20</span>
@@ -432,9 +432,9 @@ R</label><div class="tabbed-content docutils">
     <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Excess death rate as a function of temperature&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme_bw</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
 <a class="reference internal image-reference" href="../_images/doseresp.png"><img alt="Dose-response function" src="../_images/doseresp.png" style="width: 750px;" /></a>
+</div>
+</div>
 </div>
 </div>
 
