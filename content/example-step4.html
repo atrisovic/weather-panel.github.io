@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributors" href="contributors.html" />
-    <link rel="prev" title="Suggestions for work organization" href="suggestions.html" />
+    <link rel="next" title="Suggestions for work organization" href="suggestions.html" />
+    <link rel="prev" title="Producing results" href="producing-results.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -176,14 +176,14 @@
    Producing results
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Hands-On Exercise, Step 4: Producing results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="suggestions.html">
+   Suggestions for work organization
   </a>
  </li>
 </ul>
@@ -327,6 +327,10 @@ this code should be run from a sister directory to the <code class="docutils lit
 directory.</p>
 <p>Let’s first turn the data from wide form into long form and label the
 years.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="245c48bf-0b0a-4bb5-81e6-a6b444cb23fd" name="69c5afa4-9c2c-4943-8c66-8cf58af09bf2" type="radio">
+</input><label class="tabbed-label" for="245c48bf-0b0a-4bb5-81e6-a6b444cb23fd">
+R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
 
 <span class="n">clim</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/climate_data/agg_vars.csv&quot;</span><span class="p">)</span>
@@ -336,13 +340,21 @@ years.</p>
 <span class="n">clim2</span><span class="o">$</span><span class="n">year</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">substring</span><span class="p">(</span><span class="n">clim2</span><span class="o">$</span><span class="n">date</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+</div>
 <p>Now we can sum over years. To do this, we will need to base this on
 the first several characters of the column names (not variable row
 values).</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="795e701c-56a4-4648-b600-84206b9073dd" name="e925dbd4-030e-488b-a160-4c612c2a16c3" type="radio">
+</input><label class="tabbed-label" for="795e701c-56a4-4648-b600-84206b9073dd">
+R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
 <span class="n">clim3</span> <span class="o">&lt;-</span> <span class="n">clim2</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">FIPS</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">tas_adj</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="nf">substring</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">7</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;tas_adj&#39;</span><span class="p">]),</span> <span class="n">tas_sq</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="nf">substring</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;tas_sq&#39;</span><span class="p">]))</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="merging-weather-and-outcome-data">
@@ -350,6 +362,10 @@ values).</p>
 <p>And now we can merge in the mortality data! This is by county (FIPS
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="4b6da769-bce1-4760-b361-c84f021ade4c" name="36b7c557-0543-4470-a137-f426576f7c86" type="radio">
+</input><label class="tabbed-label" for="4b6da769-bce1-4760-b361-c84f021ade4c">
+R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
 
 <span class="n">df2</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">clim3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="o">=</span><span class="s">&#39;FIPS&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">))</span>
@@ -357,6 +373,8 @@ code) and year. We also construct the death rate, as deaths per
 <span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span> <span class="o">&lt;-</span> <span class="m">100000</span> <span class="o">*</span> <span class="n">df2</span><span class="o">$</span><span class="n">deaths</span> <span class="o">/</span> <span class="n">df2</span><span class="o">$</span><span class="n">pop</span>
 <span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span><span class="p">[</span><span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span> <span class="o">==</span> <span class="kc">Inf</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">NA</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="running-the-regression">
@@ -367,12 +385,18 @@ temperature in this case includes correlated effects of rainfall. As a
 result, it is not ideal for future projections.</p>
 <p>For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="26bb53c9-90ce-46e4-952e-d494bc0e8c72" name="ad3e73e9-ccbd-498f-81a2-3827f42f97eb" type="radio">
+</input><label class="tabbed-label" for="26bb53c9-90ce-46e4-952e-d494bc0e8c72">
+R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">lfe</span><span class="p">)</span>
 
 <span class="n">df2</span><span class="o">$</span><span class="n">state</span> <span class="o">&lt;-</span> <span class="nf">as.character</span><span class="p">(</span><span class="nf">floor</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">fips</span> <span class="o">/</span> <span class="m">1000</span><span class="p">))</span>
 
 <span class="n">mod</span> <span class="o">&lt;-</span> <span class="nf">felm</span><span class="p">(</span><span class="n">deathrate</span> <span class="o">~</span> <span class="n">tas_adj</span> <span class="o">+</span> <span class="n">tas_sq</span> <span class="o">|</span> <span class="o">+</span> <span class="nf">factor</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">:</span> <span class="n">year</span> <span class="o">+</span>  <span class="nf">factor</span><span class="p">(</span><span class="n">fips</span><span class="p">)</span> <span class="o">|</span> <span class="m">0</span> <span class="o">|</span> <span class="n">fips</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df2</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="plotting-the-resulting-dose-response-function">
@@ -385,6 +409,10 @@ so there are no confidence intervals at this point.</p>
 <p>For R, to get confidence intervals from <code class="docutils literal notranslate"><span class="pre">felm</span></code>, we use the
 <code class="docutils literal notranslate"><span class="pre">predict.felm</span></code> function from the <code class="docutils literal notranslate"><span class="pre">felm-tools.R</span></code> library at
 https://github.com/jrising/research-common/blob/master/R/felm-tools.R</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="e8f1b680-9245-408e-8b27-5cd58a9b3c79" name="63c4dcac-13fe-43cf-aaff-6e4099792551" type="radio">
+</input><label class="tabbed-label" for="e8f1b680-9245-408e-8b27-5cd58a9b3c79">
+R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">plotdf</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">tas</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">-20</span><span class="p">,</span> <span class="m">40</span><span class="p">))</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_adj</span> <span class="o">&lt;-</span> <span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span> <span class="o">-</span> <span class="m">20</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_sq</span> <span class="o">&lt;-</span> <span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span><span class="o">^</span><span class="m">2</span> <span class="o">-</span> <span class="m">20</span><span class="o">^</span><span class="m">2</span>
@@ -403,6 +431,8 @@ https://github.com/jrising/research-common/blob/master/R/felm-tools.R</p>
     <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Deaths per 100,000 people&quot;</span><span class="p">)</span> <span class="o">+</span>
     <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Excess death rate as a function of temperature&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme_bw</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <a class="reference internal image-reference" href="../_images/doseresp.png"><img alt="Dose-response function" src="../_images/doseresp.png" style="width: 750px;" /></a>
 </div>
@@ -436,8 +466,8 @@ https://github.com/jrising/research-common/blob/master/R/felm-tools.R</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="suggestions.html" title="previous page">Suggestions for work organization</a>
-    <a class='right-next' id="next-link" href="contributors.html" title="next page">Contributors</a>
+    <a class='left-prev' id="prev-link" href="producing-results.html" title="previous page">Producing results</a>
+    <a class='right-next' id="next-link" href="suggestions.html" title="next page">Suggestions for work organization</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

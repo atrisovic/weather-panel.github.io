@@ -177,13 +177,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
+  <a class="reference internal" href="example-step4.html">
+   Hands-On Exercise, Step 4: Producing results
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="example-step4.html">
-   Hands-On Exercise, Step 4: Producing results
+  <a class="reference internal" href="suggestions.html">
+   Suggestions for work organization
   </a>
  </li>
 </ul>
@@ -336,7 +336,7 @@
 <li><p>are the data available at the resolution I need?</p></li>
 <li><p>are biases reasonable for the variable and region of interest?</p></li>
 </ul>
-<p>The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the <a class="reference external" href="https://climatedataguide.ucar.edu">UCAR Climate Data Guide</a> introduced above is a good first place to look. A google scholar search of the form “[data product name] validation OR evaluation OR bias OR uncertainty” may be useful as well.</p>
+<p>The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the <a class="reference external" href="https://climatedataguide.ucar.edu">UCAR Climate Data Guide</a> introduced above is a good first place to look. A <a class="reference external" href="https://scholar.google.com/">Google Scholar</a> search of the form <code class="docutils literal notranslate"><span class="pre">[data</span> <span class="pre">product</span> <span class="pre">name]</span> <span class="pre">validation</span> <span class="pre">OR</span> <span class="pre">evaluation</span> <span class="pre">OR</span> <span class="pre">bias</span> <span class="pre">OR</span> <span class="pre">uncertainty</span></code> may be useful as well.</p>
 <div class="section" id="getting-started-with-a-data-product-best-and-chirps">
 <h2>Getting Started with a Data Product: BEST and CHIRPS<a class="headerlink" href="#getting-started-with-a-data-product-best-and-chirps" title="Permalink to this headline">¶</a></h2>
 <p>Say you’re looking at agriculture in Ethiopia. You would like both temperature and precipitation data (remember the <a class="reference internal" href="weather-and-climate-data.html#content-warning-on-hydrological"><span class="std std-ref">warning on hydrological variables</span></a>), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found <a class="reference external" href="https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244">literature</a> specifically examining its biases in your region of interest.</p>
@@ -392,7 +392,7 @@
 <li><p>You first consult the <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/era5-atmospheric-reanalysis">ERA5 page</a> on UCAR’s Climate Data Guide, which tells you ERA5 has a resolution of about 31 km horizontally (this is about as high as it gets in this generation of data products). It also allows hourly data (this too is uncommon; most only provide daily, or maybe 3-hourly). However, observe caution here: just because the data is available at this resolution does not mean it is reliable at that resolution, and you will likely need to spend time aggregating the data across time to develop your final dataset.</p></li>
 <li><p>You see that it even gives you an estimate of the internal model uncertainty by rerunning the same analysis 10 times (10 “ensemble members”), though in “weaknesses” you note that the uncertainty may be underestimated.</p></li>
 <li><p>You notice that ERA5 extends back to 1979 for now (1979 is a common cutoff point due to the start of satellite observations in 1978).</p></li>
-<li><p>You notice that most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest. However, you double-check whether ERA5 is appropriate by searching Google Scholar for any relevant evaluation studies (sample search: “ERA5 Sahel temperature validation OR evaluation OR bias OR uncertainty”)</p></li>
+<li><p>You notice that most of the weaknesses described (temperature in the tropopause, upper stratosphere global average temperature, etc.) don’t seem to affect your region or variables of interest. However, you double-check whether ERA5 is appropriate by searching <a class="reference external" href="https://scholar.google.com/">Google Scholar</a> for any relevant evaluation studies (sample search: <code class="docutils literal notranslate"><span class="pre">ERA5</span> <span class="pre">Sahel</span> <span class="pre">temperature</span> <span class="pre">validation</span> <span class="pre">OR</span> <span class="pre">evaluation</span> <span class="pre">OR</span> <span class="pre">bias</span> <span class="pre">OR</span> <span class="pre">uncertainty</span></code>)</p></li>
 </ol>
 </td>
 </tr>

@@ -176,13 +176,13 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
+  <a class="reference internal" href="example-step4.html">
+   Hands-On Exercise, Step 4: Producing results
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="example-step4.html">
-   Hands-On Exercise, Step 4: Producing results
+  <a class="reference internal" href="suggestions.html">
+   Suggestions for work organization
   </a>
  </li>
 </ul>
@@ -306,8 +306,8 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-introductory-concepts">
-   Some introductory concepts
+  <a class="reference internal nav-link" href="#useful-introductory-resources">
+   Useful introductory resources
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -371,33 +371,30 @@ aimed at helping you make decisions appropriate to your research.</p>
 </div>
 <div class="section" id="who-should-use-this-tutorial">
 <h1>Who should use this tutorial?<a class="headerlink" href="#who-should-use-this-tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial is aimed at students and researchers new to climate
-econometrics. We will assume a knowledge of panel econometrics. You
+<p>This tutorial is created for students and researchers new to climate
+econometrics. However, it assumes a knowledge of panel econometrics. You
 should be familiar with specifications that factor-out unobserved
 heterogeneity, implementing flexible trends, weighted regressions,
 approaches to deal with heteroskedasticity and correlated errors, and
 diagnosing efficiency problems. Some concepts in panel econometrics
 are more specific to weather regressions, such as dose-response
 curves, data-generating processes, and neighborhood effects, and we
-will cover those below.</p>
+will cover those in this tutorial.</p>
 <p>We also assume basic experience with one scientific programming
-language (Stata, R, Matlab, Julia, python). We try to provide examples
-in more than one language, so you can get started.</p>
+language (Stata, R, Matlab, Julia, Python). In most examples, we provide code snippets in more than one programming language, so you can get started.</p>
 <p>You should also already have a research question. There are plenty of
 ways to find important questions, and maybe we will try to offer a
 tutorial on that in the future.</p>
 </div>
 <div class="section" id="what-we-hope-you-will-learn">
 <h1>What we hope you will learn<a class="headerlink" href="#what-we-hope-you-will-learn" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial is designed to offer guidance on all of the steps
-necessary to contribute to this research, by walking you through the
-steps necessary to relate socioeconomic outcomes to weather data at
-high resolution. We will cover:</p>
+<p>This tutorial offers guidance that will help you contribute to climate econometrics research. It will walk you through the necessary
+steps in relating socioeconomic outcomes to weather data at high resolution. We will cover:</p>
 <ol class="simple">
 <li><p>How to find and use weather data, and what you should be aware of when using it.</p></li>
 <li><p>How to relate your socioeconomic outcomes to weather variables, and
 develop your regression specification.</p></li>
-<li><p>How to work with shapefiles, and use them to generate your
+<li><p>How to work with shapefiles and use them to generate your
 predictor variables.</p></li>
 </ol>
 <p>At the same time, this tutorial asks you to perform every step
@@ -416,27 +413,26 @@ project:</p>
 <li><p><em>Weighting schemes</em>: explains the importance of weighting schemes and how to work with them based on their file formats and origins.</p></li>
 <li><p><em>Generating geographical unit data</em>: introduces geographic information systems, shapefiles, and how to work with them effectively.</p></li>
 </ol>
-<p>You can go through the sections one at a time or jump around.</p>
+<p>You can go through the sections one at a time or reference them independently.</p>
 <p>Most importantly, if you learn something in your own research process
 that you think would be of broad interest, see <a class="reference external" href="https://github.com/atrisovic/weather-panel.github.io">the contributor’s guide</a> for how to include it here. Help us make this tutorial more
 useful for more people!</p>
 </div>
-<div class="section" id="some-introductory-concepts">
-<h1>Some introductory concepts<a class="headerlink" href="#some-introductory-concepts" title="Permalink to this headline">¶</a></h1>
-<p>A useful resource to better understand the basics of weather, climate,
-and the physical changes occurring in the climate system
-is
-<a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3">An Economist’s Guide to Climate Change Science</a>. If
+<div class="section" id="useful-introductory-resources">
+<h1>Useful introductory resources<a class="headerlink" href="#useful-introductory-resources" title="Permalink to this headline">¶</a></h1>
+<dl class="simple myst">
+<dt>📚  <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3">An Economist’s Guide to Climate Change Science</a></dt><dd><p>is a useful resource to better understand the basics of weather, climate,
+and the physical changes occurring in the climate system. If
 you have not had experience with climate (or meteorological) science,
-that is a great place to start. For a more general introduction to the
-sciences of climate and climate change, check out the <a class="reference external" href="https://editors.eol.org/eoearth/wiki/Weather_%26_Climate">Encyclopedia of
-Earth</a> and the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf">IPCC WGI report</a>.</p>
-<p>For a theoretical foundation for the work of estimating weather and
-climate responses,
-read
-<a class="reference external" href="https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343">Climate Econometrics</a> by
-Solomon Hsiang. This tutorial complements this kind of theoretical
+that is a great place to start.</p>
+</dd>
+<dt>📚  Check out the <a class="reference external" href="https://editors.eol.org/eoearth/wiki/Weather_%26_Climate">Encyclopedia of Earth</a> and the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf">IPCC WGI report</a></dt><dd><p>for a more general introduction to the sciences of climate and climate change.</p>
+</dd>
+<dt>📚  <a class="reference external" href="https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343">Climate Econometrics</a> by Solomon Hsiang</dt><dd><p>gives a theoretical foundation for the work of estimating weather and
+climate responses. This tutorial complements the theoretical
 foundation with more practical advice.</p>
+</dd>
+</dl>
 <div class="section" id="definitions-and-conventions">
 <h2>Definitions and conventions<a class="headerlink" href="#definitions-and-conventions" title="Permalink to this headline">¶</a></h2>
 <p>We will use the following terms throughout this tutorial.</p>
@@ -470,8 +466,7 @@ easier. We will discuss this more later.</p>
 <div class="section" id="mathematical-notation">
 <h3>Mathematical notation<a class="headerlink" href="#mathematical-notation" title="Permalink to this headline">¶</a></h3>
 <p>In many cases, it will be useful to describe how to work with weather
-variables irrespective of the specific data being represented. For
-this, we introduce the following notation:</p>
+variables irrespective of the represented specific data, which is why we introduce the following notation:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(T_{it}\)</span>: Any weather variable for geographic unit <span class="math notranslate nohighlight">\(i\)</span> in reporting period <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(T_{ps}\)</span>: Point or grid-level weather data for location/grid cell

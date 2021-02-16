@@ -104,13 +104,9 @@ We highly recommend you to go through [a tutorial on version control with git](h
 Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command. 
 
-Here is an example that showcases a simple workflow sequence with [bash](http://swcarpentry.github.io/shell-novice/).
-The file that defines analysis steps is often called a 'master script'.
-A master script can be written in different languages, like MATLAB, R, Python, bash etc.
+The file that defines analysis workflow is often called a 'master script'. A master script can be written in different languages, like MATLAB, R, Python, bash etc. A master script written in [bash](http://swcarpentry.github.io/shell-novice/) is typically called `run_all.sh`, `runall.sh` or similar.
 
-A master script written in bash that defines an analysis workflow is typically called run_all.sh, runall.sh or similar.
-
-An example of a master script in bash:
+An example of a master script in bash showcasing a simple workflow sequence:
 
 ```bash
 #!/bin/bash
