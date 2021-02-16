@@ -93,7 +93,8 @@ We recommend using version control to track changes to your code files. There ar
 3. Using version control for developing your code can help understand what has changed between each version and troubleshoot potential new bugs. It may also help you identify and solve them.
 4. Finally, version control can act as a backup of your project. In case your computer breaks, you can always retrieve the latest version of the project from your colleagues or a remote repository. This feature also allows you to work on multiple computers seamlessly. 
 
-![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
+```{figure} https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png
+```
 
 ```{seealso}
 We highly recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
