@@ -27,7 +27,9 @@ We start this section with a guide to the [NetCDF](https://climatedataguide.ucar
 
 ### Your code environment
 
-Through this section, we introduce relevant commands whenever possible for the following languages and packages:
+Throughout this section, we introduce relevant commands whenever
+possible for the following languages and packages (click on the tab
+names for details):
 
 ````{tabbed} Python (xarray)
 

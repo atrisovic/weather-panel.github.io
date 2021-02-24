@@ -30,7 +30,7 @@ each research question. No single sequence of steps or software can be
 widely applied for resolving these issues. Instead, this tutorial is
 aimed at helping you make decisions appropriate to your research.
 
-# Who should use this tutorial?
+# Who is this tutorial for?
 
 This tutorial is created for students and researchers new to climate
 econometrics. However, it assumes a knowledge of panel econometrics. You
