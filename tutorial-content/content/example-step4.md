@@ -10,6 +10,7 @@ directory.
 Let's first turn the data from wide form into long form and label the
 years.
 
+````{tabbed} R
 ```R
 library(reshape2)
 
@@ -19,16 +20,19 @@ clim2 <- melt(clim[, c(-1:-5)], id.vars='FIPS')
 clim2$date <- as.Date("1980-01-01") + as.numeric(gsub("tas_adj|tas_sq", "", clim2$variable))
 clim2$year <- as.numeric(substring(clim2$date, 1, 4))
 ```
+````
 
 Now we can sum over years. To do this, we will need to base this on
 the first several characters of the column names (not variable row
 values).
 
+````{tabbed} R
 ```R
 library(dplyr)
 
 clim3 <- clim2 %>% group_by(FIPS, year) %>% summarize(tas_adj=sum(value[substring(variable, 1, 7) == 'tas_adj']), tas_sq=sum(value[substring(variable, 1, 6) == 'tas_sq']))
 ```
+````
 
 ## Merging weather and outcome data
 
@@ -36,6 +40,7 @@ And now we can merge in the mortality data! This is by county (FIPS
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.
 
+````{tabbed} R
 ```R
 df <- read.csv("../data/cmf/merged.csv")
 
@@ -44,6 +49,7 @@ df2 <- df %>% left_join(clim3, by=c('fips'='FIPS', 'year'))
 df2$deathrate <- 100000 * df2$deaths / df2$pop
 df2$deathrate[df2$deathrate == Inf] <- NA
 ```
+````
 
 ## Running the regression
 
@@ -55,6 +61,7 @@ result, it is not ideal for future projections.
 For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.
 
+````{tabbed} R
 ```R
 library(lfe)
 
@@ -62,6 +69,7 @@ df2$state <- as.character(floor(df2$fips / 1000))
 
 mod <- felm(deathrate ~ tas_adj + tas_sq | + factor(state) : year +  factor(fips) | 0 | fips, data=df2)
 ```
+````
 
 ## Plotting the resulting dose-response function
 
@@ -75,6 +83,7 @@ For R, to get confidence intervals from `felm`, we use the
 `predict.felm` function from the `felm-tools.R` library at
 https://github.com/jrising/research-common/blob/master/R/felm-tools.R
 
+````{tabbed} R
 ```R
 plotdf <- data.frame(tas=seq(-20, 40))
 plotdf$tas_adj <- plotdf$tas - 20
@@ -96,3 +105,5 @@ ggplot(plotdf2, aes(tas, fit)) +
 ```
 
 <img src="images/doseresp.png" alt="Dose-response function" width="750"/>
+````
+

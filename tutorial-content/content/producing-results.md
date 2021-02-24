@@ -19,7 +19,7 @@ effects are important to consider:
 
  - Time unit FEs, or high-order polynomial trends.
  - FEs or trends as above, at the level of groups of geographic units
-   (e.g. ADM1, if the observations are at ADM2).
+   (e.g. **ADM1**, if the observations are at **ADM2**).
  - Day of week or day of year FEs, for many social/economic behaviors.
 
 If you have multiple groups (e.g., data for different ages, races, or
@@ -32,10 +32,15 @@ As the resolution of the spatial and temporal units increases, the
 coviariance between them will also increase. Those additional
 observations may not provide as much unique information as they appear
 to. In most cases, it is necessary to use Conley-White standard
-errors. Sol Hsiang has code for this in Matlab and Stata:
-[http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html](http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html).
+errors. 
 
-For corresponding code in R, see [https://github.com/darinchristensen/conley-se](https://github.com/darinchristensen/conley-se)
+````{tabbed} Matlab and Stata
+Sol Hsiang has code for this in Matlab and Stata:
+<http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
+````
+````{tabbed} R
+For corresponding code in R, see <https://github.com/darinchristensen/conley-se>.
+````
 
 ## Plotting dose-response functions
 

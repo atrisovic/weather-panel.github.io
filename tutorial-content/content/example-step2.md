@@ -37,7 +37,7 @@ where $\psi_{p}$ is the population in gridcell $p$.
 We can use the gridded population data from Gridded Population of the
 World, since the weather data is not very high resolution. Download it
 from
-https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count
+<https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count>.
 
 This is global data, so it will be useful to clip it to the US and
 aggregate it to the scale of the weather. We also need it in NetCDF
@@ -90,7 +90,7 @@ county-scale mortality data for the United States. The data through
 1988 is publically available, so we will use this for our analysis.
 
 1. Go to the CMF information page,
-   https://www.cdc.gov/nchs/data_access/cmf.htm
+   <https://www.cdc.gov/nchs/data_access/cmf.htm>.
 2. Under "Data Availability", find the mortality and population files
    for 1979 - 1988, and download these.
 3. Unzip these files, and place the resulting text files,
@@ -203,8 +203,11 @@ df_pop5.head()
 
 ```{code-block} python
 df = df_pop5.merge(df_mort4, how='left', on=['fips', 'year'])
-df.head()
+df.to_csv("../data/cmf/merged.csv", header=True)
 ```
+````
+
+The final dataset (`merged.csv`) should look like:
 		
 | fips, year |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   pop |   deaths |
 |:-------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|------:|---------:|
@@ -214,7 +217,3 @@ df.head()
 | (1001, 1982) |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 | 31529 |      223 |
 | (1001, 1983) |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 | 31547 |      267 |
 
-```{code-block} python
-df.to_csv("../data/cmf/merged.csv", header=True)
-```
-````

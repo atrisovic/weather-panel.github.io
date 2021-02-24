@@ -37,87 +37,87 @@ the environment, and then only make choices for variables that can
 explain that mechanism. A few of the important and frequently-used
 weather variables are listed below, and why we might choose them:
 
-### **Temperature** 
+### *Temperature*
 
 Temperature relationships are often preferred in climate impacts research, because temperature is more predictable than many other weather variables. There are various measures of temperature that can be used. Some of them are listed below:
 
-1. *$T_{min}$, $T_{max}$:*  Many socioeconomic processes are more
+1. **$T_{min}$, $T_{max}$:**  Many socioeconomic processes are more
     sensitive to extreme temperatures than to variation in the
     average. This is also useful when temperature variation is
     large, leading to significant differences in the cold end and hot end responses. These are important metrics when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$. 
-2. *$T_{avg}$:*  A good mean metric for seeing average response
+2. **$T_{avg}$:**  A good mean metric for seeing average response
     over the temperature support, when there is not much variation
     in temperature within each time unit considered in the
     study. $T_{avg}$ is most appropriate when there is some natural
     inertia in the response, so that the dependent variable is
     responding to a kind of average over the last 24 hours. Note
     that $T_{avg}$ is often just equal to $(T_{min} + T_{max}) / 2$, unless calculated from sub-daily data.
-3. [*HDD/CDD & GDD:*](https://www.degreedays.net/introduction)
+3. [**HDD/CDD & GDD:**](https://www.degreedays.net/introduction)
     Degree days (DD) is a measure of ’how much’ and for ’how long’
     the outside air temperature was above or below a certain
     level. A sinusoid between $T_{min}$ and $T_{max}$ can be used
     to approximate DDs from daily data.
-4. *Heat Index & Wet Bulb Temperature*: (see below on humidity)
+4. **Heat Index & Wet Bulb Temperature**: (see below on humidity)
 
-### **Humidity** 
+### *Humidity*
 
 There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air,
 expressed in grams per cubic meter or grams per kilogram. Relative
 humidity is defined as a percentage relative to a maximum humidity
 value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
 
-1. *Wet-Bulb Temperature (WBT)*: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
-2. *Wet-Bulb Globe Temperature (WBGT)*: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight) 
-3. *Heat Index (HI)*: various calculated metrics combining shade temperature and relative humidity
+1. **Wet-Bulb Temperature (WBT)**: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
+2. **Wet-Bulb Globe Temperature (WBGT)**: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight) 
+3. **Heat Index (HI)**: various calculated metrics combining shade temperature and relative humidity
 
-### **Precipitation** 
+### *Precipitation*
 
 Precipitation is highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [a Warning on Hydrological Variables](content:warning-on-hydrological). It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
 
-1. *Total precipitation (e.g., over a year)*: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
-2. *Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability*: often used to capture water stress.
-3. *Number of rainy/dry days or moments of the precipitation distribution*: the distribution of precipitation often matters more than the total.
+1. **Total precipitation (e.g., over a year)**: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
+2. **Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability**: often used to capture water stress.
+3. **Number of rainy/dry days or moments of the precipitation distribution**: the distribution of precipitation often matters more than the total.
 
 Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data)) specialize in extremes data. 
     
-### **River discharge rate** 
+### *River discharge rate* 
 
 River flows are generally measured at the station-level. While runoff is available in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
 
-### **Wind speed** 
+### *Wind speed* 
 
 The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for destructive force, and cubic speeds for wind turbine power. Also, consider gust velocity, which is generally available. Maximum wind speed over some time period has been used as well.  
 
-### **Net primary productivity (NPP)** 
+### *Net primary productivity (NPP)* 
 
 It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.
 
-### **Evapotranspiration rate (ET)** 
+### *Evapotranspiration rate (ET)* 
 
 It is the sum of evaporation and plant transpiration from the Earth's land and ocean surface to the atmosphere. Changes in ET are estimated using water stress measures in plants, and are related to agricultural productivity.
 
-### **Solar radiation** 
+### *Solar radiation* 
 
-Shortwave radiation (visible light) contains a lot of energy; longwave radiation (infrared light) contains less energy than shortwave radiation. The sun emits shortwave radiation because it is extremely hot, while the Earth re-emits heat it receives as longwave radiation in the form of infrared rays. Exposure of shortwave radiation is said to cause skin cancer, eye damage, etc. However, UV (shortwave) radiation is important for regulating vitamin D circulation in our body.
+Shortwave radiation (visible light, UV) contains more energy than longwave radiation (infrared light). The sun emits shortwave radiation, while the Earth re-emits the heat it receives as longwave radiation in the form of infrared rays. Exposure to shortwave radiation may cause skin cancer or eye damage, but it is important for regulating vitamin D circulation in our body.
 
-### **Sea surface temperature (SST) and ocean temperature** 
+### *Sea surface temperature (SST) and ocean temperature*
 
 SST is the water temperature close to the ocean's surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.  
 
-### **Climatic indices** 
+### *Climatic indices* 
 
 A wide range of metrics has been developed to understand the state of the ocean-atmosphere system at large scales. These are measured in a standardized way (e.g., by comparing temperature at two points or by extracting a mean over a region),
 and often have long time-series, often at the monthly level. However, they do not vary over space. Data for some of the
 most important are available through [NOAA](https://www.ncdc.noaa.gov/teleconnections/).  Some of the most important are:
 
-1. *El Niño/Southern Oscillation (ENSO)*: Affects temperature
+1. **El Niño/Southern Oscillation (ENSO)**: Affects temperature
         and precipitation across the globe, with hotspots on most
         continents. For some applications, the value of the signal
         will be less important than the identification of El Niño and
         La Niña phases. These phases can be somewhat predicted months
         in advance. El Niño events can be subclassified as Modoki or
         not.
-2. *Indian Ocean Dipole (IOD)*: IOD affects weather
+2. **Indian Ocean Dipole (IOD)**: IOD affects weather
         throughout East Africa, South and Southeast Asia, and
         Oceania.
 
@@ -144,27 +144,27 @@ amount of each grid cell that lies within each region. This can be
 calculated as a transformation matrix, with a row for each region and
 a column for each cell. Once the matrix is calculated, it can be
 reused for each time step. More details for this process are described
-in sections [weighting schemes](weighting-schemes) and [suggestions for 
-work organization](suggestions).
+in sections [weighting schemes](weighting-schemes).
 
 Typically, relating weather to a dependent variable requires some 
 non-linear transformation. For example, estimating a polynomial
 functional form requires raising the temperatures to various powers. 
-Importantly, the square of a weighted average of grid-level temperatures 
+Notably, the square of a weighted average of grid-level temperatures 
 is not the same as the weighted average of the square of grid-level temperatures.
 
+``` {note}
 While doing the spatial aggregation, we need to decide whether we want
-to transform the data first and then aggregate it
-(transformation-before-aggregation) or aggregate it and then transform
-it (aggregation-before-transformation). This decision is based on
+to **transform the data first and then aggregate it**
+(transformation-before-aggregation) or **aggregate it and then transform
+it** (aggregation-before-transformation). This decision is based on
 whether the phenomenon in consideration is occurring at the local
 (grid or individual) scale or at the larger administrative units
 (country, state, county, etc.) scale. Also, it matters what variable
-is under consideration. For example, doing
-aggregation-before-transformation for temperature will distort the
+is under consideration. For example, doing aggregation-before-transformation for temperature will distort the
 signal less than doing it for precipitation. This is because
-precipitation is highly local both temporally and spatially; it could
-rain for <1 min in <1 km radius area.
+precipitation is highly local both temporally and spatially (it could
+rain for <1 min in <1 km radius area).
+```
 
 ### Transformation-before-aggregation
 
@@ -238,5 +238,5 @@ $s$, $g_k(\cdot)$ is the non-linear transformation (e.g., raising to
 powers for polynomials), and $y_{it}$ is the dependent variable
 observed for region $i$ in reporting period $t$. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.
 
-![Humor](images/cartoon_sec2.JPG)
-
+```{figure} images/cartoon_sec2.JPG
+```

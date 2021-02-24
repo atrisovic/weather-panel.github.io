@@ -56,34 +56,40 @@ cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
 As an example, in R, you generate these points like so:
+````{tabbed} R
 ```R
 longitudes <- seq(longitude0, longitude1, gridwidth)
 latitudes <- seq(latitude0, latitude1, gridwidth)
 pts <- expand.grid(x=longitudes, y=latitudes)
 ```
+````
  
 Now, you can iterate through each region, and get a list of all of the
 points within each region. Here's how you would do that with the
 `PBSmapping` library in R:
+````{tabbed} R
 ```R
 events <- data.frame(EID=1:nrow(pts), X=pts$x, Y=pts$y)
 events <- as.EventData(events, projection=attributes(polys)$projection)
 eids <- findPolys(events, polys, maxRows=6e5)
 ```
- 
+````
+
 Then you can use the cells that have been found (which, if you've set
 it upright, will be in the same order as the columns of $A$) to
 fill in the entries of your transformation matrix.
  
 If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need
-to find whichever grid cell is closest. For example, in R, using
-`PBSmapping`:
+to find whichever grid cell is closest. 
+````{tabbed} R
+For example, in R, using `PBSmapping`:
 ```R
 centroid <- calcCentroid(polys, rollup=1)
 dists <- sqrt((pts$x - centroid$X)^2 + (pts$y - centroid$Y)^2)
 closest <- which.min(dists)[1]
 ```
+````
  
 ## Approach 2. Allowing for partial grid cells
  
@@ -101,7 +107,7 @@ the portion of grid cells to use.
  
 ## Matching geographical unit observations
  
-It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the GADM shapefiles.
+It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the **GADM** shapefiles.
  
 Matching observations by name can be very time-consuming. These problems even exist at the level of countries, where, for example, North Korea is regularly listed as “Democratic People's Republic of Korea”, “Korea, North”, and “Korea, Dem. Rep.”; and information is indiscriminately reported for isolated regions or sovereign states (Guadeloupe’s data may or may not be included in France). Reporting units may not correspond to standard administrative units at all, and you will need to aggregate or disaggregate regions to match between datasets. Here are some suggestions for solving this problem:
  

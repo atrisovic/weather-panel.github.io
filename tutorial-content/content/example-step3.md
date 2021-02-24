@@ -6,12 +6,11 @@ One of the tutorial authors has produced a new tool for aggregating
 gridded data according to a shapefile: `xagg`. Since it handles
 partial grid-cell overlapping and arbitrary weighting grid, we
 recommend that it be used irrespective of the language being used
-elsewhere. Install it according to the instructions here:
-https://github.com/ks905383/xagg
+elsewhere. Install it according to [the instructions from GitHub](https://github.com/ks905383/xagg).
 
 You will need to download a shapefile for the US counties. We use one
 from the ESRI community website:
-https://community.esri.com/ccqpr47374/attachments/ccqpr47374/enterprise-portal/4124/1/UScounties.zip
+<https://community.esri.com/ccqpr47374/attachments/ccqpr47374/enterprise-portal/4124/1/UScounties.zip>
 
 Save its contents to a folder `geo_data` in the `data` directory. The
 following code should be run from the `data` directory.
@@ -20,18 +19,22 @@ following code should be run from the `data` directory.
 
 The approach uses `xarray` for gridded data, `geopandas` to work with shapefiles, and `xagg` to aggregate gridded data onto shapefiles. 
 
+````{tabbed} Python
 ```python
 import xarray as xr
 import geopandas as gpd
 import xagg as xa
 import numpy as np
 ```
+````
 
 First, load the data from the previous steps:
 
+````{tabbed} Python
 ```python
 # Load temperature data using xarray
-ds_tas = xr.open_dataset('climate_data/tas_day_BEST_historical_station_19800101-19891231.nc')
+ds_tas = xr.open_dataset(
+    'climate_data/tas_day_BEST_historical_station_19800101-19891231.nc')
 
 # Load population data using xarray 
 ds_pop = xr.open_dataset('pcount/usap90ag.nc')
@@ -39,15 +42,15 @@ ds_pop = xr.open_dataset('pcount/usap90ag.nc')
 # Load county shapefiles using geopandas
 gdf_counties = gpd.read_file('geo_data/UScounties.shp')
 ```
+````
 
 ## Transforming the data
 
 Next, we need to construct any nonlinear transformations of the data.
 
-For our econometric model, we want temperature in both linear and quadratic form, centered around $20^\circ$ C: 
+For our econometric model, we want temperature in both linear and quadratic form, centered around $20^\circ$ C: $T-20^\circ C$ and $T^2 - (20^\circ C)^2$.
 
-$T-20^\circ C$ and $T^2 - (20^\circ C)^2$.
-
+````{tabbed} Python
 ```python
 ds_tas['tas_adj'] = ds_tas.tas-20
 ds_tas['tas_sq'] = ds_tas.tas**2 - 20**2
@@ -58,6 +61,7 @@ ds_tas['tas_sq'] = ds_tas.tas**2 - 20**2
 ds_tas = ds_tas.drop('tas')
 ds_tas = ds_tas.drop('land_mask')
 ```
+````
 
 ## Create map of pixels onto polygons
 
@@ -69,10 +73,12 @@ dataset, taking the intersect between each county polygon and all
 pixel polygons, and calculating the average area of overlap between
 the pixels that touch the polygon and the polygon.
 
+````{tabbed} Python
 ```python
 weightmap =
 xa.pixel_overlaps(ds_tas,gdf_counties,weights=ds_pop.Population,subset_bbox=False)
 ```
+````
 
 ## Aggregate values onto polygons
 
@@ -80,22 +86,28 @@ Using the weight map calculated above, `xagg` now aggregates all the gridded var
 
 The output of this function now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.  
 
-(`aggregated` is an object specific to the `xagg` package; we need to modify it to be usable, for example using `aggregated.to_dataset()` or `aggregated.to_csv` as we do below - see the `xagg` docs for more info). 
+````{tabbed} Python
+
+`aggregated` is an object specific to the `xagg` package. We need to modify it to be usable, for example using `aggregated.to_dataset()` or `aggregated.to_csv`. See the `xagg` docs for more info.
 
 ```python
 aggregated = xa.aggregate(ds_tas, weightmap)
 ```
+````
 
-## Export this as a .csv file to be used elsewhere
+## Export this as a `.csv` file to be used elsewhere
 
-Finally, we need to export this data to be used elsewhere. For further processing in `python`, use `aggregated.to_dataset()` or `aggregated.to_dataframe()`, depending on whether you'd like to continue using it in `xarray` or `pandas`. 
-
-For this tutorial, we want to allow a variety of tools, so we'll
-export the aggregated data into a .csv (comma-separated value) file,
+Finally, we need to export this data to be used elsewhere. For this tutorial, we want to allow a variety of tools, so we'll
+export the aggregated data into a `.csv` (comma-separated value) file,
 which can easily be read by R, STATA, and most other programming
 tools. The data will be reshaped 'wide' by `xagg` - so every row is a
 county, and every column is a timestep of the variables. 
 
+````{tabbed} Python
+
+Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`, depending on whether you'd like to continue using it in `xarray` or `pandas`. 
+
 ```python
 aggregated.to_csv('climate_data/agg_vars.csv')
 ```
+````

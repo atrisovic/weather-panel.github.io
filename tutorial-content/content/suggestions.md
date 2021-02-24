@@ -93,7 +93,8 @@ We recommend using version control to track changes to your code files. There ar
 3. Using version control for developing your code can help understand what has changed between each version and troubleshoot potential new bugs. It may also help you identify and solve them.
 4. Finally, version control can act as a backup of your project. In case your computer breaks, you can always retrieve the latest version of the project from your colleagues or a remote repository. This feature also allows you to work on multiple computers seamlessly. 
 
-![](https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png)
+```{figure} https://www.groovecommerce.com/hs-fs/hub/188845/file-4063238065-png/blog-files/version-control-comic.png
+```
 
 ```{seealso}
 We highly recommend you to go through [a tutorial on version control with git](https://swcarpentry.github.io/git-novice/).
@@ -104,13 +105,9 @@ We highly recommend you to go through [a tutorial on version control with git](h
 Automation combines all analysis steps in a cohesive analysis ensemble or a workflow. 
 The goal of automation is to enable a streamlined analysis execution, ideally only with a single command. 
 
-Here is an example that showcases a simple workflow sequence with [bash](http://swcarpentry.github.io/shell-novice/).
-The file that defines analysis steps is often called a 'master script'.
-A master script can be written in different languages, like MATLAB, R, Python, bash etc.
+The file that defines analysis workflow is often called a 'master script'. A master script can be written in different languages, like MATLAB, R, Python, bash etc. A master script written in [bash](http://swcarpentry.github.io/shell-novice/) is typically called `run_all.sh`, `runall.sh` or similar.
 
-A master script written in bash that defines an analysis workflow is typically called run_all.sh, runall.sh or similar.
-
-An example of a master script in bash:
+An example of a master script in bash showcasing a simple workflow sequence:
 
 ```bash
 #!/bin/bash

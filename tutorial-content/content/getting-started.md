@@ -32,19 +32,18 @@ aimed at helping you make decisions appropriate to your research.
 
 # Who is this tutorial for?
 
-This tutorial is aimed at students and researchers new to climate
-econometrics. We will assume a knowledge of panel econometrics. You
+This tutorial is created for students and researchers new to climate
+econometrics. However, it assumes a knowledge of panel econometrics. You
 should be familiar with specifications that factor-out unobserved
 heterogeneity, implementing flexible trends, weighted regressions,
 approaches to deal with heteroskedasticity and correlated errors, and
 diagnosing efficiency problems. Some concepts in panel econometrics
 are more specific to weather regressions, such as dose-response
 curves, data-generating processes, and neighborhood effects, and we
-will cover those below.
+will cover those in this tutorial.
 
 We also assume basic experience with one scientific programming
-language (Stata, R, Matlab, Julia, python). We try to provide examples
-in more than one language, so you can get started.
+language (Stata, R, Matlab, Julia, Python). In most examples, we provide code snippets in more than one programming language, so you can get started.
 
 You should also already have a research question. There are plenty of
 ways to find important questions, and maybe we will try to offer a
@@ -52,15 +51,13 @@ tutorial on that in the future.
 
 # What we hope you will learn
 
-This tutorial is designed to offer guidance on all of the steps
-necessary to contribute to this research, by walking you through the
-steps necessary to relate socioeconomic outcomes to weather data at
-high resolution. We will cover:
+This tutorial offers guidance that will help you contribute to climate econometrics research. It will walk you through the necessary
+steps in relating socioeconomic outcomes to weather data at high resolution. We will cover:
 
 1. How to find and use weather data, and what you should be aware of when using it.
 2. How to relate your socioeconomic outcomes to weather variables, and
    develop your regression specification.
-3. How to work with shapefiles, and use them to generate your
+3. How to work with shapefiles and use them to generate your
    predictor variables.
 
 At the same time, this tutorial asks you to perform every step
@@ -79,28 +76,26 @@ project:
 3. *Weighting schemes*: explains the importance of weighting schemes and how to work with them based on their file formats and origins. 
 4. *Generating geographical unit data*: introduces geographic information systems, shapefiles, and how to work with them effectively.
 
-You can go through the sections one at a time or jump around.
+You can go through the sections one at a time or reference them independently.
 
 Most importantly, if you learn something in your own research process
 that you think would be of broad interest, see [the contributor's guide](https://github.com/atrisovic/weather-panel.github.io) for how to include it here. Help us make this tutorial more
 useful for more people!
 
-# Some introductory concepts
+# Useful introductory resources
 
-A useful resource to better understand the basics of weather, climate,
-and the physical changes occurring in the climate system
-is
-[An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3). If
+📚  [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3)
+: is a useful resource to better understand the basics of weather, climate,
+and the physical changes occurring in the climate system. If
 you have not had experience with climate (or meteorological) science,
-that is a great place to start. For a more general introduction to the
-sciences of climate and climate change, check out the [Encyclopedia of
-Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf).
+that is a great place to start. 
 
-For a theoretical foundation for the work of estimating weather and
-climate responses,
-read
-[Climate Econometrics](https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343) by
-Solomon Hsiang. This tutorial complements this kind of theoretical
+📚  Check out the [Encyclopedia of Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf)
+: for a more general introduction to the sciences of climate and climate change.
+
+📚  [Climate Econometrics](https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343) by Solomon Hsiang
+: gives a theoretical foundation for the work of estimating weather and
+climate responses. This tutorial complements the theoretical
 foundation with more practical advice.
 
 ## Definitions and conventions
@@ -136,8 +131,7 @@ easier. We will discuss this more later.
 ### Mathematical notation
 
 In many cases, it will be useful to describe how to work with weather
-variables irrespective of the specific data being represented. For
-this, we introduce the following notation:
+variables irrespective of the represented specific data, which is why we introduce the following notation:
 
 - $T_{it}$: Any weather variable for geographic unit $i$ in reporting period $t$.
 - $T_{ps}$: Point or grid-level weather data for location/grid cell

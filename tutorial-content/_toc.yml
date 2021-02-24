@@ -23,8 +23,8 @@
 - part: Bringing it all together
   chapters:
   - file: content/producing-results
+  - file: content/example-step4  
   - file: content/suggestions
-  - file: content/example-step4
 
 - part: Contributors
   chapters:
