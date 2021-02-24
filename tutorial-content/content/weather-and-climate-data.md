@@ -27,7 +27,9 @@ The [NetCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/N
 
 ### Supported Languages
 
-Through this section, we introduce relevant commands whenever possible for the following languages and packages:
+Throughout this section, we introduce relevant commands whenever
+possible for the following languages and packages (click on the tab
+names for details):
 
 ````{tabbed} Python (xarray)
 
