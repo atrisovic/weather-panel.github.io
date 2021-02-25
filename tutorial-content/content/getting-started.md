@@ -33,17 +33,17 @@ aimed at helping you make decisions appropriate to your research.
 # Who is this tutorial for?
 
 This tutorial is created for students and researchers new to climate
-econometrics. However, it assumes a knowledge of panel econometrics. You
+econometrics. However, it assumes a knowledge of panel econometric methods. You
 should be familiar with specifications that factor-out unobserved
-heterogeneity, implementing flexible trends, weighted regressions,
+heterogeneity, flexible trends, weighted regressions,
 approaches to deal with heteroskedasticity and correlated errors, and
-diagnosing efficiency problems. Some concepts in panel econometrics
+diagnostics for efficiency problems. Some concepts in panel econometrics
 are more specific to weather regressions, such as dose-response
 curves, data-generating processes, and neighborhood effects, and we
 will cover those in this tutorial.
 
 We also assume basic experience with one scientific programming
-language (Stata, R, Matlab, Julia, Python). In most examples, we provide code snippets in more than one programming language, so you can get started.
+language (Stata, R, Python, Matlab, Julia). In most examples, we provide code snippets in more than one programming language, so you can get started.
 
 You should also already have a research question. There are plenty of
 ways to find important questions, and maybe we will try to offer a
@@ -71,12 +71,20 @@ tutorial is aimed at helping you do that.
 The tutorial is organized along the rough outline of a research
 project: 
 
-1. *Using weather and climate data*: introduces the data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.
+1. *Weather and climate data*: introduces environmental data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.
 2. *Developing a reduced-form specification*: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.
-3. *Weighting schemes*: explains the importance of weighting schemes and how to work with them based on their file formats and origins. 
-4. *Generating geographical unit data*: introduces geographic information systems, shapefiles, and how to work with them effectively.
+3. *Geographical unit data*: introduces geographic information
+   systems, shapefiles, and how to work with them effectively, and explains the importance of weighting schemes and how to work with them based on their file formats and origins. 
+4. *Bringing it all together*: offers a range of suggestions for
+   organizing your work and producing final results.
 
-You can go through the sections one at a time or reference them independently.
+You can go through the sections one at a time or reference them
+independently.
+
+We also include a Hands-On Exercise, which takes you through each of
+these steps, from collecting data to producing a final weather
+relationship. Please note that this is just one example, and not a
+template for other research projects.
 
 Most importantly, if you learn something in your own research process
 that you think would be of broad interest, see [the contributor's guide](https://github.com/atrisovic/weather-panel.github.io) for how to include it here. Help us make this tutorial more
@@ -84,19 +92,23 @@ useful for more people!
 
 # Useful introductory resources
 
+Here are some resources to read to understand climate
+econometrics. This tutorial is a kind of practical counterpart to
+these excellent documents.
+
 📚  [An Economist’s Guide to Climate Change Science](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3)
 : is a useful resource to better understand the basics of weather, climate,
 and the physical changes occurring in the climate system. If
 you have not had experience with climate (or meteorological) science,
 that is a great place to start. 
 
-📚  Check out the [Encyclopedia of Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf)
-: for a more general introduction to the sciences of climate and climate change.
-
 📚  [Climate Econometrics](https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343) by Solomon Hsiang
 : gives a theoretical foundation for the work of estimating weather and
 climate responses. This tutorial complements the theoretical
 foundation with more practical advice.
+
+📚  Check out the [Encyclopedia of Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf)
+: for a more general introduction to the sciences of climate and climate change.
 
 ## Definitions and conventions
 
@@ -111,20 +123,21 @@ forms:
    a weather station or gauge. For socioeconomic data, it may be a
    field, factory, or household.
 2. Region data describes an aggregate over an irregular space. Typical
-   natural science regions include basins and water/land bodies. But
-   economic region data is much more common, where quantities are
-   totaled across an entire political unit before they are
-   reported. The region over which a data point is provided is the
-   geographic unit.
+   natural science regions include basins and water/land bodies.
+   Economic region data is much more common though, where quantities
+   are totaled across an entire political unit before they are
+   reported. The region over which a data observation is provided is
+   called its geographic unit.
 3. Gridded data provides information on a regular grid, almost always
-   either across latitude and longitude, or distance north and
-   east. Gridded data can come from remote sensing products or other
-   models or analyses. In the latter case, it often is not clear
-   exactly what is being measured (e.g., the point data at the
-   centroid, or the average over a rectangular region). Keeping
-   information at a high resolution is important to avoid misusing such data.
+   either across latitude and longitude, but sometimes as distance
+   north and east from a fixed point. Gridded data can come from
+   remote sensing products or other models or analyses. In the latter
+   case, it often is not clear exactly what is being measured (e.g.,
+   the point data at the grid center, or some kind of average over a
+   rectangular region). Keeping information at a high resolution is
+   important to avoid misusing such data.
    
-It is always appropriate to analyze data in the spatial structure it
+It is usually preferable to analyze data in the spatial structure it
 is offered, even if translating it to another structure would be
 easier. We will discuss this more later.
 
@@ -136,3 +149,7 @@ variables irrespective of the represented specific data, which is why we introdu
 - $T_{it}$: Any weather variable for geographic unit $i$ in reporting period $t$.
 - $T_{ps}$: Point or grid-level weather data for location/grid cell
   $p$, at a native temporal resolution indexed by $s$.
+
+For example, we will discuss how to translate gridded data ($T_{ps}$)
+into regional data ($T_{it}$). Although we use the variable name $T$
+here, the methods are not specific to temperature, unless so specified.
