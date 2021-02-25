@@ -372,16 +372,16 @@ aimed at helping you make decisions appropriate to your research.</p>
 <div class="section" id="who-is-this-tutorial-for">
 <h1>Who is this tutorial for?<a class="headerlink" href="#who-is-this-tutorial-for" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial is created for students and researchers new to climate
-econometrics. However, it assumes a knowledge of panel econometrics. You
+econometrics. However, it assumes a knowledge of panel econometric methods. You
 should be familiar with specifications that factor-out unobserved
-heterogeneity, implementing flexible trends, weighted regressions,
+heterogeneity, flexible trends, weighted regressions,
 approaches to deal with heteroskedasticity and correlated errors, and
-diagnosing efficiency problems. Some concepts in panel econometrics
+diagnostics for efficiency problems. Some concepts in panel econometrics
 are more specific to weather regressions, such as dose-response
 curves, data-generating processes, and neighborhood effects, and we
 will cover those in this tutorial.</p>
 <p>We also assume basic experience with one scientific programming
-language (Stata, R, Matlab, Julia, Python). In most examples, we provide code snippets in more than one programming language, so you can get started.</p>
+language (Stata, R, Python, Matlab, Julia). In most examples, we provide code snippets in more than one programming language, so you can get started.</p>
 <p>You should also already have a research question. There are plenty of
 ways to find important questions, and maybe we will try to offer a
 tutorial on that in the future.</p>
@@ -408,29 +408,39 @@ tutorial is aimed at helping you do that.</p>
 <p>The tutorial is organized along the rough outline of a research
 project:</p>
 <ol class="simple">
-<li><p><em>Using weather and climate data</em>: introduces the data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.</p></li>
+<li><p><em>Weather and climate data</em>: introduces environmental data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.</p></li>
 <li><p><em>Developing a reduced-form specification</em>: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.</p></li>
-<li><p><em>Weighting schemes</em>: explains the importance of weighting schemes and how to work with them based on their file formats and origins.</p></li>
-<li><p><em>Generating geographical unit data</em>: introduces geographic information systems, shapefiles, and how to work with them effectively.</p></li>
+<li><p><em>Geographical unit data</em>: introduces geographic information
+systems, shapefiles, and how to work with them effectively, and explains the importance of weighting schemes and how to work with them based on their file formats and origins.</p></li>
+<li><p><em>Bringing it all together</em>: offers a range of suggestions for
+organizing your work and producing final results.</p></li>
 </ol>
-<p>You can go through the sections one at a time or reference them independently.</p>
+<p>You can go through the sections one at a time or reference them
+independently.</p>
+<p>We also include a Hands-On Exercise, which takes you through each of
+these steps, from collecting data to producing a final weather
+relationship. Please note that this is just one example, and not a
+template for other research projects.</p>
 <p>Most importantly, if you learn something in your own research process
 that you think would be of broad interest, see <a class="reference external" href="https://github.com/atrisovic/weather-panel.github.io">the contributor’s guide</a> for how to include it here. Help us make this tutorial more
 useful for more people!</p>
 </div>
 <div class="section" id="useful-introductory-resources">
 <h1>Useful introductory resources<a class="headerlink" href="#useful-introductory-resources" title="Permalink to this headline">¶</a></h1>
+<p>Here are some resources to read to understand climate
+econometrics. This tutorial is a kind of practical counterpart to
+these excellent documents.</p>
 <dl class="simple myst">
 <dt>📚  <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/jep.32.4.3">An Economist’s Guide to Climate Change Science</a></dt><dd><p>is a useful resource to better understand the basics of weather, climate,
 and the physical changes occurring in the climate system. If
 you have not had experience with climate (or meteorological) science,
 that is a great place to start.</p>
 </dd>
-<dt>📚  Check out the <a class="reference external" href="https://editors.eol.org/eoearth/wiki/Weather_%26_Climate">Encyclopedia of Earth</a> and the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf">IPCC WGI report</a></dt><dd><p>for a more general introduction to the sciences of climate and climate change.</p>
-</dd>
 <dt>📚  <a class="reference external" href="https://www.annualreviews.org/doi/10.1146/annurev-resource-100815-095343">Climate Econometrics</a> by Solomon Hsiang</dt><dd><p>gives a theoretical foundation for the work of estimating weather and
 climate responses. This tutorial complements the theoretical
 foundation with more practical advice.</p>
+</dd>
+<dt>📚  Check out the <a class="reference external" href="https://editors.eol.org/eoearth/wiki/Weather_%26_Climate">Encyclopedia of Earth</a> and the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf">IPCC WGI report</a></dt><dd><p>for a more general introduction to the sciences of climate and climate change.</p>
 </dd>
 </dl>
 <div class="section" id="definitions-and-conventions">
@@ -446,20 +456,21 @@ point in space. For weather data, this is typically the location of
 a weather station or gauge. For socioeconomic data, it may be a
 field, factory, or household.</p></li>
 <li><p>Region data describes an aggregate over an irregular space. Typical
-natural science regions include basins and water/land bodies. But
-economic region data is much more common, where quantities are
-totaled across an entire political unit before they are
-reported. The region over which a data point is provided is the
-geographic unit.</p></li>
+natural science regions include basins and water/land bodies.
+Economic region data is much more common though, where quantities
+are totaled across an entire political unit before they are
+reported. The region over which a data observation is provided is
+called its geographic unit.</p></li>
 <li><p>Gridded data provides information on a regular grid, almost always
-either across latitude and longitude, or distance north and
-east. Gridded data can come from remote sensing products or other
-models or analyses. In the latter case, it often is not clear
-exactly what is being measured (e.g., the point data at the
-centroid, or the average over a rectangular region). Keeping
-information at a high resolution is important to avoid misusing such data.</p></li>
+either across latitude and longitude, but sometimes as distance
+north and east from a fixed point. Gridded data can come from
+remote sensing products or other models or analyses. In the latter
+case, it often is not clear exactly what is being measured (e.g.,
+the point data at the grid center, or some kind of average over a
+rectangular region). Keeping information at a high resolution is
+important to avoid misusing such data.</p></li>
 </ol>
-<p>It is always appropriate to analyze data in the spatial structure it
+<p>It is usually preferable to analyze data in the spatial structure it
 is offered, even if translating it to another structure would be
 easier. We will discuss this more later.</p>
 </div>
@@ -472,6 +483,9 @@ variables irrespective of the represented specific data, which is why we introdu
 <li><p><span class="math notranslate nohighlight">\(T_{ps}\)</span>: Point or grid-level weather data for location/grid cell
 <span class="math notranslate nohighlight">\(p\)</span>, at a native temporal resolution indexed by <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
 </ul>
+<p>For example, we will discuss how to translate gridded data (<span class="math notranslate nohighlight">\(T_{ps}\)</span>)
+into regional data (<span class="math notranslate nohighlight">\(T_{it}\)</span>). Although we use the variable name <span class="math notranslate nohighlight">\(T\)</span>
+here, the methods are not specific to temperature, unless so specified.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
