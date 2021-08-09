@@ -26,7 +26,7 @@ ipython==7.19.0
 ipython-genutils==0.2.0
 ipywidgets==7.5.1
 jedi==0.17.2
-Jinja2==2.11.2
+Jinja2==2.11.3
 jsonschema==3.2.0
 jupyter-book==0.8.3
 jupyter-cache==0.4.1
@@ -58,12 +58,12 @@ pybtex==0.23.0
 pybtex-docutils==0.2.2
 pycparser==2.20
 pydata-sphinx-theme==0.4.1
-Pygments==2.7.2
+Pygments==2.7.4
 pyparsing==2.4.7
 pyrsistent==0.17.3
 python-dateutil==2.8.1
 pytz==2020.4
-PyYAML==5.3.1
+PyYAML==5.4
 pyzmq==19.0.2
 requests==2.25.0
 Send2Trash==1.5.0
@@ -90,7 +90,7 @@ terminado==0.9.1
 testpath==0.4.4
 tornado==6.1
 traitlets==5.0.5
-urllib3==1.26.1
+urllib3==1.26.5
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
