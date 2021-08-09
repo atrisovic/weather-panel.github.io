@@ -44,7 +44,7 @@ For corresponding code in R, see <https://github.com/darinchristensen/conley-se>
 
 ## Plotting dose-response functions
 
-Regressino results are always relative to some baseline, and for
+Regression results are always relative to some baseline, and for
 dose-response functions, that baseline is often defined as a
 particular value of the weather variable (e.g., a day at 20 C). At
 this same point, the standard errors go to 0 (if there are no other
@@ -55,3 +55,4 @@ plotting a quadratic in temperature relative to 20 C, define your
 linear term as $T-20^\circ C$ and your quadratic term as $T^2 -
 (20^\circ C)^2$.
 
+See Step 4 of the Hands-On Exercise for an example.
