@@ -1,12 +1,10 @@
 '''
 Creates a monthly temparature time series for a global average
-temperature, using of all Berkeley region data per time index. The
-average is of the temperature absolute value, the anomaly plus the
-base value for a time/region.  Missing data is interpolated using
-Pandas interpolate(). Data is from http://berkeleyearth.org/data/, see
-"Monthly Land" under the Gridded section, and use the "Equal Area"
-data file.
-
+land temperature, using of all Berkeley region data per time
+index. Missing data is interpolated using Pandas interpolate(). Data
+is from http://berkeleyearth.org/data/, see "Monthly Land" under the
+Gridded section, and use the "Equal Area" data file. The script will
+also work on Land+Sea file. 
 '''
 import pandas as pd, gc, netCDF4, psutil 
 import csv, numpy as np
