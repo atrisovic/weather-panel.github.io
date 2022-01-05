@@ -21,6 +21,10 @@ When using weather data as independent variables in an economic model, or climat
 - There is no universally *right* or *correct* weather or climate data product.
 - Every weather or climate data product has its use cases, limitations, uncertainties, and quirks.
 
+```{seealso}
+[Auffhammer et al. (2013)](https://core.ac.uk/download/pdf/189626825.pdf) provide an excellent discussion of the challenges to consider when using weather data in econometric studies.
+```
+
 ## The NetCDF Data Format
 
 We start this section with a guide to the [NetCDF](https://climatedataguide.ucar.edu/climate-data-tools-and-analysis/NetCDF-overview) format, a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It's efficient, self-describing, and supported in major programming languages, though you’ll have to pre-process data into another format (`.csv`, etc.) before you can use it in STATA. If you get familiar with the commands to read the header and access data in the language you’re most comfortable with, you will be able to work with most existing climate or weather datasets.
