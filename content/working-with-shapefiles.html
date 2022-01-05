@@ -341,21 +341,21 @@ about the order of the entries, and order the columns of <span class="math notra
 same way.</p></li>
 </ol>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f17a7e21-8d76-458a-8d7c-3e2e6f4e103e" name="479a92bb-9591-4848-8d57-441ddf152af9" type="radio">
-</input><label class="tabbed-label" for="f17a7e21-8d76-458a-8d7c-3e2e6f4e103e">
+<input checked="checked" id="4cd46104-75c6-426b-9161-0d097c1fc7cf" name="228a6f87-4f31-42d0-b688-093577dbe940" type="radio">
+</input><label class="tabbed-label" for="4cd46104-75c6-426b-9161-0d097c1fc7cf">
 R</label><div class="tabbed-content docutils">
 <p>In R, <code class="docutils literal notranslate"><span class="pre">as.vector</span></code> will convert from a matrix to a vector, with each
 <em>column</em> being listed in full before moving on to the next column.</p>
 </div>
-<input id="5cf7c738-ef08-4ef0-b915-a675b55390e6" name="479a92bb-9591-4848-8d57-441ddf152af9" type="radio">
-</input><label class="tabbed-label" for="5cf7c738-ef08-4ef0-b915-a675b55390e6">
+<input id="32cdd818-9318-4bfb-8a96-fb8ac1c16506" name="228a6f87-4f31-42d0-b688-093577dbe940" type="radio">
+</input><label class="tabbed-label" for="32cdd818-9318-4bfb-8a96-fb8ac1c16506">
 Python</label><div class="tabbed-content docutils">
 <p>In python, <code class="docutils literal notranslate"><span class="pre">numpy.flatten</span></code> will convert a numpy matrix to a vector,
 with each <em>row</em> being listed in full before moving on to the next
 row.</p>
 </div>
-<input id="baedec1e-efdf-4283-bdf3-cda3084e69e9" name="479a92bb-9591-4848-8d57-441ddf152af9" type="radio">
-</input><label class="tabbed-label" for="baedec1e-efdf-4283-bdf3-cda3084e69e9">
+<input id="fd55b3dd-06bd-4083-b91a-f4e69259a7af" name="228a6f87-4f31-42d0-b688-093577dbe940" type="radio">
+</input><label class="tabbed-label" for="fd55b3dd-06bd-4083-b91a-f4e69259a7af">
 Matlab</label><div class="tabbed-content docutils">
 <p>In Matlab, indexing the grid with <code class="docutils literal notranslate"><span class="pre">(:)</span></code> will convert from an array
 to a vector, with each <em>column</em> being listed in full before moving
@@ -370,8 +370,8 @@ cell. This approach can be used without generating an <span class="math notransl
 but the matrix method improves efficiency.</p>
 <p>As an example, in R, you generate these points like so:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="3d419373-7544-4c00-bed5-148d301fb59d" name="1a4cd78d-ef65-4e0a-bea4-67a40ff07d54" type="radio">
-</input><label class="tabbed-label" for="3d419373-7544-4c00-bed5-148d301fb59d">
+<input checked="checked" id="0f458ed1-3128-4306-80b0-af61fdcf2528" name="d728e98d-e83c-4dd5-83d9-497680af55e1" type="radio">
+</input><label class="tabbed-label" for="0f458ed1-3128-4306-80b0-af61fdcf2528">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">longitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
 <span class="n">latitudes</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
@@ -384,8 +384,8 @@ R</label><div class="tabbed-content docutils">
 points within each region. Here’s how you would do that with the
 <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code> library in R:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e2743484-cade-4692-85c8-ed17f575293e" name="d104a603-b5b7-4156-b8dc-b285a87af080" type="radio">
-</input><label class="tabbed-label" for="e2743484-cade-4692-85c8-ed17f575293e">
+<input checked="checked" id="e8df9d20-a55d-47cc-990f-4240c13daafa" name="a25d81f7-99f9-4bf6-8660-870dd9c37c67" type="radio">
+</input><label class="tabbed-label" for="e8df9d20-a55d-47cc-990f-4240c13daafa">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span> <span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
 <span class="n">events</span> <span class="o">&lt;-</span> <span class="nf">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span>
@@ -401,8 +401,8 @@ fill in the entries of your transformation matrix.</p>
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f2c0cbbd-c9d8-48e5-81a4-445e1ed9859f" name="c19eb25d-0de9-42b7-8fee-7f298ba78532" type="radio">
-</input><label class="tabbed-label" for="f2c0cbbd-c9d8-48e5-81a4-445e1ed9859f">
+<input checked="checked" id="26b488ad-ff4e-471d-93f3-260e4638fb99" name="f53688db-6838-497f-a73f-2029a670bf51" type="radio">
+</input><label class="tabbed-label" for="26b488ad-ff4e-471d-93f3-260e4638fb99">
 R</label><div class="tabbed-content docutils">
 <p>For example, in R, using <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">centroid</span> <span class="o">&lt;-</span> <span class="nf">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span> <span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
