@@ -19,7 +19,7 @@ This section describes some of the considerations that go into
 developing a [reduced-form specification](https://stats.stackexchange.com/questions/86004/what-is-simply-meant-by-reduced-form) using weather [panel data](https://en.wikipedia.org/wiki/Panel_data). Our discussion here will be very practical and limited to non-linear panel regressions. 
 
 ```{seealso}
-See also [Estimating the Economic Impacts of Climate Change Using Weather Observations](https://academic.oup.com/reep/article/14/1/1/5718007) for a review of the available econometric techniques and their strengths and weaknesses.  For an extensive review of the results available from
+See also [Estimating the Economic Impacts of Climate Change Using Weather Observations](https://www.journals.uchicago.edu/doi/abs/10.1093/reep/rez024?journalCode=reep) for a review of the available econometric techniques and their strengths and weaknesses.  [Climate Econometrics](https://www.annualreviews.org/doi/pdf/10.1146/annurev-resource-100815-095343) provide a strong theory-first introduction to the issues implicit in climate econometrics methods. For an extensive review of the results available from
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is [Social and Economic Impacts of Climate](http://science.sciencemag.org/content/353/6304/aad9837).
 ```
