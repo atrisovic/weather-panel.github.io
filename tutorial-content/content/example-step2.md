@@ -39,6 +39,9 @@ World, since the weather data is not very high resolution. Download it
 from
 <https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count>.
 
+The code below assumes that you download the global population count
+grid as a `.bil` format at 2.5' resolution for 1990.
+
 This is global data, so it will be useful to clip it to the US and
 aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
