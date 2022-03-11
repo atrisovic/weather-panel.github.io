@@ -353,13 +353,15 @@ variables, for the linear and quadratic terms relative to 20 C.</p>
 World, since the weather data is not very high resolution. Download it
 from
 <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count">https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count</a>.</p>
+<p>The code below assumes that you download the global population count
+grid as a <code class="docutils literal notranslate"><span class="pre">.bil</span></code> format at 2.5’ resolution for 1990.</p>
 <p>This is global data, so it will be useful to clip it to the US and
 aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
 being run from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b7f8bf0f-109e-44c6-8f7a-84fcf354d3d2" name="102e7b56-a087-49c4-b48c-522f78da1fd9" type="radio">
-</input><label class="tabbed-label" for="b7f8bf0f-109e-44c6-8f7a-84fcf354d3d2">
+<input checked="checked" id="b9f40076-186c-4d77-bb90-7c0afbc035c0" name="c5daec81-cefb-459c-b03c-8aefb289301e" type="radio">
+</input><label class="tabbed-label" for="b9f40076-186c-4d77-bb90-7c0afbc035c0">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
@@ -373,8 +375,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="1022ae60-4cfc-4c54-9a37-98b7dd2ff272" name="102e7b56-a087-49c4-b48c-522f78da1fd9" type="radio">
-</input><label class="tabbed-label" for="1022ae60-4cfc-4c54-9a37-98b7dd2ff272">
+<input id="b7f2d591-7741-4134-ab57-96a045e2e9ef" name="c5daec81-cefb-459c-b03c-8aefb289301e" type="radio">
+</input><label class="tabbed-label" for="b7f2d591-7741-4134-ab57-96a045e2e9ef">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rasterio # will work in Jupyter Notebook</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -436,8 +438,8 @@ on).</p>
 <p>Here we sum across all races and ages and merge the mortality and
 population data.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="bd25cd15-7181-42d6-bd3c-aa1846900978" name="53bade84-f7e2-408d-ae15-17620002ccb8" type="radio">
-</input><label class="tabbed-label" for="bd25cd15-7181-42d6-bd3c-aa1846900978">
+<input checked="checked" id="9d26145f-89c2-4cd5-b148-8cf62f58a916" name="5ac0dad9-dc10-4a9e-a648-32334c92a84a" type="radio">
+</input><label class="tabbed-label" for="9d26145f-89c2-4cd5-b148-8cf62f58a916">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
@@ -463,8 +465,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="faeca51a-e478-4a1d-8d69-c4682716b67c" name="53bade84-f7e2-408d-ae15-17620002ccb8" type="radio">
-</input><label class="tabbed-label" for="faeca51a-e478-4a1d-8d69-c4682716b67c">
+<input id="80f44a91-a75a-4f7c-b90f-91c98ee6e38f" name="5ac0dad9-dc10-4a9e-a648-32334c92a84a" type="radio">
+</input><label class="tabbed-label" for="80f44a91-a75a-4f7c-b90f-91c98ee6e38f">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">df_mort</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>
