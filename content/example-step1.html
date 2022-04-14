@@ -350,8 +350,8 @@ it (the code) is stored in a file (call it <code class="docutils literal notrans
 <code class="docutils literal notranslate"><span class="pre">preprocess_best.py</span></code>) in a directory <code class="docutils literal notranslate"><span class="pre">code/</span></code>, a sister to the <code class="docutils literal notranslate"><span class="pre">data/</span></code>
 directory.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b4dae7a8-e918-4baa-8a26-56fd0f2bdcc2" name="18305f1f-f51f-449e-a50e-09c1c0005846" type="radio">
-</input><label class="tabbed-label" for="b4dae7a8-e918-4baa-8a26-56fd0f2bdcc2">
+<input checked="checked" id="207f9cb8-4b6b-4915-9287-477dedf0e4f9" name="6f1d150f-0752-41a8-a8f3-555460cad901" type="radio">
+</input><label class="tabbed-label" for="207f9cb8-4b6b-4915-9287-477dedf0e4f9">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
 
@@ -361,8 +361,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="8622ca2d-9f8a-4f9d-812a-3a96ce5e1f56" name="18305f1f-f51f-449e-a50e-09c1c0005846" type="radio">
-</input><label class="tabbed-label" for="8622ca2d-9f8a-4f9d-812a-3a96ce5e1f56">
+<input id="c95b6cd3-ddc0-4e70-9454-cac1d002a323" name="6f1d150f-0752-41a8-a8f3-555460cad901" type="radio">
+</input><label class="tabbed-label" for="c95b6cd3-ddc0-4e70-9454-cac1d002a323">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -377,8 +377,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="bbf3c55c-2707-42d3-acc7-ca1b814ec1a4" name="18305f1f-f51f-449e-a50e-09c1c0005846" type="radio">
-</input><label class="tabbed-label" for="bbf3c55c-2707-42d3-acc7-ca1b814ec1a4">
+<input id="25156906-dfef-48d0-a581-72be0e432965" name="6f1d150f-0752-41a8-a8f3-555460cad901" type="radio">
+</input><label class="tabbed-label" for="25156906-dfef-48d0-a581-72be0e432965">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/&#39;</span><span class="p">;</span>
 <span class="n">filename</span> <span class="p">=</span> <span class="s">&#39;Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">;</span>
@@ -408,8 +408,8 @@ accounts for days 1:365 of the year, and ignores leap days (which the
 for Feb 28th to also work on Feb 29th, and creates a <code class="docutils literal notranslate"><span class="pre">tas</span></code> variable
 that’s the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> + <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="2150f538-c94f-4ebd-8a5e-dca9ef2a99d7" name="75ecad76-6f1e-4654-942c-30e182c09fdb" type="radio">
-</input><label class="tabbed-label" for="2150f538-c94f-4ebd-8a5e-dca9ef2a99d7">
+<input checked="checked" id="d1b84557-4233-487b-b74a-46ed79f634a9" name="8477f6a3-8103-4567-8352-5cc96ae74243" type="radio">
+</input><label class="tabbed-label" for="d1b84557-4233-487b-b74a-46ed79f634a9">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">doy</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&#39;day_of_year&#39;</span><span class="p">)</span>
 <span class="n">tas.anom</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&#39;temperature&#39;</span><span class="p">)</span>
@@ -420,8 +420,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d285e1a9-cf2c-46f3-bbbf-acff0d038739" name="75ecad76-6f1e-4654-942c-30e182c09fdb" type="radio">
-</input><label class="tabbed-label" for="d285e1a9-cf2c-46f3-bbbf-acff0d038739">
+<input id="3d69a6fc-38d6-4285-b6e7-42429fa17d2d" name="8477f6a3-8103-4567-8352-5cc96ae74243" type="radio">
+</input><label class="tabbed-label" for="3d69a6fc-38d6-4285-b6e7-42429fa17d2d">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calendar</span>
 
@@ -446,8 +446,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c443710f-94a0-4259-8928-30605e7de0af" name="75ecad76-6f1e-4654-942c-30e182c09fdb" type="radio">
-</input><label class="tabbed-label" for="c443710f-94a0-4259-8928-30605e7de0af">
+<input id="28c72f9c-6781-424d-9b5b-1cf837e67092" name="8477f6a3-8103-4567-8352-5cc96ae74243" type="radio">
+</input><label class="tabbed-label" for="28c72f9c-6781-424d-9b5b-1cf837e67092">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% BEST data is given in terms of anomalies from the underlying</span>
 <span class="c">% climatology. So, the climatology has to be loaded first.</span>
@@ -465,8 +465,8 @@ Matlab</label><div class="tabbed-content docutils">
 the process.</p>
 <p>Using the extreme points of the continental United States (see e.g., <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States">here</a>) + 1 degree of wiggle room.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7d32b2bf-c398-4592-8685-9ff1a2a5c00d" name="cdd1df75-1df9-4329-89e6-0ed7eef7b32a" type="radio">
-</input><label class="tabbed-label" for="7d32b2bf-c398-4592-8685-9ff1a2a5c00d">
+<input checked="checked" id="264cb8ce-2972-45a1-9d81-c4927d2c5658" name="56617071-0182-4bb8-818b-60998d1496c0" type="radio">
+</input><label class="tabbed-label" for="264cb8ce-2972-45a1-9d81-c4927d2c5658">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">longitude</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&#39;longitude&#39;</span><span class="p">)</span>
 <span class="n">latitude</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&#39;latitude&#39;</span><span class="p">)</span>
@@ -478,8 +478,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="8edc1b30-0bda-4942-b384-0c6cb421bf4b" name="cdd1df75-1df9-4329-89e6-0ed7eef7b32a" type="radio">
-</input><label class="tabbed-label" for="8edc1b30-0bda-4942-b384-0c6cb421bf4b">
+<input id="bdee709e-061a-4340-8a67-1d05420f6508" name="56617071-0182-4bb8-818b-60998d1496c0" type="radio">
+</input><label class="tabbed-label" for="bdee709e-061a-4340-8a67-1d05420f6508">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">],</span><span class="s1">&#39;lon&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">]}</span>
 
@@ -487,8 +487,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="83aa7a04-98d4-4fdc-8be5-4b937262af5b" name="cdd1df75-1df9-4329-89e6-0ed7eef7b32a" type="radio">
-</input><label class="tabbed-label" for="83aa7a04-98d4-4fdc-8be5-4b937262af5b">
+<input id="8ee7392b-fe49-4fd0-921b-a06a0c65541c" name="56617071-0182-4bb8-818b-60998d1496c0" type="radio">
+</input><label class="tabbed-label" for="8ee7392b-fe49-4fd0-921b-a06a0c65541c">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;latitude&#39;</span><span class="p">);</span>
 <span class="n">lon</span> <span class="p">=</span> <span class="n">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;longitude&#39;</span><span class="p">);</span>
@@ -511,8 +511,8 @@ Matlab</label><div class="tabbed-content docutils">
 future processing. We make some changes in the process to conform to
 the standards used in CMIP5 datasets.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="905cdf3b-efa6-4b56-8192-8b5fde9224cf" name="bc03d1ab-138a-4687-916f-109cc80de28f" type="radio">
-</input><label class="tabbed-label" for="905cdf3b-efa6-4b56-8192-8b5fde9224cf">
+<input checked="checked" id="85266024-0215-4cda-ad60-7c88a04eeab4" name="b1f32716-cceb-4e66-9543-ae9c92046f7a" type="radio">
+</input><label class="tabbed-label" for="85266024-0215-4cda-ad60-7c88a04eeab4">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">dimlon</span> <span class="o">&lt;-</span> <span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lon&quot;</span><span class="p">,</span> <span class="s">&quot;degrees_east&quot;</span><span class="p">,</span> <span class="n">longitude</span><span class="p">[</span><span class="n">longitude</span> <span class="o">&gt;=</span> <span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span> <span class="n">longname</span><span class="o">=</span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
 <span class="n">dimlat</span> <span class="o">&lt;-</span> <span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span> <span class="s">&quot;degrees_north&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="p">[</span><span class="n">latitude</span> <span class="o">&gt;=</span> <span class="n">latlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="n">latlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span> <span class="n">longname</span><span class="o">=</span><span class="s">&#39;latitude&#39;</span><span class="p">)</span>
@@ -526,8 +526,8 @@ R</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="90b73b15-6bfc-4a53-9963-e64daae8ba59" name="bc03d1ab-138a-4687-916f-109cc80de28f" type="radio">
-</input><label class="tabbed-label" for="90b73b15-6bfc-4a53-9963-e64daae8ba59">
+<input id="dbcd769d-15aa-497c-8dd8-5fe37a4bd2e9" name="b1f32716-cceb-4e66-9543-ae9c92046f7a" type="radio">
+</input><label class="tabbed-label" for="dbcd769d-15aa-497c-8dd8-5fe37a4bd2e9">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
 
@@ -540,8 +540,8 @@ Python</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e3284b85-bf5e-43a0-b45b-f5c419db849d" name="bc03d1ab-138a-4687-916f-109cc80de28f" type="radio">
-</input><label class="tabbed-label" for="e3284b85-bf5e-43a0-b45b-f5c419db849d">
+<input id="f6fe9bcb-e721-4fed-85e6-bb038ae4e59b" name="b1f32716-cceb-4e66-9543-ae9c92046f7a" type="radio">
+</input><label class="tabbed-label" for="f6fe9bcb-e721-4fed-85e6-bb038ae4e59b">
 Matlab</label><div class="tabbed-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename</span>
 <span class="n">fn_out</span> <span class="p">=</span> <span class="s">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>

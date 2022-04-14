@@ -352,8 +352,8 @@ following code should be run from the <code class="docutils literal notranslate"
 <h2>Setting up the environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this headline">¶</a></h2>
 <p>The approach uses <code class="docutils literal notranslate"><span class="pre">xarray</span></code> for gridded data, <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> to work with shapefiles, and <code class="docutils literal notranslate"><span class="pre">xagg</span></code> to aggregate gridded data onto shapefiles.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f470b985-ac27-4dc3-8cf5-2d22dda0252d" name="70037814-ac95-46d2-858a-5be0a8cb5c08" type="radio">
-</input><label class="tabbed-label" for="f470b985-ac27-4dc3-8cf5-2d22dda0252d">
+<input checked="checked" id="fa64db89-eaa3-4b11-9be3-82c26b9b3225" name="0281808e-05ca-47c3-9096-4e5034d1d875" type="radio">
+</input><label class="tabbed-label" for="fa64db89-eaa3-4b11-9be3-82c26b9b3225">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
@@ -365,8 +365,8 @@ Python</label><div class="tabbed-content docutils">
 </div>
 <p>First, load the data from the previous steps:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b28a4ec6-cb8b-4aa3-99de-d422b55c28ce" name="4e8c9769-ea6f-42a3-9fb7-842efd7ea57a" type="radio">
-</input><label class="tabbed-label" for="b28a4ec6-cb8b-4aa3-99de-d422b55c28ce">
+<input checked="checked" id="0cd2fe6c-4df3-40d2-a099-4d6e60dacca9" name="faf72614-a53c-4d6e-9a3e-83a74e5e94f7" type="radio">
+</input><label class="tabbed-label" for="0cd2fe6c-4df3-40d2-a099-4d6e60dacca9">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load temperature data using xarray</span>
 <span class="n">ds_tas</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
@@ -387,8 +387,8 @@ Python</label><div class="tabbed-content docutils">
 <p>Next, we need to construct any nonlinear transformations of the data.</p>
 <p>For our econometric model, we want temperature in both linear and quadratic form, centered around <span class="math notranslate nohighlight">\(20^\circ\)</span> C: <span class="math notranslate nohighlight">\(T-20^\circ C\)</span> and <span class="math notranslate nohighlight">\(T^2 - (20^\circ C)^2\)</span>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="755fc8de-b9c1-40dd-8c83-8e05e6f24947" name="9fbc86bc-f6d1-4f61-a647-dcb0aa2ca584" type="radio">
-</input><label class="tabbed-label" for="755fc8de-b9c1-40dd-8c83-8e05e6f24947">
+<input checked="checked" id="001f066e-c3e1-41c0-a98e-0f7029e6d27c" name="b53619bc-12cb-4afb-ac87-69259fdfde2e" type="radio">
+</input><label class="tabbed-label" for="001f066e-c3e1-41c0-a98e-0f7029e6d27c">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_tas</span><span class="p">[</span><span class="s1">&#39;tas_adj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">tas</span><span class="o">-</span><span class="mi">20</span>
 <span class="n">ds_tas</span><span class="p">[</span><span class="s1">&#39;tas_sq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">tas</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="o">**</span><span class="mi">2</span>
@@ -412,8 +412,8 @@ dataset, taking the intersect between each county polygon and all
 pixel polygons, and calculating the average area of overlap between
 the pixels that touch the polygon and the polygon.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5295f8c2-7c02-494b-a36f-48786c12c7a0" name="15cdd85c-2b49-43ef-9fb8-85d148099f26" type="radio">
-</input><label class="tabbed-label" for="5295f8c2-7c02-494b-a36f-48786c12c7a0">
+<input checked="checked" id="a064bdcc-65f4-45b1-bb69-1bab39bb9c31" name="29c58d4d-ba21-4ae4-889c-95bd96919fed" type="radio">
+</input><label class="tabbed-label" for="a064bdcc-65f4-45b1-bb69-1bab39bb9c31">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weightmap</span> <span class="o">=</span>
 <span class="n">xa</span><span class="o">.</span><span class="n">pixel_overlaps</span><span class="p">(</span><span class="n">ds_tas</span><span class="p">,</span><span class="n">gdf_counties</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="n">ds_pop</span><span class="o">.</span><span class="n">Population</span><span class="p">,</span><span class="n">subset_bbox</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -427,8 +427,8 @@ Python</label><div class="tabbed-content docutils">
 <p>Using the weight map calculated above, <code class="docutils literal notranslate"><span class="pre">xagg</span></code> now aggregates all the gridded variables in <code class="docutils literal notranslate"><span class="pre">ds_tas</span></code> (the <code class="docutils literal notranslate"><span class="pre">tas_adj</span></code> and <code class="docutils literal notranslate"><span class="pre">tas_sq</span></code> we calculated above) onto the county polygons. For each county, the weighted average of the temperatures of the pixels that cover the county is calculated. Since we included population as a desired weight above, the weight for each pixel is a combination of how much of the pixel overlaps with the county and its population density. In other words, a pixel that covers more of a county and has a higher population density will be weighted more in that county’s temperature average than a pixel that covers less of a county and is more sparsely populated.</p>
 <p>The output of this function now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="422c203f-2674-424b-9226-9c9e7758bd16" name="c0ad955b-899a-4dba-9b46-81fc32dc76ab" type="radio">
-</input><label class="tabbed-label" for="422c203f-2674-424b-9226-9c9e7758bd16">
+<input checked="checked" id="515ddc7d-6681-49ee-8470-2ebe624e507e" name="05697291-f64f-41de-93a1-24193d524f07" type="radio">
+</input><label class="tabbed-label" for="515ddc7d-6681-49ee-8470-2ebe624e507e">
 Python</label><div class="tabbed-content docutils">
 <p><code class="docutils literal notranslate"><span class="pre">aggregated</span></code> is an object specific to the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> package. We need to modify it to be usable, for example using <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or <code class="docutils literal notranslate"><span class="pre">aggregated.to_csv</span></code>. See the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> docs for more info.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aggregated</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">ds_tas</span><span class="p">,</span> <span class="n">weightmap</span><span class="p">)</span>
@@ -445,8 +445,8 @@ which can easily be read by R, STATA, and most other programming
 tools. The data will be reshaped ‘wide’ by <code class="docutils literal notranslate"><span class="pre">xagg</span></code> - so every row is a
 county, and every column is a timestep of the variables.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="4a841eca-4fc8-4291-a687-112fed7cbc42" name="5bdffdf4-1495-4618-a5ba-ed4c0ebaff22" type="radio">
-</input><label class="tabbed-label" for="4a841eca-4fc8-4291-a687-112fed7cbc42">
+<input checked="checked" id="39572388-530c-4831-b4b9-af5673b90a65" name="b750a33f-8c76-42bd-8075-6e5dfe75bf70" type="radio">
+</input><label class="tabbed-label" for="39572388-530c-4831-b4b9-af5673b90a65">
 Python</label><div class="tabbed-content docutils">
 <p>Use <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataframe()</span></code>, depending on whether you’d like to continue using it in <code class="docutils literal notranslate"><span class="pre">xarray</span></code> or <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aggregated</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;climate_data/agg_vars.csv&#39;</span><span class="p">)</span>

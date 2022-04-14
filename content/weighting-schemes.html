@@ -488,8 +488,8 @@ need to project these back to latitude-longitude and regrid them.</p>
 <div class="section" id="implementation-notes-reading-gridded-data">
 <h3>Implementation Notes: Reading gridded data.<a class="headerlink" href="#implementation-notes-reading-gridded-data" title="Permalink to this headline">¶</a></h3>
 <div class="tabbed-set docutils">
-<input checked="checked" id="98a5003b-e54d-40bd-8e5d-8731acd9b1df" name="79a0a415-314f-4ae9-8899-e25d0657f91b" type="radio">
-</input><label class="tabbed-label" for="98a5003b-e54d-40bd-8e5d-8731acd9b1df">
+<input checked="checked" id="69b824dd-9898-4c7f-8df1-4f19047cfd62" name="191cd069-5385-47b9-8fb1-b73e638595ca" type="radio">
+</input><label class="tabbed-label" for="69b824dd-9898-4c7f-8df1-4f19047cfd62">
 R</label><div class="tabbed-content docutils">
 <p>Use the <code class="docutils literal notranslate"><span class="pre">raster</span></code> library. For example:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
@@ -502,8 +502,8 @@ R</label><div class="tabbed-content docutils">
 which has some extensive examples of working with geospatial raster data.</p>
 </div>
 </div>
-<input id="bd5d556c-336b-4e09-8ec1-388da4b1cf95" name="79a0a415-314f-4ae9-8899-e25d0657f91b" type="radio">
-</input><label class="tabbed-label" for="bd5d556c-336b-4e09-8ec1-388da4b1cf95">
+<input id="b0785167-cd17-46e9-9645-41b9be269b8b" name="191cd069-5385-47b9-8fb1-b73e638595ca" type="radio">
+</input><label class="tabbed-label" for="b0785167-cd17-46e9-9645-41b9be269b8b">
 Python</label><div class="tabbed-content docutils">
 <p>Take a look at <a class="reference external" href="https://github.com/jrising/research-common/tree/master/python/geogrid">https://github.com/jrising/research-common/tree/master/python/geogrid</a>.</p>
 </div>
@@ -536,15 +536,15 @@ upsampling, downsampling, and cropping.</p>
 <p>To increase the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without increasing the
 sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b7a37cf7-eb48-4c04-aa1c-8bc16a149deb" name="70372b64-92ee-4772-9ab1-9e9111675bdb" type="radio">
-</input><label class="tabbed-label" for="b7a37cf7-eb48-4c04-aa1c-8bc16a149deb">
+<input checked="checked" id="3dd37add-8b06-4260-93fc-22cd30139741" name="8b65d0dd-216d-451b-9444-f5f5e027091b" type="radio">
+</input><label class="tabbed-label" for="3dd37add-8b06-4260-93fc-22cd30139741">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="8044979e-f9be-446c-b153-e992ae58bc1f" name="70372b64-92ee-4772-9ab1-9e9111675bdb" type="radio">
-</input><label class="tabbed-label" for="8044979e-f9be-446c-b153-e992ae58bc1f">
+<input id="b66c2aaf-516d-4b8c-9c73-961d1d754233" name="8b65d0dd-216d-451b-9444-f5f5e027091b" type="radio">
+</input><label class="tabbed-label" for="b66c2aaf-516d-4b8c-9c73-961d1d754233">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
@@ -557,15 +557,15 @@ Python</label><div class="tabbed-content docutils">
 <p>To decrease the resolution of a grid <code class="docutils literal notranslate"><span class="pre">rr</span></code> by a factor of <code class="docutils literal notranslate"><span class="pre">N</span></code> without
 decreasing the sum of grid cells:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="4ea5459b-0946-431e-8e50-82b641ffc632" name="ac7f4b2a-c99f-443b-991d-452a8b88c922" type="radio">
-</input><label class="tabbed-label" for="4ea5459b-0946-431e-8e50-82b641ffc632">
+<input checked="checked" id="7abcd5f8-2249-4044-b0ef-2e1bf5ce9ba2" name="cd499fd9-4a3d-4663-a4fe-a8bdef75f434" type="radio">
+</input><label class="tabbed-label" for="7abcd5f8-2249-4044-b0ef-2e1bf5ce9ba2">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="0166a245-9dbb-4df0-8fac-2d9d410981dd" name="ac7f4b2a-c99f-443b-991d-452a8b88c922" type="radio">
-</input><label class="tabbed-label" for="0166a245-9dbb-4df0-8fac-2d9d410981dd">
+<input id="a2a5b5ff-b769-4748-9e0a-43716592a9a4" name="cd499fd9-4a3d-4663-a4fe-a8bdef75f434" type="radio">
+</input><label class="tabbed-label" for="a2a5b5ff-b769-4748-9e0a-43716592a9a4">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -582,15 +582,15 @@ Python</label><div class="tabbed-content docutils">
 to a box from the longitudinal range <code class="docutils literal notranslate"><span class="pre">WW</span></code> to <code class="docutils literal notranslate"><span class="pre">EE</span></code> and the latitudinal
 range from <code class="docutils literal notranslate"><span class="pre">SS</span></code> to <code class="docutils literal notranslate"><span class="pre">NN</span></code>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="06514f7d-e9f6-47dc-8dba-23b0082007a0" name="9b084b21-f5c0-4f9a-b836-6882233459fc" type="radio">
-</input><label class="tabbed-label" for="06514f7d-e9f6-47dc-8dba-23b0082007a0">
+<input checked="checked" id="5c5b99a1-c81c-46db-a92f-7789983a503a" name="d0d17cc9-4f41-4409-a647-ca8669b78d8d" type="radio">
+</input><label class="tabbed-label" for="5c5b99a1-c81c-46db-a92f-7789983a503a">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="n">WW</span><span class="p">,</span> <span class="n">SS</span><span class="p">,</span> <span class="n">EE</span><span class="p">,</span> <span class="n">NN</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<input id="02b51bd2-c9a1-4bce-a584-0d0cec184609" name="9b084b21-f5c0-4f9a-b836-6882233459fc" type="radio">
-</input><label class="tabbed-label" for="02b51bd2-c9a1-4bce-a584-0d0cec184609">
+<input id="2cd5df02-eff9-4be6-acaf-8c53da639fb1" name="d0d17cc9-4f41-4409-a647-ca8669b78d8d" type="radio">
+</input><label class="tabbed-label" for="2cd5df02-eff9-4be6-acaf-8c53da639fb1">
 Python</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)</span>
 
@@ -617,8 +617,8 @@ exact same extent.</p></li>
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent <span class="math notranslate nohighlight">\(125.0208\)</span> to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="779dc67b-70a5-491f-be61-2620ab9e150c" name="b4d0d9ad-7fdb-4d6a-93c8-1101864c5f3a" type="radio">
-</input><label class="tabbed-label" for="779dc67b-70a5-491f-be61-2620ab9e150c">
+<input checked="checked" id="bcbd9f9d-2f40-4810-a034-a0377f398b35" name="1be40478-5e97-41ec-90b1-4a0a52f86022" type="radio">
+</input><label class="tabbed-label" for="bcbd9f9d-2f40-4810-a034-a0377f398b35">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;…/w001001.adf&quot;</span><span class="p">)</span>
 <span class="n">landscan</span>
@@ -639,8 +639,8 @@ R</label><div class="tabbed-content docutils">
 <p>Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c0d125a7-ca28-4f65-b286-5fe67f810e1a" name="24e71828-4fee-4675-a2fd-92aeaba9266c" type="radio">
-</input><label class="tabbed-label" for="c0d125a7-ca28-4f65-b286-5fe67f810e1a">
+<input checked="checked" id="fb344416-d762-4816-8e6c-d5ef0006329f" name="1e27f0f2-3cf3-4923-bef4-651a64a4eaa8" type="radio">
+</input><label class="tabbed-label" for="fb344416-d762-4816-8e6c-d5ef0006329f">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span> <span class="m">-66</span><span class="p">,</span> <span class="m">24</span><span class="p">,</span> <span class="m">50</span><span class="p">))</span>
 </pre></div>
@@ -651,8 +651,8 @@ R</label><div class="tabbed-content docutils">
 <span class="math notranslate nohighlight">\(120 * (180 - 125.0208) = 6597.5\)</span>
 That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="97281f87-c74d-4c58-a77b-ac29de86910c" name="20f09da8-e365-4477-8cab-741cade7b28c" type="radio">
-</input><label class="tabbed-label" for="97281f87-c74d-4c58-a77b-ac29de86910c">
+<input checked="checked" id="a4529c62-fbb9-4a0b-87a7-7c47c60bbf18" name="62c4f228-2e27-4718-8edd-9f9d9a4787a8" type="radio">
+</input><label class="tabbed-label" for="a4529c62-fbb9-4a0b-87a7-7c47c60bbf18">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">disaggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> <span class="o">/</span> <span class="m">4</span>
 </pre></div>
@@ -662,8 +662,8 @@ R</label><div class="tabbed-content docutils">
 <p>We divide by 4 so that the total population remains the same.</p>
 <p>After increasing the resolution of the LandScan data, we clip it again.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7c426d3d-a041-437c-a94f-2e3fb8ed58eb" name="dd298076-5db2-469f-9038-d8ad83204434" type="radio">
-</input><label class="tabbed-label" for="7c426d3d-a041-437c-a94f-2e3fb8ed58eb">
+<input checked="checked" id="4bce562e-24da-4d60-8b53-a1b7850ba5cc" name="93f77dbe-ac2c-440a-92a0-203a0070ac09" type="radio">
+</input><label class="tabbed-label" for="4bce562e-24da-4d60-8b53-a1b7850ba5cc">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-125.0208</span><span class="p">,</span> <span class="m">-66.47917</span><span class="p">,</span> <span class="m">24.0625</span><span class="p">,</span> <span class="m">49.9375</span><span class="p">))</span>
 </pre></div>
@@ -673,8 +673,8 @@ R</label><div class="tabbed-content docutils">
 <p>Now, the resolution of the dataset has become 1/240th, and we can
 write aggregate by a factor of <span class="math notranslate nohighlight">\(10\)</span> for it to match the PRISM data:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="2010613e-fcf0-405a-8d17-55c7c9dc4f1d" name="2f6a0a35-366c-4f92-a8d8-18b5e199915d" type="radio">
-</input><label class="tabbed-label" for="2010613e-fcf0-405a-8d17-55c7c9dc4f1d">
+<input checked="checked" id="92d6d7b7-e999-4fca-93be-0f15a39dc86a" name="bbef3b09-bce5-437d-8f7e-c524bc283747" type="radio">
+</input><label class="tabbed-label" for="92d6d7b7-e999-4fca-93be-0f15a39dc86a">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">landscan</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">landscan</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
@@ -697,8 +697,8 @@ Population of the
 World</a>
 dataset.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e5f4ce2b-0f95-4fc7-91ae-d7c16accc034" name="0d6b82d9-0fd1-45cf-8c95-bc00578748aa" type="radio">
-</input><label class="tabbed-label" for="e5f4ce2b-0f95-4fc7-91ae-d7c16accc034">
+<input checked="checked" id="f8a92f44-0b23-4e75-b4e7-53ba45a87b9c" name="35ced921-3dfe-4d2c-95cc-920486f7e7db" type="radio">
+</input><label class="tabbed-label" for="f8a92f44-0b23-4e75-b4e7-53ba45a87b9c">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="c1">## Load the data</span>
@@ -717,8 +717,8 @@ complicated.</p>
 <p>First, we’ll download <a class="reference external" href="https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/%5BT+%5Daverage/">historical maximum temperature</a> data from the
 easy-to-use IRI data library.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="76f9165f-001a-47e7-a1de-ed78ff20e480" name="205f1b64-f65e-434f-987e-77f1f87bc624" type="radio">
-</input><label class="tabbed-label" for="76f9165f-001a-47e7-a1de-ed78ff20e480">
+<input checked="checked" id="eb5a0a3e-00ef-4880-81cc-9f1fcb6f5830" name="5391f4de-626e-4487-af82-10d32d066baf" type="radio">
+</input><label class="tabbed-label" for="eb5a0a3e-00ef-4880-81cc-9f1fcb6f5830">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
 
@@ -744,8 +744,8 @@ interpret. And to do that, we need to rearrange the data so it goes
 from -180 to 180, rather than 0 to 360 as currently. Here’s our second
 attempt:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f6821eaa-4087-4d98-a505-0e56dcdd2932" name="858f07bc-9d93-4f1b-8b7a-ff1c15b384d1" type="radio">
-</input><label class="tabbed-label" for="f6821eaa-4087-4d98-a505-0e56dcdd2932">
+<input checked="checked" id="6b951a77-0d5a-4774-9258-01b69b695af6" name="d41635ed-74dc-4170-9b40-258a6bf49bf5" type="radio">
+</input><label class="tabbed-label" for="6b951a77-0d5a-4774-9258-01b69b695af6">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Extract the coordinate values</span>
 <span class="n">lon</span> <span class="o">&lt;-</span> <span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="s">&quot;X&quot;</span><span class="p">)</span>
@@ -769,8 +769,8 @@ R</label><div class="tabbed-content docutils">
 to convert the matrix into a dataframe (with <code class="docutils literal notranslate"><span class="pre">melt</span></code>) and the map into
 a dataframe (with <code class="docutils literal notranslate"><span class="pre">map_data</span></code>):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="01b012d2-6870-4022-8135-c50e96d68436" name="4288dab5-812a-46eb-bfa7-79b066bedcfa" type="radio">
-</input><label class="tabbed-label" for="01b012d2-6870-4022-8135-c50e96d68436">
+<input checked="checked" id="748b2b02-70d5-4b1f-9f80-dcf3116fe233" name="8b4e2f9d-7798-4881-b6b4-453663049548" type="radio">
+</input><label class="tabbed-label" for="748b2b02-70d5-4b1f-9f80-dcf3116fe233">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Convert temp2 to a dataframe</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
@@ -812,8 +812,8 @@ quite a bit slower. We use a color palette from
 <a class="reference external" href="http://colorbrewer2.org/">ColorBrewer</a>, which is an excellent resource for
 choosing colors.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="116fa653-67f6-42a6-a322-79c52e1cf62e" name="f347e151-b35e-44ef-86a4-0c6f8aa58ee1" type="radio">
-</input><label class="tabbed-label" for="116fa653-67f6-42a6-a322-79c52e1cf62e">
+<input checked="checked" id="38f17c75-8bf0-4a4c-bd7a-a0339b117677" name="66cefd38-9614-4597-ae45-df284c268373" type="radio">
+</input><label class="tabbed-label" for="38f17c75-8bf0-4a4c-bd7a-a0339b117677">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
 <span class="nf">ggplot</span><span class="p">()</span> <span class="o">+</span>
