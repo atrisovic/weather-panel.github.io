@@ -107,8 +107,13 @@ that is a great place to start.
 climate responses. This tutorial complements the theoretical
 foundation with more practical advice.
 
-📚  Check out the [Encyclopedia of Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and the [IPCC WGI report](https://www.ipcc.ch/site/assets/uploads/2017/09/WG1AR5_Chapter01_FINAL.pdf)
-: for a more general introduction to the sciences of climate and climate change.
+📚  Check out the [Encyclopedia of
+Earth](https://editors.eol.org/eoearth/wiki/Weather_%26_Climate) and
+the IPCC [WGI report (The Physical Science
+Basis)](https://www.ipcc.ch/report/ar6/wg1/) and [WGII report (Impacts, Adaptation and Vulnerability)](https://www.ipcc.ch/report/ar6/wg2/)
+: for a more general introduction to the sciences of climate and
+  climate impacts. Chapter 1 of the IPCC WGI report in particular
+  provides useful background information.
 
 ## Definitions and conventions
 
@@ -124,10 +129,12 @@ forms:
    field, factory, or household.
 2. Region data describes an aggregate over an irregular space. Typical
    natural science regions include basins and water/land bodies.
-   Economic region data is much more common though, where quantities
-   are totaled across an entire political unit before they are
-   reported. The region over which a data observation is provided is
-   called its geographic unit.
+   Socioeconomic region data is much more common though, with
+   information provided for political units (e.g. municipalities),
+   statistical units (e.g., census tracts), and jurisdictions (e.g.,
+   educational districts). Quantities are reported as a total across
+   the entire regional unit. The region over which a data observation
+   is provided is called its geographic unit.
 3. Gridded data provides information on a regular grid, almost always
    either across latitude and longitude, but sometimes as distance
    north and east from a fixed point. Gridded data can come from
@@ -143,13 +150,17 @@ easier. We will discuss this more later.
 
 ### Mathematical notation
 
-In many cases, it will be useful to describe how to work with weather
-variables irrespective of the represented specific data, which is why we introduce the following notation:
+In many cases, it will be useful to describe how to describe how to work with weather
+variables irrespective of the specific data being represented. A
+common mathematical notation will help our discussion in the tutorial,
+and it is particularly useful to have some common subscripts. We will
+use the following notation:
 
-- $T_{it}$: Any weather variable for geographic unit $i$ in reporting period $t$.
-- $T_{ps}$: Point or grid-level weather data for location/grid cell
+- $X_{it}$: Any weather variable for geographic unit $i$ in reporting period $t$.
+- $X_{ps}$: Point or grid-level weather data for location/grid cell
   $p$, at a native temporal resolution indexed by $s$.
 
-For example, we will discuss how to translate gridded data ($T_{ps}$)
-into regional data ($T_{it}$). Although we use the variable name $T$
-here, the methods are not specific to temperature, unless so specified.
+For example, we will discuss how to translate gridded data ($X_{ps}$)
+into regional data ($X_{it}$). When we actually use this mathematical
+logic, we will often replace $X$ with $T$ for temperature and $P$ for
+precipitation.
