@@ -113,7 +113,8 @@ the IPCC [WGI report (The Physical Science
 Basis)](https://www.ipcc.ch/report/ar6/wg1/) and [WGII report (Impacts, Adaptation and Vulnerability)](https://www.ipcc.ch/report/ar6/wg2/)
 : for a more general introduction to the sciences of climate and
   climate impacts. Chapter 1 of the IPCC WGI report in particular
-  provides useful background information.
+  provides useful background information on climate and climate
+  modeling.
 
 ## Definitions and conventions
 
