@@ -328,8 +328,8 @@ directory.</p>
 <p>Let’s first turn the data from wide form into long form and label the
 years.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c851e7ef-1ca0-4b42-aff8-32d5b631ec91" name="854f297e-477b-4f69-8336-59c1aa8efb80" type="radio">
-</input><label class="tabbed-label" for="c851e7ef-1ca0-4b42-aff8-32d5b631ec91">
+<input checked="checked" id="2c7a7781-46ce-4194-928f-bb6df4fd1248" name="0c534e42-39f4-40c4-a698-2c492928b270" type="radio">
+</input><label class="tabbed-label" for="2c7a7781-46ce-4194-928f-bb6df4fd1248">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
 
@@ -346,8 +346,8 @@ R</label><div class="tabbed-content docutils">
 the first several characters of the column names (not variable row
 values).</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d2bea0d3-5194-4012-8022-c321d8c412c6" name="76856aeb-0ee3-4b43-85e6-41deb4842a2b" type="radio">
-</input><label class="tabbed-label" for="d2bea0d3-5194-4012-8022-c321d8c412c6">
+<input checked="checked" id="45e13ae4-17a5-48db-aa4d-5b7f89ed48e4" name="fee90603-7125-4f0f-a756-ccf904eb7973" type="radio">
+</input><label class="tabbed-label" for="45e13ae4-17a5-48db-aa4d-5b7f89ed48e4">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
@@ -363,8 +363,8 @@ R</label><div class="tabbed-content docutils">
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="a0627465-2273-4651-9837-51267e6ebe42" name="c6758613-ba09-457f-baee-701da3fc3c58" type="radio">
-</input><label class="tabbed-label" for="a0627465-2273-4651-9837-51267e6ebe42">
+<input checked="checked" id="84ef8e50-18ea-40f3-b899-07e4e922c2f6" name="912640f7-a37a-42c4-a01b-992876b41480" type="radio">
+</input><label class="tabbed-label" for="84ef8e50-18ea-40f3-b899-07e4e922c2f6">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
 
@@ -386,8 +386,8 @@ result, it is not ideal for future projections.</p>
 <p>For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d371ef8b-54dd-44b8-8597-7abc71ea14c4" name="03f923fc-3af1-47e2-b556-b45976431cf3" type="radio">
-</input><label class="tabbed-label" for="d371ef8b-54dd-44b8-8597-7abc71ea14c4">
+<input checked="checked" id="4aa23e0f-0e1a-40a6-8d40-88e27c08c8e1" name="3115df7b-94e3-4a91-86ed-3fbf87afd142" type="radio">
+</input><label class="tabbed-label" for="4aa23e0f-0e1a-40a6-8d40-88e27c08c8e1">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">lfe</span><span class="p">)</span>
 
@@ -410,8 +410,8 @@ so there are no confidence intervals at this point.</p>
 <code class="docutils literal notranslate"><span class="pre">predict.felm</span></code> function from the <code class="docutils literal notranslate"><span class="pre">felm-tools.R</span></code> library at
 https://github.com/jrising/research-common/blob/master/R/felm-tools.R</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c8b9e60b-3e02-43d9-bebe-53c5178dd437" name="a15d8971-f391-4b7f-aeeb-decd176ff035" type="radio">
-</input><label class="tabbed-label" for="c8b9e60b-3e02-43d9-bebe-53c5178dd437">
+<input checked="checked" id="803fe27a-d63c-4e1d-b5c9-81aba76795ea" name="4253af4c-9f5b-4cf1-b91b-47b7e153ef64" type="radio">
+</input><label class="tabbed-label" for="803fe27a-d63c-4e1d-b5c9-81aba76795ea">
 R</label><div class="tabbed-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">plotdf</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">tas</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">-20</span><span class="p">,</span> <span class="m">40</span><span class="p">))</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_adj</span> <span class="o">&lt;-</span> <span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span> <span class="o">-</span> <span class="m">20</span>
