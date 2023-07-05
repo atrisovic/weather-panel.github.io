@@ -81,7 +81,7 @@ All documentation should be stored in non-proprietary file formats, such as `.tx
 ```
 
 ```{note}
-When data files cannot be converted into open formats (particularly geospatial vector data), make sure to document the software package, version, and native platform.
+When data files cannot be converted into open formats (particularly geospatial region data), make sure to document the software package, version, and native platform.
 ```
 
 ## Version control
