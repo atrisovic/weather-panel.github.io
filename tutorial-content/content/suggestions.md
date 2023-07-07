@@ -8,6 +8,7 @@
 
 Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. In computational research, reproducibility is the ability to obtain consistent results using the same input data, code, and methods. Considering these early on is particularly helpful when collaborating with other researchers (including a future self). 
 
+(content:code-organization)=
 ## Organization of data and code
 
 Having a single directory for a project, containing all data and code in subdirectories 
