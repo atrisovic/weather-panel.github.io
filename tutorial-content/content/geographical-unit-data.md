@@ -79,7 +79,8 @@ In some cases, you will need to create a shapefile from scratch. The most common
 
 Once you obtain your shapefiles, you should first view them in a software system like QGIS or ArcGIS to ensure everything is in order. Both R and Python support working with shapefiles and spatial data. See the following examples:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 To read shapefiles you could use a package like `maptools`, `rgdal`, `sf`, or `PBSmapping`.
  
 ```{code-block} R
@@ -93,7 +94,7 @@ shapefile <- importShapefile("/my_shapefile.shp")
 ```
 ````
  
-````{tabbed} Python
+````{tab-item} Python
  
 Shapefiles can be opened with Python packages in a few different ways:
  
@@ -116,6 +117,7 @@ shapefile = gpd.read_file("my_shapefile.shp")
 print(shapefile)
 ```
 ````
+`````
 
 ````{caution}
 Despite its name indicating a singular file, a shapefile is actually a collection of at least three basic files that need to be stored in the same directory to be used. The three mandatory files have filename extensions `.shp`, `.shx` and `.dbf`. There may be additional files like `.prj` with the shape file’s projection information. All files must have the same name, for example:
