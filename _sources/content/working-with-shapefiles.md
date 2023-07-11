@@ -33,20 +33,22 @@ Below, we sketch out two approaches to generating this matrix, but a few comment
   about the order of the entries, and order the columns of $A$ the
   same way.
  
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
   In R, `as.vector` will convert from a matrix to a vector, with each
   *column* being listed in full before moving on to the next column.
 ````
-````{tabbed} Python
+````{tab-item} Python
  In python, `numpy.flatten` will convert a numpy matrix to a vector,
   with each *row* being listed in full before moving on to the next
   row.
 ````
-````{tabbed} Matlab
+````{tab-item} Matlab
   In Matlab, indexing the grid with `(:)` will convert from an array
   to a vector, with each *column* being listed in full before moving
   on to the next column.
 ````
+`````
 
 ## Approach 1. Using grid cell centers
  
@@ -56,24 +58,30 @@ cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
 As an example, in R, you generate these points like so:
-````{tabbed} R
+
+`````{tab-set}
+````{tab-item} R
 ```R
 longitudes <- seq(longitude0, longitude1, gridwidth)
 latitudes <- seq(latitude0, latitude1, gridwidth)
 pts <- expand.grid(x=longitudes, y=latitudes)
 ```
 ````
+`````
  
 Now, you can iterate through each region, and get a list of all of the
 points within each region. Here's how you would do that with the
 `PBSmapping` library in R:
-````{tabbed} R
+
+`````{tab-set}
+````{tab-item} R
 ```R
 events <- data.frame(EID=1:nrow(pts), X=pts$x, Y=pts$y)
 events <- as.EventData(events, projection=attributes(polys)$projection)
 eids <- findPolys(events, polys, maxRows=6e5)
 ```
 ````
+`````
 
 Then you can use the cells that have been found (which, if you've set
 it upright, will be in the same order as the columns of $A$) to
@@ -82,7 +90,9 @@ fill in the entries of your transformation matrix.
 If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest. 
-````{tabbed} R
+
+`````{tab-set}
+````{tab-item} R
 For example, in R, using `PBSmapping`:
 ```R
 centroid <- calcCentroid(polys, rollup=1)
@@ -90,6 +100,7 @@ dists <- sqrt((pts$x - centroid$X)^2 + (pts$y - centroid$Y)^2)
 closest <- which.min(dists)[1]
 ```
 ````
+`````
  
 ## Approach 2. Allowing for partial grid cells
  

@@ -26,7 +26,8 @@ it (the code) is stored in a file (call it `preprocess_best.m` or
 `preprocess_best.py`) in a directory `code/`, a sister to the `data/`
 directory.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 library(ncdf4)
 
@@ -36,7 +37,7 @@ time <- seq(as.Date("1980-01-01"), length.out=nc$dim$time$len, by="1 day")
 ```
 ````
 
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 import numpy as np
 import xarray as xr
@@ -51,7 +52,7 @@ ds['time'] = (
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 data_dir = '../data/climate_data/';
 filename = 'Complete_TAVG_Daily_LatLong1_1980.nc';
@@ -68,6 +69,7 @@ doy_tmp = ncread([data_dir,filename],'day_of_year');
 months = ncread([data_dir,filename],'month');
 ```
 ````
+`````
 
 ## Constructing temperature levels
 
@@ -79,7 +81,8 @@ accounts for days 1:365 of the year, and ignores leap days (which the
 for Feb 28th to also work on Feb 29th, and creates a `tas` variable
 that's the `climatology` + `temperature`.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 doy <- ncvar_get(nc, 'day_of_year')
 tas.anom <- ncvar_get(nc, 'temperature')
@@ -90,7 +93,7 @@ tas <- tas.anom + tas.clim.all
 ```
 ````
 
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 import calendar
 
@@ -115,7 +118,7 @@ ds = ds.drop(['temperature','climatology'])
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 % BEST data is given in terms of anomalies from the underlying
 % climatology. So, the climatology has to be loaded first.
@@ -124,6 +127,7 @@ tas = anom_tmp + clim_tmp(:,:,doy_tmp);
 clear clim_tmp, anom_tmp, doy_tmp
 ```
 ````
+`````
 
 ## Subset it geographically
 
@@ -132,7 +136,8 @@ the process.
 
 Using the extreme points of the continental United States (see e.g., [here](https://en.wikipedia.org/wiki/List_of_extreme_points_of_the_United_States)) + 1 degree of wiggle room.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 longitude <- ncvar_get(nc, 'longitude')
 latitude <- ncvar_get(nc, 'latitude')
@@ -144,7 +149,7 @@ tas2 <- tas[longitude >= lonlims[1] & longitude <= lonlims[2], latitude >= latli
 ```
 ````
 
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 geo_lims = {'lat':[23,51],'lon':[-126,-65]}
 
@@ -152,7 +157,7 @@ ds = ds.sel(latitude=slice(*geo_lims['lat']),longitude=slice(*geo_lims['lon'])).
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 lat = ncread([data_dir,filename],'latitude');
 lon = ncread([data_dir,filename],'longitude');
@@ -166,6 +171,7 @@ lon = lon(lon_idxs);
 lat = lat(lat_idxs);
 ```
 ````
+`````
 
 ## Save the result
 
@@ -173,7 +179,8 @@ We will write out the clipped, concatenated data to a single file for
 future processing. We make some changes in the process to conform to
 the standards used in CMIP5 datasets.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 dimlon <- ncdim_def("lon", "degrees_east", longitude[longitude >= lonlims[1] & longitude <= lonlims[2]], longname='longitude')
 dimlat <- ncdim_def("lat", "degrees_north", latitude[latitude >= latlims[1] & latitude <= latlims[2]], longname='latitude')
@@ -187,7 +194,7 @@ nc_close(ncnew)
 ```
 ````
 
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 output_fn = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc'
 
@@ -200,7 +207,7 @@ ds.to_netcdf(output_fn)
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 % Set output filename
 fn_out = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc';
@@ -243,3 +250,4 @@ ncwriteatt(fn_out,'/','origin_script','preprocess_best.m')
 ncwriteatt(fn_out,'/','calendar','gregorian')
 ```
 ````
+`````

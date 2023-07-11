@@ -1,326 +1,421 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Hands-On Exercise, Step 2: Understanding the outcomes</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/example-step2';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Generating geographical unit data" href="geographical-unit-data.html" />
     <link rel="prev" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
+    
+    
+    
+  </div>
   
-  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="getting-started.html">
   
   
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/climate_estimate_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/climate_estimate_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="getting-started.html">
+                    Introduction to the Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Using Weather and Climate Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">How to Start Working with a Data Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 2: Understanding the outcomes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geographical-unit-data.html">Generating geographical unit data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-shapefiles.html">Constructing weather averages within spatial units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting-schemes.html">Weighting schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-On Exercise, Step 3: Aggregating the data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="producing-results.html">Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="getting-started.html">
-   Introduction to the Tutorial
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Weather and Climate Data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="weather-and-climate-data.html">
-   Using Weather and Climate Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-data-product.html">
-   How to Start Working with a Data Product
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step1.html">
-   Hands-On Exercise, Step 1: Preparing the Weather Data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Developing a reduced-form specification
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="reduced-form-specification.html">
-   Developing a reduced-form specification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="functional-forms.html">
-   Functional forms: pros, cons, and methods
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Hands-On Exercise, Step 2: Understanding the outcomes
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Geographical unit data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="geographical-unit-data.html">
-   Generating geographical unit data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-shapefiles.html">
-   Constructing weather averages within spatial units
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="weighting-schemes.html">
-   Weighting schemes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step3.html">
-   Hands-On Exercise, Step 3: Aggregating the data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Bringing it all together
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="producing-results.html">
-   Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step4.html">
-   Hands-On Exercise, Step 4: Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Contributors
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="contributors.html">
-   Contributors
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/example-step2.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/issues/new?title=Issue%20on%20page%20%2Fcontent/example-step2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
 
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/example-step2.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
 
-        <!-- Source interaction buttons -->
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/example-step2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/example-step2.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/example-step2.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
 
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
+</div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hands-On Exercise, Step 2: Understanding the outcomes</h1>
     <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#thinking-about-the-data-generating-process">
-   Thinking about the data-generating process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#download-the-population-data">
-   Download the population data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#downloading-the-mortality-data">
-   Downloading the mortality data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-mortality-data">
-   Preparing the mortality data
-  </a>
- </li>
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thinking-about-the-data-generating-process">Thinking about the data-generating process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-population-data">Download the population data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-mortality-data">Downloading the mortality data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-mortality-data">Preparing the mortality data</a></li>
 </ul>
-
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="hands-on-exercise-step-2-understanding-the-outcomes">
-<h1>Hands-On Exercise, Step 2: Understanding the outcomes<a class="headerlink" href="#hands-on-exercise-step-2-understanding-the-outcomes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="thinking-about-the-data-generating-process">
-<h2>Thinking about the data-generating process<a class="headerlink" href="#thinking-about-the-data-generating-process" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-2-understanding-the-outcomes">
+<h1>Hands-On Exercise, Step 2: Understanding the outcomes<a class="headerlink" href="#hands-on-exercise-step-2-understanding-the-outcomes" title="Permalink to this heading">#</a></h1>
+<section id="thinking-about-the-data-generating-process">
+<h2>Thinking about the data-generating process<a class="headerlink" href="#thinking-about-the-data-generating-process" title="Permalink to this heading">#</a></h2>
 <p>First, let us think about the process that relates mortality to
 weather. Weather fluctations can have impacts on all scales, but
 generally when we are thinking of heat waves killing people, it is
@@ -346,9 +441,9 @@ variables, for the linear and quadratic terms relative to 20 C.</p>
 <div class="math notranslate nohighlight">
 \[X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}^2 - 20^2)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the population in gridcell <span class="math notranslate nohighlight">\(p\)</span>.</p>
-</div>
-<div class="section" id="download-the-population-data">
-<h2>Download the population data<a class="headerlink" href="#download-the-population-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="download-the-population-data">
+<h2>Download the population data<a class="headerlink" href="#download-the-population-data" title="Permalink to this heading">#</a></h2>
 <p>We can use the gridded population data from Gridded Population of the
 World, since the weather data is not very high resolution. Download it
 from
@@ -359,25 +454,25 @@ grid as a <code class="docutils literal notranslate"><span class="pre">.bil</spa
 aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
 being run from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="c2e3d73c-646a-446e-8ab6-380115369b96" name="89d252b1-93ee-4c6e-b4ab-335d1f3cc332" type="radio">
-</input><label class="tabbed-label" for="c2e3d73c-646a-446e-8ab6-380115369b96">
-R</label><div class="tabbed-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
-<span class="n">rr</span> <span class="o">&lt;-</span> <span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
+<span class="n">rr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
 
-<span class="n">rr2</span> <span class="o">&lt;-</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span> <span class="n">fact</span><span class="o">=</span><span class="m">24</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
-<span class="n">rr3</span> <span class="o">&lt;-</span> <span class="nf">crop</span><span class="p">(</span><span class="n">rr2</span><span class="p">,</span> <span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span> <span class="m">-65</span><span class="p">,</span> <span class="m">23</span><span class="p">,</span> <span class="m">51</span><span class="p">))</span>
+<span class="n">rr2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="n">rr</span><span class="p">,</span><span class="w"> </span><span class="n">fact</span><span class="o">=</span><span class="m">24</span><span class="p">,</span><span class="w"> </span><span class="n">fun</span><span class="o">=</span><span class="n">sum</span><span class="p">)</span>
+<span class="n">rr3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">crop</span><span class="p">(</span><span class="n">rr2</span><span class="p">,</span><span class="w"> </span><span class="nf">extent</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span><span class="w"> </span><span class="m">-65</span><span class="p">,</span><span class="w"> </span><span class="m">23</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="p">))</span>
 
-<span class="nf">writeRaster</span><span class="p">(</span><span class="n">rr3</span><span class="p">,</span> <span class="s">&quot;../data/pcount/usap90ag.nc4&quot;</span><span class="p">,</span>
- <span class="n">overwrite</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">varname</span><span class="o">=</span><span class="s">&quot;Population&quot;</span><span class="p">,</span> <span class="n">varunit</span><span class="o">=</span><span class="s">&quot;people&quot;</span><span class="p">,</span>
- <span class="n">xname</span><span class="o">=</span><span class="s">&quot;lon&quot;</span><span class="p">,</span> <span class="n">yname</span><span class="o">=</span><span class="s">&quot;lat&quot;</span><span class="p">)</span>
+<span class="nf">writeRaster</span><span class="p">(</span><span class="n">rr3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;../data/pcount/usap90ag.nc4&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="n">overwrite</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="s">&quot;CDF&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">varname</span><span class="o">=</span><span class="s">&quot;Population&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">varunit</span><span class="o">=</span><span class="s">&quot;people&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="n">xname</span><span class="o">=</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">yname</span><span class="o">=</span><span class="s">&quot;lat&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="68c39472-d49c-4f22-a9c0-71f268fb9aa3" name="89d252b1-93ee-4c6e-b4ab-335d1f3cc332" type="radio">
-</input><label class="tabbed-label" for="68c39472-d49c-4f22-a9c0-71f268fb9aa3">
-Python</label><div class="tabbed-content docutils">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+Python</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rasterio # will work in Jupyter Notebook</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
@@ -402,13 +497,13 @@ Python</label><div class="tabbed-content docutils">
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="downloading-the-mortality-data">
-<h2>Downloading the mortality data<a class="headerlink" href="#downloading-the-mortality-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="downloading-the-mortality-data">
+<h2>Downloading the mortality data<a class="headerlink" href="#downloading-the-mortality-data" title="Permalink to this heading">#</a></h2>
 <p>The Compressed Mortality File (CMF) provides comprehensive,
 county-scale mortality data for the United States. The data through
 1988 is publically available, so we will use this for our analysis.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Go to the CMF information page,
 <a class="reference external" href="https://www.cdc.gov/nchs/data_access/cmf.htm">https://www.cdc.gov/nchs/data_access/cmf.htm</a>.</p></li>
 <li><p>Under “Data Availability”, find the mortality and population files
@@ -432,42 +527,42 @@ each of 12 age groups is reported with 8 characters per age group
 number (so, the first age group, 1 - 4 year-olds, is characters 19 -
 26; then 5 - 9 year-olds is reported in characters 27 - 34; and so
 on).</p>
-</div>
-<div class="section" id="preparing-the-mortality-data">
-<h2>Preparing the mortality data<a class="headerlink" href="#preparing-the-mortality-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="preparing-the-mortality-data">
+<h2>Preparing the mortality data<a class="headerlink" href="#preparing-the-mortality-data" title="Permalink to this heading">#</a></h2>
 <p>Here we sum across all races and ages and merge the mortality and
 population data.</p>
-<div class="tabbed-set docutils">
-<input checked="checked" id="d6d29c25-b3a2-47fc-9f39-b7c484d7865b" name="d90b51ef-b6b4-4713-a378-605dd84d4026" type="radio">
-</input><label class="tabbed-label" for="d6d29c25-b3a2-47fc-9f39-b7c484d7865b">
-R</label><div class="tabbed-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
-<span class="n">df.mort</span> <span class="o">&lt;-</span> <span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span>
-   <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">4</span><span class="p">),</span> <span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="s">&#39;deaths&#39;</span><span class="p">))</span>
+<span class="n">df.mort</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ignore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;deaths&#39;</span><span class="p">))</span>
 
-<span class="n">df2.mort</span> <span class="o">&lt;-</span> <span class="n">df.mort</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">deaths</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">deaths</span><span class="p">))</span>
+<span class="n">df2.mort</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df.mort</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="n">deaths</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">deaths</span><span class="p">))</span>
 
-<span class="n">df.pop</span> <span class="o">&lt;-</span> <span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Pop7988.txt&quot;</span><span class="p">,</span>
-   <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="m">12</span><span class="p">),</span> <span class="m">25</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">,</span>
-   <span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#39;pop&#39;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">),</span> <span class="s">&#39;county&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">))</span>
+<span class="n">df.pop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.fwf</span><span class="p">(</span><span class="s">&quot;../data/cmf/Pop7988.txt&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">),</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">col.names</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;year&#39;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&#39;ignore&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&#39;pop&#39;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;county&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;type&#39;</span><span class="p">))</span>
 
-<span class="n">df2.pop</span> <span class="o">&lt;-</span> <span class="n">df.pop</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">pop</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">pop1</span> <span class="o">+</span>
-    <span class="n">pop2</span> <span class="o">+</span> <span class="n">pop3</span> <span class="o">+</span> <span class="n">pop4</span> <span class="o">+</span> <span class="n">pop5</span> <span class="o">+</span> <span class="n">pop6</span> <span class="o">+</span> <span class="n">pop7</span> <span class="o">+</span> <span class="n">pop8</span> <span class="o">+</span> <span class="n">pop9</span> <span class="o">+</span> <span class="n">pop10</span> <span class="o">+</span>
-    <span class="n">pop11</span> <span class="o">+</span> <span class="n">pop12</span><span class="p">),</span> <span class="n">type</span><span class="o">=</span><span class="n">type</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
+<span class="n">df2.pop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df.pop</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="n">fips</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="n">pop</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">pop1</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="n">pop2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop9</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop10</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="n">pop11</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pop12</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="n">type</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
 
-<span class="n">df3</span> <span class="o">&lt;-</span> <span class="n">df2.pop</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df2.mort</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span> <span class="s">&#39;year&#39;</span><span class="p">))</span>
-<span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="n">df3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df2.pop</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">df2.mort</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;year&#39;</span><span class="p">))</span>
+<span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">deaths</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
 
-<span class="n">df4</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span> <span class="n">type</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span>
+<span class="n">df4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">df3</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
 
-<span class="nf">write.csv</span><span class="p">(</span><span class="n">df4</span><span class="p">[,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df4</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;type&#39;</span><span class="p">)],</span> <span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">df4</span><span class="p">[,</span><span class="w"> </span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;type&#39;</span><span class="p">)],</span><span class="w"> </span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="f124eeb9-272a-4553-82d8-dba37a7e8140" name="d90b51ef-b6b4-4713-a378-605dd84d4026" type="radio">
-</input><label class="tabbed-label" for="f124eeb9-272a-4553-82d8-dba37a7e8140">
-Python</label><div class="tabbed-content docutils">
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+Python</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">df_mort</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>
 
@@ -483,27 +578,27 @@ Python</label><div class="tabbed-content docutils">
 <span class="n">df_mort4</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>fips, year</p></th>
-<th class="text-align:right head"><p>deaths</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips, year</p></th>
+<th class="head text-right"><p>deaths</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1979)</p></td>
-<td class="text-align:right"><p>225</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1979)</p></td>
+<td class="text-right"><p>225</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1980)</p></td>
-<td class="text-align:right"><p>221</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1980)</p></td>
+<td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1981)</p></td>
-<td class="text-align:right"><p>221</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1981)</p></td>
+<td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1982)</p></td>
-<td class="text-align:right"><p>223</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1982)</p></td>
+<td class="text-right"><p>223</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1983)</p></td>
-<td class="text-align:right"><p>267</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1983)</p></td>
+<td class="text-right"><p>267</p></td>
 </tr>
 </tbody>
 </table>
@@ -529,99 +624,99 @@ Python</label><div class="tabbed-content docutils">
 <span class="n">df_pop5</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>fips, year, type</p></th>
-<th class="text-align:right head"><p>pop1</p></th>
-<th class="text-align:right head"><p>pop2</p></th>
-<th class="text-align:right head"><p>pop3</p></th>
-<th class="text-align:right head"><p>pop4</p></th>
-<th class="text-align:right head"><p>pop5</p></th>
-<th class="text-align:right head"><p>pop6</p></th>
-<th class="text-align:right head"><p>pop7</p></th>
-<th class="text-align:right head"><p>pop8</p></th>
-<th class="text-align:right head"><p>pop9</p></th>
-<th class="text-align:right head"><p>pop10</p></th>
-<th class="text-align:right head"><p>pop11</p></th>
-<th class="text-align:right head"><p>pop12</p></th>
-<th class="text-align:right head"><p>pop</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips, year, type</p></th>
+<th class="head text-right"><p>pop1</p></th>
+<th class="head text-right"><p>pop2</p></th>
+<th class="head text-right"><p>pop3</p></th>
+<th class="head text-right"><p>pop4</p></th>
+<th class="head text-right"><p>pop5</p></th>
+<th class="head text-right"><p>pop6</p></th>
+<th class="head text-right"><p>pop7</p></th>
+<th class="head text-right"><p>pop8</p></th>
+<th class="head text-right"><p>pop9</p></th>
+<th class="head text-right"><p>pop10</p></th>
+<th class="head text-right"><p>pop11</p></th>
+<th class="head text-right"><p>pop12</p></th>
+<th class="head text-right"><p>pop</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1979, 3)</p></td>
-<td class="text-align:right"><p>2022</p></td>
-<td class="text-align:right"><p>2982</p></td>
-<td class="text-align:right"><p>3248</p></td>
-<td class="text-align:right"><p>3491</p></td>
-<td class="text-align:right"><p>2640</p></td>
-<td class="text-align:right"><p>4414</p></td>
-<td class="text-align:right"><p>4211</p></td>
-<td class="text-align:right"><p>3310</p></td>
-<td class="text-align:right"><p>2457</p></td>
-<td class="text-align:right"><p>1813</p></td>
-<td class="text-align:right"><p>779</p></td>
-<td class="text-align:right"><p>178</p></td>
-<td class="text-align:right"><p>31545</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1979, 3)</p></td>
+<td class="text-right"><p>2022</p></td>
+<td class="text-right"><p>2982</p></td>
+<td class="text-right"><p>3248</p></td>
+<td class="text-right"><p>3491</p></td>
+<td class="text-right"><p>2640</p></td>
+<td class="text-right"><p>4414</p></td>
+<td class="text-right"><p>4211</p></td>
+<td class="text-right"><p>3310</p></td>
+<td class="text-right"><p>2457</p></td>
+<td class="text-right"><p>1813</p></td>
+<td class="text-right"><p>779</p></td>
+<td class="text-right"><p>178</p></td>
+<td class="text-right"><p>31545</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1980, 3)</p></td>
-<td class="text-align:right"><p>2021</p></td>
-<td class="text-align:right"><p>2952</p></td>
-<td class="text-align:right"><p>3184</p></td>
-<td class="text-align:right"><p>3495</p></td>
-<td class="text-align:right"><p>2663</p></td>
-<td class="text-align:right"><p>4463</p></td>
-<td class="text-align:right"><p>4293</p></td>
-<td class="text-align:right"><p>3373</p></td>
-<td class="text-align:right"><p>2487</p></td>
-<td class="text-align:right"><p>1848</p></td>
-<td class="text-align:right"><p>795</p></td>
-<td class="text-align:right"><p>181</p></td>
-<td class="text-align:right"><p>31755</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1980, 3)</p></td>
+<td class="text-right"><p>2021</p></td>
+<td class="text-right"><p>2952</p></td>
+<td class="text-right"><p>3184</p></td>
+<td class="text-right"><p>3495</p></td>
+<td class="text-right"><p>2663</p></td>
+<td class="text-right"><p>4463</p></td>
+<td class="text-right"><p>4293</p></td>
+<td class="text-right"><p>3373</p></td>
+<td class="text-right"><p>2487</p></td>
+<td class="text-right"><p>1848</p></td>
+<td class="text-right"><p>795</p></td>
+<td class="text-right"><p>181</p></td>
+<td class="text-right"><p>31755</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1981, 3)</p></td>
-<td class="text-align:right"><p>2037</p></td>
-<td class="text-align:right"><p>2776</p></td>
-<td class="text-align:right"><p>3132</p></td>
-<td class="text-align:right"><p>3320</p></td>
-<td class="text-align:right"><p>2664</p></td>
-<td class="text-align:right"><p>4646</p></td>
-<td class="text-align:right"><p>4210</p></td>
-<td class="text-align:right"><p>3330</p></td>
-<td class="text-align:right"><p>2516</p></td>
-<td class="text-align:right"><p>1829</p></td>
-<td class="text-align:right"><p>824</p></td>
-<td class="text-align:right"><p>192</p></td>
-<td class="text-align:right"><p>31476</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1981, 3)</p></td>
+<td class="text-right"><p>2037</p></td>
+<td class="text-right"><p>2776</p></td>
+<td class="text-right"><p>3132</p></td>
+<td class="text-right"><p>3320</p></td>
+<td class="text-right"><p>2664</p></td>
+<td class="text-right"><p>4646</p></td>
+<td class="text-right"><p>4210</p></td>
+<td class="text-right"><p>3330</p></td>
+<td class="text-right"><p>2516</p></td>
+<td class="text-right"><p>1829</p></td>
+<td class="text-right"><p>824</p></td>
+<td class="text-right"><p>192</p></td>
+<td class="text-right"><p>31476</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1982, 3)</p></td>
-<td class="text-align:right"><p>2042</p></td>
-<td class="text-align:right"><p>2707</p></td>
-<td class="text-align:right"><p>3098</p></td>
-<td class="text-align:right"><p>3190</p></td>
-<td class="text-align:right"><p>2651</p></td>
-<td class="text-align:right"><p>4714</p></td>
-<td class="text-align:right"><p>4343</p></td>
-<td class="text-align:right"><p>3327</p></td>
-<td class="text-align:right"><p>2565</p></td>
-<td class="text-align:right"><p>1835</p></td>
-<td class="text-align:right"><p>856</p></td>
-<td class="text-align:right"><p>201</p></td>
-<td class="text-align:right"><p>31529</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1982, 3)</p></td>
+<td class="text-right"><p>2042</p></td>
+<td class="text-right"><p>2707</p></td>
+<td class="text-right"><p>3098</p></td>
+<td class="text-right"><p>3190</p></td>
+<td class="text-right"><p>2651</p></td>
+<td class="text-right"><p>4714</p></td>
+<td class="text-right"><p>4343</p></td>
+<td class="text-right"><p>3327</p></td>
+<td class="text-right"><p>2565</p></td>
+<td class="text-right"><p>1835</p></td>
+<td class="text-right"><p>856</p></td>
+<td class="text-right"><p>201</p></td>
+<td class="text-right"><p>31529</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1983, 3)</p></td>
-<td class="text-align:right"><p>2044</p></td>
-<td class="text-align:right"><p>2670</p></td>
-<td class="text-align:right"><p>3054</p></td>
-<td class="text-align:right"><p>3063</p></td>
-<td class="text-align:right"><p>2625</p></td>
-<td class="text-align:right"><p>4815</p></td>
-<td class="text-align:right"><p>4408</p></td>
-<td class="text-align:right"><p>3325</p></td>
-<td class="text-align:right"><p>2613</p></td>
-<td class="text-align:right"><p>1833</p></td>
-<td class="text-align:right"><p>882</p></td>
-<td class="text-align:right"><p>215</p></td>
-<td class="text-align:right"><p>31547</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1983, 3)</p></td>
+<td class="text-right"><p>2044</p></td>
+<td class="text-right"><p>2670</p></td>
+<td class="text-right"><p>3054</p></td>
+<td class="text-right"><p>3063</p></td>
+<td class="text-right"><p>2625</p></td>
+<td class="text-right"><p>4815</p></td>
+<td class="text-right"><p>4408</p></td>
+<td class="text-right"><p>3325</p></td>
+<td class="text-right"><p>2613</p></td>
+<td class="text-right"><p>1833</p></td>
+<td class="text-right"><p>882</p></td>
+<td class="text-right"><p>215</p></td>
+<td class="text-right"><p>31547</p></td>
 </tr>
 </tbody>
 </table>
@@ -632,110 +727,110 @@ Python</label><div class="tabbed-content docutils">
 </div>
 </div>
 <p>The final dataset (<code class="docutils literal notranslate"><span class="pre">merged.csv</span></code>) should look like:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>fips, year</p></th>
-<th class="text-align:right head"><p>pop1</p></th>
-<th class="text-align:right head"><p>pop2</p></th>
-<th class="text-align:right head"><p>pop3</p></th>
-<th class="text-align:right head"><p>pop4</p></th>
-<th class="text-align:right head"><p>pop5</p></th>
-<th class="text-align:right head"><p>pop6</p></th>
-<th class="text-align:right head"><p>pop7</p></th>
-<th class="text-align:right head"><p>pop8</p></th>
-<th class="text-align:right head"><p>pop9</p></th>
-<th class="text-align:right head"><p>pop10</p></th>
-<th class="text-align:right head"><p>pop11</p></th>
-<th class="text-align:right head"><p>pop12</p></th>
-<th class="text-align:right head"><p>pop</p></th>
-<th class="text-align:right head"><p>deaths</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips, year</p></th>
+<th class="head text-right"><p>pop1</p></th>
+<th class="head text-right"><p>pop2</p></th>
+<th class="head text-right"><p>pop3</p></th>
+<th class="head text-right"><p>pop4</p></th>
+<th class="head text-right"><p>pop5</p></th>
+<th class="head text-right"><p>pop6</p></th>
+<th class="head text-right"><p>pop7</p></th>
+<th class="head text-right"><p>pop8</p></th>
+<th class="head text-right"><p>pop9</p></th>
+<th class="head text-right"><p>pop10</p></th>
+<th class="head text-right"><p>pop11</p></th>
+<th class="head text-right"><p>pop12</p></th>
+<th class="head text-right"><p>pop</p></th>
+<th class="head text-right"><p>deaths</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1979)</p></td>
-<td class="text-align:right"><p>2022</p></td>
-<td class="text-align:right"><p>2982</p></td>
-<td class="text-align:right"><p>3248</p></td>
-<td class="text-align:right"><p>3491</p></td>
-<td class="text-align:right"><p>2640</p></td>
-<td class="text-align:right"><p>4414</p></td>
-<td class="text-align:right"><p>4211</p></td>
-<td class="text-align:right"><p>3310</p></td>
-<td class="text-align:right"><p>2457</p></td>
-<td class="text-align:right"><p>1813</p></td>
-<td class="text-align:right"><p>779</p></td>
-<td class="text-align:right"><p>178</p></td>
-<td class="text-align:right"><p>31545</p></td>
-<td class="text-align:right"><p>225</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1979)</p></td>
+<td class="text-right"><p>2022</p></td>
+<td class="text-right"><p>2982</p></td>
+<td class="text-right"><p>3248</p></td>
+<td class="text-right"><p>3491</p></td>
+<td class="text-right"><p>2640</p></td>
+<td class="text-right"><p>4414</p></td>
+<td class="text-right"><p>4211</p></td>
+<td class="text-right"><p>3310</p></td>
+<td class="text-right"><p>2457</p></td>
+<td class="text-right"><p>1813</p></td>
+<td class="text-right"><p>779</p></td>
+<td class="text-right"><p>178</p></td>
+<td class="text-right"><p>31545</p></td>
+<td class="text-right"><p>225</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1980)</p></td>
-<td class="text-align:right"><p>2021</p></td>
-<td class="text-align:right"><p>2952</p></td>
-<td class="text-align:right"><p>3184</p></td>
-<td class="text-align:right"><p>3495</p></td>
-<td class="text-align:right"><p>2663</p></td>
-<td class="text-align:right"><p>4463</p></td>
-<td class="text-align:right"><p>4293</p></td>
-<td class="text-align:right"><p>3373</p></td>
-<td class="text-align:right"><p>2487</p></td>
-<td class="text-align:right"><p>1848</p></td>
-<td class="text-align:right"><p>795</p></td>
-<td class="text-align:right"><p>181</p></td>
-<td class="text-align:right"><p>31755</p></td>
-<td class="text-align:right"><p>221</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1980)</p></td>
+<td class="text-right"><p>2021</p></td>
+<td class="text-right"><p>2952</p></td>
+<td class="text-right"><p>3184</p></td>
+<td class="text-right"><p>3495</p></td>
+<td class="text-right"><p>2663</p></td>
+<td class="text-right"><p>4463</p></td>
+<td class="text-right"><p>4293</p></td>
+<td class="text-right"><p>3373</p></td>
+<td class="text-right"><p>2487</p></td>
+<td class="text-right"><p>1848</p></td>
+<td class="text-right"><p>795</p></td>
+<td class="text-right"><p>181</p></td>
+<td class="text-right"><p>31755</p></td>
+<td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1981)</p></td>
-<td class="text-align:right"><p>2037</p></td>
-<td class="text-align:right"><p>2776</p></td>
-<td class="text-align:right"><p>3132</p></td>
-<td class="text-align:right"><p>3320</p></td>
-<td class="text-align:right"><p>2664</p></td>
-<td class="text-align:right"><p>4646</p></td>
-<td class="text-align:right"><p>4210</p></td>
-<td class="text-align:right"><p>3330</p></td>
-<td class="text-align:right"><p>2516</p></td>
-<td class="text-align:right"><p>1829</p></td>
-<td class="text-align:right"><p>824</p></td>
-<td class="text-align:right"><p>192</p></td>
-<td class="text-align:right"><p>31476</p></td>
-<td class="text-align:right"><p>221</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1981)</p></td>
+<td class="text-right"><p>2037</p></td>
+<td class="text-right"><p>2776</p></td>
+<td class="text-right"><p>3132</p></td>
+<td class="text-right"><p>3320</p></td>
+<td class="text-right"><p>2664</p></td>
+<td class="text-right"><p>4646</p></td>
+<td class="text-right"><p>4210</p></td>
+<td class="text-right"><p>3330</p></td>
+<td class="text-right"><p>2516</p></td>
+<td class="text-right"><p>1829</p></td>
+<td class="text-right"><p>824</p></td>
+<td class="text-right"><p>192</p></td>
+<td class="text-right"><p>31476</p></td>
+<td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1001, 1982)</p></td>
-<td class="text-align:right"><p>2042</p></td>
-<td class="text-align:right"><p>2707</p></td>
-<td class="text-align:right"><p>3098</p></td>
-<td class="text-align:right"><p>3190</p></td>
-<td class="text-align:right"><p>2651</p></td>
-<td class="text-align:right"><p>4714</p></td>
-<td class="text-align:right"><p>4343</p></td>
-<td class="text-align:right"><p>3327</p></td>
-<td class="text-align:right"><p>2565</p></td>
-<td class="text-align:right"><p>1835</p></td>
-<td class="text-align:right"><p>856</p></td>
-<td class="text-align:right"><p>201</p></td>
-<td class="text-align:right"><p>31529</p></td>
-<td class="text-align:right"><p>223</p></td>
+<tr class="row-odd"><td class="text-left"><p>(1001, 1982)</p></td>
+<td class="text-right"><p>2042</p></td>
+<td class="text-right"><p>2707</p></td>
+<td class="text-right"><p>3098</p></td>
+<td class="text-right"><p>3190</p></td>
+<td class="text-right"><p>2651</p></td>
+<td class="text-right"><p>4714</p></td>
+<td class="text-right"><p>4343</p></td>
+<td class="text-right"><p>3327</p></td>
+<td class="text-right"><p>2565</p></td>
+<td class="text-right"><p>1835</p></td>
+<td class="text-right"><p>856</p></td>
+<td class="text-right"><p>201</p></td>
+<td class="text-right"><p>31529</p></td>
+<td class="text-right"><p>223</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(1001, 1983)</p></td>
-<td class="text-align:right"><p>2044</p></td>
-<td class="text-align:right"><p>2670</p></td>
-<td class="text-align:right"><p>3054</p></td>
-<td class="text-align:right"><p>3063</p></td>
-<td class="text-align:right"><p>2625</p></td>
-<td class="text-align:right"><p>4815</p></td>
-<td class="text-align:right"><p>4408</p></td>
-<td class="text-align:right"><p>3325</p></td>
-<td class="text-align:right"><p>2613</p></td>
-<td class="text-align:right"><p>1833</p></td>
-<td class="text-align:right"><p>882</p></td>
-<td class="text-align:right"><p>215</p></td>
-<td class="text-align:right"><p>31547</p></td>
-<td class="text-align:right"><p>267</p></td>
+<tr class="row-even"><td class="text-left"><p>(1001, 1983)</p></td>
+<td class="text-right"><p>2044</p></td>
+<td class="text-right"><p>2670</p></td>
+<td class="text-right"><p>3054</p></td>
+<td class="text-right"><p>3063</p></td>
+<td class="text-right"><p>2625</p></td>
+<td class="text-right"><p>4815</p></td>
+<td class="text-right"><p>4408</p></td>
+<td class="text-right"><p>3325</p></td>
+<td class="text-right"><p>2613</p></td>
+<td class="text-right"><p>1833</p></td>
+<td class="text-right"><p>882</p></td>
+<td class="text-right"><p>215</p></td>
+<td class="text-right"><p>31547</p></td>
+<td class="text-right"><p>267</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -749,7 +844,7 @@ Python</label><div class="tabbed-content docutils">
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -757,36 +852,104 @@ Python</label><div class="tabbed-content docutils">
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="functional-forms.html" title="previous page">Functional forms: pros, cons, and methods</a>
-    <a class='right-next' id="next-link" href="geographical-unit-data.html" title="next page">Generating geographical unit data</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="functional-forms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Functional forms: pros, cons, and methods</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="geographical-unit-data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generating geographical unit data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thinking-about-the-data-generating-process">Thinking about the data-generating process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-population-data">Download the population data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-mortality-data">Downloading the mortality data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-mortality-data">Preparing the mortality data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2020.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

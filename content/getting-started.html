@@ -1,349 +1,427 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction to the Tutorial</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/getting-started';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Using Weather and Climate Data" href="weather-and-climate-data.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
+    
+    
+    
+  </div>
   
-  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
   
   
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/climate_estimate_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/climate_estimate_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Introduction to the Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Using Weather and Climate Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">How to Start Working with a Data Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Understanding the outcomes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geographical-unit-data.html">Generating geographical unit data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-shapefiles.html">Constructing weather averages within spatial units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting-schemes.html">Weighting schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-On Exercise, Step 3: Aggregating the data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="producing-results.html">Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="reference internal" href="#">
-   Introduction to the Tutorial
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Weather and Climate Data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="weather-and-climate-data.html">
-   Using Weather and Climate Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-data-product.html">
-   How to Start Working with a Data Product
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step1.html">
-   Hands-On Exercise, Step 1: Preparing the Weather Data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Developing a reduced-form specification
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="reduced-form-specification.html">
-   Developing a reduced-form specification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="functional-forms.html">
-   Functional forms: pros, cons, and methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step2.html">
-   Hands-On Exercise, Step 2: Understanding the outcomes
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Geographical unit data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="geographical-unit-data.html">
-   Generating geographical unit data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-shapefiles.html">
-   Constructing weather averages within spatial units
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="weighting-schemes.html">
-   Weighting schemes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step3.html">
-   Hands-On Exercise, Step 3: Aggregating the data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Bringing it all together
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="producing-results.html">
-   Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step4.html">
-   Hands-On Exercise, Step 4: Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Contributors
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="contributors.html">
-   Contributors
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/getting-started.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/issues/new?title=Issue%20on%20page%20%2Fcontent/getting-started.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/getting-started.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-        <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/getting-started.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/getting-started.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
-
-        <!-- Launch buttons -->
-
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Introduction to the Tutorial
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#who-is-this-tutorial-for">
-   Who is this tutorial for?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-we-hope-you-will-learn">
-   What we hope you will learn
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-use-this-tutorial">
-   How to use this tutorial
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#useful-introductory-resources">
-   Useful introductory resources
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#definitions-and-conventions">
-     Definitions and conventions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#point-data-region-data-and-gridded-data">
-       Point data, region data, and gridded data
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#mathematical-notation">
-       Mathematical notation
-      </a>
-      <ul class="nav section-nav flex-column">
-      </ul>
-     </li>
-    </ul>
-   </li>
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
   </ul>
- </li>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/getting-started.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to the Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to the Tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-tutorial-for">Who is this tutorial for?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-hope-you-will-learn">What we hope you will learn</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-tutorial">How to use this tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-introductory-resources">Useful introductory resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-conventions">Definitions and conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-data-region-data-and-gridded-data">Point data, region data, and gridded data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-notation">Mathematical notation</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="introduction-to-the-tutorial">
-<h1>Introduction to the Tutorial<a class="headerlink" href="#introduction-to-the-tutorial" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-the-tutorial">
+<h1>Introduction to the Tutorial<a class="headerlink" href="#introduction-to-the-tutorial" title="Permalink to this heading">#</a></h1>
 <p>The use of econometrics to study how social, economic, and biophysical
 systems respond to weather has started a torrent of new research. It
 is allowing us to better understand the impacts of climate change,
@@ -368,9 +446,9 @@ problems, the appropriate solutions to these problems are unique to
 each research question. No single sequence of steps or software can be
 widely applied for resolving these issues. Instead, this tutorial is
 aimed at helping you make decisions appropriate to your research.</p>
-</div>
-<div class="section" id="who-is-this-tutorial-for">
-<h1>Who is this tutorial for?<a class="headerlink" href="#who-is-this-tutorial-for" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="who-is-this-tutorial-for">
+<h1>Who is this tutorial for?<a class="headerlink" href="#who-is-this-tutorial-for" title="Permalink to this heading">#</a></h1>
 <p>This tutorial is created for students and researchers new to climate
 econometrics. However, it assumes a knowledge of panel econometric methods. You
 should be familiar with specifications that factor-out unobserved
@@ -385,12 +463,12 @@ language (Stata, R, Python, Matlab, Julia). In most examples, we provide code sn
 <p>You should also already have a research question. There are plenty of
 ways to find important questions, and maybe we will try to offer a
 tutorial on that in the future.</p>
-</div>
-<div class="section" id="what-we-hope-you-will-learn">
-<h1>What we hope you will learn<a class="headerlink" href="#what-we-hope-you-will-learn" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-we-hope-you-will-learn">
+<h1>What we hope you will learn<a class="headerlink" href="#what-we-hope-you-will-learn" title="Permalink to this heading">#</a></h1>
 <p>This tutorial offers guidance that will help you contribute to climate econometrics research. It will walk you through the necessary
 steps in relating socioeconomic outcomes to weather data at high resolution. We will cover:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>How to find and use weather data, and what you should be aware of when using it.</p></li>
 <li><p>How to relate your socioeconomic outcomes to weather variables, and
 develop your regression specification.</p></li>
@@ -402,12 +480,12 @@ yourself. In particular, we do not provide prepared weather data or a
 ready-made script to prepare it. Each particular project is too specific,
 so you, the researcher, need to think through everything. This
 tutorial is aimed at helping you do that.</p>
-</div>
-<div class="section" id="how-to-use-this-tutorial">
-<h1>How to use this tutorial<a class="headerlink" href="#how-to-use-this-tutorial" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-use-this-tutorial">
+<h1>How to use this tutorial<a class="headerlink" href="#how-to-use-this-tutorial" title="Permalink to this heading">#</a></h1>
 <p>The tutorial is organized along the rough outline of a research
 project:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><em>Weather and climate data</em>: introduces environmental data and its attributes, the NetCDF file format, supported programming languages, and common limitations of the data.</p></li>
 <li><p><em>Developing a reduced-form specification</em>: provides a number of considerations before starting an analysis, such as choosing weather variables, functions for creating a model, and caveats when working with spatial and temporal processes.</p></li>
 <li><p><em>Geographical unit data</em>: introduces geographic information
@@ -424,9 +502,9 @@ template for other research projects.</p>
 <p>Most importantly, if you learn something in your own research process
 that you think would be of broad interest, see <a class="reference external" href="https://github.com/atrisovic/weather-panel.github.io">the contributor’s guide</a> for how to include it here. Help us make this tutorial more
 useful for more people!</p>
-</div>
-<div class="section" id="useful-introductory-resources">
-<h1>Useful introductory resources<a class="headerlink" href="#useful-introductory-resources" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="useful-introductory-resources">
+<h1>Useful introductory resources<a class="headerlink" href="#useful-introductory-resources" title="Permalink to this heading">#</a></h1>
 <p>Here are some resources to read to understand climate
 econometrics. This tutorial is a kind of practical counterpart to
 these excellent documents.</p>
@@ -449,14 +527,14 @@ Basis)</a> and <a class="reference external" href="https://www.ipcc.ch/report/ar
 climate impacts. Chapter 1 of the IPCC WGI report in particular
 provides useful background information on climate and climate
 modeling.</p>
-<div class="section" id="definitions-and-conventions">
-<h2>Definitions and conventions<a class="headerlink" href="#definitions-and-conventions" title="Permalink to this headline">¶</a></h2>
+<section id="definitions-and-conventions">
+<h2>Definitions and conventions<a class="headerlink" href="#definitions-and-conventions" title="Permalink to this heading">#</a></h2>
 <p>We will use the following terms throughout this tutorial.</p>
-<div class="section" id="point-data-region-data-and-gridded-data">
-<h3>Point data, region data, and gridded data<a class="headerlink" href="#point-data-region-data-and-gridded-data" title="Permalink to this headline">¶</a></h3>
+<section id="point-data-region-data-and-gridded-data">
+<h3>Point data, region data, and gridded data<a class="headerlink" href="#point-data-region-data-and-gridded-data" title="Permalink to this heading">#</a></h3>
 <p>The data being related in climate econometric studies comes in three
 forms:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Point data describes the conditions at a particular geographic
 point in space. For weather data, this is typically the location of
 a weather station or gauge. For socioeconomic data, it may be a
@@ -481,9 +559,9 @@ important to avoid misusing such data.</p></li>
 <p>It is usually preferable to analyze data in the spatial structure it
 is offered, even if translating it to another structure would be
 easier. We will discuss this more later.</p>
-</div>
-<div class="section" id="mathematical-notation">
-<h3>Mathematical notation<a class="headerlink" href="#mathematical-notation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mathematical-notation">
+<h3>Mathematical notation<a class="headerlink" href="#mathematical-notation" title="Permalink to this heading">#</a></h3>
 <p>In many cases, it will be useful to describe how to describe how to work with weather
 variables irrespective of the specific data being represented. A
 common mathematical notation will help our discussion in the tutorial,
@@ -498,6 +576,8 @@ use the following notation:</p>
 into regional data (<span class="math notranslate nohighlight">\(X_{it}\)</span>). When we actually use this mathematical
 logic, we will often replace <span class="math notranslate nohighlight">\(X\)</span> with <span class="math notranslate nohighlight">\(T\)</span> for temperature and <span class="math notranslate nohighlight">\(P\)</span> for
 precipitation.</p>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -508,9 +588,7 @@ precipitation.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
-</div>
-</div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -524,7 +602,7 @@ precipitation.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -532,35 +610,104 @@ precipitation.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='right-next' id="next-link" href="weather-and-climate-data.html" title="next page">Using Weather and Climate Data</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="weather-and-climate-data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using Weather and Climate Data</p>
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to the Tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-this-tutorial-for">Who is this tutorial for?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-hope-you-will-learn">What we hope you will learn</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-tutorial">How to use this tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-introductory-resources">Useful introductory resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-conventions">Definitions and conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-data-region-data-and-gridded-data">Point data, region data, and gridded data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-notation">Mathematical notation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2020.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

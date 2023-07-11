@@ -1,398 +1,433 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Developing a reduced-form specification</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/reduced-form-specification';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Functional forms: pros, cons, and methods" href="functional-forms.html" />
     <link rel="prev" title="Hands-On Exercise, Step 1: Preparing the Weather Data" href="example-step1.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
+    
+    
+    
+  </div>
   
-  <img src="../_static/climate_estimate_logo.png" class="logo" alt="logo">
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="getting-started.html">
   
   
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/climate_estimate_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/climate_estimate_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="getting-started.html">
+                    Introduction to the Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Using Weather and Climate Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">How to Start Working with a Data Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Developing a reduced-form specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Understanding the outcomes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geographical-unit-data.html">Generating geographical unit data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-shapefiles.html">Constructing weather averages within spatial units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting-schemes.html">Weighting schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-On Exercise, Step 3: Aggregating the data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="producing-results.html">Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="getting-started.html">
-   Introduction to the Tutorial
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Weather and Climate Data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="weather-and-climate-data.html">
-   Using Weather and Climate Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-data-product.html">
-   How to Start Working with a Data Product
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step1.html">
-   Hands-On Exercise, Step 1: Preparing the Weather Data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Developing a reduced-form specification
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Developing a reduced-form specification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="functional-forms.html">
-   Functional forms: pros, cons, and methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step2.html">
-   Hands-On Exercise, Step 2: Understanding the outcomes
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Geographical unit data
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="geographical-unit-data.html">
-   Generating geographical unit data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="working-with-shapefiles.html">
-   Constructing weather averages within spatial units
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="weighting-schemes.html">
-   Weighting schemes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step3.html">
-   Hands-On Exercise, Step 3: Aggregating the data
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Bringing it all together
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="producing-results.html">
-   Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="example-step4.html">
-   Hands-On Exercise, Step 4: Producing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="suggestions.html">
-   Suggestions for work organization
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Contributors
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="contributors.html">
-   Contributors
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/reduced-form-specification.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/issues/new?title=Issue%20on%20page%20%2Fcontent/reduced-form-specification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
 
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/reduced-form-specification.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
 
-        <!-- Source interaction buttons -->
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/reduced-form-specification.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/atrisovic/weather-panel.github.io/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/atrisovic/weather-panel.github.io//issues/new?title=Issue%20on%20page%20%2Fcontent/reduced-form-specification.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/reduced-form-specification.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
 
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
+</div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Developing a reduced-form specification</h1>
     <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-weather-variables-and-their-forms">
-   Choosing weather variables and their forms
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#temperature">
-     <em>
-      Temperature
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#humidity">
-     <em>
-      Humidity
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#precipitation">
-     <em>
-      Precipitation
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#river-discharge-rate">
-     <em>
-      River discharge rate
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#wind-speed">
-     <em>
-      Wind speed
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#net-primary-productivity-npp">
-     <em>
-      Net primary productivity (NPP)
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evapotranspiration-rate-et">
-     <em>
-      Evapotranspiration rate (ET)
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solar-radiation">
-     <em>
-      Solar radiation
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sea-surface-temperature-sst-and-ocean-temperature">
-     <em>
-      Sea surface temperature (SST) and ocean temperature
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#climatic-indices">
-     <em>
-      Climatic indices
-     </em>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#spatial-and-temporal-scales-of-economic-processes">
-   Spatial and temporal scales of economic processes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transformation-before-aggregation">
-     Transformation-before-aggregation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aggregation-before-transformation">
-     Aggregation-before-transformation
-    </a>
-   </li>
-  </ul>
- </li>
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-weather-variables-and-their-forms">Choosing weather variables and their forms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature"><em>Temperature</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humidity"><em>Humidity</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation"><em>Precipitation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#river-discharge-rate"><em>River discharge rate</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wind-speed"><em>Wind speed</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-primary-productivity-npp"><em>Net primary productivity (NPP)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evapotranspiration-rate-et"><em>Evapotranspiration rate (ET)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-radiation"><em>Solar radiation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature-sst-and-ocean-temperature"><em>Sea surface temperature (SST) and ocean temperature</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#climatic-indices"><em>Climatic indices</em></a></li>
 </ul>
-
-        </nav>
-        
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-and-temporal-scales-of-economic-processes">Spatial and temporal scales of economic processes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-before-aggregation">Transformation-before-aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-before-transformation">Aggregation-before-transformation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="developing-a-reduced-form-specification">
-<h1>Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="developing-a-reduced-form-specification">
+<h1>Developing a reduced-form specification<a class="headerlink" href="#developing-a-reduced-form-specification" title="Permalink to this heading">#</a></h1>
 <div class="note admonition">
 <p class="admonition-title">Key objectives and decision points</p>
 <p>Objectives:</p>
@@ -416,8 +451,8 @@ developing a <a class="reference external" href="https://stats.stackexchange.com
 the climate econometric literature and the empirical methods used to
 identify them, a good resource is <a class="reference external" href="http://science.sciencemag.org/content/353/6304/aad9837">Social and Economic Impacts of Climate</a>.</p>
 </div>
-<div class="section" id="choosing-weather-variables-and-their-forms">
-<span id="content-choosing-weather-variables"></span><h2>Choosing weather variables and their forms<a class="headerlink" href="#choosing-weather-variables-and-their-forms" title="Permalink to this headline">¶</a></h2>
+<section id="choosing-weather-variables-and-their-forms">
+<span id="content-choosing-weather-variables"></span><h2>Choosing weather variables and their forms<a class="headerlink" href="#choosing-weather-variables-and-their-forms" title="Permalink to this heading">#</a></h2>
 <p>The choice of weather variables depends on the question we are trying
 to answer, and there are many forms to represent any given
 variable. For example, in the case of temperature, we can use
@@ -427,10 +462,10 @@ first think about possible <em>mechanism(s)</em> behind a change witnessed in
 the environment, and then only make choices for variables that can
 explain that mechanism. A few of the important and frequently-used
 weather variables are listed below, and why we might choose them:</p>
-<div class="section" id="temperature">
-<h3><em>Temperature</em><a class="headerlink" href="#temperature" title="Permalink to this headline">¶</a></h3>
+<section id="temperature">
+<h3><em>Temperature</em><a class="headerlink" href="#temperature" title="Permalink to this heading">#</a></h3>
 <p>Temperature relationships are often preferred in climate impacts research, because temperature is more predictable than many other weather variables. There are various measures of temperature that can be used. Some of them are listed below:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong><span class="math notranslate nohighlight">\(T_{min}\)</span>, <span class="math notranslate nohighlight">\(T_{max}\)</span>:</strong>  Many socioeconomic processes are more
 sensitive to extreme temperatures than to variation in the
 average. This is also useful when temperature variation is
@@ -449,59 +484,59 @@ level. A sinusoid between <span class="math notranslate nohighlight">\(T_{min}\)
 to approximate DDs from daily data.</p></li>
 <li><p><strong>Heat Index &amp; Wet Bulb Temperature</strong>: (see below on humidity)</p></li>
 </ol>
-</div>
-<div class="section" id="humidity">
-<h3><em>Humidity</em><a class="headerlink" href="#humidity" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="humidity">
+<h3><em>Humidity</em><a class="headerlink" href="#humidity" title="Permalink to this heading">#</a></h3>
 <p>There are mainly three metrics for humidity measurements: absolute, relative (often “RH”), and specific. Absolute humidity describes the water content of air,
 expressed in grams per cubic meter or grams per kilogram. Relative
 humidity is defined as a percentage relative to a maximum humidity
 value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate “apparent” temperature, i.e. the temperature the current weather “feels like”:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>Wet-Bulb Temperature (WBT)</strong>: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity.</p></li>
 <li><p><strong>Wet-Bulb Globe Temperature (WBGT)</strong>: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight)</p></li>
 <li><p><strong>Heat Index (HI)</strong>: various calculated metrics combining shade temperature and relative humidity</p></li>
 </ol>
-</div>
-<div class="section" id="precipitation">
-<h3><em>Precipitation</em><a class="headerlink" href="#precipitation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="precipitation">
+<h3><em>Precipitation</em><a class="headerlink" href="#precipitation" title="Permalink to this heading">#</a></h3>
 <p>Precipitation is highly local (in space <em>and</em> time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see <a class="reference internal" href="weather-and-climate-data.html#content-warning-on-hydrological"><span class="std std-ref">a Warning on Hydrological Variables</span></a>. It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation vary significantly by region and time of year (see e.g. <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760">Trenberth et al. 2005</a>, with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Remember that though means and extremes may be correlated, it’s still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>Total precipitation (e.g., over a year)</strong>: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena.</p></li>
 <li><p><strong>Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability</strong>: often used to capture water stress.</p></li>
 <li><p><strong>Number of rainy/dry days or moments of the precipitation distribution</strong>: the distribution of precipitation often matters more than the total.</p></li>
 </ol>
 <p>Some datasets (such as <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data">HadEX2</a>) specialize in extremes data.</p>
-</div>
-<div class="section" id="river-discharge-rate">
-<h3><em>River discharge rate</em><a class="headerlink" href="#river-discharge-rate" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="river-discharge-rate">
+<h3><em>River discharge rate</em><a class="headerlink" href="#river-discharge-rate" title="Permalink to this heading">#</a></h3>
 <p>River flows are generally measured at the station-level. While runoff is available in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.</p>
-</div>
-<div class="section" id="wind-speed">
-<h3><em>Wind speed</em><a class="headerlink" href="#wind-speed" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="wind-speed">
+<h3><em>Wind speed</em><a class="headerlink" href="#wind-speed" title="Permalink to this heading">#</a></h3>
 <p>The process of interest determines how wind speeds should be measured. For example, normal speeds are important for agriculture, squared speeds for destructive force, and cubic speeds for wind turbine power. Also, consider gust velocity, which is generally available. Maximum wind speed over some time period has been used as well.</p>
-</div>
-<div class="section" id="net-primary-productivity-npp">
-<h3><em>Net primary productivity (NPP)</em><a class="headerlink" href="#net-primary-productivity-npp" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="net-primary-productivity-npp">
+<h3><em>Net primary productivity (NPP)</em><a class="headerlink" href="#net-primary-productivity-npp" title="Permalink to this heading">#</a></h3>
 <p>It is the difference of amount of carbon dioxide that vegetation takes in during photosynthesis and the amount of carbon dioxide released during respiration. The data come from MODIS on NASA’s Terra satellite. Values range from near 0 g of carbon/area/day (tan) to 6.5 g of carbon/area/day (dark green). A negative value means decomposition or respiration overpowered carbon absorption; more carbon was released to the atmosphere than the plants took in.</p>
-</div>
-<div class="section" id="evapotranspiration-rate-et">
-<h3><em>Evapotranspiration rate (ET)</em><a class="headerlink" href="#evapotranspiration-rate-et" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="evapotranspiration-rate-et">
+<h3><em>Evapotranspiration rate (ET)</em><a class="headerlink" href="#evapotranspiration-rate-et" title="Permalink to this heading">#</a></h3>
 <p>It is the sum of evaporation and plant transpiration from the Earth’s land and ocean surface to the atmosphere. Changes in ET are estimated using water stress measures in plants, and are related to agricultural productivity.</p>
-</div>
-<div class="section" id="solar-radiation">
-<h3><em>Solar radiation</em><a class="headerlink" href="#solar-radiation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="solar-radiation">
+<h3><em>Solar radiation</em><a class="headerlink" href="#solar-radiation" title="Permalink to this heading">#</a></h3>
 <p>Shortwave radiation (visible light, UV) contains more energy than longwave radiation (infrared light). The sun emits shortwave radiation, while the Earth re-emits the heat it receives as longwave radiation in the form of infrared rays. Exposure to shortwave radiation may cause skin cancer or eye damage, but it is important for regulating vitamin D circulation in our body.</p>
-</div>
-<div class="section" id="sea-surface-temperature-sst-and-ocean-temperature">
-<h3><em>Sea surface temperature (SST) and ocean temperature</em><a class="headerlink" href="#sea-surface-temperature-sst-and-ocean-temperature" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sea-surface-temperature-sst-and-ocean-temperature">
+<h3><em>Sea surface temperature (SST) and ocean temperature</em><a class="headerlink" href="#sea-surface-temperature-sst-and-ocean-temperature" title="Permalink to this heading">#</a></h3>
 <p>SST is the water temperature close to the ocean’s surface, while ocean temperature is related to ocean heat content, an important topic in the study of global warming. Weather satellites have been available to determine SST information since 1967. NASA and Moderate Resolution Imaging Spectroradiometer (MODIS) SST satellites have been providing global SST data since 2000, available with a day lag. Though SST has a large impact on global weather patterns, other metrics (such as El Niño indices - ENSO3.4, etc. - or various other oscillation indices) may be more useful in understanding its impact.</p>
-</div>
-<div class="section" id="climatic-indices">
-<h3><em>Climatic indices</em><a class="headerlink" href="#climatic-indices" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="climatic-indices">
+<h3><em>Climatic indices</em><a class="headerlink" href="#climatic-indices" title="Permalink to this heading">#</a></h3>
 <p>A wide range of metrics has been developed to understand the state of the ocean-atmosphere system at large scales. These are measured in a standardized way (e.g., by comparing temperature at two points or by extracting a mean over a region),
 and often have long time-series, often at the monthly level. However, they do not vary over space. Data for some of the
 most important are available through <a class="reference external" href="https://www.ncdc.noaa.gov/teleconnections/">NOAA</a>.  Some of the most important are:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>El Niño/Southern Oscillation (ENSO)</strong>: Affects temperature
 and precipitation across the globe, with hotspots on most
 continents. For some applications, the value of the signal
@@ -513,10 +548,10 @@ not.</p></li>
 throughout East Africa, South and Southeast Asia, and
 Oceania.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="spatial-and-temporal-scales-of-economic-processes">
-<span id="content-spatial-and-temporal-scales"></span><h2>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="spatial-and-temporal-scales-of-economic-processes">
+<span id="content-spatial-and-temporal-scales"></span><h2>Spatial and temporal scales of economic processes<a class="headerlink" href="#spatial-and-temporal-scales-of-economic-processes" title="Permalink to this heading">#</a></h2>
 <p>The process of developing a reduced-form specification starts with a
 study of the “true model”, or data-generating process, that relates
 our dependent variable to our weather variables. A crucial aspect of
@@ -556,8 +591,8 @@ signal less than doing it for precipitation. This is because
 precipitation is highly local both temporally and spatially (it could
 rain for &lt;1 min in &lt;1 km radius area).</p>
 </div>
-<div class="section" id="transformation-before-aggregation">
-<h3>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this headline">¶</a></h3>
+<section id="transformation-before-aggregation">
+<h3>Transformation-before-aggregation<a class="headerlink" href="#transformation-before-aggregation" title="Permalink to this heading">#</a></h3>
 <p>When an economic process occurs at the local level (for example,
 for individuals or households), we need first to do our estimation at
 the grid level. For example, to estimate the effect of temperature on
@@ -593,9 +628,9 @@ curve into a sum of terms:</p>
 \[\beta_k (\sum_{s\in t} \sum_{p\in i} g_k(T_{ps}))\]</div>
 <p>That is, the variables used in the regression should be the sum over
 weather data that has been transformed at the grid level.</p>
-</div>
-<div class="section" id="aggregation-before-transformation">
-<h3>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="aggregation-before-transformation">
+<h3>Aggregation-before-transformation<a class="headerlink" href="#aggregation-before-transformation" title="Permalink to this heading">#</a></h3>
 <p>When an economic process is occurring at the regional level, we need
 to first aggregate weather variable to that level before transforming
 it. For example, to estimate the effect of storm events on public
@@ -617,12 +652,12 @@ do.</p>
 <span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(g_k(\cdot)\)</span> is the non-linear transformation (e.g., raising to
 powers for polynomials), and <span class="math notranslate nohighlight">\(y_{it}\)</span> is the dependent variable
 observed for region <span class="math notranslate nohighlight">\(i\)</span> in reporting period <span class="math notranslate nohighlight">\(t\)</span>. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/cartoon_sec2.JPG" src="../_images/cartoon_sec2.JPG" />
-</div>
-</div>
-</div>
-</div>
+</figure>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -636,7 +671,7 @@ observed for region <span class="math notranslate nohighlight">\(i\)</span> in r
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -644,36 +679,118 @@ observed for region <span class="math notranslate nohighlight">\(i\)</span> in r
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="example-step1.html" title="previous page">Hands-On Exercise, Step 1: Preparing the Weather Data</a>
-    <a class='right-next' id="next-link" href="functional-forms.html" title="next page">Functional forms: pros, cons, and methods</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="example-step1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hands-On Exercise, Step 1: Preparing the Weather Data</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="functional-forms.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Functional forms: pros, cons, and methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-weather-variables-and-their-forms">Choosing weather variables and their forms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature"><em>Temperature</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humidity"><em>Humidity</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precipitation"><em>Precipitation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#river-discharge-rate"><em>River discharge rate</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wind-speed"><em>Wind speed</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#net-primary-productivity-npp"><em>Net primary productivity (NPP)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evapotranspiration-rate-et"><em>Evapotranspiration rate (ET)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-radiation"><em>Solar radiation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature-sst-and-ocean-temperature"><em>Sea surface temperature (SST) and ocean temperature</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#climatic-indices"><em>Climatic indices</em></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-and-temporal-scales-of-economic-processes">Spatial and temporal scales of economic processes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-before-aggregation">Transformation-before-aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-before-transformation">Aggregation-before-transformation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2020.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

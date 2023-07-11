@@ -47,7 +47,8 @@ aggregate it to the scale of the weather. We also need it in NetCDF
 format, for the aggregation step. Again, this code assumes that it is
 being run from a directory `code`, sister to the `data` directory.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 library(raster)
 rr <- raster("../data/pcount/usap90ag.bil")
@@ -61,7 +62,7 @@ writeRaster(rr3, "../data/pcount/usap90ag.nc4",
 ```
 ````
  
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 #!pip install rasterio # will work in Jupyter Notebook
 import xarray as xr
@@ -85,6 +86,7 @@ rr3 = rr3.rename(x='lon', y='lat')
 rr3.to_dataset(name="Population").to_netcdf("../data/pcount/usap90ag.nc4")
 ```
 ````
+`````
 
 ## Downloading the mortality data
 
@@ -123,7 +125,8 @@ on).
 Here we sum across all races and ages and merge the mortality and
 population data.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 library(dplyr)
 
@@ -149,7 +152,7 @@ write.csv(df4[, -which(names(df4) == 'type')], "../data/cmf/merged.csv", row.nam
 ```
 ````
  
-````{tabbed} Python
+````{tab-item} Python
 ```{code-block} python
 import pandas as pd
 df_mort = pd.read_csv("../data/cmf/Mort7988.txt", names = ['input'])
@@ -209,6 +212,7 @@ df = df_pop5.merge(df_mort4, how='left', on=['fips', 'year'])
 df.to_csv("../data/cmf/merged.csv", header=True)
 ```
 ````
+`````
 
 The final dataset (`merged.csv`) should look like:
 		
