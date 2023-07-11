@@ -6,13 +6,17 @@
 Objectives:
 - Understand what geographical unit and administrative unit data are
 - Understand shapefiles, how to obtain them and how to work with them
+- Understand how to incorporate weights into your data.
+- Understand how to match up gridded data with different grids.
 
 Decision points:
 - How to incorporate geographical and administrative units in your analysis?
 - How to generate weather measures that will correspond to your economic data and geographical regions?
+- Does your data-generating process occur locally or regionally?
+- Select the weighting scheme most appropriate for your data.
 ```
 
-Socioeconomic data is collected and corresponding to geographical units, such as states, countries, provinces, or municipalities, which is a portion of a country delineated for administration, and hence, often called  "administrative units". For that reason, administrative units (or politically-defined regions) are frequently used in economic analysis rather than regular grids. Communicating data analysis results in administrative units is also particularly effective since politically defined regions are relevant for policy-makers. 
+Socioeconomic data is collected corresponding to geographical units, such as states, countries, provinces, or municipalities, which is a portion of a country delineated for administration, and hence, often called  "administrative units". For that reason, administrative units (or politically-defined regions) are frequently used in economic analysis rather than regular grids. Communicating data analysis results in administrative units is also particularly effective since politically defined regions are relevant for policy-makers. 
 
 The top-level of this hierarchy of administrative units is **ADM0**, referring to countries; **ADM1** is the first level of political division, usually called states or provinces; **ADM2** is the second level of division, and has a wider range of names across the globe (see example below).
  
