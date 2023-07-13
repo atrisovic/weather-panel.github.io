@@ -35,7 +35,8 @@ Throughout this section, we introduce relevant commands whenever
 possible for the following languages and packages (click on the tab
 names for details):
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 [`xarray`](http://xarray.pydata.org/en/stable/) (recommended) is a package for working with N-dimensional data that natively supports NetCDF files.
 
@@ -46,11 +47,11 @@ import xarray as xr
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 MATLAB has native support for working with N-dimensional data.
 ````
 
-````{tabbed} R
+````{tab-item} R
 Support through the [ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package.
 
 For any R code chunks, it's assumed the `ncdf4` package is loaded with: 
@@ -60,7 +61,7 @@ library(ncdf4)
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 Support through the [netCDF4](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module.
 
 For any Python (NetCDF4) code chunks, it's assumed that the `NetCDF4` package is loaded as `nc`:
@@ -70,13 +71,14 @@ import netCDF4 as nc
 ```
 ````
 
-````{tabbed} nco
+````{tab-item} nco
 [nco](http://nco.sourceforge.net) ("NetCDF operators") - it is a series of command-line tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language. Here are a few important commands: 
 
 - `ncview` (to display spatial data), 
 - `ncks` ("nc kitchen sink" - to split or concatenate files command line), and 
 - `ncdump` (to print contents of the file).
 ````
+`````
 
 
 ```{tip}
@@ -142,39 +144,41 @@ To figure out which file saving convention your NetCDF file uses and what is con
 
 NetCDF files are self-describing, meaning that the file itself contains descriptive information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, what the variables are named, etc. Here are the commands to print the header for NetCDF filename `fn`: 
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 ```{code-block} python
 ds = xr.open_dataset(fn)
 ds
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 ncdisp(fn)
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 ncfile
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 ```{code-block} python
 ds = nc.Dataset(fn)
 ds
 ```
 ````
 
-````{tabbed} nco
+````{tab-item} nco
 ```{code-block} 
 # 
 ncdump -h fn
 ```
 ````
+`````
 
 The header will contain ‘global attributes,’ which are just text fields containing housekeeping information (information specifying the institution that created the file, copyright information, etc.). Then, for each variable contained within the file, the header specifies the names and sizes of their dimensions, plus any variable-specific attributes, like units.
 
@@ -198,7 +202,8 @@ Here are some important common “attributes” of NetCDF files or variables:
 
 NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable `var`:
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 ```{code-block} python
 ds = xr.open_dataset(fn)
 ds.var
@@ -207,20 +212,20 @@ ds.var
 `xr.open_dataset(fn)` prepares to load all variables contained in `fn` into a [Dataset](http://xarray.pydata.org/en/stable/data-structures.html#dataset), which allows you to conduct operations across all variables in the file. `ds.var` extracts the variable named `'var'` specifically, into a [DataArray](http://xarray.pydata.org/en/stable/data-structures.html#dataarray). Data is loaded 'lazily,' meaning only variable information (not content) is loaded until calculations are done on them. To force loading, run `ds.load()`.
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 var = ncread(fn,'var');
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 var <- ncvar_get(ncfile,'var')
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 ```{code-block} python
 ncf = nc.Dataset(fn)
 var = ncf.variables['var'][:]
@@ -228,13 +233,16 @@ var = ncf.variables['var'][:]
 
 `ncf.variables[var]` returns a `float` object that keeps the attributes from the NetCDF file
 ````
+`````
+
 (content:loading-netcdf)=
 #### Loading a subset of a NetCDF file
 NetCDF files can be partially loaded, which is particularly useful if you only need a geographic or temporal subset of a variable. Unless you are using `xarray` (which allows you to refer to dimensions by name), make sure you confirm the order of dimensions first by reading the NetCDF header, to avoid subsetting the wrong dimension. 
 
 The following example assumes `fn` is a file containing a 3-dimensional (`lon,lat,time`) variable called "`'var'`", and extracts a 5 x 5 pixel time series for 365 time steps:
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 Data is loaded lazily and only fully loaded when calculations are done, so you can slice (subset) data without loading it into memory. Slicing can be done by time, variable, etc.
 
 ```{code-block} python
@@ -252,19 +260,20 @@ ds = ds.sel(lat=slice(22,53),lon=slice(-125,-65),time=slice('1979-01-01','2010-1
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 % in the format ncread(filename,variable name,start idx,count)
 var = ncread(fn,'var',[1 1 1],[5 5 365]);
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 vardata <- ncvar_get(ncfile, var, start=c(1,1,1), count=c(5,5,365))
 ```
 ````
+`````
 
 These files also include variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. In some cases, these may be listed as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, `nav_lat`, and any number of other names. Therefore, make sure to first double-check the name of those dimensions in the NetCDF header. 
 
@@ -291,7 +300,8 @@ To diagnose your data or to illustrate the weather and climate data used in your
 
 Assuming that your data is loaded and named as it is in the [section above](content:loading-netcdf), the following example shows how to plot the time series of a single-pixel of your variable "`var`", or an average across all pixels.  
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 ```{code-block} python
 # This will plot a time series of the first lat/lon pixel
@@ -305,7 +315,7 @@ ds.var.mean(('lat','lon')).plot()
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 As before, we're assuming the variable `var` is in the form `lon,lat,time`.
 ```{code-block} matlab
 % This will plot a time series of the first lat/lon pixel
@@ -315,12 +325,14 @@ plot(squeeze(var(1,1,:)))
 plot(squeeze(mean(mean(var,1),2)))
 ```
 ````
+`````
 
 #### Maps 
 
 Weather and climate data is generally geographic in nature; you're therefore likely to want or need to create maps of your variables. Maps can also offer an easy first-order check to see if your data subset correctly. Assuming that your data is loaded and named as it is in the [section above](content:netcdf-org), the following example shows how to plot a map of a single timestep of your variable "`var`" or an average across all timesteps.
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 ```{code-block} python
 ## Example without geographic information: 
@@ -343,7 +355,7 @@ ax.coastlines()
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 As before, we're assuming the variable `var` is in the form `lon,lat,time`.
 ```{code-block} matlab
 % To plot a heatmap of your 3-dimensional variable 
@@ -361,7 +373,7 @@ coasts=matfile('coast.mat')
 geoshow(coasts.lat,coasts.long)
 ```
 ````
-
+`````
 
 ## Gridded Data
 
@@ -396,18 +408,21 @@ Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (a
 - Observations are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)
 - Products generally differ by which stations or other data sources are included and excluded
 
-```{panels}
-Strengths
-^^^
+`````{grid}
+:gutter: 2
+
+````{grid-item-card} Strengths
+
 - Simple, biases well-understood
 - High correlation with source station data in areas with strong station coverage
----
-Weaknesses
-^^^
+````
+
+````{grid-item-card} Weaknesses
 - Less realistic outside areas with strong station coverage
 - Statistical interpolation means data not bound by physicality
 - Often only available at lower temporal resolution (e.g., monthly)
-```
+````
+`````
 
 ```{seealso}
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table) on temperature datasets.
@@ -420,19 +435,22 @@ Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 - Observational data are combined with climate models to produce a full set of atmospheric variables
 - Products differ by what data is included (as with interpolated datasets), but now also differ by which underlying models are used
 
-```{panels}
-Strengths
-^^^
+````{grid}
+:gutter: 2
+
+```{grid-item-card} Strengths
+
 - Large extant literature on most major reanalysis products; limitations are generally well-understood (though not always well-estimated; and biases are often tested against interpolated datasets)
 - Coverage in areas with low station coverage (generally poorer or less populated areas) is more physically reasonable
 - Covers a large number of variables (though uncertainties differ between them)
----
-Weaknesses
-^^^
+```
+```{grid-item-card} Weaknesses
+
 - Limited by often significant biases in underlying models that may or may not be well understood
 - Accuracy in areas of high station density may be lower than in interpolated products
 - Not fully physical either - laws of conservation, e.g., are often relaxed
 ```
+````
 
 ```{seealso}
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) on reanalyses.
