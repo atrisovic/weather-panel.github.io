@@ -23,6 +23,7 @@ clim2$year <- as.numeric(substring(clim2$date, 1, 4))
 ```
 ````
 `````
+
 Now we can sum over years. To do this, we will need to base this on
 the first several characters of the column names (not variable row
 values).
@@ -36,6 +37,7 @@ clim3 <- clim2 %>% group_by(FIPS, year) %>% summarize(tas_adj=sum(value[substrin
 ```
 ````
 `````
+
 ## Merging weather and outcome data
 
 And now we can merge in the mortality data! This is by county (FIPS
@@ -54,6 +56,7 @@ df2$deathrate[df2$deathrate == Inf] <- NA
 ```
 ````
 `````
+
 ## Running the regression
 
 Let's run our central regression, relating death rate to

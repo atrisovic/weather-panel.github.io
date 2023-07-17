@@ -30,6 +30,7 @@ import numpy as np
 ```
 ````
 `````
+
 First, load the data from the previous steps:
 
 `````{tab-set}

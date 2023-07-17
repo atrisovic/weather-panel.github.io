@@ -43,6 +43,7 @@ Sol Hsiang has code for this in Matlab and Stata:
 For corresponding code in R, see <https://github.com/darinchristensen/conley-se>.
 ````
 `````
+
 ## Plotting dose-response functions
 
 Regression results are always relative to some baseline, and for

@@ -58,6 +58,7 @@ cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
 As an example, in R, you generate these points like so:
+
 `````{tab-set}
 ````{tab-item} R
 ```R
@@ -71,6 +72,7 @@ pts <- expand.grid(x=longitudes, y=latitudes)
 Now, you can iterate through each region, and get a list of all of the
 points within each region. Here's how you would do that with the
 `PBSmapping` library in R:
+
 `````{tab-set}
 ````{tab-item} R
 ```R
@@ -81,13 +83,12 @@ eids <- findPolys(events, polys, maxRows=6e5)
 ````
 `````
 
-Then you can use the cells that have been found (which, if you've set
-it upright, will be in the same order as the columns of $A$) to
-fill in the entries of your transformation matrix.
+Then you can use the cells that have been found (which, if you've set it up right, will be in the same order as the columns of $A$) to fill in the entries of your transformation matrix.
  
 If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest. 
+
 `````{tab-set}
 ````{tab-item} R
 For example, in R, using `PBSmapping`:
