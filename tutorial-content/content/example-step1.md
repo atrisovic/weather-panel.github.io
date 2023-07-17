@@ -11,7 +11,7 @@ For the rest of this section, we will assume you are working from a directory st
 ## Downloading the data 
 
 In our example, we will use Berkeley Earth (BEST) data. BEST data is
-available as national timeseries (which weight all _geographic_ areas equally in a country, and may therefore not be useful for studying even national-level data that implicitly describes properties of populations or crops that are unequally distributed over the country) and as a 1-degree grid.
+available as national timeseries (which weight all _geographic_ areas equally in a country, and may therefore not be useful for studying even national-level data that implicitly describes properties of populations or crops that are unequally distributed over the country) and as a 1-degree grid. Working with BEST data requires extra pre-processing steps, which will allow us to illustrate some basic data processing across a few languages. Many data products will require less pre-processing, some will require more.  
 
 1. Go to the BEST archive, <http://berkeleyearth.org/archive/data/>
 2. Scroll down to the Gridded Data (ignore the Time Series Data which
@@ -29,7 +29,7 @@ States.
 ## Loading the data
 
 First, let's load all of the data into memory. This code assumes that
-it (the code) is stored in a file (call it `preprocess_best.m` or
+it (the code) is stored in a file (call it `preprocess_best.R`, `preprocess_best.m`, or
 `preprocess_best.py`) in your `code/` directory, a sister to the `sources/`
 directory.
 
@@ -269,20 +269,36 @@ the CMIP file system standards, for ease of future processing.
 `````{tab-set}
 ````{tab-item} R
 ```{code-block} R
+# Set output filename of your pre-processed file
+output_fn <- "../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc"
+
+# Define dimensions
 dimlon <- ncdim_def("lon", "degrees_east", longitude[longitude >= lonlims[1] & longitude <= lonlims[2]], longname='longitude')
 dimlat <- ncdim_def("lat", "degrees_north", latitude[latitude >= latlims[1] & latitude <= latlims[2]], longname='latitude')
 dimtime <- ncdim_def("time", "days since 1980-01-01 00:00:00", as.numeric(time - as.Date("1980-01-01")),
                      unlim=T, calendar="proleptic_gregorian")
+
+# Define variable with the dimensions listed above
 vartas <- ncvar_def("tas", "C", list(dimlon, dimlat, dimtime), NA, longname="temperature")
 
-ncnew <- nc_create("../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc", vartas)
+# Create netcdf vile
+ncnew <- nc_create(output_fn, vartas)
+# Add the variable data
 ncvar_put(ncnew, vartas, tas2)
+
+# Add an attribute mentioning how this file was created
+# This is good practice, especially for NetCDF files, 
+# whose metadata can help you keep track of your workflow. 
+ncvar_put(ncnew,0,'origin_script','preprocess_best.R')
+
+# Close file
 nc_close(ncnew)
 ```
 ````
 
 ````{tab-item} Python
 ```{code-block} python
+# Set output filename of your pre-processed file
 output_fn = '../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc'
 
 # Add an attribute mentioning how this file was created
@@ -299,7 +315,7 @@ ds.to_netcdf(output_fn)
 
 ````{tab-item} Matlab
 ```{code-block} matlab
-% Set output filename
+% Set output filename of your pre-processed file
 fn_out = '../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc';
 
 % Write temperature data to netcdf 
@@ -345,3 +361,5 @@ ncwriteatt(fn_out,'/','origin_script','preprocess_best.m')
 ```
 ````
 `````
+
+Now you can start working with the downloaded data! We'll come back to using this file in [Step 3](content:hands-on3) of the Hands-On Exercise. 

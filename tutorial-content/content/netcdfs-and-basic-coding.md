@@ -161,7 +161,7 @@ ncdump -h fn
 ````
 `````
 
-You can find what a sample NetCDF header looks like [here](https://www.eol.ucar.edu/content/sample-netcdf-header-3); this example is roughly what the output of the `nco`, `R`, and `Matlab` code will look like. In `xarray`, the header is formatted for easier reading: 
+You can find what a sample NetCDF header looks like [here](https://www.eol.ucar.edu/content/sample-netcdf-header-3); the example shown at the link is roughly what the output of the `nco`, `R`, and `Matlab` code will look like. In `xarray`, the header is formatted for easier reading: 
 
 ```{figure} images/sample_nc_header.png
 ---
@@ -169,9 +169,9 @@ You can find what a sample NetCDF header looks like [here](https://www.eol.ucar.
 The header of a [sample](https://www.unidata.ucar.edu/software/netcdf/examples/tos_O1_2001-2002.nc) NetCDF file, displayed using `xarray` in Python. 
 ```
 
-The header will contain ‘global attributes,’ which are just text fields that typically contain housekeeping information (information specifying the institution that created the file, copyright information, etc.). Then, for each variable contained within the file, the header specifies the names and sizes of their dimensions, plus any variable-specific attributes, like units.
+The header will contain any ‘global attributes,’ which are just text fields that typically contain housekeeping information (information specifying the institution that created the file, copyright information, etc.). Then, for each variable contained within the file, the header specifies the names and sizes of their dimensions, plus any variable-specific attributes, like units.
 
-Use the header to check what your desired variable is called, and what dimensions it has. The header can also be used to verify the order of dimensions that a variable is saved in - for a 3-dimensional variable, `lon,lat,time` is common, but some files will have the `time` variable first. 
+Use the header to check what your desired variable is called, and what dimensions it has. The header can also be used to verify the order of dimensions that a variable is saved in (which you will have to know to use, unless you're using a tool like `xarray` that lets you refer to dimensions by name) - for a 3-dimensional variable, `lon,lat,time` is common, but some files will have the `time` variable first. 
 
 ### Attributes
 
@@ -271,7 +271,7 @@ Longitude can be either of the form `-180:180` or `0:360`. In the latter form, `
 
 The `time` variable can also be listed in a few different formats. An integer representation of “days since [some date, often 1850-01-01]” is common, as is an integer representation of the form [YYYYMMDD], among others. The key is to always check the description of the variable in the header, and adjust your methods accordingly until it’s in a format you want it in. If you're using Python, the `xarray` package has the ability to interpret some of these time representations for you and translates them into the `datetime64` class, which makes some kinds of manipulation, like [averaging over months](http://xarray.pydata.org/en/stable/time-series.html), easier.
 
-Now that you have loaded your weather and climate data, a good practice is to double-check that it is downloaded and processed correctly. Common red flags include suspiciously many `NA` / `NaN` values, suspiciously high or low values, or variables that unexpectedly don't line up with geographic features. Plotting your data can be a good first-order check: 
+Now that you have loaded your weather and climate data, a good practice is to double-check that it is downloaded and processed correctly. Common red flags include suspiciously many `NA` / `NaN` values, suspiciously high or low values, or variables that unexpectedly don't line up with geographic features. Plotting your data, the basics of which we'll cover next, can be a good first-order check.
 
 (content:basic-visualization)=
 ## Basic Visualization of Climate and Weather Data

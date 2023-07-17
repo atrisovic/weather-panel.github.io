@@ -1,3 +1,4 @@
+(content:hands-on3)=
 # Hands-On Exercise, Step 3: Aggregating the data
 
 ## Aggregating the weather data
