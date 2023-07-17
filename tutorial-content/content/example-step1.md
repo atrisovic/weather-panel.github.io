@@ -40,6 +40,9 @@ library(ncdf4)
 
 nc <- nc_open("../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc")
 
+# Display header
+nc
+
 time <- seq(as.Date("1980-01-01"), length.out=nc$dim$time$len, by="1 day")
 ```
 ````
@@ -52,10 +55,15 @@ import datetime as dt
 
 ds = xr.open_dataset('../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc')
 
+# Display header
+ds
+
 # Create time variable, which wasn't auto-generated from the netcdf 
 # due to BEST's ambiguous timing
 ds['time'] = (
     ('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
+
+
 ```
 ````
 
@@ -63,12 +71,15 @@ ds['time'] = (
 ```{code-block} matlab
 data_dir = '../data/climate_data/';
 filename = 'Complete_TAVG_Daily_LatLong1_1980.nc';
+
+% Display header
+ncdisp([data_dir,filename])
 	   
 clim_tmp = ncread([data_dir,filename],'climatology');
 anom_tmp = ncread([data_dir,filename],'temperature');
 doy_tmp = ncread([data_dir,filename],'day_of_year');
 
-% Also loading the "months" variable - most datasets don't have it, but
+% Also loading the "months" variable - most datasets won't have this, but
 % it will make more sophisticated projecting methods easier. This is
 % particularly useful because of the gregorian calendar (which includes
 % leap days, and therefore would otherwise add an extra step to
@@ -77,6 +88,7 @@ months = ncread([data_dir,filename],'month');
 ```
 ````
 `````
+Note that we also printed the NetCDF file's [header](content:netcdf-header). This allows us to inspect the contents of the file and the variables. Note, for example, that the units of the variable `temperature` are $^\circ$C, not K as is often the case for weather data. 
 
 ## Constructing temperature levels
 
