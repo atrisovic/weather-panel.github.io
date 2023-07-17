@@ -5,8 +5,8 @@ parts:
 - caption: Weather and Climate Data
   chapters:
   - file: content/weather-and-climate-data
-  - file: content/gridded-data
   - file: content/netcdfs-and-basic-coding
+  - file: content/gridded-data
   - file: content/working-with-data-product
   - file: content/example-step1
 - caption: Developing a reduced-form specification

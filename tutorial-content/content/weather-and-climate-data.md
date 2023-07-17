@@ -14,7 +14,7 @@ Decision points:
  - How to choose climate or weather data to use in your research project?
 ```
 ```{figure} https://www.earthdata.nasa.gov/s3fs-public/2023-01/product-distribution-volume-discipline-2.jpg?VersionId=Tor97BJIz5dyuZofS5swA7RGwdccByVe 
-The growing amount of data distributed by NASA's EOSDIS cloud ([source](https://www.earthdata.nasa.gov/esds/esds-highlights/2022-esds-highlights)). We're live through a golden age of climate data use creation. See also the classic [xkcd](https://xkcd.com/2582/). 
+The growing amount of data distributed by NASA's EOSDIS cloud ([source](https://www.earthdata.nasa.gov/esds/esds-highlights/2022-esds-highlights)). We're live through a golden age of climate data creation. See also the classic [xkcd](https://xkcd.com/2582/). 
 
 ```
 
