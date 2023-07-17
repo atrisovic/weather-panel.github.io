@@ -330,6 +330,8 @@ plot(squeeze((weights'*squeeze(mean(variable,1)))/sum(weights)))
 
 Weather and climate data is generally geographic in nature; you're therefore likely to want or need to create maps of your variables. Maps can also offer an easy first-order check to see if your data subset correctly. Assuming that your data is loaded and named as it is in the [section above](content:netcdf-org), the following example shows how to plot a map of a single timestep of your variable "`variable`" or an average across all timesteps. 
 
+Note that which [map projection](https://www.usgs.gov/faqs/how-are-different-map-projections-used) you use will influence how you read the map. In the code examples below, we will use an equal-area projection, in which every grid cell in the gridded data is shown with its accurate relative area, to avoid visually overemphasizing data in regions with smaller geographic extent. To see which other projections are available, see the relevant parts of the documentations ([here](https://scitools.org.uk/cartopy/docs/v0.15/crs/projections.html) for cartopy/python, and [here](https://www.mathworks.com/discovery/map-projection.html) for Matlab)
+
 `````{tab-set}
 ````{tab-item} Python (xarray)
 
