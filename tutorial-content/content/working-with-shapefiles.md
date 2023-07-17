@@ -83,7 +83,9 @@ eids <- findPolys(events, polys, maxRows=6e5)
 ````
 `````
 
-Then you can use the cells that have been found (which, if you've set it up right, will be in the same order as the columns of $A$) to fill in the entries of your transformation matrix.
+Then you can use the cells that have been found (which, if you've set
+it upright, will be in the same order as the columns of $A$) to
+fill in the entries of your transformation matrix.
  
 If your regions are not much bigger than the grid cells, you may get
 regions that do not contain any cell centers. In this case, you need

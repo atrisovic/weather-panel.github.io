@@ -1,5 +1,18 @@
 # Weighting schemes
 
+```{admonition} Key objectives and decision points
+:class: note
+Objectives:
+
+- Understand how to incorporate weights into your data.
+- Understand how to match up gridded data with different grids.
+
+Decision points:
+
+ - Does your data-generating process occur locally or regionally?
+ - Select the weighting scheme most appropriate for your data.
+```
+
 This section describes how to use different weighting schemes when
 working with gridded and regional data. As we use the term, weighting
 schemes assign a weight to each grid cell or regional
@@ -11,7 +24,7 @@ perform a weighted aggregation of gridded data to data regions.
 
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
-As described in the section
+As described in section
 [spatial and temporal scales of economic processes](content:spatial-and-temporal-scales),
 the scale of a phenomenon matters. Many processes occur at a more
 local scale than that which data is collected. The motivation for
@@ -94,7 +107,7 @@ is important for visualizing maps, it can just be a nuisance for
 gridded datasets. The most common “projection” for gridded datasets is
 an equirectangular projection, and we have been assuming this
 above. This is variously referred to as `1`, `ll`, `WGS 84`, and
-`EPSG: 4326` (technically, WGS 84 specifies how latitude and longitude
+`EPSG: 4326` (technically, WGS 84 species how latitude and longitude
 are defined, and EPSG:4326 specifies a drawing scheme where x =
 longitude and y = latitude). However, you will sometimes encounter
 grids in terms of km north and km east of a point, and then you may
@@ -130,9 +143,9 @@ In some cases, it is appropriate and possible to use time-varying weighting sche
 ## Aligning weather and weighting grids
 
 The first step to using a gridded weighting dataset is to make it
-conform to the data grid definition used by your weather data.  This
+conform to data grid definition used by your weather data.  This
 generally requires resampling the weighting data, increasing its
-resolution by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and meridional grid lines of the weather data coincide with the resampled grid lines of the weighting data.
+resolution by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.
 
 Here we assume that both are regular latitude-longitude
 grids. See [working with gridded weighting data](content:working-with-gridded-data) to
