@@ -4,7 +4,7 @@ Before we get into how to choose, download, and work with specific weather and c
 
 ## The NetCDF Data Format
 
-We start this section with a guide to the [NetCDF](https://climatedataguide.ucar.edu/climate-tools/NetCDF) format, a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It's efficient, self-describing, and supported in major programming languages (though some software pacakges commonly used in economics, such as STATA, may require pre-processing the data into another format - `.csv`, etc.). If you get familiar with the commands to read the [header](content:netcdf-header) and access data in the language you’re most comfortable with, you will be able to work with most existing climate or weather datasets.
+We start this section with a guide to the [NetCDF](https://climatedataguide.ucar.edu/climate-tools/NetCDF) format, a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It's efficient, self-describing, and supported in major programming languages (though some software packages commonly used in economics, such as STATA, may require pre-processing the data into another format - `.csv`, etc.). If you get familiar with the commands to read the [header](content:netcdf-header) and access data in the language you’re most comfortable with, you will be able to work with most existing climate or weather datasets.
 
 We'll walk you through downloading specific weather data in the next section, but to follow along with the interactive portions of this section, feel free to download sample NetCDF files, such as any on [this](https://www.unidata.ucar.edu/software/netcdf/examples/files.html) page.
 
@@ -14,7 +14,8 @@ Throughout this section, we introduce relevant commands whenever
 possible for the following languages and packages (click on the tab
 names for details):
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 [`xarray`](http://xarray.pydata.org/en/stable/) (recommended) is a package for working with N-dimensional data that natively supports NetCDF files.
 
@@ -25,11 +26,11 @@ import xarray as xr
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 MATLAB has native support for working with N-dimensional data.
 ````
 
-````{tabbed} R
+````{tab-item} R
 Support through the [ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) package.
 
 For any R code chunks, it's assumed the `ncdf4` package is loaded with: 
@@ -39,7 +40,7 @@ library(ncdf4)
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 Support through the [netCDF4](https://unidata.github.io/netcdf4-python/netCDF4/index.html) module.
 
 For any Python (NetCDF4) code chunks, it's assumed that the `NetCDF4` package is loaded as `nc`:
@@ -49,14 +50,14 @@ import netCDF4 as nc
 ```
 ````
 
-````{tabbed} nco
+````{tab-item} nco
 [nco](http://nco.sourceforge.net) ("NetCDF operators") - a series of command-line tools to check the contents of a file, collate different NetCDF files, and extract individual variables without having to go through a full language. Here are a few important commands: 
 
 - `ncview` (to display spatial data), 
 - `ncks` ("nc kitchen sink" - to split or concatenate files command line), and 
 - `ncdump` (to print contents of the file) - you will likely primarily need `ncdump -h`, which prints the file [header](content:netcdf-header)
 ````
-
+`````
 
 ```{tip}
 If you know several of the languages referred to in this tutorial and just want our opinion on which one to use, we suggest:
@@ -121,7 +122,8 @@ To figure out which file saving convention your NetCDF file uses and what is con
 
 NetCDF files are self-describing, meaning that the file itself contains descriptive information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, what the variables are named, etc. Here are the commands to print the header for NetCDF filename `fn`: 
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 ```{code-block} python
 ds = xr.open_dataset(fn)
 ds
@@ -132,31 +134,32 @@ ds.variable
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 ncdisp(fn)
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 ncfile
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 ```{code-block} python
 ds = nc.Dataset(fn)
 ds
 ```
 ````
 
-````{tabbed} nco (command line)
+````{tab-item} nco (command line)
 ```{code-block} 
 ncdump -h fn
 ```
 ````
+`````
 
 You can find what a sample NetCDF header looks like [here](https://www.eol.ucar.edu/content/sample-netcdf-header-3); this example is roughly what the output of the `nco`, `R`, and `Matlab` code will look like. In `xarray`, the header is formatted for easier reading: 
 
@@ -188,7 +191,8 @@ Here are some important common “attributes” of NetCDF files or variables:
 
 NetCDF files can be easily imported as numeric data in any language. Here are some common ways, for the variable `variable`:
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 ```{code-block} python
 ds = xr.open_dataset(fn)
 ds.variable
@@ -197,20 +201,20 @@ ds.variable
 `xr.open_dataset(fn)` prepares to load all variables contained in `fn` into a [Dataset](http://xarray.pydata.org/en/stable/data-structures.html#dataset), which allows you to conduct operations across all variables in the file. `ds.variable` extracts the variable named `'variable'` specifically, into a [DataArray](http://xarray.pydata.org/en/stable/data-structures.html#dataarray). Data is loaded 'lazily,' meaning only variable information (not content) is loaded until calculations are done on them. To force loading, run `ds.load()`.
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 var = ncread(fn,'variable');
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 var <- ncvar_get(ncfile,'variable')
 ```
 ````
 
-````{tabbed} Python (NetCDF4)
+````{tab-item} Python (NetCDF4)
 ```{code-block} python
 ncf = nc.Dataset(fn)
 var = ncf.variables['variable'][:]
@@ -218,13 +222,15 @@ var = ncf.variables['variable'][:]
 
 `ncf.variables[variable]` returns a `float` object that keeps the attributes from the NetCDF file
 ````
+`````
 (content:loading-netcdf)=
 #### Loading a subset of a NetCDF file
 NetCDF files can be partially loaded, which is useful if you only need a geographic or temporal subset of a variable, or the file you are trying to open is particularly large compared to your system's memory. Unless you are using `xarray` (which allows you to refer to dimensions by name), make sure you confirm the order of dimensions first by reading the NetCDF header, to avoid subsetting the wrong dimension. 
 
 The following example assumes `fn` is a file containing a 3-dimensional (`lon,lat,time`) variable called "`variable`", and extracts a 5 x 5 pixel time series for 365 time steps:
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 Data is loaded lazily and only fully loaded when calculations are done, so you can slice (subset) data without loading it into memory. Slicing can be done by time, variable, etc.
 
 ```{code-block} python
@@ -242,19 +248,20 @@ ds = ds.sel(lat=slice(22,53),lon=slice(-125,-65),time=slice('1979-01-01','2010-1
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 ```{code-block} matlab
 % in the format ncread(filename,variable name,start idx,count)
 var = ncread(fn,'variable',[1 1 1],[5 5 365]);
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ncfile <- nc_open(fn)
 vardata <- ncvar_get(ncfile, variable, start=c(1,1,1), count=c(5,5,365))
 ```
 ````
+`````
 
 These files also include variables that give values for indices along each dimension (`lon, lat` / `location` and `time`), which can be extracted like any other variable using the functions listed above. In some cases, these may be listed as `lat`, `latitude`, `Latitude`, `Lat`, `latitude_1`, `nav_lat`, and any number of other names. Therefore, make sure to first double-check the name of those dimensions in the NetCDF header. 
 
@@ -282,7 +289,8 @@ To diagnose your data or to illustrate the weather and climate data used in your
 
 Assuming that your data is loaded and named as it is in the [section above](content:loading-netcdf), the following example shows how to plot the time series of a single-pixel of your variable "`variable`", or an average across all pixels.  
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 ```{code-block} python
 # This will plot a time series of the first lat/lon pixel
@@ -300,7 +308,7 @@ ds.variable.weighted(weights).mean(('lat','lon')).plot()
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 As before, we're assuming the variable `variable` is in the form `lon,lat,time`.
 ```{code-block} matlab
 % This will plot a time series of the first lat/lon pixel
@@ -317,12 +325,13 @@ weights = cos(deg2rad(lat))
 plot(squeeze((weights'*squeeze(mean(variable,1)))/sum(weights)))
 ```
 ````
-
+`````
 #### Maps 
 
 Weather and climate data is generally geographic in nature; you're therefore likely to want or need to create maps of your variables. Maps can also offer an easy first-order check to see if your data subset correctly. Assuming that your data is loaded and named as it is in the [section above](content:netcdf-org), the following example shows how to plot a map of a single timestep of your variable "`variable`" or an average across all timesteps. 
 
-````{tabbed} Python (xarray)
+`````{tab-set}
+````{tab-item} Python (xarray)
 
 ```{code-block} python
 ## Example without geographic information: 
@@ -350,7 +359,7 @@ ax.coastlines()
 ```
 ````
 
-````{tabbed} Matlab
+````{tab-item} Matlab
 As before, we're assuming the variable `variable` is in the form `lon,lat,time`.
 ```{code-block} matlab
 % To plot a heatmap of your 3-dimensional variable 
@@ -368,6 +377,7 @@ coasts=matfile('coast.mat')
 geoshow(coasts.lat,coasts.long)
 ```
 ````
+`````
 
 ## Moving forward
 Now that you know how to read NetCDF files and conduct basic operations and plotting with them, you can start downloading and using the weather and climate data you need for your projects. To take the first steps on this road, we'll cover the basics of [gridded data](content:gridded-data) in the next section. 

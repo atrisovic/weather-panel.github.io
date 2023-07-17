@@ -118,8 +118,8 @@ need to project these back to latitude-longitude and regrid them.
 All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.
 
 ### Implementation Notes: Reading gridded data.
-
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 Use the `raster` library. For example:
 
 ```{code-block} R
@@ -132,9 +132,10 @@ If you are using R, take a look at the [Introduction to Geospatial Raster and Ve
 which has some extensive examples of working with geospatial raster data.
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
+`````
 
 In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.
 
@@ -166,28 +167,31 @@ upsampling, downsampling, and cropping.
 To increase the resolution of a grid `rr` by a factor of `N` without increasing the
 sum of grid cells:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- disaggregate(rr, fact=N) / (N^2)
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 rr2 = np.repeat(np.repeat(rr, N, axis=0), N, axis=1) / (N*N)
 ```
 ````
+`````
 
 ### Downsampling - decreasing data resolution
 
 To decrease the resolution of a grid `rr` by a factor of `N` without
 decreasing the sum of grid cells:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- aggregate(rr, fact=N, fun=sum)
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 rr2 = np.zeros((int(rr.shape[0] / N), int(rr.shape[1] / N)))
 for ii in range(N):
@@ -195,26 +199,27 @@ for ii in range(N):
     rr2 += rr[ii::N, ii::N] / (N*N)
 ```
 ````
-
+`````
 ### Cropping - adjusting the extent of data
 
 To adjust the spatial extent of grid `rr` to conform as closely as possible
 to a box from the longitudinal range `WW` to `EE` and the latitudinal
 range from `SS` to `NN`.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- crop(rr, extent(WW, SS, EE, NN))
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 # We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)
 
 rr2 = rr[int((SS - S0)/D):int((NN - S0)/D), int((WW - W0)/D):int((EE - W0)/D)]
 ```
 ````
-
+`````
 The following recipe should work for most cases to align weighting data with a weather grid.
 
 1. **Upsample the weighting data until the grid of the weighting data evenly divides up the weather data.** Start by considering the southwest corner of each dataset. Even if the
@@ -234,7 +239,8 @@ exact same extent.
 
 Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent $125.0208$ to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- raster("…/w001001.adf")
 landscan
@@ -250,45 +256,50 @@ prism
 ## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
 ```
 ````
-
+`````
 Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ```
 ````
-
+`````
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     $120 * (180 - 125.0208) = 6597.5$
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- disaggregate(landscan, fact=2) / 4
 ```
 ````
-
+`````
 We divide by 4 so that the total population remains the same.
 
 After increasing the resolution of the LandScan data, we clip it again.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ```
 ````
+`````
 
 Now, the resolution of the dataset has become 1/240th, and we can
 write aggregate by a factor of $10$ for it to match the PRISM data:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- aggregate(landscan, fact=10, fun=sum)
 ```
 ````
-
+`````
 
 ## Plotting your results
 
@@ -306,7 +317,8 @@ Population of the
 World](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download)
 dataset.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(raster)
 ## Load the data
@@ -319,6 +331,7 @@ image(rr)
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
 ````
+`````
 
 But that wasn't any fun. Let's try again with something more
 complicated.
@@ -326,7 +339,8 @@ complicated.
 First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
 easy-to-use IRI data library.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(ncdf4)
 
@@ -340,6 +354,7 @@ image(temp)
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
 ````
+`````
 
 This is R's default way of showing matrices, with axes that go from
 0 - 1. What's worse, the map is up-side-down, though it will take some
@@ -353,7 +368,8 @@ interpret. And to do that, we need to rearrange the data so it goes
 from -180 to 180, rather than 0 to 360 as currently. Here's our second
 attempt:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 ## Extract the coordinate values
 lon <- ncvar_get(nc, "X")
@@ -371,13 +387,14 @@ map("world", add=T)
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
 ````
-
+`````
 Now, for our production-ready map, we're going to switch to
 `ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
 to convert the matrix into a dataframe (with `melt`) and the map into
 a dataframe (with `map_data`):
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 ## Convert temp2 to a dataframe
 library(reshape2)
@@ -397,6 +414,7 @@ ggplot() +
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
 ````
+`````
 
 And now we're ready to production-ready graph! The biggest change
 will be the addition of a map projection. As mentioned above, map
@@ -421,7 +439,8 @@ quite a bit slower. We use a color palette from
 [ColorBrewer](http://colorbrewer2.org/), which is an excellent resource for
 choosing colors.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(RColorBrewer)
 ggplot() +
@@ -436,4 +455,4 @@ ggplot() +
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
 ````
-
+`````

@@ -19,7 +19,8 @@ following code should be run from the `data` directory.
 
 The approach uses `xarray` for gridded data, `geopandas` to work with shapefiles, and `xagg` to aggregate gridded data onto shapefiles. 
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 import xarray as xr
 import geopandas as gpd
@@ -27,10 +28,11 @@ import xagg as xa
 import numpy as np
 ```
 ````
-
+`````
 First, load the data from the previous steps:
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 # Load temperature data using xarray
 ds_tas = xr.open_dataset(
@@ -43,6 +45,7 @@ ds_pop = xr.open_dataset('pcount/usap90ag.nc')
 gdf_counties = gpd.read_file('geo_data/UScounties.shp')
 ```
 ````
+`````
 
 ## Transforming the data
 
@@ -50,7 +53,8 @@ Next, we need to construct any nonlinear transformations of the data.
 
 For our econometric model, we want temperature in both linear and quadratic form, centered around $20^\circ$ C: $T-20^\circ C$ and $T^2 - (20^\circ C)^2$.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 ds_tas['tas_adj'] = ds_tas.tas-20
 ds_tas['tas_sq'] = ds_tas.tas**2 - 20**2
@@ -62,6 +66,7 @@ ds_tas = ds_tas.drop('tas')
 ds_tas = ds_tas.drop('land_mask')
 ```
 ````
+`````
 
 ## Create map of pixels onto polygons
 
@@ -73,12 +78,14 @@ dataset, taking the intersect between each county polygon and all
 pixel polygons, and calculating the average area of overlap between
 the pixels that touch the polygon and the polygon.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 weightmap =
 xa.pixel_overlaps(ds_tas,gdf_counties,weights=ds_pop.Population,subset_bbox=False)
 ```
 ````
+`````
 
 ## Aggregate values onto polygons
 
@@ -86,7 +93,8 @@ Using the weight map calculated above, `xagg` now aggregates all the gridded var
 
 The output of this function now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.  
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 
 `aggregated` is an object specific to the `xagg` package. We need to modify it to be usable, for example using `aggregated.to_dataset()` or `aggregated.to_csv`. See the `xagg` docs for more info.
 
@@ -94,6 +102,7 @@ The output of this function now gives, for each county, a 10-year time series of
 aggregated = xa.aggregate(ds_tas, weightmap)
 ```
 ````
+`````
 
 ## Export this as a `.csv` file to be used elsewhere
 
@@ -103,7 +112,8 @@ which can easily be read by R, STATA, and most other programming
 tools. The data will be reshaped 'wide' by `xagg` - so every row is a
 county, and every column is a timestep of the variables. 
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 
 Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`, depending on whether you'd like to continue using it in `xarray` or `pandas`. 
 
@@ -111,3 +121,4 @@ Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`, depending on wheth
 aggregated.to_csv('climate_data/agg_vars.csv')
 ```
 ````
+`````

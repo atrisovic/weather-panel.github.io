@@ -34,14 +34,15 @@ observations may not provide as much unique information as they appear
 to. In most cases, it is necessary to use Conley-White standard
 errors. 
 
-````{tabbed} Matlab and Stata
+`````{tab-set}
+````{tab-item} Matlab and Stata
 Sol Hsiang has code for this in Matlab and Stata:
 <http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
 ````
-````{tabbed} R
+````{tab-item} R
 For corresponding code in R, see <https://github.com/darinchristensen/conley-se>.
 ````
-
+`````
 ## Plotting dose-response functions
 
 Regression results are always relative to some baseline, and for
