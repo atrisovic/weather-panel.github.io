@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>How to Start Working with a Data Product</title>
+    <title>Choosing and Downloading Weather and Climate Data Products</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hands-On Exercise, Step 1: Preparing the Weather Data" href="example-step1.html" />
-    <link rel="prev" title="Using Weather and Climate Data" href="weather-and-climate-data.html" />
+    <link rel="prev" title="Working with Gridded Data" href="gridded-data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,8 +159,10 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Using Weather and Climate Data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to Start Working with a Data Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to Weather and Climate Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdfs-and-basic-coding.html">Weather and Climate Data Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridded-data.html">Working with Gridded Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Choosing and Downloading Weather and Climate Data Products</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
@@ -385,7 +387,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>How to Start Working with a Data Product</h1>
+    <h1>Choosing and Downloading Weather and Climate Data Products</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -395,8 +397,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-data-product-best-and-chirps">Getting Started with a Data Product: BEST and CHIRPS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-data-product-era-5">Getting Started with a Data Product: ERA-5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-an-observational-data-product-best-and-chirps">Getting Started with an Observational Data Product: BEST and CHIRPS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-reanalysis-data-product-era-5">Getting Started with a Reanalysis Data Product: ERA-5</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thinking-ahead-to-climate-projections">Thinking Ahead to Climate Projections</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-summarizing-note">A Quick Summarizing Note</a></li>
 </ul>
@@ -410,18 +412,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="how-to-start-working-with-a-data-product">
-<span id="content-working-with-data"></span><h1>How to Start Working with a Data Product<a class="headerlink" href="#how-to-start-working-with-a-data-product" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="choosing-and-downloading-weather-and-climate-data-products">
+<span id="content-working-with-data"></span><h1>Choosing and Downloading Weather and Climate Data Products<a class="headerlink" href="#choosing-and-downloading-weather-and-climate-data-products" title="Permalink to this heading">#</a></h1>
 <p>The following are incredibly useful resources to keep in mind while working with weather data:</p>
 <dl class="simple myst">
 <dt>📚  <a class="reference external" href="https://climatedataguide.ucar.edu">UCAR Climate Data Guide</a></dt><dd><p>an encyclopedia for weather and climate data products with expert guidance on strengths and weaknesses for most commonly-used datasets</p>
 </dd>
 <dt>📚  <a class="reference external" href="https://reanalyses.org">Reanalysis.org</a></dt><dd><p>a forum and wiki for makers and users of reanalyses with a focus on evaluating data products and comparing them with observational data</p>
 </dd>
-<dt>📚  <a class="reference external" href="https://www.esrl.noaa.gov/psd/data/writ/moncomp/datasets/">Reanalysis and Observational Datasets and Variables</a></dt><dd><p>a “who’s who” of historical weather products with basic facts about each</p>
+<dt>📚  <a class="reference external" href="https://psl.noaa.gov/data/atmoswrit/map/datasets/">Reanalysis and Observational Datasets and Variables</a></dt><dd><p>a “who’s who” of historical weather products with basic facts about each</p>
 </dd>
 </dl>
-<p>These resources will help you determine which data product is right for you. They will also help you better interpret results from existing studies. (For example, NCEP2, which was commonly used in economics and policy studies, has known issues including larger biases in the Southern Hemisphere).</p>
+<p>These resources will help you determine which data product is right for you. They will also help you better interpret results from existing studies. (For example, the NCEP2 reanalysis data product, which was commonly used in economics and policy studies, has known issues including larger biases in the Southern Hemisphere).</p>
 <p>The following section shows several examples of choosing and downloading weather data given a region and variable of interest. Though there are many more products than the three introduced here, each with their own download procedures and quirks, these examples show a few common setups that you may encounter (CHIRPS: ftp directory; BEST: website browser; ERA5: data storage system).</p>
 <p>Generally, it’s good practice to first research which data products are appropriate for your variable and area of interest. Questions you should be thinking of include:</p>
 <ul class="simple">
@@ -430,9 +432,9 @@ document.write(`
 <li><p>are biases reasonable for the variable and region of interest?</p></li>
 </ul>
 <p>The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the <a class="reference external" href="https://climatedataguide.ucar.edu">UCAR Climate Data Guide</a> introduced above is a good first place to look. A <a class="reference external" href="https://scholar.google.com/">Google Scholar</a> search of the form <code class="docutils literal notranslate"><span class="pre">[data</span> <span class="pre">product</span> <span class="pre">name]</span> <span class="pre">validation</span> <span class="pre">OR</span> <span class="pre">evaluation</span> <span class="pre">OR</span> <span class="pre">bias</span> <span class="pre">OR</span> <span class="pre">uncertainty</span></code> may be useful as well.</p>
-<section id="getting-started-with-a-data-product-best-and-chirps">
-<h2>Getting Started with a Data Product: BEST and CHIRPS<a class="headerlink" href="#getting-started-with-a-data-product-best-and-chirps" title="Permalink to this heading">#</a></h2>
-<p>Say you’re looking at agriculture in Ethiopia. You would like both temperature and precipitation data (remember the <a class="reference internal" href="weather-and-climate-data.html#content-warning-on-hydrological"><span class="std std-ref">warning on hydrological variables</span></a>), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found <a class="reference external" href="https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244">literature</a> specifically examining its biases in your region of interest.</p>
+<section id="getting-started-with-an-observational-data-product-best-and-chirps">
+<span id="content-best-and-chirps"></span><h2>Getting Started with an Observational Data Product: BEST and CHIRPS<a class="headerlink" href="#getting-started-with-an-observational-data-product-best-and-chirps" title="Permalink to this heading">#</a></h2>
+<p>Say you’re looking at agriculture in Ethiopia. You would like both temperature and precipitation data (remember the <a class="reference internal" href="gridded-data.html#content-warning-on-hydrological"><span class="std std-ref">warning on hydrological variables</span></a>), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found <a class="reference external" href="https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244">literature</a> specifically examining its biases in your region of interest.</p>
 <table class="table">
 <colgroup>
 <col style="width: 20%" />
@@ -466,8 +468,8 @@ document.write(`
 </div>
 <p>These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like <code class="docutils literal notranslate"><span class="pre">xesmf</span></code> in Python. See also <a class="reference internal" href="weighting-schemes.html"><span class="doc std std-doc">weighting schemes</span></a>.</p>
 </section>
-<section id="getting-started-with-a-data-product-era-5">
-<span id="content-working-with-era5"></span><h2>Getting Started with a Data Product: ERA-5<a class="headerlink" href="#getting-started-with-a-data-product-era-5" title="Permalink to this heading">#</a></h2>
+<section id="getting-started-with-a-reanalysis-data-product-era-5">
+<span id="content-working-with-era5"></span><h2>Getting Started with a Reanalysis Data Product: ERA-5<a class="headerlink" href="#getting-started-with-a-reanalysis-data-product-era-5" title="Permalink to this heading">#</a></h2>
 <p>Say you’re studying heat waves in the Sahel. Weather station data is low, so you need a gridded data product. You consider ERA5, the most advanced modern reanalysis data product as of 2019, recently released by the <a class="reference external" href="https://www.ecmwf.int/">European Centre for Medium-Range Weather Forecasting (ECMWF)</a> (which incidentally also produces the world’s most respected hurricane forecast model).</p>
 <table class="table">
 <colgroup>
@@ -516,15 +518,19 @@ document.write(`
 <p class="admonition-title">Caution</p>
 <p>Many datasets, especially those from smaller institutions, will not give up their secrets easily. Be prepared to have to deal with <code class="docutils literal notranslate"><span class="pre">wget</span></code> scripts, <code class="docutils literal notranslate"><span class="pre">jblob</span></code> scripts, writing <code class="docutils literal notranslate"><span class="pre">ftp</span></code> scripts, and so forth, with well-meaning but poorly-written accompanying documentation. In some of these cases, it might be fastest to call up your best climate researcher friend, who may be able to just share their scripts with you.</p>
 </div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Climate and weather data can be massive. For example, the full, hourly, global record of a set of 9 commonly-used near-surface variables in ERA5 (including temperature and preciptiation) comes out to roughly 7 TB of disk space in total. Consequently, data products tend to be saved in smaller chunks, or allow for subsetting before downloading. Depending on the scale of your analysis, you will likely need additional storage beyond your personal machine, on external servers, for example. More recently, some datasets have also been made available on cloud servers such as <a class="reference external" href="https://pangeo-forge.org/catalog">pangeo</a> or <a class="reference external" href="https://www.ecmwf.int/en/newsletter/162/news/era5-reanalysis-data-available-earth-engine">Google Earth Engine</a>.</p>
+</div>
 </section>
 <section id="thinking-ahead-to-climate-projections">
 <h2>Thinking Ahead to Climate Projections<a class="headerlink" href="#thinking-ahead-to-climate-projections" title="Permalink to this heading">#</a></h2>
-<p>Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. Even more so than with weather data products, there is no <em>right</em> or <em>correct</em> climate model, or group of models to use (see e.g., <a class="reference external" href="https://link.springer.com/article/10.1007/s10584-010-9800-2">Knutti 2010</a> or <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL073370">Collins 2017</a>). Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and <em>intra</em>-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study.</p>
+<p>Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. Even more so than with weather data products, there is no <em>right</em> or <em>correct</em> climate model, or group of models to use (see e.g., <a class="reference external" href="https://doi.org/10.1007/s10584-010-9800-2">Knutti 2010</a> or <a class="reference external" href="https://doi.org/10.1002/2017GL073370">Collins 2017</a>. Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and <em>intra</em>-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>To get started thinking about incorporating changes in climate into your analysis, we also recommend: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/wcc.579">On the use and misuse of climate change projections in international development, by Nissan et al. (2019)</a> and <a class="reference external" href="https://academic.oup.com/reep/article-abstract/7/2/181/1522753">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change by Auffhammer et al. (2013)</a></p>
+<p>To get started thinking about incorporating changes in climate into your analysis, we also recommend: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/wcc.579">On the use and misuse of climate change projections in international development, by Nissan et al. (2019)</a> and <a class="reference external" href="https://doi.org/10.1093/reep/ret016">Using Weather Data and Climate Model Output in Economic Analyses of Climate Change by Auffhammer et al. (2013)</a></p>
 </div>
-<p>However, if you plan to project results into the future, you can start thinking about its logistics now. Climate data comes from imperfect models whose raw output generally has to be “bias-corrected” before being used in econometric or policy research contexts. Bias-correction involves using information from a weather dataset to inform the output of a climate model, either by applying model changes to the weather data (so-called “delta-method” projection) or by adjusting the model output by applying a historical difference between the model and weather data to the future model output. We won’t go into details about these methods (like everything in this field, they have their strengths and weaknesses), but you should generally use data that has been bias-corrected to the same weather data set you are using to inform your econometric model. Oftentimes this bias-correction is still conducted by the end user themselves, but some pre-bias-corrected climate projections exist. For example, NASA’s <a class="reference external" href="https://nex.nasa.gov/nex/projects/1356/">NEX-GDDP</a> dataset is bias-corrected to the <a class="reference external" href="http://hydrology.princeton.edu/data.pgf.php">Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling</a> historical dataset.</p>
+<p>However, if you plan to project results into the future, you can start thinking about its logistics now. Climate data comes from imperfect models whose raw output generally has to be “bias-corrected” before being used in econometric or policy research contexts. Bias-correction involves using information from a weather dataset to inform the output of a climate model, either by applying model changes to the weather data (so-called “delta-method” projection) or by adjusting the model output by applying a historical difference between the model and weather data to the future model output. We won’t go into details about these methods (like everything in this field, they have their strengths and weaknesses), but you should generally use data that has been bias-corrected to the same weather data set you are using to inform your econometric model. Oftentimes this bias-correction is still conducted by the end user themselves, but some pre-bias-corrected climate projections exist. For example, NASA’s <a class="reference external" href="https://doi.org/10.7917/OFSG3345">NEX-GDDP</a> dataset is bias-corrected to the <a class="reference external" href="https://doi.org/10.5065/JV89-AH11">Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling</a> historical dataset.</p>
 </section>
 <section id="a-quick-summarizing-note">
 <h2>A Quick Summarizing Note<a class="headerlink" href="#a-quick-summarizing-note" title="Permalink to this heading">#</a></h2>
@@ -566,12 +572,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="weather-and-climate-data.html"
+       href="gridded-data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using Weather and Climate Data</p>
+        <p class="prev-next-title">Working with Gridded Data</p>
       </div>
     </a>
     <a class="right-next"
@@ -601,8 +607,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-data-product-best-and-chirps">Getting Started with a Data Product: BEST and CHIRPS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-data-product-era-5">Getting Started with a Data Product: ERA-5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-an-observational-data-product-best-and-chirps">Getting Started with an Observational Data Product: BEST and CHIRPS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-a-reanalysis-data-product-era-5">Getting Started with a Reanalysis Data Product: ERA-5</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thinking-ahead-to-climate-projections">Thinking Ahead to Climate Projections</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-summarizing-note">A Quick Summarizing Note</a></li>
 </ul>

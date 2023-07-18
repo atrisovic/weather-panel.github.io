@@ -61,12 +61,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/example-step1';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Developing a reduced-form specification" href="reduced-form-specification.html" />
-    <link rel="prev" title="How to Start Working with a Data Product" href="working-with-data-product.html" />
+    <link rel="prev" title="Choosing and Downloading Weather and Climate Data Products" href="working-with-data-product.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,8 +161,10 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Using Weather and Climate Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">How to Start Working with a Data Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to Weather and Climate Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdfs-and-basic-coding.html">Weather and Climate Data Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridded-data.html">Working with Gridded Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">Choosing and Downloading Weather and Climate Data Products</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
@@ -395,10 +399,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filesystem-organization">Filesystem organization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-temperature-levels">Constructing temperature levels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-it-geographically">Subset it geographically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-the-data">Verify the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-result">Save the result</a></li>
 </ul>
             </nav>
@@ -413,11 +419,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-1-preparing-the-weather-data">
 <h1>Hands-On Exercise, Step 1: Preparing the Weather Data<a class="headerlink" href="#hands-on-exercise-step-1-preparing-the-weather-data" title="Permalink to this heading">#</a></h1>
+<p>This section will walk you through downloading and pre-processing an example dataset, the BEST data we mentioned in the <a class="reference internal" href="working-with-data-product.html#content-best-and-chirps"><span class="std std-ref">previous section</span></a>. “Pre-processing” data is the process through which data is standardized into a format that’s easy to interpret and use in your analysis. It generally includes adapting the data into filesystem and file formats that work for your project requirements and code workflows, and, crucially, quality control and verification.</p>
+<p>We strongly recommend that you homogenize all your weather and climate data into the same filename and file structure system whenever possible. That way, any code you write will easily be generalizable to all the data you work with. Extra time spent pre-processing will therefore make your projects more robust and save you time later. In this section, we will save data in the CMIP format introduced in a <a class="reference internal" href="netcdfs-and-basic-coding.html#content-netcdf-org"><span class="std std-ref">previous section</span></a> on file organization (one file = one variable, coupled with a set of variable and filename conventions), which we believe works well for many common applications.</p>
+<section id="filesystem-organization">
+<h2>Filesystem organization<a class="headerlink" href="#filesystem-organization" title="Permalink to this heading">#</a></h2>
+<p>Please skim through the section on <a class="reference internal" href="suggestions.html#content-code-organization"><span class="std std-ref">code and data organization</span></a> before beginning the hands-on exercise.</p>
+<p>For the rest of this section, we will assume you are working from a directory structure similar to what is introduced there. Specifically, we assume you will have created a folder called <code class="docutils literal notranslate"><span class="pre">../sources/climate_data/</span></code>, relative to your working directory, in which to store raw climate data.</p>
+</section>
 <section id="downloading-the-data">
 <h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this heading">#</a></h2>
 <p>In our example, we will use Berkeley Earth (BEST) data. BEST data is
-available as national timeseries (area-weighted, so not usually useful
-even for studying national-level data) and as a 1-degree grid.</p>
+available as national timeseries (which weight all <em>geographic</em> areas equally in a country, and may therefore not be useful for studying even national-level data that implicitly describes properties of populations or crops that are unequally distributed over the country) and as a 1-degree grid. Working with BEST data requires extra pre-processing steps, which will allow us to illustrate some basic data processing across a few languages. Many data products will require less pre-processing, some will require more.</p>
 <ol class="arabic simple">
 <li><p>Go to the BEST archive, <a class="reference external" href="http://berkeleyearth.org/archive/data/">http://berkeleyearth.org/archive/data/</a></p></li>
 <li><p>Scroll down to the Gridded Data (ignore the Time Series Data which
@@ -427,7 +439,7 @@ Recent)”.</p></li>
 <li><p>Download the Average Temperature (TAVG) data in 1-degree gridded
 form for 1980 - 1989.</p></li>
 <li><p>Place this file (<code class="docutils literal notranslate"><span class="pre">Complete_TAVG_Daily_LatLong1_1980.nc</span></code>) in the
-<code class="docutils literal notranslate"><span class="pre">data/climate_data</span></code> folder.</p></li>
+<code class="docutils literal notranslate"><span class="pre">sources/climate_data</span></code> folder.</p></li>
 </ol>
 <p>As a first pre-processing step, we will clip this file to the United
 States.</p>
@@ -435,8 +447,8 @@ States.</p>
 <section id="loading-the-data">
 <h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this heading">#</a></h2>
 <p>First, let’s load all of the data into memory. This code assumes that
-it (the code) is stored in a file (call it <code class="docutils literal notranslate"><span class="pre">preprocess_best.m</span></code> or
-<code class="docutils literal notranslate"><span class="pre">preprocess_best.py</span></code>) in a directory <code class="docutils literal notranslate"><span class="pre">code/</span></code>, a sister to the <code class="docutils literal notranslate"><span class="pre">data/</span></code>
+it (the code) is stored in a file (call it <code class="docutils literal notranslate"><span class="pre">preprocess_best.R</span></code>, <code class="docutils literal notranslate"><span class="pre">preprocess_best.m</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">preprocess_best.py</span></code>) in your <code class="docutils literal notranslate"><span class="pre">code/</span></code> directory, a sister to the <code class="docutils literal notranslate"><span class="pre">sources/</span></code>
 directory.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
@@ -445,6 +457,9 @@ R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
 
 <span class="n">nc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nc_open</span><span class="p">(</span><span class="s">&quot;../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display header</span>
+<span class="n">nc</span>
 
 <span class="n">time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="nf">as.Date</span><span class="p">(</span><span class="s">&quot;1980-01-01&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="n">nc</span><span class="o">$</span><span class="n">dim</span><span class="o">$</span><span class="n">time</span><span class="o">$</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&quot;1 day&quot;</span><span class="p">)</span>
 </pre></div>
@@ -459,10 +474,14 @@ Python</label><div class="sd-tab-content docutils">
 
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../data/climate_data/Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">)</span>
 
+<span class="c1"># Display header</span>
+<span class="n">ds</span>
+
 <span class="c1"># Create time variable, which wasn&#39;t auto-generated from the netcdf </span>
 <span class="c1"># due to BEST&#39;s ambiguous timing</span>
 <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">),</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
 </pre></div>
 </div>
 </div>
@@ -471,12 +490,15 @@ Python</label><div class="sd-tab-content docutils">
 Matlab</label><div class="sd-tab-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;../data/climate_data/&#39;</span><span class="p">;</span>
 <span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Complete_TAVG_Daily_LatLong1_1980.nc&#39;</span><span class="p">;</span>
+
+<span class="c">% Display header</span>
+<span class="nb">ncdisp</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">])</span>
 <span class="w">	   </span>
 <span class="n">clim_tmp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;climatology&#39;</span><span class="p">);</span>
 <span class="n">anom_tmp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;temperature&#39;</span><span class="p">);</span>
 <span class="n">doy_tmp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">([</span><span class="n">data_dir</span><span class="p">,</span><span class="n">filename</span><span class="p">],</span><span class="s">&#39;day_of_year&#39;</span><span class="p">);</span>
 
-<span class="c">% Also loading the &quot;months&quot; variable - most datasets don&#39;t have it, but</span>
+<span class="c">% Also loading the &quot;months&quot; variable - most datasets won&#39;t have this, but</span>
 <span class="c">% it will make more sophisticated projecting methods easier. This is</span>
 <span class="c">% particularly useful because of the gregorian calendar (which includes</span>
 <span class="c">% leap days, and therefore would otherwise add an extra step to</span>
@@ -486,6 +508,7 @@ Matlab</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
+<p>Note that we also printed the NetCDF file’s <a class="reference internal" href="netcdfs-and-basic-coding.html#content-netcdf-header"><span class="std std-ref">header</span></a>. This allows us to inspect the contents of the file and the variables. Note, for example, that the units of the variable <code class="docutils literal notranslate"><span class="pre">temperature</span></code> are <span class="math notranslate nohighlight">\(^\circ\)</span>C, not K as is often the case for weather data.</p>
 </section>
 <section id="constructing-temperature-levels">
 <h2>Constructing temperature levels<a class="headerlink" href="#constructing-temperature-levels" title="Permalink to this heading">#</a></h2>
@@ -570,9 +593,9 @@ R</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-7">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">],</span><span class="s1">&#39;lon&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">]}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">),</span><span class="s1">&#39;lon&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">)}</span>
 
-<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">geo_lims</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]),</span><span class="n">longitude</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">geo_lims</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="o">**</span><span class="n">geo_lims</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -594,46 +617,142 @@ Matlab</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
+<section id="verify-the-data">
+<h2>Verify the data<a class="headerlink" href="#verify-the-data" title="Permalink to this heading">#</a></h2>
+<p>This is a good moment to take a look at your data, to make sure it downloaded correctly and that your pre-processing code did what you expected it to. The simplest way to do so is to plot your data and inspect it visually.</p>
+<p>From the section on <a class="reference internal" href="netcdfs-and-basic-coding.html#content-basic-visualization"><span class="std std-ref">Basic Visualization of Climate and Weather Data</span></a>:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-9">
+python</label><div class="sd-tab-content docutils">
+<p>Let’s plot a time series of the closest grid cell to Los Angeles, CA:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Does the time series look reasonable (for example, do the temperatures match up with what you expect temperatures in LA to look like)? Are there any missing data? Is there a trend?</p>
+<p>Let’s also look at the seasonal cycle of temperature as well:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the day-of-year average</span>
+<span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span>
+ <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time.dayofyear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>What can you say about the seasonality of your data?</p>
+<p>Now, let’s plot a map of the average summer temperature of our data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cartopy</span> <span class="kn">import</span> <span class="n">crs</span> <span class="k">as</span> <span class="n">ccrs</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Create a geographic axis with the Albers Equal Area projection, a </span>
+<span class="c1"># commonly-used projection for continental USA maps</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=-</span><span class="mi">96</span><span class="p">))</span>
+
+<span class="c1"># Get average summer temperatures</span>
+<span class="n">ds_summer</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span><span class="o">==</span><span class="s1">&#39;JJA&#39;</span><span class="p">))</span>
+
+<span class="c1"># Plot contour map of summer temperatures, making sure to set the </span>
+<span class="c1"># transform of the data itself (PlateCarree() tells the code to intepret</span>
+<span class="c1"># x values as longitude, y values as latitude, so it can transform </span>
+<span class="c1"># the data to the AlbersEqualArea projection)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span><span class="n">levels</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+
+<span class="c1"># Add coastlines, for reference</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly?</p>
+</div>
+<input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-10">
+Matlab</label><div class="sd-tab-content docutils">
+<p>Let’s plot a time series of the closest grid cell to Los Angeles, CA:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Find the closet lat / lon indices to LA</span>
+<span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">lat_idx</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">lat</span><span class="o">-</span><span class="mf">34.1</span><span class="p">))</span>
+<span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">lon_idx</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">lon</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mf">118.2</span><span class="p">)))</span>
+<span class="c">% Plot a time series of that grid cell</span>
+<span class="nb">plot</span><span class="p">(</span><span class="nb">squeeze</span><span class="p">(</span><span class="n">tas</span><span class="p">(</span><span class="n">lon_idx</span><span class="p">,</span><span class="n">lat_idx</span><span class="p">,:)))</span>
+</pre></div>
+</div>
+<p>Does the time series look reasonable (for example, do the temperatures match up with what you expect temperatures in LA to look like)? Are there any missing data? Is there a trend?</p>
+<p>Let’s also look at the seasonal cycle of temperature as well:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">Plot</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="nb">year</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">data</span>
+<span class="nb">plot</span><span class="p">(</span><span class="nb">squeeze</span><span class="p">(</span><span class="n">tas</span><span class="p">(</span><span class="n">lon_idx</span><span class="p">,</span><span class="n">lat_idx</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">365</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>What can you say about the seasonality of your data?</p>
+<p>Now, let’s plot a map of the average temperature of our data:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set an equal-area projection</span>
+<span class="n">axesm</span><span class="p">(</span><span class="s">&#39;eckert4&#39;</span><span class="p">)</span><span class="w"> </span>
+
+<span class="c">% Plot time-mean data </span>
+<span class="n">pcolorm</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span><span class="nb">squeeze</span><span class="p">(</span><span class="nb">mean</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">).</span><span class="o">&#39;</span><span class="p">);</span><span class="w"> </span><span class="n">shading</span><span class="w"> </span><span class="s">flat</span><span class="w"> </span>
+
+<span class="c">% Add coastlines</span>
+<span class="n">coasts</span><span class="p">=</span><span class="nb">matfile</span><span class="p">(</span><span class="s">&#39;coast.mat&#39;</span><span class="p">)</span>
+<span class="n">geoshow</span><span class="p">(</span><span class="n">coasts</span><span class="p">.</span><span class="n">lat</span><span class="p">,</span><span class="n">coasts</span><span class="p">.</span><span class="n">long</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly?</p>
+</div>
+</div>
+</section>
 <section id="save-the-result">
 <h2>Save the result<a class="headerlink" href="#save-the-result" title="Permalink to this heading">#</a></h2>
 <p>We will write out the clipped, concatenated data to a single file for
 future processing. We make some changes in the process to conform to
-the standards used in CMIP5 datasets.</p>
+the CMIP file system standards, for ease of future processing.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-9">
+<input checked="checked" id="sd-tab-item-11" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-11">
 R</label><div class="sd-tab-content docutils">
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">dimlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;degrees_east&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="p">[</span><span class="n">longitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span><span class="w"> </span><span class="n">longname</span><span class="o">=</span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set output filename of your pre-processed file</span>
+<span class="n">output_fn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&quot;</span>
+
+<span class="c1"># Define dimensions</span>
+<span class="n">dimlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;degrees_east&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="p">[</span><span class="n">longitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span><span class="w"> </span><span class="n">longname</span><span class="o">=</span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
 <span class="n">dimlat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;degrees_north&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">[</span><span class="n">latitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">latitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span><span class="w"> </span><span class="n">longname</span><span class="o">=</span><span class="s">&#39;latitude&#39;</span><span class="p">)</span>
 <span class="n">dimtime</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;days since 1980-01-01 00:00:00&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">as.Date</span><span class="p">(</span><span class="s">&quot;1980-01-01&quot;</span><span class="p">)),</span>
 <span class="w">                     </span><span class="n">unlim</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="w"> </span><span class="n">calendar</span><span class="o">=</span><span class="s">&quot;proleptic_gregorian&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define variable with the dimensions listed above</span>
 <span class="n">vartas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncvar_def</span><span class="p">(</span><span class="s">&quot;tas&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">dimlon</span><span class="p">,</span><span class="w"> </span><span class="n">dimlat</span><span class="p">,</span><span class="w"> </span><span class="n">dimtime</span><span class="p">),</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">longname</span><span class="o">=</span><span class="s">&quot;temperature&quot;</span><span class="p">)</span>
 
-<span class="n">ncnew</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nc_create</span><span class="p">(</span><span class="s">&quot;tas_day_BEST_historical_station_19800101-19891231.nc&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">vartas</span><span class="p">)</span>
+<span class="c1"># Create netcdf vile</span>
+<span class="n">ncnew</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nc_create</span><span class="p">(</span><span class="n">output_fn</span><span class="p">,</span><span class="w"> </span><span class="n">vartas</span><span class="p">)</span>
+<span class="c1"># Add the variable data</span>
 <span class="nf">ncvar_put</span><span class="p">(</span><span class="n">ncnew</span><span class="p">,</span><span class="w"> </span><span class="n">vartas</span><span class="p">,</span><span class="w"> </span><span class="n">tas2</span><span class="p">)</span>
+
+<span class="c1"># Add an attribute mentioning how this file was created</span>
+<span class="c1"># This is good practice, especially for NetCDF files, </span>
+<span class="c1"># whose metadata can help you keep track of your workflow. </span>
+<span class="nf">ncvar_put</span><span class="p">(</span><span class="n">ncnew</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="s">&#39;origin_script&#39;</span><span class="p">,</span><span class="s">&#39;preprocess_best.R&#39;</span><span class="p">)</span>
+
+<span class="c1"># Close file</span>
 <span class="nf">nc_close</span><span class="p">(</span><span class="n">ncnew</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-10">
+<input id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-12">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set output filename of your pre-processed file</span>
+<span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
 
+<span class="c1"># Add an attribute mentioning how this file was created</span>
+<span class="c1"># This is good practice, especially for NetCDF files, </span>
+<span class="c1"># whose metadata can help you keep track of your workflow. </span>
 <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;origin_script&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;preprocess_best.py&#39;</span>
 
-<span class="c1"># Rename to lat/lon to fit CMIP5 defaults</span>
+<span class="c1"># Rename to lat/lon to fit CMIP defaults</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="s1">&#39;lon&#39;</span><span class="p">})</span>
 
 <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">output_fn</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-11">
+<input id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-13">
 Matlab</label><div class="sd-tab-content docutils">
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename</span>
-<span class="n">fn_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename of your pre-processed file</span>
+<span class="n">fn_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
 
 <span class="c">% Write temperature data to netcdf </span>
 <span class="nb">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)})</span>
@@ -669,12 +788,17 @@ Matlab</label><div class="sd-tab-content docutils">
 <span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;variable&#39;</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">)</span>
 <span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;variable_long&#39;</span><span class="p">,</span><span class="s">&#39;near-surface air temperature&#39;</span><span class="p">)</span>
 <span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;source&#39;</span><span class="p">,</span><span class="s">&#39;Berkeley Earth Surface Temperature Project&#39;</span><span class="p">)</span>
-<span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;origin_script&#39;</span><span class="p">,</span><span class="s">&#39;preprocess_best.m&#39;</span><span class="p">)</span>
 <span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;calendar&#39;</span><span class="p">,</span><span class="s">&#39;gregorian&#39;</span><span class="p">)</span>
+
+<span class="c">% Add an attribute mentioning how this file was created</span>
+<span class="c">% This is good practice, especially for NetCDF files, </span>
+<span class="c">% whose metadata can help you keep track of your workflow. </span>
+<span class="nb">ncwriteatt</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;/&#39;</span><span class="p">,</span><span class="s">&#39;origin_script&#39;</span><span class="p">,</span><span class="s">&#39;preprocess_best.m&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Now you can start working with the downloaded data! We’ll come back to using this file in <a class="reference internal" href="example-step3.html#content-hands-on3"><span class="std std-ref">Step 3</span></a> of the Hands-On Exercise.</p>
 </section>
 </section>
 
@@ -715,7 +839,7 @@ Matlab</label><div class="sd-tab-content docutils">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">How to Start Working with a Data Product</p>
+        <p class="prev-next-title">Choosing and Downloading Weather and Climate Data Products</p>
       </div>
     </a>
     <a class="right-next"
@@ -745,10 +869,12 @@ Matlab</label><div class="sd-tab-content docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filesystem-organization">Filesystem organization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-temperature-levels">Constructing temperature levels</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-it-geographically">Subset it geographically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-the-data">Verify the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-result">Save the result</a></li>
 </ul>
   </nav></div>
