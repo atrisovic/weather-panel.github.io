@@ -1,50 +1,72 @@
-# Hands-On Exercise, Step 4: Producing results
+# Hands-On Exercise, Step 4: Regression results
 
-## Constructing annual polynomials summed over days
+## Necessary libraries
 
-We have county aggregated data from the previous step, but we also
-need to sum it to the annual level to match the mortality data. Again,
-this code should be run from a sister directory to the `data`
-directory.
+In this step, we will perform econometric regressions and plot the
+results. This requires some libraries, and we will also be calculating
+confidence intervals by hand which requires some additional code or
+libraries.
 
-Let's first turn the data from wide form into long form and label the
-years.
 
-````{tabbed} R
-```R
-library(reshape2)
+````{tabbed} Python
 
-clim <- read.csv("../data/climate_data/agg_vars.csv")
+We will use `PanelOLS` from `linearmodels` to perform the regression,
+but we also need the `t` function to compute t values for the
+confidence intervals. We will plot the result with `matplotlib`.
 
-clim2 <- melt(clim[, c(-1:-5)], id.vars='FIPS')
-clim2$date <- as.Date("1980-01-01") + as.numeric(gsub("tas_adj|tas_sq", "", clim2$variable))
-clim2$year <- as.numeric(substring(clim2$date, 1, 4))
+```python
+import pandas as pd
+import numpy as np
+from linearmodels.panel import PanelOLS
+from scipy.stats import t
+import matplotlib.pyplot as plt
 ```
 ````
 
-Now we can sum over years. To do this, we will need to base this on
-the first several characters of the column names (not variable row
-values).
-
 ````{tabbed} R
+We will use the `lfe` package to perform the regression and `ggplot2`
+to graph the result.
+
+To get confidence intervals from the `felm` function in `lfe`, we use
+the `predict.felm` function from the `felm-tools.R` library at
+https://github.com/jrising/research-common/blob/master/R/felm-tools.R
+
+
 ```R
 library(dplyr)
-
-clim3 <- clim2 %>% group_by(FIPS, year) %>% summarize(tas_adj=sum(value[substring(variable, 1, 7) == 'tas_adj']), tas_sq=sum(value[substring(variable, 1, 6) == 'tas_sq']))
+library(lfe)
+library(ggplot2)
+source("~/projects/research-common/R/felm-tools.R")
 ```
 ````
 
 ## Merging weather and outcome data
 
-And now we can merge in the mortality data! This is by county (FIPS
+Now we can merge in the mortality data! This is by county (FIPS
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.
 
+````{tabbed} Python
+```python
+# Read data
+clim = pd.read_csv("../data/climate_data/agg_vars.csv")
+df = pd.read_csv("../data/cmf/merged.csv")
+
+# Merge datasets
+df2 = pd.merge(df, clim, how='left', left_on=['fips', 'year'], right_on=['FIPS', 'year'])
+
+# Create new variable
+df2['deathrate'] = 100000 * df2['deaths'] / df2['pop']
+df2.loc[df2['deathrate'] == float("inf"), 'deathrate'] = np.nan
+```
+````
+
 ````{tabbed} R
 ```R
+clim <- read.csv("../data/climate_data/agg_vars.csv")
 df <- read.csv("../data/cmf/merged.csv")
 
-df2 <- df %>% left_join(clim3, by=c('fips'='FIPS', 'year'))
+df2 <- df %>% left_join(clim, by=c('fips'='FIPS', 'year'))
 
 df2$deathrate <- 100000 * df2$deaths / df2$pop
 df2$deathrate[df2$deathrate == Inf] <- NA
@@ -61,13 +83,43 @@ result, it is not ideal for future projections.
 For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.
 
+````{tabbed} Python
+We will first need to construct the state-level fixed-effects by hand,
+by creating a state dummies and multiplying them by year values.
+
+```python
+# Categories and numbers
+df2['state'] = (df2['fips'] / 1000).astype(int).astype(str)
+
+# Drop rows with missing values
+df2 = df2.dropna(subset=['deathrate', 'tas_adj', 'tas_sq'])
+
+df2 = df2.set_index(['FIPS', 'year'])
+
+# Create separate columns for state-specific trends using dummy variable expansion
+state_dummies = pd.get_dummies(df2['state'], prefix='state')
+state_trends = state_dummies.mul(df2.index.get_level_values('year'), axis=0)
+
+# Fixed effects regression
+
+# Merge the state-specific trends with the exogenous variables
+exog = pd.concat([df2[['tas_adj', 'tas_sq']], state_trends], axis=1)
+
+mod = PanelOLS(df2.deathrate, exog, entity_effects=True)
+clustered = mod.fit(cov_type='clustered', cluster_entity=True)
+```
+````
+
 ````{tabbed} R
+We need to create a state-level indicator, which will be used for the
+state fixed-effects. We will also need to ensure that `year` is a
+numeric value, not an integer, for `felm` to work properly.
+
 ```R
-library(lfe)
-
 df2$state <- as.character(floor(df2$fips / 1000))
+df2$year <- as.numeric(df2$year)
 
-mod <- felm(deathrate ~ tas_adj + tas_sq | + factor(state) : year +  factor(fips) | 0 | fips, data=df2)
+mod <- felm(deathrate ~ tas_adj + tas_sq | factor(state) : year +  factor(fips) | 0 | fips, data=df2)
 ```
 ````
 
@@ -79,9 +131,46 @@ reconstruct the adjusted temperatures. The normalization we used
 ensures that all of the reported values are relative to $20^\circ$ C,
 so there are no confidence intervals at this point.
 
-For R, to get confidence intervals from `felm`, we use the
-`predict.felm` function from the `felm-tools.R` library at
-https://github.com/jrising/research-common/blob/master/R/felm-tools.R
+````{tabbed} Python
+The Python code here is a bit complicated, since we have to calculate
+confidence intervals by hand. This also lets us ignore all of the
+fixed effects.
+
+```python
+# Prediction dataframe
+plotdf = pd.DataFrame({'tas': range(-20, 41)})
+plotdf['tas_adj'] = plotdf['tas'] - 20
+plotdf['tas_sq'] = plotdf['tas']**2 - 20**2
+
+# Point estimate prediction
+coefficients = clustered.params[0:2]
+preds = plotdf[['tas_adj', 'tas_sq']]
+prediction = np.dot(preds, coefficients)
+
+# Confidence interval prediction
+vcov = clustered.cov.iloc[0:2, 0:2]
+ses = np.sqrt(np.diag(np.dot(np.dot(preds, vcov), np.transpose(preds))))
+degfree = len(df2) - len(clustered.params) - clustered.df_model - 1
+ci_upper = prediction + t.ppf(0.975, degfree) * ses
+ci_lower = prediction + t.ppf(0.025, degfree) * ses
+
+# Create final dataframe for visualization
+plotdf2 = pd.concat([plotdf, pd.DataFrame({'y': prediction, 'cilo': ci_lower, 'cihi': ci_upper})], axis=1)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(plotdf2.tas.values, plotdf2.y.values)
+
+# Confidence interval
+plt.fill_between(plotdf2.tas, plotdf2.cilo, plotdf2.cihi, color='grey', alpha=.5)
+
+plt.xlabel('Daily temperature (C)')
+plt.ylabel("Deaths per 100,000 people")
+plt.title('Excess death rate as a function of temperature')
+plt.grid(True)
+plt.show()
+```
+````
 
 ````{tabbed} R
 ```R
@@ -89,13 +178,9 @@ plotdf <- data.frame(tas=seq(-20, 40))
 plotdf$tas_adj <- plotdf$tas - 20
 plotdf$tas_sq <- plotdf$tas^2 - 20^2
 
-source("felm-tools.R")
-
 preddf <- predict.felm(mod, plotdf, interval='confidence')
 
 plotdf2 <- cbind(plotdf, preddf)
-
-library(ggplot2)
 
 ggplot(plotdf2, aes(tas, fit)) +
     geom_line() + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=.5) +

@@ -6,6 +6,7 @@
 library(stagg)
 library(raster)
 library(tigris)
+library(dplyr)
 
 ## Load data and expand to global grid
 global.extent <- extent(-180, 180, -90, 90)
@@ -32,5 +33,16 @@ county.tas <- staggregate_polynomial(data=rr.tas.padded2, daily_agg="none", time
 
 ## Only write out valid entries
 county.tas.valid <- subset(county.tas, !is.na(order_1))
-write.csv(county.tas, 'climate_data/agg_poly.csv', row.names=F)
+
+## Remove 20 deg per day
+daysperyear <- table(substring(names(rr.tas), 2, 5))
+county.tas.base <- data.frame(year=as.numeric(names(daysperyear)), order_1=20*as.numeric(daysperyear), order_2=(20^2)*as.numeric(daysperyear))
+
+county.tas.final <- county.tas.valid %>% left_join(county.tas.base, by='year', suffix=c('', '.base'))
+
+county.tas.final$tas_adj <- county.tas.final$order_1 - county.tas.final$order_1.base
+county.tas.final$tas_sq <- county.tas.final$order_2 - county.tas.final$order_2.base
+names(county.tas.final)[2] <- 'FIPS'
+
+write.csv(county.tas.final, 'climate_data/agg_vars.csv', row.names=F)
 

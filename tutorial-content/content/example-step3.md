@@ -44,6 +44,7 @@ Begin your code as follows:
 library(stagg)
 library(raster)
 library(tigris)
+library(dplyr)
 ```
 ````
 
@@ -76,6 +77,7 @@ rr.pop.padded[is.na(rr.pop.padded)] = 0
 
 ## Load counties
 counties <- tigris::counties()
+counties$FIPS <- paste0(counties$STATEFP, counties$COUNTYFP)
 ```
 ````
 
@@ -115,15 +117,14 @@ between the pixels that touch the polygon and the polygon.
 
 ````{tabbed} Python
 ```python
-weightmap =
-xa.pixel_overlaps(ds_tas,gdf_counties,weights=ds_pop.Population,subset_bbox=False)
+weightmap = xa.pixel_overlaps(ds_tas, gdf_counties, weights=ds_pop.Population, subset_bbox=False)
 ```
 ````
 
 ````{tabbed} R
 ```R
 grid.weights <- secondary_weights(secondary_raster=rr.pop.padded, grid=rr.tas.padded)
-county.weights <- overlay_weights(polygons=counties, polygon_id_col="GEOID", grid=rr.tas.padded, secondary_weights=grid.weights)
+county.weights <- overlay_weights(polygons=counties, polygon_id_col="FIPS", grid=rr.tas.padded, secondary_weights=grid.weights)
 ```
 ````
 
@@ -140,10 +141,18 @@ Using the weight map calculated above, `xagg` now aggregates all the
 gridded variables in `ds_tas` (the `tas_adj` and `tas_sq` we
 calculated above) onto the county polygons. 
 
-`aggregated` is an object specific to the `xagg` package. We need to modify it to be usable, for example using `aggregated.to_dataset()` or `aggregated.to_csv`. See the `xagg` docs for more info.
+`aggregated` is an object specific to the `xagg` package. We need to
+modify it to be usable, for example using `aggregated.to_dataset()` or
+`aggregated.to_csv()`. See the `xagg` docs for more info. Here we use
+`aggregated.to_dataset()` which produces an `xarray` dataset, which
+will be convenient for providing a standardized output.
 
 ```python
 aggregated = xa.aggregate(ds_tas, weightmap)
+
+## Aggregate the result to the annual level
+ds = aggregated.to_dataset()
+ds2 = ds.groupby(ds.time.dt.year).sum()
 ```
 ````
 
@@ -168,22 +177,46 @@ tools.
 The result from `xagg` will be reshaped 'wide' - so every row is a
 county, and every column is a timestep of the variables. `stagg` on
 the other hand aggregates the results to the annual level and provides
-each county-year as a row. Since these files look quite different, we
-will use different filenames in the example code. The logic for using
-each result will be provided in future steps.
+each county-year as a row. We also want to output this data in a
+standard form, so that the next step does not depend on the language
+and library used for this step.
 
 ````{tabbed} Python
 
-Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`, depending on whether you'd like to continue using it in `xarray` or `pandas`. 
+Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`,
+depending on whether you'd like to continue using it in `xarray` or
+`pandas`. The code below provides a standard format for the next step.
 
 ```python
-aggregated.to_csv('climate_data/agg_vars.csv')
+ds2['STATE_FIPS'] = ds2.STATE_FIPS.astype(str)
+ds2['CNTY_FIPS'] = ds2.CNTY_FIPS.astype(str)
+
+ds2['FIPS'] = xr.apply_ufunc(np.char.add, ds2.STATE_FIPS, ds2.CNTY_FIPS)
+ds2['FIPS'] = ds2.FIPS.isel(year=0).drop('year')
+
+ds2.swap_dims({'poly_idx': 'FIPS'}).drop('poly_idx')
+ds2.to_dataframe().to_csv("climate_data/agg_vars.csv")
 ```
 ````
 
 ````{tabbed} R
-```python
+The polynomial calculation used by `stagg` assumes a baseline
+temperature of 0 C. We will now adjust this to a baseline of 20 C.
+
+```R
+## Only write out valid entries
 county.tas.valid <- subset(county.tas, !is.na(order_1))
-write.csv(county.tas.valid, 'climate_data/agg_poly.csv', row.names=F)
+
+## Remove 20 deg per day
+daysperyear <- table(substring(names(rr.tas), 2, 5))
+county.tas.base <- data.frame(year=as.numeric(names(daysperyear)), order_1=20*as.numeric(daysperyear), order_2=(20^2)*as.numeric(daysperyear))
+
+county.tas.final <- county.tas.valid %>% left_join(county.tas.base, by='year', suffix=c('', '.base'))
+
+county.tas.final$tas_adj <- county.tas.final$order_1 - county.tas.final$order_1.base
+county.tas.final$tas_sq <- county.tas.final$order_2 - county.tas.final$order_2.base
+names(county.tas.final)[2] <- 'FIPS'
+
+write.csv(county.tas.final, 'climate_data/agg_vars.csv', row.names=F)
 ```
 ````
