@@ -36,7 +36,7 @@ https://github.com/jrising/research-common/blob/master/R/felm-tools.R
 library(dplyr)
 library(lfe)
 library(ggplot2)
-source("~/projects/research-common/R/felm-tools.R")
+source("felm-tools.R")
 ```
 ````
 
