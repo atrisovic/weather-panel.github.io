@@ -44,7 +44,7 @@ Temperature relationships are often preferred in climate impacts research, becau
 1. **$T_{min}$, $T_{max}$:**  Many socioeconomic processes are more
     sensitive to extreme temperatures than to variation in the
     average. This is also useful when temperature variation is
-    large, leading to significant differences in the cold end and hot end responses. These are important metrics when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$, which are measured at a daily frequency. 
+    large, leading to significant differences in the cold end and hot end responses. These are important metrics, which are measured at a daily frequency, when heterogeneity within time units matters, and may better capture heat waves and cold spells. Also, note that $T_{min}$ better reflects nighttime temperatures while $T_{max}$ better reflects daytime temperatures. Not all datasets include $T_{min}$ or $T_{max}$.
 2. **$T_{avg}$:**  A good mean metric for seeing average response
     over the temperature support, when there is not much variation
     in temperature within each time unit considered in the
@@ -61,10 +61,10 @@ Temperature relationships are often preferred in climate impacts research, becau
 
 ### *Humidity*
 
-There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific (very similar to absolute). Absolute humidity describes the water content of air,
+There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air,
 expressed in grams per cubic meter or grams per kilogram. Relative
 humidity is defined as a percentage relative to a maximum humidity
-value for a given temperature. Specific humidity is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
+value for a given temperature. Specific humidity, which is very similar to absolute humidity, is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
 
 1. **Wet-Bulb Temperature (WBT)**: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
 2. **Wet-Bulb Globe Temperature (WBGT)**: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight).
@@ -179,7 +179,7 @@ $s$, $g_k(\cdot)$ is the non-linear transformation (e.g., raising to
 powers for polynomials), and $y_{it}$ is the dependent variable
 observed for region $i$ in reporting period $t$. Weather data products can have temporal resolution finer than scale of daily observations. Like spatial aggregation, we can do temporal aggregation to month, year, or decade.
 
-(content:spatial-and-temporal-scales)=
+(content:more-weather-variables)=
 ## More weather variables
 
 ### *Precipitation*
