@@ -3,10 +3,13 @@
 Returning to the "true model" of your process, the decisions around how to
 generate a linear expression that you can estimate have important
 implications. Different functional forms serve different purposes and
-describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
+describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below. For the ease of notation in this section, we get rid of timestep $s$ and instead work with more aggregated time values $t$.
 
-## [Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)
+## [Bins](https://en.wikipedia.org/wiki/Data_binning)
 
+Binning is a data classification technique in which observations are assigned 
+to specific bins, which correspond to a range of data. For example, histograms
+are used to observe frequency distributions of the data.
 Bins offer a very flexible functional form, although the choice of bin
 edges means that they are not as "non-parametric" as often assumed. It
 is also highly sensitive to existence of outliers in data. This can
@@ -28,7 +31,7 @@ which the temperature falls into that bin.
 To calculate bin observations, count up the number of timesteps where
 the weather predictor falls into each bin:
 
-$$X_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{{X_{p i t} \in Bin_k} \right \}$$
+$$X_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \lbrace {X_{p i t} \in Bin_k} \right \rbrace$$
 
 where $\psi_{p}$ is the weight assigned to the $p$ grid cell.  
 
@@ -86,12 +89,12 @@ title on cubic splines can be helpful in deciding the knot
 specifications.
 
 Once knot locations are determined, the weather data needs to be
-translated into RCS terms. As before let the gridded weather be $X_{p
-i t}$ and let there be $n$ knots, placed at $X_1<X_2<...<X_n$. Then we
-have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
+translated into RCS terms. As before let the gridded weather variable be $X_{p i t}$ 
+and let there be $n$ knots, placed at $X_1 < X_2 < ... < X_n$.
+Then we have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
 
-$$f(X_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(X_{p i t}-X_k)^3_+ - (X_{p i t} - X_{n-1})^3_+ \frac{X_n-X_k}{X_n-X_{n-1}}+(X_{p i t} - X_{n})^3_+ \frac{X_{n-1}-X_k}{X_{n}-X_{n-1}}\}$$ 
-    
+$$f(X_{i t})_k = \sum_{p \in \Theta(i)} \psi_{p} \{(X_{p i t}-X_k)^3_+ - (X_{p i t} - X_{n-1})^3_+ \frac{X_n-X_k}{X_n-X_{n-1}} + (X_{p i t} - X_{n})^3_+ \frac{X_{n-1} - X_k} {X_{n}-X_{n-1}}\}$$ 
+
 $$\forall k \in \{1,2,...,n-2\}$$
 
 where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
@@ -119,8 +122,8 @@ segments between knots here are lines. As with RCS, the choice of knot
 locations is very important.
 
 One definition of terms for a linear spline for a spline with $n$ knots at
-$X_1<X_2<...<X_n$ is:
-    
+$X_1 < X_2 < ... < X_n$ is:
+
 $$f(X_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} X_{p i t}$$
 $$f(X_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (X_{p i t}-X_k)_+$$
 
