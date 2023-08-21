@@ -59,16 +59,22 @@ Temperature relationships are often preferred in climate impacts research, becau
     to approximate DDs from daily data.
 4. **Heat Index & Wet Bulb Temperature**: (see below on humidity)
 
-### *Humidity*
+### *Precipitation*
 
-There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air,
-expressed in grams per cubic meter or grams per kilogram. Relative
-humidity is defined as a percentage relative to a maximum humidity
-value for a given temperature. Specific humidity, which is very similar to absolute humidity, is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
+Precipitation is highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [a Warning on Hydrological Variables](content:warning-on-hydrological). It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation can vary significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Moreover, precipitation can be much more approximated by a Normal disribution when aggregated in time. For example, as shown in figures below, the top(bottom) panel presents distribution of daily(monthly) precipitation for the state of Illinois, and it is notable that the monthly distribution looks more Normal (though still has some large outliers). Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
 
-1. **Wet-Bulb Temperature (WBT)**: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
-2. **Wet-Bulb Globe Temperature (WBGT)**: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight).
-3. **Heat Index (HI)**: various calculated metrics combining shade temperature and relative humidity.
+1. **Total precipitation (e.g., over a year)**: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
+2. **Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability**: often used to capture water stress.
+3. **Number of rainy/dry days or moments of the precipitation distribution**: the distribution of precipitation often matters more than the total.
+
+Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data)) specialize in extremes data. Please refer to [ETCCDI](http://etccdi.pacificclimate.org/list_27_indices.shtml) for definitions of extremes that are often used for weather and climate data.
+
+```{figure} images/rain_daily.png
+Daily precipitation distribution of Illinois, US
+```
+```{figure} images/rain_monthly.png
+Monthly precipitation distribution of Illinois, US
+```
 
 Please refer to the list at the bottom of this page for descriptions on more weather variables.
 
@@ -182,16 +188,17 @@ observed for region $i$ in reporting period $t$. Weather data products can have 
 (content:more-weather-variables)=
 ## More weather variables
 
-### *Precipitation*
+### *Humidity*
 
-Precipitation is highly local (in space *and* time), non-normally distributed i.e. often takes extremely low or high values (especially compared to temperature), poorly measured, and poorly predicted (see [a Warning on Hydrological Variables](content:warning-on-hydrological). It is often used as a control since it is correlated with temperature. However, the strength and direction of this correlation can vary significantly by region and time of year (see e.g. [Trenberth et al. 2005](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005GL022760), with implications for collinearity). Furthermore, the same care should be taken when inserting precipitation into a model as any other weather or social variable - what is its expected role? In what form should the data be? etc. Precipitation affects society differently at different spatiotemporal scales - annual precipitation may be useful for studying snowpack trends, drinking water supply, or the effect of droughts on agriculture; maximum precipitation rates may be the relevant metric for flood damages or crop failures. Moreover, precipitation can be much more approximated by a Normal disribution when aggregated in time, e.g. monthly precip. Remember that though means and extremes may be correlated, it's still possible to have a record storm in an unnaturally dry year, or an unnaturally wet year without heavy precipitation. As a result, different metrics of precipitation are often used (incomplete list):  
+There are mainly three metrics for humidity measurements: absolute, relative (often "RH"), and specific. Absolute humidity describes the water content of air,
+expressed in grams per cubic meter or grams per kilogram. Relative
+humidity is defined as a percentage relative to a maximum humidity
+value for a given temperature. Specific humidity, which is very similar to absolute humidity, is the ratio of water vapor mass to total moist air parcel mass. Human (and animal) bodies rely on evaporative cooling to regulate temperature in hot weather, the effectiveness of which depends on how much more moisture the atmosphere can currently hold (1 - RH). As a result, various temperature-humidity metrics have been developed to estimate "apparent" temperature, i.e. the temperature the current weather "feels like": 
 
-1. **Total precipitation (e.g., over a year)**: May be useful for large-scale impacts such as snowpack trends. Often used as a control in responses to extreme weather, despite being unsuited to studying short-term phenomena. 
-2. **Soil water, potential evapotranspiration rate (PET), Palmer drought severity index (PDSI), and water runoff/availability**: often used to capture water stress.
-3. **Number of rainy/dry days or moments of the precipitation distribution**: the distribution of precipitation often matters more than the total.
+1. **Wet-Bulb Temperature (WBT)**: the temperature read by a thermometer covered in water-soaked cloth (wet-bulb thermometer) over which air is passed. Gives the lowest temperature that can be reached under current conditions by evaporative cooling only. Equals air temperature at 100% relative humidity, and is lower at lower humidity. 
+2. **Wet-Bulb Globe Temperature (WBGT)**: a weighted index that combines WBT with measures of the impact of direct radiative transfer (e.g. sunlight).
+3. **Heat Index (HI)**: various calculated metrics combining shade temperature and relative humidity.
 
-Some datasets (such as [HadEX2](https://climatedataguide.ucar.edu/climate-data/hadex2-gridded-temperature-and-precipitation-climate-extremes-indices-climdex-data)) specialize in extremes data. Please refer to [ETCCDI](http://etccdi.pacificclimate.org/list_27_indices.shtml) for definitions of extremes often used for weather and climate data.
-    
 ### *River discharge rate* 
 
 River flows are generally measured at the station-level. While runoff is available in gridded products, it is not a good reflection of water availability. Hydrological models (like VIC) can translate precipitation into river discharges across a region.
