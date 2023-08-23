@@ -8,6 +8,7 @@
 
 Following these suggestions will help you organize your research, which could improve [reproducibility](https://the-turing-way.netlify.com) (replicability) and reusability of your code and results. In computational research, reproducibility is the ability to obtain consistent results using the same input data, code, and methods. Considering these early on is particularly helpful when collaborating with other researchers (including a future self). 
 
+(content:code-organization)=
 ## Organization of data and code
 
 Having a single directory for a project, containing all data and code in subdirectories 
@@ -27,9 +28,11 @@ you do not want to do it more times than necessary.
 
 Good naming practices should be applied to files and folders to make clear the contents of your project. Informative naming will help you understand the purpose of each file, and it will improve its findability. Here are a few recommendations:
 
-```{panels}
-Do's
-^^^
+`````{grid}
+:gutter: 2
+
+````{grid-item-card} Do's
+
 ✅ Use delimiters (such as underscores "_" or dashes "-") to separate information contained in the file name.
 
 ✅ Make sure file names are informative of their contents, and be consistent in using a naming scheme. 
@@ -37,15 +40,17 @@ Do's
 ✅ If you want to indicate sequence, start your file or folder names with numbers (e.g., `01_clean_data`, `02_analyze`, `03_results`)
 
 ✅ Use ASCII encoding if possible, with UTF-8 or UTF-16 as secondary options.
----
-Don'ts
-^^^
+````
+````{grid-item-card} Don'ts
+
 ❎ Don't use spaces, punctuation, accented characters or case sensitivity. Use periods for file type only (e.g., `.csv`)
 
 ❎ Don't use extra-long file and folder names, they should be as concise as possible while still being descriptive. 
 
 ❎ Don't use proprietary file formats for storing image data. Images, pictures, or figures should be saved as JPEG or GIF files.
-```
+````
+`````
+
 
 ```{admonition} Data storage 
 :class: tip
@@ -58,23 +63,26 @@ We recommend you inquire at your university about what can be the best place to 
 Even if you have organized your working directory perfectly, it is still good to include additional documentation in readme files (`readme.txt` or `README.md`). A README file is usually a plain text file stored in a top-level directory. Describe the files and process in these files, and try to keep them up-to-date as things are added or changed. Project documentation will be primarily helpful to you later on (for example, if you need to reuse the code with some modifications), but also to your peers and collaborators in case you share your data and code. Here are a few tips on creating a good README file:
 
 
-```{panels}
-Do's
-^^^
+````{grid}
+:gutter: 2
+
+```{grid-item-card} Do's
+
 ✅ Include a project description, explain how data was obtained and analyzed.
 
 ✅ Include a breakdown of naming conventions that will apply to files and variables in the dataset.
 
 ✅ Include names and contact information (when appropriate) of dataset creators and maintainers.
----
-Don'ts
-^^^
+```
+```{grid-item-card} Don'ts
+
 ❎ Don't forget to document your code, add information on software versions, and how to run your code.
 
 ❎ Don't use abbreviations, acronyms, or code names without defining them.
 
 ❎ Don't include personal information about authors or maintainers without their consent.
 ```
+````
 
 ```{note}
 All documentation should be stored in non-proprietary file formats, such as `.txt`, `.md`, `.xml` or `.pdf`.

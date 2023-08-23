@@ -1,32 +1,30 @@
-- file: content/getting-started
-  title: Introduction 
-
-- part: Weather and Climate Data
+format: jb-book
+root: content/getting-started
+title: Introduction
+parts:
+- caption: Weather and Climate Data
   chapters:
   - file: content/weather-and-climate-data
+  - file: content/netcdfs-and-basic-coding
+  - file: content/gridded-data
   - file: content/working-with-data-product
   - file: content/example-step1
-
-- part: Developing a reduced-form specification
+- caption: Developing a reduced-form specification
   chapters:
   - file: content/reduced-form-specification
   - file: content/functional-forms
   - file: content/example-step2
-
-- part: Geographical unit data
+- caption: Geographical unit data
   chapters:
   - file: content/geographical-unit-data
   - file: content/working-with-shapefiles
   - file: content/weighting-schemes
   - file: content/example-step3
-
-- part: Bringing it all together
+- caption: Bringing it all together
   chapters:
   - file: content/regression-pointers
-  - file: content/example-step4  
+  - file: content/example-step4
   - file: content/suggestions
-
-- part: Contributors
+- caption: Contributors
   chapters:
   - file: content/contributors
-

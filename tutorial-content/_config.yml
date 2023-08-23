@@ -18,7 +18,17 @@ html:
   favicon: content/images/favicon.png
 
 parse:
-  myst_extended_syntax: true
+  myst_enable_extensions:
+    - amsmath
+    - html_image
+    - dollarmath
+    - colon_fence
+    - deflist
+    - html_admonition
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
 
 execute:
   execute_notebooks: "off"

@@ -35,17 +35,19 @@ to. In most cases, it is necessary to use Conley-White standard
 errors, which correct for spatially- and temporally-correlated error
 terms.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 For code to calculate Conley standard errors in R, see <https://github.com/darinchristensen/conley-se>.
 ````
-````{tabbed} Python
+````{tab-item} Python
 For code to calculate Conley standard errors in python, see <https://www.danielmsullivan.com/econtools/metrics.html#spatial-hac-conley-errors>.
 ````
-````{tabbed} Matlab and Stata
+````{tab-item} Matlab and Stata
 Sol Hsiang has code that has been widely re-used (e.g., for R),
 originally developed for Matlab and Stata:
 <http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
 ````
+`````
 
 ## Plotting dose-response functions
 

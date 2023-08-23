@@ -1,3 +1,4 @@
+(content:hands-on3)=
 # Hands-On Exercise, Step 3: Aggregating the data
 
 ## Aggregating the weather data
@@ -10,7 +11,8 @@ being used elsewhere.
 
 ## Setting up the environment
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 The approach uses `xarray` for gridded data, `geopandas` to work with shapefiles, and `xagg` to aggregate gridded data onto shapefiles. 
 
 Install `xagg` according to [the instructions from
@@ -32,7 +34,7 @@ import numpy as np
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 The approach uses `raster` to work with gridded data, `tigris` to work
 with shapefiles, and `stagg` to aggregate gridded data onto shapefiles.
 
@@ -47,10 +49,12 @@ library(tigris)
 library(dplyr)
 ```
 ````
+`````
 
 Now, load the data from the previous steps and the county shapefile:
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 # Load temperature data using xarray
 ds_tas = xr.open_dataset(
@@ -64,7 +68,7 @@ gdf_counties = gpd.read_file('../data/geo_data/UScounties.shp')
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```{code-block} R
 ## Load data and expand to global grid
 global.extent <- extent(-180, 180, -90, 90)
@@ -80,6 +84,7 @@ counties <- tigris::counties()
 counties$FIPS <- paste0(counties$STATEFP, counties$COUNTYFP)
 ```
 ````
+`````
 
 ## Transforming the data
 
@@ -87,7 +92,8 @@ Next, we need to construct any nonlinear transformations of the data.
 
 For our econometric model, we want temperature in both linear and quadratic form, centered around $20^\circ$ C: $T-20^\circ C$ and $T^2 - (20^\circ C)^2$.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 ds_tas['tas_adj'] = ds_tas.tas-20
 ds_tas['tas_sq'] = ds_tas.tas**2 - 20**2
@@ -100,10 +106,11 @@ ds_tas = ds_tas.drop('land_mask')
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 With `stagg`, we will let the library handle this with the
 `staggregate_polynomial` function (below).
 ````
+`````
 
 ## Create map of pixels onto polygons
 
@@ -115,18 +122,20 @@ gridded dataset, taking the intersect between each county polygon and
 all pixel polygons, and calculating the average area of overlap
 between the pixels that touch the polygon and the polygon.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 weightmap = xa.pixel_overlaps(ds_tas, gdf_counties, weights=ds_pop.Population, subset_bbox=False)
 ```
 ````
 
-````{tabbed} R
+````{tab-set} R
 ```R
 grid.weights <- secondary_weights(secondary_raster=rr.pop.padded, grid=rr.tas.padded)
 county.weights <- overlay_weights(polygons=counties, polygon_id_col="FIPS", grid=rr.tas.padded, secondary_weights=grid.weights)
 ```
 ````
+`````
 
 
 ## Aggregate values onto polygons
@@ -135,7 +144,8 @@ For each county, we want to calculate the weighted average of the temperatures o
 
 The output of this step now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.  
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 
 Using the weight map calculated above, `xagg` now aggregates all the
 gridded variables in `ds_tas` (the `tas_adj` and `tas_sq` we
@@ -156,7 +166,7 @@ ds2 = ds.groupby(ds.time.dt.year).sum()
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```R
 ## Shift axis of climate data to conform to stagg expectations
 rr.tas.padded2 <- shift(rr.tas.padded, dx = 360)
@@ -165,6 +175,7 @@ rr.tas.padded2 <- shift(rr.tas.padded, dx = 360)
 county.tas <- staggregate_polynomial(data=rr.tas.padded2, daily_agg="none", time_agg='year', overlay_weights=county.weights, degree=2)
 ```
 ````
+`````
 
 
 ## Export this as a `.csv` file to be used elsewhere
@@ -181,7 +192,8 @@ each county-year as a row. We also want to output this data in a
 standard form, so that the next step does not depend on the language
 and library used for this step.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 
 Use `aggregated.to_dataset()` or `aggregated.to_dataframe()`,
 depending on whether you'd like to continue using it in `xarray` or
@@ -199,7 +211,7 @@ ds2.to_dataframe().to_csv("../data/climate_data/agg_vars.csv")
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 The polynomial calculation used by `stagg` assumes a baseline
 temperature of 0 C. We will now adjust this to a baseline of 20 C.
 
@@ -220,3 +232,4 @@ names(county.tas.final)[2] <- 'FIPS'
 write.csv(county.tas.final, '../data/climate_data/agg_vars.csv', row.names=F)
 ```
 ````
+`````

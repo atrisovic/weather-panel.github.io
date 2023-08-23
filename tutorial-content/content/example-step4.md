@@ -8,8 +8,8 @@ confidence intervals by hand which requires some additional code or
 libraries.
 
 
-````{tabbed} Python
-
+`````{tab-set}
+````{tab-item} Python
 We will use `PanelOLS` from `linearmodels` to perform the regression,
 but we also need the `t` function to compute t values for the
 confidence intervals. We will plot the result with `matplotlib`.
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 We will use the `lfe` package to perform the regression and `ggplot2`
 to graph the result.
 
@@ -39,6 +39,7 @@ library(ggplot2)
 source("felm-tools.R")
 ```
 ````
+`````
 
 ## Merging weather and outcome data
 
@@ -46,7 +47,8 @@ Now we can merge in the mortality data! This is by county (FIPS
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 ```python
 # Read data
 clim = pd.read_csv("../data/climate_data/agg_vars.csv")
@@ -61,7 +63,7 @@ df2.loc[df2['deathrate'] == float("inf"), 'deathrate'] = np.nan
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```R
 clim <- read.csv("../data/climate_data/agg_vars.csv")
 df <- read.csv("../data/cmf/merged.csv")
@@ -72,6 +74,7 @@ df2$deathrate <- 100000 * df2$deaths / df2$pop
 df2$deathrate[df2$deathrate == Inf] <- NA
 ```
 ````
+`````
 
 ## Running the regression
 
@@ -83,7 +86,8 @@ result, it is not ideal for future projections.
 For fixed effects, we use county fixed effects and state trends. More
 saturated fixed effects should be explored.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 We will first need to construct the state-level fixed-effects by hand,
 by creating a state dummies and multiplying them by year values.
 
@@ -110,7 +114,7 @@ clustered = mod.fit(cov_type='clustered', cluster_entity=True)
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 We need to create a state-level indicator, which will be used for the
 state fixed-effects. We will also need to ensure that `year` is a
 numeric value, not an integer, for `felm` to work properly.
@@ -122,6 +126,7 @@ df2$year <- as.numeric(df2$year)
 mod <- felm(deathrate ~ tas_adj + tas_sq | factor(state) : year +  factor(fips) | 0 | fips, data=df2)
 ```
 ````
+`````
 
 ## Plotting the resulting dose-response function
 
@@ -131,7 +136,8 @@ reconstruct the adjusted temperatures. The normalization we used
 ensures that all of the reported values are relative to $20^\circ$ C,
 so there are no confidence intervals at this point.
 
-````{tabbed} Python
+`````{tab-set}
+````{tab-item} Python
 The Python code here is a bit complicated, since we have to calculate
 confidence intervals by hand. This also lets us ignore all of the
 fixed effects.
@@ -172,7 +178,7 @@ plt.show()
 ```
 ````
 
-````{tabbed} R
+````{tab-item} R
 ```R
 plotdf <- data.frame(tas=seq(-20, 40))
 plotdf$tas_adj <- plotdf$tas - 20
@@ -188,7 +194,7 @@ ggplot(plotdf2, aes(tas, fit)) +
     ylab("Deaths per 100,000 people") +
     ggtitle("Excess death rate as a function of temperature") + theme_bw()
 ```
+````
+`````
 
 <img src="images/doseresp.png" alt="Dose-response function" width="750"/>
-````
-

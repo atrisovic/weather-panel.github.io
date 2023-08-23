@@ -1,18 +1,5 @@
 # Weighting schemes
 
-```{admonition} Key objectives and decision points
-:class: note
-Objectives:
-
-- Understand how to incorporate weights into your data.
-- Understand how to match up gridded data with different grids.
-
-Decision points:
-
- - Does your data-generating process occur locally or regionally?
- - Select the weighting scheme most appropriate for your data.
-```
-
 This section describes how to use different weighting schemes when
 working with gridded and regional data. As we use the term, weighting
 schemes assign a weight to each grid cell or regional
@@ -24,7 +11,7 @@ perform a weighted aggregation of gridded data to data regions.
 
 Taking the unweighted average of weather within a region can misrepresent what populations, firms, or other phenomena of interest are exposed to. For example, an unweighted annual average temperature for Canada is about -8°C, but most of the population and agricultural activity is in climate zones with mean temperatures over 6°C, and the urban heat island effect can raise temperatures by another 4°C. The time of year matters too, and you should consider a weighting scheme across days within a year, or even hours within a day.
 
-As described in section
+As described in the section
 [spatial and temporal scales of economic processes](content:spatial-and-temporal-scales),
 the scale of a phenomenon matters. Many processes occur at a more
 local scale than that which data is collected. The motivation for
@@ -107,7 +94,7 @@ is important for visualizing maps, it can just be a nuisance for
 gridded datasets. The most common “projection” for gridded datasets is
 an equirectangular projection, and we have been assuming this
 above. This is variously referred to as `1`, `ll`, `WGS 84`, and
-`EPSG: 4326` (technically, WGS 84 species how latitude and longitude
+`EPSG: 4326` (technically, WGS 84 specifies how latitude and longitude
 are defined, and EPSG:4326 specifies a drawing scheme where x =
 longitude and y = latitude). However, you will sometimes encounter
 grids in terms of km north and km east of a point, and then you may
@@ -119,7 +106,8 @@ All of these allow missing data to be handled. Typically, a specific numerical r
 
 ### Implementation Notes: Reading gridded data.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 Use the `raster` library. For example:
 
 ```{code-block} R
@@ -132,23 +120,22 @@ If you are using R, take a look at the [Introduction to Geospatial Raster and Ve
 which has some extensive examples of working with geospatial raster data.
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
+`````
 
 In some cases, it is appropriate and possible to use time-varying weighting schemes. For example, if population impacts are being studied, and the scale of the model is individuals, annual estimate of population can be used. This kind of data is often either in NetCDF format (see above), or as a collection of files.
 
 ## Aligning weather and weighting grids
 
 The first step to using a gridded weighting dataset is to make it
-conform to data grid definition used by your weather data.  This
+conform to the data grid definition used by your weather data.  This
 generally requires resampling the weighting data, increasing its
-resolution by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and vertical grid lines of the weather data coincide with the resampled grid lines of the weighting data.
+resolution by some factor. You want to do this so that two conditions to be met after resampling: (A) The new resolution should be an integer multiple of the weather resolution. (B) The horizontal and meridional grid lines of the weather data coincide with the resampled grid lines of the weighting data.
 
-Here we
-assume that both are regular latitude-longitude
-grids. See
-[working with gridded weighting data](content:working-with-gridded-data) to
+Here we assume that both are regular latitude-longitude
+grids. See [working with gridded weighting data](content:working-with-gridded-data) to
 understand the grid scheme for your weighting file; note that gridded
 weather data often reports the center of each grid cell, rather than
 the corner.
@@ -166,28 +153,31 @@ upsampling, downsampling, and cropping.
 To increase the resolution of a grid `rr` by a factor of `N` without increasing the
 sum of grid cells:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- disaggregate(rr, fact=N) / (N^2)
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 rr2 = np.repeat(np.repeat(rr, N, axis=0), N, axis=1) / (N*N)
 ```
 ````
+`````
 
 ### Downsampling - decreasing data resolution
 
 To decrease the resolution of a grid `rr` by a factor of `N` without
 decreasing the sum of grid cells:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- aggregate(rr, fact=N, fun=sum)
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 rr2 = np.zeros((int(rr.shape[0] / N), int(rr.shape[1] / N)))
 for ii in range(N):
@@ -195,6 +185,7 @@ for ii in range(N):
     rr2 += rr[ii::N, ii::N] / (N*N)
 ```
 ````
+`````
 
 ### Cropping - adjusting the extent of data
 
@@ -202,18 +193,20 @@ To adjust the spatial extent of grid `rr` to conform as closely as possible
 to a box from the longitudinal range `WW` to `EE` and the latitudinal
 range from `SS` to `NN`.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```{code-block} R
 rr2 <- crop(rr, extent(WW, SS, EE, NN))
 ```
 ````
-````{tabbed} Python
+````{tab-item} Python
 ``` python
 # We need to know the original extent of the data (W0, S0, E0, N0) and the spatial resolution (D)
 
 rr2 = rr[int((SS - S0)/D):int((NN - S0)/D), int((WW - W0)/D):int((EE - W0)/D)]
 ```
 ````
+`````
 
 The following recipe should work for most cases to align weighting data with a weather grid.
 
@@ -234,7 +227,8 @@ exact same extent.
 
 Suppose the weather data is nearly global, from 180°W to 180°E, 90°S to 86°N, as the case with LandScan population data. The resolution is 1/120th of a degree. You want to use this to weight PRISM data for the USA, with an extent $125.0208$ to 66.47917°W, 24.0625 to 49.9375°N, with a resolution of 1/24th of a degree.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- raster("…/w001001.adf")
 landscan
@@ -250,45 +244,53 @@ prism
 ## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
 ```
 ````
+`````
 
 Start by throwing away extraneous data, by cropping the LandScan to, say,
 126 to 66°W, 24 to 50°N.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ```
 ````
+`````
 
 Now, note that the edge of the PRISM data is in the middle of the LandScan grid cells:
     $120 * (180 - 125.0208) = 6597.5$
     That means that you need to increase the resolution of the LandScan data by 2 to line it up. In general, you will need to increase it by 1 / (the trailing decimal).
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- disaggregate(landscan, fact=2) / 4
 ```
 ````
+`````
 
 We divide by 4 so that the total population remains the same.
 
 After increasing the resolution of the LandScan data, we clip it again.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ```
 ````
+`````
 
 Now, the resolution of the dataset has become 1/240th, and we can
 write aggregate by a factor of $10$ for it to match the PRISM data:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 landscan <- aggregate(landscan, fact=10, fun=sum)
 ```
 ````
-
+`````
 
 ## Plotting your results
 
@@ -306,7 +308,8 @@ Population of the
 World](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download)
 dataset.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(raster)
 ## Load the data
@@ -319,6 +322,7 @@ image(rr)
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
 ````
+`````
 
 But that wasn't any fun. Let's try again with something more
 complicated.
@@ -326,7 +330,8 @@ complicated.
 First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
 easy-to-use IRI data library.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(ncdf4)
 
@@ -340,6 +345,7 @@ image(temp)
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
 ````
+`````
 
 This is R's default way of showing matrices, with axes that go from
 0 - 1. What's worse, the map is up-side-down, though it will take some
@@ -353,7 +359,8 @@ interpret. And to do that, we need to rearrange the data so it goes
 from -180 to 180, rather than 0 to 360 as currently. Here's our second
 attempt:
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 ## Extract the coordinate values
 lon <- ncvar_get(nc, "X")
@@ -371,13 +378,15 @@ map("world", add=T)
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
 ````
+`````
 
 Now, for our production-ready map, we're going to switch to
 `ggplot2`. In `ggplot`, all data needs to be as dataframes, so we need
 to convert the matrix into a dataframe (with `melt`) and the map into
 a dataframe (with `map_data`):
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 ## Convert temp2 to a dataframe
 library(reshape2)
@@ -397,6 +406,7 @@ ggplot() +
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
 ````
+`````
 
 And now we're ready to production-ready graph! The biggest change
 will be the addition of a map projection. As mentioned above, map
@@ -421,7 +431,8 @@ quite a bit slower. We use a color palette from
 [ColorBrewer](http://colorbrewer2.org/), which is an excellent resource for
 choosing colors.
 
-````{tabbed} R
+`````{tab-set}
+````{tab-item} R
 ```R
 library(RColorBrewer)
 ggplot() +
@@ -436,4 +447,4 @@ ggplot() +
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
 ````
-
+`````
