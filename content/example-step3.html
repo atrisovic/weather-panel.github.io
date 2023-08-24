@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Producing results" href="producing-results.html" />
+    <link rel="next" title="Some pointers when performing regressions" href="regression-pointers.html" />
     <link rel="prev" title="Weighting schemes" href="weighting-schemes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,8 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="producing-results.html">Producing results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression-pointers.html">Some pointers when performing regressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Regression results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
@@ -420,24 +420,27 @@ document.write(`
 <span id="content-hands-on3"></span><h1>Hands-On Exercise, Step 3: Aggregating the data<a class="headerlink" href="#hands-on-exercise-step-3-aggregating-the-data" title="Permalink to this heading">#</a></h1>
 <section id="aggregating-the-weather-data">
 <h2>Aggregating the weather data<a class="headerlink" href="#aggregating-the-weather-data" title="Permalink to this heading">#</a></h2>
-<p>One of the tutorial authors has produced a new tool for aggregating
-gridded data according to a shapefile: <code class="docutils literal notranslate"><span class="pre">xagg</span></code>. Since it handles
-partial grid-cell overlapping and arbitrary weighting grid, we
-recommend that it be used irrespective of the language being used
-elsewhere. Install it according to <a class="reference external" href="https://github.com/ks905383/xagg">the instructions from GitHub</a>.</p>
+<p>There exist tools in R and Python which aggregate gridded data
+according to a shapefile. In particular, <code class="docutils literal notranslate"><span class="pre">xagg</span></code> in Python and <code class="docutils literal notranslate"><span class="pre">stagg</span></code>
+in R handle partial grid-cell overlapping and arbitrary weighting
+grid, and we recommend that it be used irrespective of the language
+being used elsewhere.</p>
+</section>
+<section id="setting-up-the-environment">
+<h2>Setting up the environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+Python</label><div class="sd-tab-content docutils">
+<p>The approach uses <code class="docutils literal notranslate"><span class="pre">xarray</span></code> for gridded data, <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> to work with shapefiles, and <code class="docutils literal notranslate"><span class="pre">xagg</span></code> to aggregate gridded data onto shapefiles.</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">xagg</span></code> according to <a class="reference external" href="https://github.com/ks905383/xagg">the instructions from
+GitHub</a>.</p>
 <p>You will need to download a shapefile for the US counties. We use one
 from the ESRI community website:
 <a class="reference external" href="https://community.esri.com/ccqpr47374/attachments/ccqpr47374/enterprise-portal/4124/1/UScounties.zip">https://community.esri.com/ccqpr47374/attachments/ccqpr47374/enterprise-portal/4124/1/UScounties.zip</a></p>
 <p>Save its contents to a folder <code class="docutils literal notranslate"><span class="pre">geo_data</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory. The
 following code should be run from the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-</section>
-<section id="setting-up-the-environment">
-<h2>Setting up the environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this heading">#</a></h2>
-<p>The approach uses <code class="docutils literal notranslate"><span class="pre">xarray</span></code> for gridded data, <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> to work with shapefiles, and <code class="docutils literal notranslate"><span class="pre">xagg</span></code> to aggregate gridded data onto shapefiles.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
-Python</label><div class="sd-tab-content docutils">
+<p>Begin your code as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">xagg</span> <span class="k">as</span> <span class="nn">xa</span>
@@ -445,21 +448,54 @@ Python</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-</div>
-<p>First, load the data from the previous steps:</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
+R</label><div class="sd-tab-content docutils">
+<p>The approach uses <code class="docutils literal notranslate"><span class="pre">raster</span></code> to work with gridded data, <code class="docutils literal notranslate"><span class="pre">tigris</span></code> to work
+with shapefiles, and <code class="docutils literal notranslate"><span class="pre">stagg</span></code> to aggregate gridded data onto shapefiles.</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">stagg</span></code> according to <a class="reference external" href="https://github.com/tcarleton/stagg">the instructions from
+GitHub</a>.</p>
+<p>Begin your code as follows:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">stagg</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tigris</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, load the data from the previous steps and the county shapefile:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
 Python</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load temperature data using xarray</span>
 <span class="n">ds_tas</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="s1">&#39;climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">)</span>
 
 <span class="c1"># Load population data using xarray </span>
-<span class="n">ds_pop</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;pcount/usap90ag.nc&#39;</span><span class="p">)</span>
+<span class="n">ds_pop</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;../data/pcount/usap90ag.nc&#39;</span><span class="p">)</span>
 
 <span class="c1"># Load county shapefiles using geopandas</span>
-<span class="n">gdf_counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;geo_data/UScounties.shp&#39;</span><span class="p">)</span>
+<span class="n">gdf_counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;../data/geo_data/UScounties.shp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+R</label><div class="sd-tab-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Load data and expand to global grid</span>
+<span class="n">global.extent</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">extent</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">)</span>
+
+<span class="n">rr.tas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">stack</span><span class="p">(</span><span class="s">&quot;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&quot;</span><span class="p">)</span>
+<span class="n">rr.tas.padded</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="n">rr.tas</span><span class="p">,</span><span class="w"> </span><span class="n">global.extent</span><span class="p">)</span>
+<span class="n">rr.pop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.nc&quot;</span><span class="p">)</span>
+<span class="n">rr.pop.padded</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="n">rr.pop</span><span class="p">,</span><span class="w"> </span><span class="n">global.extent</span><span class="p">)</span>
+<span class="n">rr.pop.padded</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">rr.pop.padded</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+
+<span class="c1">## Load counties</span>
+<span class="n">counties</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tigris</span><span class="o">::</span><span class="nf">counties</span><span class="p">()</span>
+<span class="n">counties</span><span class="o">$</span><span class="n">FIPS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">counties</span><span class="o">$</span><span class="n">STATEFP</span><span class="p">,</span><span class="w"> </span><span class="n">counties</span><span class="o">$</span><span class="n">COUNTYFP</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -470,8 +506,8 @@ Python</label><div class="sd-tab-content docutils">
 <p>Next, we need to construct any nonlinear transformations of the data.</p>
 <p>For our econometric model, we want temperature in both linear and quadratic form, centered around <span class="math notranslate nohighlight">\(20^\circ\)</span> C: <span class="math notranslate nohighlight">\(T-20^\circ C\)</span> and <span class="math notranslate nohighlight">\(T^2 - (20^\circ C)^2\)</span>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
 Python</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds_tas</span><span class="p">[</span><span class="s1">&#39;tas_adj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">tas</span><span class="o">-</span><span class="mi">20</span>
 <span class="n">ds_tas</span><span class="p">[</span><span class="s1">&#39;tas_sq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">tas</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="o">**</span><span class="mi">2</span>
@@ -484,37 +520,70 @@ Python</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+R</label><div class="sd-tab-content docutils">
+<p>With <code class="docutils literal notranslate"><span class="pre">stagg</span></code>, we will let the library handle this with the
+<code class="docutils literal notranslate"><span class="pre">staggregate_polynomial</span></code> function (below).</p>
+</div>
 </div>
 </section>
 <section id="create-map-of-pixels-onto-polygons">
 <h2>Create map of pixels onto polygons<a class="headerlink" href="#create-map-of-pixels-onto-polygons" title="Permalink to this heading">#</a></h2>
 <p>We need to create a weight map of pixels to polygons. For each
 polygon, we need to know which pixels overlap it and by how much.</p>
-<p><code class="docutils literal notranslate"><span class="pre">xagg</span></code> does this by creating polygons for each pixel in the gridded
-dataset, taking the intersect between each county polygon and all
-pixel polygons, and calculating the average area of overlap between
-the pixels that touch the polygon and the polygon.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xagg</span></code> and <code class="docutils literal notranslate"><span class="pre">stagg</span></code> do this by creating polygons for each pixel in the
+gridded dataset, taking the intersect between each county polygon and
+all pixel polygons, and calculating the average area of overlap
+between the pixels that touch the polygon and the polygon.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weightmap</span> <span class="o">=</span>
-<span class="n">xa</span><span class="o">.</span><span class="n">pixel_overlaps</span><span class="p">(</span><span class="n">ds_tas</span><span class="p">,</span><span class="n">gdf_counties</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="n">ds_pop</span><span class="o">.</span><span class="n">Population</span><span class="p">,</span><span class="n">subset_bbox</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weightmap</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">pixel_overlaps</span><span class="p">(</span><span class="n">ds_tas</span><span class="p">,</span> <span class="n">gdf_counties</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ds_pop</span><span class="o">.</span><span class="n">Population</span><span class="p">,</span> <span class="n">subset_bbox</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label for="sd-tab-item-7">
+R</label><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">grid.weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">secondary_weights</span><span class="p">(</span><span class="n">secondary_raster</span><span class="o">=</span><span class="n">rr.pop.padded</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="n">rr.tas.padded</span><span class="p">)</span>
+<span class="n">county.weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">overlay_weights</span><span class="p">(</span><span class="n">polygons</span><span class="o">=</span><span class="n">counties</span><span class="p">,</span><span class="w"> </span><span class="n">polygon_id_col</span><span class="o">=</span><span class="s">&quot;FIPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="n">rr.tas.padded</span><span class="p">,</span><span class="w"> </span><span class="n">secondary_weights</span><span class="o">=</span><span class="n">grid.weights</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </section>
 <section id="aggregate-values-onto-polygons">
 <h2>Aggregate values onto polygons<a class="headerlink" href="#aggregate-values-onto-polygons" title="Permalink to this heading">#</a></h2>
-<p>Using the weight map calculated above, <code class="docutils literal notranslate"><span class="pre">xagg</span></code> now aggregates all the gridded variables in <code class="docutils literal notranslate"><span class="pre">ds_tas</span></code> (the <code class="docutils literal notranslate"><span class="pre">tas_adj</span></code> and <code class="docutils literal notranslate"><span class="pre">tas_sq</span></code> we calculated above) onto the county polygons. For each county, the weighted average of the temperatures of the pixels that cover the county is calculated. Since we included population as a desired weight above, the weight for each pixel is a combination of how much of the pixel overlaps with the county and its population density. In other words, a pixel that covers more of a county and has a higher population density will be weighted more in that county’s temperature average than a pixel that covers less of a county and is more sparsely populated.</p>
-<p>The output of this function now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.</p>
+<p>For each county, we want to calculate the weighted average of the temperatures of the pixels that cover the county. Since we included population as a desired weight above, the weight for each pixel is a combination of how much of the pixel overlaps with the county and its population density. In other words, a pixel that covers more of a county and has a higher population density will be weighted more in that county’s temperature average than a pixel that covers less of a county and is more sparsely populated.</p>
+<p>The output of this step now gives, for each county, a 10-year time series of linear and quadratic temperature, properly area- and population-weighted.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
 Python</label><div class="sd-tab-content docutils">
-<p><code class="docutils literal notranslate"><span class="pre">aggregated</span></code> is an object specific to the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> package. We need to modify it to be usable, for example using <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or <code class="docutils literal notranslate"><span class="pre">aggregated.to_csv</span></code>. See the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> docs for more info.</p>
+<p>Using the weight map calculated above, <code class="docutils literal notranslate"><span class="pre">xagg</span></code> now aggregates all the
+gridded variables in <code class="docutils literal notranslate"><span class="pre">ds_tas</span></code> (the <code class="docutils literal notranslate"><span class="pre">tas_adj</span></code> and <code class="docutils literal notranslate"><span class="pre">tas_sq</span></code> we
+calculated above) onto the county polygons.</p>
+<p><code class="docutils literal notranslate"><span class="pre">aggregated</span></code> is an object specific to the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> package. We need to
+modify it to be usable, for example using <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">aggregated.to_csv()</span></code>. See the <code class="docutils literal notranslate"><span class="pre">xagg</span></code> docs for more info. Here we use
+<code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> which produces an <code class="docutils literal notranslate"><span class="pre">xarray</span></code> dataset, which
+will be convenient for providing a standardized output.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aggregated</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">ds_tas</span><span class="p">,</span> <span class="n">weightmap</span><span class="p">)</span>
+
+<span class="c1">## Aggregate the result to the annual level</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">aggregated</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-9">
+R</label><div class="sd-tab-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Shift axis of climate data to conform to stagg expectations</span>
+<span class="n">rr.tas.padded2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">shift</span><span class="p">(</span><span class="n">rr.tas.padded</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">360</span><span class="p">)</span>
+
+<span class="c1">## Calculate aggregation</span>
+<span class="n">county.tas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">staggregate_polynomial</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">rr.tas.padded2</span><span class="p">,</span><span class="w"> </span><span class="n">daily_agg</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">time_agg</span><span class="o">=</span><span class="s">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">overlay_weights</span><span class="o">=</span><span class="n">county.weights</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -525,14 +594,50 @@ Python</label><div class="sd-tab-content docutils">
 <p>Finally, we need to export this data to be used elsewhere. For this tutorial, we want to allow a variety of tools, so we’ll
 export the aggregated data into a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> (comma-separated value) file,
 which can easily be read by R, STATA, and most other programming
-tools. The data will be reshaped ‘wide’ by <code class="docutils literal notranslate"><span class="pre">xagg</span></code> - so every row is a
-county, and every column is a timestep of the variables.</p>
+tools.</p>
+<p>The result from <code class="docutils literal notranslate"><span class="pre">xagg</span></code> will be reshaped ‘wide’ - so every row is a
+county, and every column is a timestep of the variables. <code class="docutils literal notranslate"><span class="pre">stagg</span></code> on
+the other hand aggregates the results to the annual level and provides
+each county-year as a row. We also want to output this data in a
+standard form, so that the next step does not depend on the language
+and library used for this step.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-10">
 Python</label><div class="sd-tab-content docutils">
-<p>Use <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataframe()</span></code>, depending on whether you’d like to continue using it in <code class="docutils literal notranslate"><span class="pre">xarray</span></code> or <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aggregated</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;climate_data/agg_vars.csv&#39;</span><span class="p">)</span>
+<p>Use <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataset()</span></code> or <code class="docutils literal notranslate"><span class="pre">aggregated.to_dataframe()</span></code>,
+depending on whether you’d like to continue using it in <code class="docutils literal notranslate"><span class="pre">xarray</span></code> or
+<code class="docutils literal notranslate"><span class="pre">pandas</span></code>. The code below provides a standard format for the next step.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds2</span><span class="p">[</span><span class="s1">&#39;STATE_FIPS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds2</span><span class="o">.</span><span class="n">STATE_FIPS</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">ds2</span><span class="p">[</span><span class="s1">&#39;CNTY_FIPS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds2</span><span class="o">.</span><span class="n">CNTY_FIPS</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">ds2</span><span class="p">[</span><span class="s1">&#39;FIPS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">apply_ufunc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">ds2</span><span class="o">.</span><span class="n">STATE_FIPS</span><span class="p">,</span> <span class="n">ds2</span><span class="o">.</span><span class="n">CNTY_FIPS</span><span class="p">)</span>
+<span class="n">ds2</span><span class="p">[</span><span class="s1">&#39;FIPS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds2</span><span class="o">.</span><span class="n">FIPS</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+
+<span class="n">ds2</span><span class="o">.</span><span class="n">swap_dims</span><span class="p">({</span><span class="s1">&#39;poly_idx&#39;</span><span class="p">:</span> <span class="s1">&#39;FIPS&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;poly_idx&#39;</span><span class="p">)</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/climate_data/agg_vars.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-11">
+R</label><div class="sd-tab-content docutils">
+<p>The polynomial calculation used by <code class="docutils literal notranslate"><span class="pre">stagg</span></code> assumes a baseline
+temperature of 0 C. We will now adjust this to a baseline of 20 C.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">## Only write out valid entries</span>
+<span class="n">county.tas.valid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">county.tas</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">order_1</span><span class="p">))</span>
+
+<span class="c1">## Remove 20 deg per day</span>
+<span class="n">daysperyear</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="nf">substring</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">rr.tas</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">))</span>
+<span class="n">county.tas.base</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">daysperyear</span><span class="p">)),</span><span class="w"> </span><span class="n">order_1</span><span class="o">=</span><span class="m">20</span><span class="o">*</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">daysperyear</span><span class="p">),</span><span class="w"> </span><span class="n">order_2</span><span class="o">=</span><span class="p">(</span><span class="m">20</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">*</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">daysperyear</span><span class="p">))</span>
+
+<span class="n">county.tas.final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">county.tas.valid</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">county.tas.base</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;year&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;.base&#39;</span><span class="p">))</span>
+
+<span class="n">county.tas.final</span><span class="o">$</span><span class="n">tas_adj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">county.tas.final</span><span class="o">$</span><span class="n">order_1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">county.tas.final</span><span class="o">$</span><span class="n">order_1.base</span>
+<span class="n">county.tas.final</span><span class="o">$</span><span class="n">tas_sq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">county.tas.final</span><span class="o">$</span><span class="n">order_2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">county.tas.final</span><span class="o">$</span><span class="n">order_2.base</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">county.tas.final</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;FIPS&#39;</span>
+
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">county.tas.final</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;../data/climate_data/agg_vars.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -581,11 +686,11 @@ Python</label><div class="sd-tab-content docutils">
       </div>
     </a>
     <a class="right-next"
-       href="producing-results.html"
+       href="regression-pointers.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Producing results</p>
+        <p class="prev-next-title">Some pointers when performing regressions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

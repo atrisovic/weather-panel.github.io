@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Hands-On Exercise, Step 4: Producing results</title>
+    <title>Hands-On Exercise, Step 4: Regression results</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Suggestions for work organization" href="suggestions.html" />
-    <link rel="prev" title="Producing results" href="producing-results.html" />
+    <link rel="prev" title="Some pointers when performing regressions" href="regression-pointers.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,8 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="producing-results.html">Producing results</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression-pointers.html">Some pointers when performing regressions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 4: Regression results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
@@ -389,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hands-On Exercise, Step 4: Producing results</h1>
+    <h1>Hands-On Exercise, Step 4: Regression results</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,7 +399,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-annual-polynomials-summed-over-days">Constructing annual polynomials summed over days</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#necessary-libraries">Necessary libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-weather-and-outcome-data">Merging weather and outcome data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-regression">Running the regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-resulting-dose-response-function">Plotting the resulting dose-response function</a></li>
@@ -414,41 +414,41 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-4-producing-results">
-<h1>Hands-On Exercise, Step 4: Producing results<a class="headerlink" href="#hands-on-exercise-step-4-producing-results" title="Permalink to this heading">#</a></h1>
-<section id="constructing-annual-polynomials-summed-over-days">
-<h2>Constructing annual polynomials summed over days<a class="headerlink" href="#constructing-annual-polynomials-summed-over-days" title="Permalink to this heading">#</a></h2>
-<p>We have county aggregated data from the previous step, but we also
-need to sum it to the annual level to match the mortality data. Again,
-this code should be run from a sister directory to the <code class="docutils literal notranslate"><span class="pre">data</span></code>
-directory.</p>
-<p>Let’s first turn the data from wide form into long form and label the
-years.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-4-regression-results">
+<h1>Hands-On Exercise, Step 4: Regression results<a class="headerlink" href="#hands-on-exercise-step-4-regression-results" title="Permalink to this heading">#</a></h1>
+<section id="necessary-libraries">
+<h2>Necessary libraries<a class="headerlink" href="#necessary-libraries" title="Permalink to this heading">#</a></h2>
+<p>In this step, we will perform econometric regressions and plot the
+results. This requires some libraries, and we will also be calculating
+confidence intervals by hand which requires some additional code or
+libraries.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
-R</label><div class="sd-tab-content docutils">
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
-
-<span class="n">clim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/climate_data/agg_vars.csv&quot;</span><span class="p">)</span>
-
-<span class="n">clim2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">melt</span><span class="p">(</span><span class="n">clim</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="o">:</span><span class="m">-5</span><span class="p">)],</span><span class="w"> </span><span class="n">id.vars</span><span class="o">=</span><span class="s">&#39;FIPS&#39;</span><span class="p">)</span>
-<span class="n">clim2</span><span class="o">$</span><span class="n">date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.Date</span><span class="p">(</span><span class="s">&quot;1980-01-01&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;tas_adj|tas_sq&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clim2</span><span class="o">$</span><span class="n">variable</span><span class="p">))</span>
-<span class="n">clim2</span><span class="o">$</span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">substring</span><span class="p">(</span><span class="n">clim2</span><span class="o">$</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">))</span>
+Python</label><div class="sd-tab-content docutils">
+<p>We will use <code class="docutils literal notranslate"><span class="pre">PanelOLS</span></code> from <code class="docutils literal notranslate"><span class="pre">linearmodels</span></code> to perform the regression,
+but we also need the <code class="docutils literal notranslate"><span class="pre">t</span></code> function to compute t values for the
+confidence intervals. We will plot the result with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">linearmodels.panel</span> <span class="kn">import</span> <span class="n">PanelOLS</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
-</div>
-<p>Now we can sum over years. To do this, we will need to base this on
-the first several characters of the column names (not variable row
-values).</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
 R</label><div class="sd-tab-content docutils">
+<p>We will use the <code class="docutils literal notranslate"><span class="pre">lfe</span></code> package to perform the regression and <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>
+to graph the result.</p>
+<p>To get confidence intervals from the <code class="docutils literal notranslate"><span class="pre">felm</span></code> function in <code class="docutils literal notranslate"><span class="pre">lfe</span></code>, we use
+the <code class="docutils literal notranslate"><span class="pre">predict.felm</span></code> function from the <code class="docutils literal notranslate"><span class="pre">felm-tools.R</span></code> library at
+<a class="github reference external" href="https://github.com/jrising/research-common/blob/master/R/felm-tools.R">jrising/research-common</a></p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
-
-<span class="n">clim3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">clim2</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="n">FIPS</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="n">tas_adj</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="nf">substring</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;tas_adj&#39;</span><span class="p">]),</span><span class="w"> </span><span class="n">tas_sq</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="nf">substring</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;tas_sq&#39;</span><span class="p">]))</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">lfe</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;felm-tools.R&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -456,16 +456,33 @@ R</label><div class="sd-tab-content docutils">
 </section>
 <section id="merging-weather-and-outcome-data">
 <h2>Merging weather and outcome data<a class="headerlink" href="#merging-weather-and-outcome-data" title="Permalink to this heading">#</a></h2>
-<p>And now we can merge in the mortality data! This is by county (FIPS
+<p>Now we can merge in the mortality data! This is by county (FIPS
 code) and year. We also construct the death rate, as deaths per
 100,000 people in the population.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-2" type="radio">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-2">
-R</label><div class="sd-tab-content docutils">
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read data</span>
+<span class="n">clim</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/climate_data/agg_vars.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
 
-<span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">clim3</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="o">=</span><span class="s">&#39;FIPS&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;year&#39;</span><span class="p">))</span>
+<span class="c1"># Merge datasets</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">clim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fips&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;FIPS&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span>
+
+<span class="c1"># Create new variable</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;deathrate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100000</span> <span class="o">*</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;deaths&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;deathrate&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="s1">&#39;deathrate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+R</label><div class="sd-tab-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">clim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/climate_data/agg_vars.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../data/cmf/merged.csv&quot;</span><span class="p">)</span>
+
+<span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">left_join</span><span class="p">(</span><span class="n">clim</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;fips&#39;</span><span class="o">=</span><span class="s">&#39;FIPS&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;year&#39;</span><span class="p">))</span>
 
 <span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">df2</span><span class="o">$</span><span class="n">deaths</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">df2</span><span class="o">$</span><span class="n">pop</span>
 <span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span><span class="p">[</span><span class="n">df2</span><span class="o">$</span><span class="n">deathrate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">Inf</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span>
@@ -476,21 +493,55 @@ R</label><div class="sd-tab-content docutils">
 </section>
 <section id="running-the-regression">
 <h2>Running the regression<a class="headerlink" href="#running-the-regression" title="Permalink to this heading">#</a></h2>
-<p>Let’s run our central regression, relating death rate to
-temperature. Note that since we do not control for precipitation,
-temperature in this case includes correlated effects of rainfall. As a
-result, it is not ideal for future projections.</p>
-<p>For fixed effects, we use county fixed effects and state trends. More
-saturated fixed effects should be explored.</p>
+<p>Let’s run our central regression, relating death rate to temperature. In keeping with the literature, we will assume that weather-related mortality is a u-shaped function. That is, both cold and hot temperatures cause increased mortality. We also assume that these effects are convex, so that more extreme cold and heat will produce a more-than-linear increase in mortality. The simplest relationship that has these features is a quadratic. Refer to the functional forms section for further considerations.</p>
+<p>For fixed effects, we use county fixed effects, to account for unobserved constant heterogeneity, and state-specific trends, to account for gradual changes at a larger scale. While the high-resolution fixed effects are necessary and standard, the choice of trends can be more subtle. Here are a few points:</p>
+<ul class="simple">
+<li><p>The high-resolution and more flexible the better, as far as identification is concerned. For example, we might consider county-specific trends, higher-order polynomials, or cubic splines. These better isolate weather shocks, which are the core of the identification strategy.</p></li>
+<li><p>At the same time, flexible trends capture the variation necessary for statistical analysis. For example, a state-by-year fixed effect would leave very little variation at the county level, because counties weather is correlated within each state.</p></li>
+<li><p>The right balance between these depends upon the other drivers affecting the dependent variable. It is useful to graph the timeseries for individual units and for groups of units (e.g., every county within a state). Trends should be imposed whereever there is non-weather-related drift in the dependent variable, and their resolution should be fine enough so that the values for all the contained regional units are drifting in the same way.</p></li>
+<li><p>Where reasonably researchers can disagree about the right trend specification, generate tables that show several specifications.  Typical sensitivity tests include more flexible fixed effects and functional forms and the inclusion of other weather variables. The R^2 values will help you understand how much of the variation you are capturing, but it is important to look at the resulting fit to decide if the regression is doing what you expect.</p></li>
+</ul>
+<p>In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.</p>
+<p>Here is our specification: $<span class="math notranslate nohighlight">\(M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t\)</span><span class="math notranslate nohighlight">\( for mortality in state \)</span><span class="math notranslate nohighlight">\(s\)</span><span class="math notranslate nohighlight">\(, county \)</span><span class="math notranslate nohighlight">\(i\)</span><span class="math notranslate nohighlight">\(, year \)</span><span class="math notranslate nohighlight">\(t\)</span>$.</p>
+<p>Note that since we do not control for precipitation, temperature in this case includes correlated effects of rainfall. As a result, it is not ideal for future projections.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+Python</label><div class="sd-tab-content docutils">
+<p>We will first need to construct the state-level fixed-effects by hand,
+by creating a state dummies and multiplying them by year values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Categories and numbers</span>
+<span class="n">df2</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;fips&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1"># Drop rows with missing values</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;deathrate&#39;</span><span class="p">,</span> <span class="s1">&#39;tas_adj&#39;</span><span class="p">,</span> <span class="s1">&#39;tas_sq&#39;</span><span class="p">])</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;FIPS&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span>
+
+<span class="c1"># Create separate columns for state-specific trends using dummy variable expansion</span>
+<span class="n">state_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">)</span>
+<span class="n">state_trends</span> <span class="o">=</span> <span class="n">state_dummies</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Fixed effects regression</span>
+
+<span class="c1"># Merge the state-specific trends with the exogenous variables</span>
+<span class="n">exog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df2</span><span class="p">[[</span><span class="s1">&#39;tas_adj&#39;</span><span class="p">,</span> <span class="s1">&#39;tas_sq&#39;</span><span class="p">]],</span> <span class="n">state_trends</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">mod</span> <span class="o">=</span> <span class="n">PanelOLS</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">deathrate</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">entity_effects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clustered</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;clustered&#39;</span><span class="p">,</span> <span class="n">cluster_entity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
 R</label><div class="sd-tab-content docutils">
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">lfe</span><span class="p">)</span>
+<p>We need to create a state-level indicator, which will be used for the
+state fixed-effects. We will also need to ensure that <code class="docutils literal notranslate"><span class="pre">year</span></code> is a
+numeric value, not an integer, for <code class="docutils literal notranslate"><span class="pre">felm</span></code> to work properly.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="o">$</span><span class="n">state</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="nf">floor</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">fips</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1000</span><span class="p">))</span>
+<span class="n">df2</span><span class="o">$</span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">year</span><span class="p">)</span>
 
-<span class="n">df2</span><span class="o">$</span><span class="n">state</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="nf">floor</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">fips</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1000</span><span class="p">))</span>
-
-<span class="n">mod</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">felm</span><span class="p">(</span><span class="n">deathrate</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">tas_adj</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tas_sq</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="nf">factor</span><span class="p">(</span><span class="n">fips</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fips</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">df2</span><span class="p">)</span>
+<span class="n">mod</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">felm</span><span class="p">(</span><span class="n">deathrate</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">tas_adj</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tas_sq</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="nf">factor</span><span class="p">(</span><span class="n">fips</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fips</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">df2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -503,24 +554,58 @@ R</label><div class="sd-tab-content docutils">
 reconstruct the adjusted temperatures. The normalization we used
 ensures that all of the reported values are relative to <span class="math notranslate nohighlight">\(20^\circ\)</span> C,
 so there are no confidence intervals at this point.</p>
-<p>For R, to get confidence intervals from <code class="docutils literal notranslate"><span class="pre">felm</span></code>, we use the
-<code class="docutils literal notranslate"><span class="pre">predict.felm</span></code> function from the <code class="docutils literal notranslate"><span class="pre">felm-tools.R</span></code> library at
-<a class="github reference external" href="https://github.com/jrising/research-common/blob/master/R/felm-tools.R">jrising/research-common</a></p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
+Python</label><div class="sd-tab-content docutils">
+<p>The Python code here is a bit complicated, since we have to calculate
+confidence intervals by hand. This also lets us ignore all of the
+fixed effects.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction dataframe</span>
+<span class="n">plotdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;tas&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">41</span><span class="p">)})</span>
+<span class="n">plotdf</span><span class="p">[</span><span class="s1">&#39;tas_adj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plotdf</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">20</span>
+<span class="n">plotdf</span><span class="p">[</span><span class="s1">&#39;tas_sq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plotdf</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Point estimate prediction</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">clustered</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">plotdf</span><span class="p">[[</span><span class="s1">&#39;tas_adj&#39;</span><span class="p">,</span> <span class="s1">&#39;tas_sq&#39;</span><span class="p">]]</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">)</span>
+
+<span class="c1"># Confidence interval prediction</span>
+<span class="n">vcov</span> <span class="o">=</span> <span class="n">clustered</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">vcov</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">preds</span><span class="p">))))</span>
+<span class="n">degfree</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">clustered</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">-</span> <span class="n">clustered</span><span class="o">.</span><span class="n">df_model</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">ci_upper</span> <span class="o">=</span> <span class="n">prediction</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="n">degfree</span><span class="p">)</span> <span class="o">*</span> <span class="n">ses</span>
+<span class="n">ci_lower</span> <span class="o">=</span> <span class="n">prediction</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">degfree</span><span class="p">)</span> <span class="o">*</span> <span class="n">ses</span>
+
+<span class="c1"># Create final dataframe for visualization</span>
+<span class="n">plotdf2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">plotdf</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">prediction</span><span class="p">,</span> <span class="s1">&#39;cilo&#39;</span><span class="p">:</span> <span class="n">ci_lower</span><span class="p">,</span> <span class="s1">&#39;cihi&#39;</span><span class="p">:</span> <span class="n">ci_upper</span><span class="p">})],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plotdf2</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">plotdf2</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1"># Confidence interval</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">plotdf2</span><span class="o">.</span><span class="n">tas</span><span class="p">,</span> <span class="n">plotdf2</span><span class="o">.</span><span class="n">cilo</span><span class="p">,</span> <span class="n">plotdf2</span><span class="o">.</span><span class="n">cihi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Daily temperature (C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Deaths per 100,000 people&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Excess death rate as a function of temperature&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
 R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">plotdf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">tas</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">-20</span><span class="p">,</span><span class="w"> </span><span class="m">40</span><span class="p">))</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_adj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">20</span>
 <span class="n">plotdf</span><span class="o">$</span><span class="n">tas_sq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plotdf</span><span class="o">$</span><span class="n">tas</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">20</span><span class="o">^</span><span class="m">2</span>
 
-<span class="nf">source</span><span class="p">(</span><span class="s">&quot;felm-tools.R&quot;</span><span class="p">)</span>
-
 <span class="n">preddf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict.felm</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span><span class="w"> </span><span class="n">plotdf</span><span class="p">,</span><span class="w"> </span><span class="n">interval</span><span class="o">=</span><span class="s">&#39;confidence&#39;</span><span class="p">)</span>
 
 <span class="n">plotdf2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">plotdf</span><span class="p">,</span><span class="w"> </span><span class="n">preddf</span><span class="p">)</span>
-
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 
 <span class="nf">ggplot</span><span class="p">(</span><span class="n">plotdf2</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="w"> </span><span class="n">fit</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_ribbon</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="n">lwr</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="n">upr</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -529,9 +614,11 @@ R</label><div class="sd-tab-content docutils">
 <span class="w">    </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Excess death rate as a function of temperature&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_bw</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
 <a class="reference internal image-reference" href="../_images/doseresp.png"><img alt="Dose-response function" src="../_images/doseresp.png" style="width: 750px;" /></a>
-</div>
-</div>
+<p>The estimated dose-response function suggests that counties with an average temperature higher than about 2 deg C observe increases in mortality when the temperature rises and decreases in mortality when it falls. Counties with very cold average temperatures see the opposite– for them, warmer temperatures reduce mortality.</p>
+<p>Since baseline mortality rates are different in each county, the dose-response function can only tell us about the effect of changes. So, for example, relative to the mortality expected on a 20 deg C day, a 30 deg C day is projected to result in 0.3 additional deaths per 100,000, equivalent to deaths attributable to all natural disasters in the US.</p>
 </section>
 </section>
 
@@ -567,12 +654,12 @@ R</label><div class="sd-tab-content docutils">
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="producing-results.html"
+       href="regression-pointers.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Producing results</p>
+        <p class="prev-next-title">Some pointers when performing regressions</p>
       </div>
     </a>
     <a class="right-next"
@@ -602,7 +689,7 @@ R</label><div class="sd-tab-content docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-annual-polynomials-summed-over-days">Constructing annual polynomials summed over days</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#necessary-libraries">Necessary libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-weather-and-outcome-data">Merging weather and outcome data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-regression">Running the regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-resulting-dose-response-function">Plotting the resulting dose-response function</a></li>

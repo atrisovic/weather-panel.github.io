@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Producing results</title>
+    <title>Some pointers when performing regressions</title>
   
   
   
@@ -63,11 +63,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/producing-results';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/regression-pointers';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hands-On Exercise, Step 4: Producing results" href="example-step4.html" />
+    <link rel="next" title="Hands-On Exercise, Step 4: Regression results" href="example-step4.html" />
     <link rel="prev" title="Hands-On Exercise, Step 3: Aggregating the data" href="example-step3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,8 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Producing results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Producing results</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Some pointers when performing regressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Regression results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
@@ -260,7 +260,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/producing-results.md" target="_blank"
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/edit/master/tutorial-content/content/regression-pointers.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/atrisovic/weather-panel.github.io/issues/new?title=Issue%20on%20page%20%2Fcontent/producing-results.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/atrisovic/weather-panel.github.io/issues/new?title=Issue%20on%20page%20%2Fcontent/regression-pointers.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +307,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/content/producing-results.md" target="_blank"
+      <li><a href="../_sources/content/regression-pointers.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -389,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Producing results</h1>
+    <h1>Some pointers when performing regressions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,7 +399,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-regressions">Performing regressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unobserved-heterogeneity">Unobserved heterogeneity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-and-temporal-error-term-covariance">Spatial and temporal error term covariance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-dose-response-functions">Plotting dose-response functions</a></li>
 </ul>
@@ -413,12 +413,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="producing-results">
-<h1>Producing results<a class="headerlink" href="#producing-results" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="some-pointers-when-performing-regressions">
+<h1>Some pointers when performing regressions<a class="headerlink" href="#some-pointers-when-performing-regressions" title="Permalink to this heading">#</a></h1>
 <div class="note admonition">
 <p class="admonition-title">Key objectives</p>
 <ul class="simple">
-<li><p>Offer some advice on running regressions and plotting results.</p></li>
+<li><p>Avoid common pitfalls when running regressions and plotting results.</p></li>
 </ul>
 </div>
 <p>Once you have translated physical weather data into observations that
@@ -426,8 +426,8 @@ match the geographic units, much of the work of climate econometrics
 follows the patterns laid down in other econometrics. This section
 just provides a few pointers for problems that are common when working
 with weather relationships.</p>
-<section id="performing-regressions">
-<h2>Performing regressions<a class="headerlink" href="#performing-regressions" title="Permalink to this heading">#</a></h2>
+<section id="unobserved-heterogeneity">
+<h2>Unobserved heterogeneity<a class="headerlink" href="#unobserved-heterogeneity" title="Permalink to this heading">#</a></h2>
 <p>Weather regressions require careful fixed-effect (FE) definitions. A
 geographic unit fixed effect is essential, but several other fixed
 effects are important to consider:</p>
@@ -447,18 +447,25 @@ make sure you use Seemingly Unrelated Regressions.</p>
 coviariance between them will also increase. Those additional
 observations may not provide as much unique information as they appear
 to. In most cases, it is necessary to use Conley-White standard
-errors.</p>
+errors, which correct for spatially- and temporally-correlated error
+terms.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
-Matlab and Stata</label><div class="sd-tab-content docutils">
-<p>Sol Hsiang has code for this in Matlab and Stata:
-<a class="reference external" href="http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html">http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html</a>.</p>
+R</label><div class="sd-tab-content docutils">
+<p>For code to calculate Conley standard errors in R, see <a class="github reference external" href="https://github.com/darinchristensen/conley-se">darinchristensen/conley-se</a>.</p>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
-R</label><div class="sd-tab-content docutils">
-<p>For corresponding code in R, see <a class="github reference external" href="https://github.com/darinchristensen/conley-se">darinchristensen/conley-se</a>.</p>
+Python</label><div class="sd-tab-content docutils">
+<p>For code to calculate Conley standard errors in python, see <a class="reference external" href="https://www.danielmsullivan.com/econtools/metrics.html#spatial-hac-conley-errors">https://www.danielmsullivan.com/econtools/metrics.html#spatial-hac-conley-errors</a>.</p>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+Matlab and Stata</label><div class="sd-tab-content docutils">
+<p>Sol Hsiang has code that has been widely re-used (e.g., for R),
+originally developed for Matlab and Stata:
+<a class="reference external" href="http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html">http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html</a>.</p>
 </div>
 </div>
 </section>
@@ -523,7 +530,7 @@ linear term as <span class="math notranslate nohighlight">\(T-20^\circ C\)</span
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hands-On Exercise, Step 4: Producing results</p>
+        <p class="prev-next-title">Hands-On Exercise, Step 4: Regression results</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -545,7 +552,7 @@ linear term as <span class="math notranslate nohighlight">\(T-20^\circ C\)</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-regressions">Performing regressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unobserved-heterogeneity">Unobserved heterogeneity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-and-temporal-error-term-covariance">Spatial and temporal error term covariance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-dose-response-functions">Plotting dose-response functions</a></li>
 </ul>
