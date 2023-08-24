@@ -1,8 +1,8 @@
-# Producing results
+# Some pointers when performing regressions
 
 ```{admonition} Key objectives
 :class: note
-- Offer some advice on running regressions and plotting results.
+- Avoid common pitfalls when running regressions and plotting results.
 ```
 
 Once you have translated physical weather data into observations that
@@ -11,7 +11,7 @@ follows the patterns laid down in other econometrics. This section
 just provides a few pointers for problems that are common when working
 with weather relationships.
 
-## Performing regressions
+## Unobserved heterogeneity
 
 Weather regressions require careful fixed-effect (FE) definitions. A
 geographic unit fixed effect is essential, but several other fixed
@@ -32,15 +32,20 @@ As the resolution of the spatial and temporal units increases, the
 coviariance between them will also increase. Those additional
 observations may not provide as much unique information as they appear
 to. In most cases, it is necessary to use Conley-White standard
-errors. 
+errors, which correct for spatially- and temporally-correlated error
+terms.
 
 `````{tab-set}
-````{tab-item} Matlab and Stata
-Sol Hsiang has code for this in Matlab and Stata:
-<http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
-````
 ````{tab-item} R
-For corresponding code in R, see <https://github.com/darinchristensen/conley-se>.
+For code to calculate Conley standard errors in R, see <https://github.com/darinchristensen/conley-se>.
+````
+````{tab-item} Python
+For code to calculate Conley standard errors in python, see <https://www.danielmsullivan.com/econtools/metrics.html#spatial-hac-conley-errors>.
+````
+````{tab-item} Matlab and Stata
+Sol Hsiang has code that has been widely re-used (e.g., for R),
+originally developed for Matlab and Stata:
+<http://www.fight-entropy.com/2010/06/standard-error-adjustment-ols-for.html>.
 ````
 `````
 

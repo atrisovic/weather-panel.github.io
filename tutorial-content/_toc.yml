@@ -22,7 +22,7 @@ parts:
   - file: content/example-step3
 - caption: Bringing it all together
   chapters:
-  - file: content/producing-results
+  - file: content/regression-pointers
   - file: content/example-step4
   - file: content/suggestions
 - caption: Contributors
