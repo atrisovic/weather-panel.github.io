@@ -78,13 +78,20 @@ df2$deathrate[df2$deathrate == Inf] <- NA
 
 ## Running the regression
 
-Let's run our central regression, relating death rate to
-temperature. Note that since we do not control for precipitation,
-temperature in this case includes correlated effects of rainfall. As a
-result, it is not ideal for future projections.
+Let's run our central regression, relating death rate to temperature. In keeping with the literature, we will assume that weather-related mortality is a u-shaped function. That is, both cold and hot temperatures cause increased mortality. We also assume that these effects are convex, so that more extreme cold and heat will produce a more-than-linear increase in mortality. The simplest relationship that has these features is a quadratic. Refer to the functional forms section for further considerations.
 
-For fixed effects, we use county fixed effects and state trends. More
-saturated fixed effects should be explored.
+For fixed effects, we use county fixed effects, to account for unobserved constant heterogeneity, and state-specific trends, to account for gradual changes at a larger scale. While the high-resolution fixed effects are necessary and standard, the choice of trends can be more subtle. Here are a few points:
+
+ - The high-resolution and more flexible the better, as far as identification is concerned. For example, we might consider county-specific trends, higher-order polynomials, or cubic splines. These better isolate weather shocks, which are the core of the identification strategy.
+ - At the same time, flexible trends capture the variation necessary for statistical analysis. For example, a state-by-year fixed effect would leave very little variation at the county level, because counties weather is correlated within each state.
+ - The right balance between these depends upon the other drivers affecting the dependent variable. It is useful to graph the timeseries for individual units and for groups of units (e.g., every county within a state). Trends should be imposed whereever there is non-weather-related drift in the dependent variable, and their resolution should be fine enough so that the values for all the contained regional units are drifting in the same way.
+- Where reasonably researchers can disagree about the right trend specification, generate tables that show several specifications.  Typical sensitivity tests include more flexible fixed effects and functional forms and the inclusion of other weather variables. The R^2 values will help you understand how much of the variation you are capturing, but it is important to look at the resulting fit to decide if the regression is doing what you expect.
+
+In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.
+
+Here is our specification: $$M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t$$ for mortality in state $$s$$, county $$i$$, year $$t$$.
+
+Note that since we do not control for precipitation, temperature in this case includes correlated effects of rainfall. As a result, it is not ideal for future projections.
 
 `````{tab-set}
 ````{tab-item} Python
@@ -198,3 +205,7 @@ ggplot(plotdf2, aes(tas, fit)) +
 `````
 
 <img src="images/doseresp.png" alt="Dose-response function" width="750"/>
+
+The estimated dose-response function suggests that counties with an average temperature higher than about 2 deg C observe increases in mortality when the temperature rises and decreases in mortality when it falls. Counties with very cold average temperatures see the opposite-- for them, warmer temperatures reduce mortality.
+
+Since baseline mortality rates are different in each county, the dose-response function can only tell us about the effect of changes. So, for example, relative to the mortality expected on a 20 deg C day, a 30 deg C day is projected to result in 0.3 additional deaths per 100,000, equivalent to deaths attributable to all natural disasters in the US.

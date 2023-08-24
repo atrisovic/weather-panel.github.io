@@ -28,6 +28,7 @@ plotdf2 <- cbind(plotdf, preddf)
 
 ggplot(plotdf2, aes(tas, fit)) +
     geom_line() + geom_ribbon(aes(ymin=lwr, ymax=upr), alpha=.5) +
-    scale_x_continuous(name="Daily temperature (C)", expand=c(0, 0)) +
+    scale_x_continuous(name="Daily temperature (deg. C)", expand=c(0, 0)) +
     ylab("Deaths per 100,000 people") +
     ggtitle("Excess death rate as a function of temperature") + theme_bw()
+ggsave("../../tutorial-content/content/images/doseresp.png", width=5.7, height=3.8)
