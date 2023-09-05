@@ -420,10 +420,13 @@ document.write(`
 <p>Returning to the “true model” of your process, the decisions around how to
 generate a linear expression that you can estimate have important
 implications. Different functional forms serve different purposes and
-describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.</p>
+describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below. For the ease of notation in this section, we get rid of timestep <span class="math notranslate nohighlight">\(s\)</span> and instead work with more aggregated time values <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <section id="bins">
-<h2><a class="reference external" href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152">Bins</a><a class="headerlink" href="#bins" title="Permalink to this heading">#</a></h2>
-<p>Bins offer a very flexible functional form, although the choice of bin
+<h2><a class="reference external" href="https://en.wikipedia.org/wiki/Data_binning">Bins</a><a class="headerlink" href="#bins" title="Permalink to this heading">#</a></h2>
+<p>Binning is a data classification technique in which observations are assigned
+to specific bins, which correspond to a range of data. For example, histograms
+are used to observe frequency distributions of the data.
+Bins offer a very flexible functional form, although the choice of bin
 edges means that they are not as “non-parametric” as often assumed. It
 is also highly sensitive to existence of outliers in data. This can
 particularly be an issue for extrapolation when the results are used
@@ -441,7 +444,7 @@ which the temperature falls into that bin.</p>
 <p>To calculate bin observations, count up the number of timesteps where
 the weather predictor falls into each bin:</p>
 <div class="math notranslate nohighlight">
-\[T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}\]</div>
+\[X_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \lbrace {X_{p i t} \in Bin_k} \right \rbrace\]</div>
 <p>where <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the weight assigned to the <span class="math notranslate nohighlight">\(p\)</span> grid cell.</p>
 </section>
 <section id="polynomial">
@@ -451,7 +454,7 @@ flexibility of increasing the effective resolution of the curve by
 increasing the degree of the polynomial. Using more degrees improves
 the ability of the curve to fit the data, but may lead to
 over-fitting. To choose the number of terms in the polynomial,
-consider cross-validation.</p>
+consider <span class="xref myst">cross-validation</span>.</p>
 <p>Another benefit of polynomials for climate change estimates is that
 they provide smooth extrapolation to higher temperatures. Again, it is
 important to highlight the fact that the evaluation of the
@@ -465,15 +468,15 @@ high-resolution weather values should be raised to powers before
 aggregating up to the regions in the economic data. That is, the
 predictor for the <span class="math notranslate nohighlight">\(k\)</span>-th power of the polynomial is</p>
 <div class="math notranslate nohighlight">
-\[f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k\]</div>
+\[f(X_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} X_{p i t}^k\]</div>
 <p>where <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the weight assigned to the <span class="math notranslate nohighlight">\(p\)</span> grid cell.</p>
 <p>The dose-response regression would then be applied as follows</p>
 <div class="math notranslate nohighlight">
-\[F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)\]</div>
+\[F(X_{it})=\sum_{k} \beta_k f(X_{it}^k)\]</div>
 <p>while the coefficients can be interpreted as describing a local
 dose-response relationship:</p>
 <div class="math notranslate nohighlight">
-\[F(T_{pit})=\sum_{k} \beta_k T_{pit}^k\]</div>
+\[F(X_{pit})=\sum_{k} \beta_k X_{pit}^k\]</div>
 </section>
 <section id="restricted-cubic-spline">
 <h2><a class="reference external" href="https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf">Restricted cubic spline</a><a class="headerlink" href="#restricted-cubic-spline" title="Permalink to this heading">#</a></h2>
@@ -491,26 +494,24 @@ number of knots and their placement. The reference in this subsection
 title on cubic splines can be helpful in deciding the knot
 specifications.</p>
 <p>Once knot locations are determined, the weather data needs to be
-translated into RCS terms. As before let the gridded weather be <span class="math notranslate nohighlight">\(T_{p
-i t}\)</span> and let there be <span class="math notranslate nohighlight">\(n\)</span> knots, placed at <span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span>. Then we
-have a set of <span class="math notranslate nohighlight">\((n-2)\)</span> terms, here indexed by <span class="math notranslate nohighlight">\(k\)</span> and defined as:</p>
+translated into RCS terms. As before let the gridded weather variable be <span class="math notranslate nohighlight">\(X_{p i t}\)</span>
+and let there be <span class="math notranslate nohighlight">\(n\)</span> knots, placed at <span class="math notranslate nohighlight">\(X_1 &lt; X_2 &lt; ... &lt; X_n\)</span>.
+Then we have a set of <span class="math notranslate nohighlight">\((n-2)\)</span> terms, here indexed by <span class="math notranslate nohighlight">\(k\)</span> and defined as:</p>
 <div class="math notranslate nohighlight">
-\[f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
-	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
-	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}\]</div>
+\[f(X_{i t})_k = \sum_{p \in \Theta(i)} \psi_{p} \{(X_{p i t}-X_k)^3_+ - (X_{p i t} - X_{n-1})^3_+ \frac{X_n-X_k}{X_n-X_{n-1}} + (X_{p i t} - X_{n})^3_+ \frac{X_{n-1} - X_k} {X_{n}-X_{n-1}}\}\]</div>
 <div class="math notranslate nohighlight">
 \[\forall k \in \{1,2,...,n-2\}\]</div>
 <p>where, <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the weight assigned to the <span class="math notranslate nohighlight">\(p\)</span> grid.</p>
-<p>Each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)^3_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - t_{n-1})^3_+\)</span> is called a truncated           polynomial of degree 3, which is defined as follows:</p>
+<p>Each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)^3_+\)</span> e.g. <span class="math notranslate nohighlight">\((X_{p i t} - t_{n-1})^3_+\)</span> is called a truncated polynomial of degree 3, which is defined as follows:</p>
 <p><span class="math notranslate nohighlight">\(\nabla^3_+=\nabla^3_+\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&gt;0\)</span></p>
 <p><span class="math notranslate nohighlight">\(\nabla^3_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla^3_+&lt;0\)</span></p>
 <p>As with the polynomial, the dose-response regression would then be applied as follows</p>
 <div class="math notranslate nohighlight">
-\[F(T_{it})=\sum_{k} \beta_k f(T_{it})_k\]</div>
+\[F(X_{it})=\sum_{k} \beta_k f(X_{it})_k\]</div>
 <p>while the coefficients can be interpreted as describing a local
 dose-response relationship:</p>
 <div class="math notranslate nohighlight">
-\[F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k\]</div>
+\[F(X_{pit})=\sum_{k} \beta_k {X_{pit}}_k\]</div>
 </section>
 <section id="linear-spline">
 <h2><a class="reference external" href="https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf">Linear spline</a><a class="headerlink" href="#linear-spline" title="Permalink to this heading">#</a></h2>
@@ -519,13 +520,13 @@ the direct response curve to temperature correspondence of bins. The
 segments between knots here are lines. As with RCS, the choice of knot
 locations is very important.</p>
 <p>One definition of terms for a linear spline for a spline with <span class="math notranslate nohighlight">\(n\)</span> knots at
-<span class="math notranslate nohighlight">\(T_1&lt;T_2&lt;...&lt;T_n\)</span> is:</p>
+<span class="math notranslate nohighlight">\(X_1 &lt; X_2 &lt; ... &lt; X_n\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}\]</div>
+\[f(X_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} X_{p i t}\]</div>
 <div class="math notranslate nohighlight">
-\[f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+\]</div>
+\[f(X_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (X_{p i t}-X_k)_+\]</div>
 <p>where, <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the weight assigned to the <span class="math notranslate nohighlight">\(p\)</span> gridcell.</p>
-<p>And, each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)_+\)</span> e.g. <span class="math notranslate nohighlight">\((T_{p i t} - T_2)_+\)</span> is called a truncated polynomial of degree 1, which is defined as follows:</p>
+<p>And, each spline term in the parentheses <span class="math notranslate nohighlight">\((\nabla)_+\)</span> e.g. <span class="math notranslate nohighlight">\((X_{p i t} - X_2)_+\)</span> is called a truncated polynomial of degree 1, which is defined as follows:</p>
 <p><span class="math notranslate nohighlight">\(\nabla_+=\nabla_+\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&gt;0\)</span></p>
 <p><span class="math notranslate nohighlight">\(\nabla_+=0\)</span> if <span class="math notranslate nohighlight">\(\nabla_+&lt;0\)</span></p>
 <p>We generally try to work with many functional forms in a paper because it serves dual purpose of being a <em>sanity check</em> for researchers’ code and a <em>robustness check</em> for readers’ confirmation. However, we need to take decision on the <em>main specification</em> that we want in the paper. To do this, we formally rely on tests such as cross-validation (explained below), but we can also eyeball at the <em>fit</em> of different functional forms by printing overlaid graphs in a way that is suitable for the exercise. An example is shown in the figure below:</p>
@@ -554,7 +555,7 @@ predicts the excluded data. To fix a metric for making this decision,
 we can rely on root-mean-square-error (RMSE) statistics. So, the
 specification with the lowest RMSE will be the most preferred
 specification here. Having said that, we usually employ a combination of
-techniques, like eye-balling and RMSE, to make a decision on the most preferred specification.</p>
+techniques, such as interpretability and RMSE, to make a decision on the most preferred specification.</p>
 </section>
 </section>
 
