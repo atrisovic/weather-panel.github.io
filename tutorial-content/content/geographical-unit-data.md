@@ -54,7 +54,7 @@ Administrative unit data can capture existing administrative units (high granula
 When aggregating administrative units, it is important to capture territories with homogeneous features that are relevant to the study. For example, if the weather is relevant for the study, the administrative units should be fairly homogeneous concerning mean temperature and precipitation.
  
 ```{seealso}
-[Using Weather Data and Climate Model Output in Economic Analyses of Climate Change](https://academic.oup.com/reep/article/7/2/181/1522753) describes the common pitfalls in translating weather data into geographical unit data.
+[Using Weather Data and Climate Model Output in Economic Analyses of Climate Change](https://doi.org/10.1093/reep/ret016) describes the common pitfalls in translating weather data into geographical unit data.
 ```
  
 ## Geographic information systems (GIS)
@@ -75,7 +75,7 @@ It is usually possible to find online a shapefile that corresponds to a set of s
 In some cases, you will need to create a shapefile from scratch. The most common way of doing this is by defining ("clicking out") the shape of each polygon in QGIS or ArcGIS, which can be done in the following steps:
  
 1. Find an image that shows the regions that you want to digitize and import it into QGIS or ArcGIS.
-2. Typically, published images will not report the projection that was used, but you will need to find a mapping between points in the image and latitude-longitude coordinates. Use the [GDAL Georeferencer](https://www.qgistutorials.com/en/docs/georeferencing_basics.html) to make this a point-and-click task.
+2. Typically, published images will not report the projection that was used, but you will need to find a mapping between points in the image and latitude-longitude coordinates. Use the [GDAL Georeferencer](https://www.qgistutorials.com/en/docs/3/georeferencing_basics.html) to make this a point-and-click task.
 3. Create new polygons by clicking around the edges of the polygon.
 
 

@@ -42,7 +42,7 @@ Below are some common data sources for various weighting schemes.
 - 📚  Population is an important weighting scheme for social impacts.
     - [Gridded Population of the World](https://sedac.ciesin.columbia.edu/data/collection/gpw-v4)
     : Open-source, available at 30 arc-second resolution every 5 years from 2000 (or before with their previous version).
-    - [LandScan](https://landscan.ornl.gov/landscan-datasets)
+    - [LandScan](https://landscan.ornl.gov)
     : LandScan is available at 30 arc-second resolution, annually, but previous years need to be purchased. Ask at your institution, as many already have it.
 - 📚  Gridded agriculture information
     - [Global Agricultural Lands in the Year 2000](https://sedac.ciesin.columbia.edu/data/collection/aglands)
@@ -448,3 +448,7 @@ ggplot() +
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
 ````
 `````
+
+``` {seealso}
+The proper use of color in scientific plots ensures accurate data representation and accessibility, especially for those with color-vision deficiencies. Check out [this paper on color maps](https://www.nature.com/articles/s41467-020-19160-7) for best practices and guidelines.
+```
