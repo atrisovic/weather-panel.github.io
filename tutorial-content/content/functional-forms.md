@@ -3,10 +3,13 @@
 Returning to the "true model" of your process, the decisions around how to
 generate a linear expression that you can estimate have important
 implications. Different functional forms serve different purposes and
-describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below.
+describe different underlying processes. Some of the frequently used functional forms along with a good reference for understanding them in detail are listed below. For the ease of notation in this section, we get rid of timestep $s$ and instead work with more aggregated time values $t$.
 
-## [Bins](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.3.4.152)
+## [Bins](https://en.wikipedia.org/wiki/Data_binning)
 
+Binning is a data classification technique in which observations are assigned 
+to specific bins, which correspond to a range of data. For example, histograms
+are used to observe frequency distributions of the data.
 Bins offer a very flexible functional form, although the choice of bin
 edges means that they are not as "non-parametric" as often assumed. It
 is also highly sensitive to existence of outliers in data. This can
@@ -28,10 +31,10 @@ which the temperature falls into that bin.
 To calculate bin observations, count up the number of timesteps where
 the weather predictor falls into each bin:
 
-$$T_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \{  {T_{p i t} \in Bin_k} \right \}$$
+$$X_{it} = \sum_{p \in i} \psi_{p} \sum \mathbf{1} \left \lbrace {X_{p i t} \in Bin_k} \right \rbrace$$
 
 where $\psi_{p}$ is the weight assigned to the $p$ grid cell.  
-    
+
 ## [Polynomial](https://en.wikipedia.org/wiki/Polynomial_regression)
 
 Polynomial specifications balance smooth dose-response curves with the
@@ -39,7 +42,7 @@ flexibility of increasing the effective resolution of the curve by
 increasing the degree of the polynomial. Using more degrees improves
 the ability of the curve to fit the data, but may lead to
 over-fitting. To choose the number of terms in the polynomial,
-consider cross-validation.
+consider [cross-validation](#cross-validation).
 
 Another benefit of polynomials for climate change estimates is that
 they provide smooth extrapolation to higher temperatures. Again, it is
@@ -55,18 +58,18 @@ high-resolution weather values should be raised to powers before
 aggregating up to the regions in the economic data. That is, the 
 predictor for the $k$-th power of the polynomial is 
 
-$$f(T_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}^k$$ 
+$$f(X_{it}^k)=\sum_{p \in \Theta(i)} \psi_{p} X_{p i t}^k$$ 
 
 where $\psi_{p}$ is the weight assigned to the $p$ grid cell.  
     
 The dose-response regression would then be applied as follows
 
-$$F(T_{it})=\sum_{k} \beta_k f(T_{it}^k)$$
+$$F(X_{it})=\sum_{k} \beta_k f(X_{it}^k)$$
 	
 while the coefficients can be interpreted as describing a local
 dose-response relationship:
 
-$$F(T_{pit})=\sum_{k} \beta_k T_{pit}^k$$
+$$F(X_{pit})=\sum_{k} \beta_k X_{pit}^k$$
 
 ## [Restricted cubic spline](https://support.sas.com/resources/papers/proceedings16/5621-2016.pdf)
 
@@ -86,19 +89,17 @@ title on cubic splines can be helpful in deciding the knot
 specifications.
 
 Once knot locations are determined, the weather data needs to be
-translated into RCS terms. As before let the gridded weather be $T_{p
-i t}$ and let there be $n$ knots, placed at $T_1<T_2<...<T_n$. Then we
-have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
+translated into RCS terms. As before let the gridded weather variable be $X_{p i t}$ 
+and let there be $n$ knots, placed at $X_1 < X_2 < ... < X_n$.
+Then we have a set of $(n-2)$ terms, here indexed by $k$ and defined as:
 
-$$f(T_{i t})_k= \sum_{p \in \Theta(i)} \psi_{p} \{(T_{p i
-	t}-T_k)^3_+ - (T_{p i t} - T_{n-1})^3_+
-	\frac{T_n-T_k}{T_n-T_{n-1}}+(T_{p i t} - T_{n})^3_+ \frac{T_{n-1}-T_k}{T_{n}-T_{n-1}}\}$$ 
-    
+$$f(X_{i t})_k = \sum_{p \in \Theta(i)} \psi_{p} \{(X_{p i t}-X_k)^3_+ - (X_{p i t} - X_{n-1})^3_+ \frac{X_n-X_k}{X_n-X_{n-1}} + (X_{p i t} - X_{n})^3_+ \frac{X_{n-1} - X_k} {X_{n}-X_{n-1}}\}$$ 
+
 $$\forall k \in \{1,2,...,n-2\}$$
 
 where, $\psi_{p}$ is the weight assigned to the $p$ grid.  
     
-Each spline term in the parentheses $(\nabla)^3_+$ e.g. $(T_{p i t} - t_{n-1})^3_+$ is called a truncated           polynomial of degree 3, which is defined as follows:  
+Each spline term in the parentheses $(\nabla)^3_+$ e.g. $(X_{p i t} - t_{n-1})^3_+$ is called a truncated polynomial of degree 3, which is defined as follows:  
 
 $\nabla^3_+=\nabla^3_+$ if $\nabla^3_+>0$
 
@@ -106,12 +107,12 @@ $\nabla^3_+=0$ if $\nabla^3_+<0$
     
 As with the polynomial, the dose-response regression would then be applied as follows
 
-$$F(T_{it})=\sum_{k} \beta_k f(T_{it})_k$$
+$$F(X_{it})=\sum_{k} \beta_k f(X_{it})_k$$
 	
 while the coefficients can be interpreted as describing a local
 dose-response relationship:
 
-$$F(T_{pit})=\sum_{k} \beta_k {T_{pit}}_k$$
+$$F(X_{pit})=\sum_{k} \beta_k {X_{pit}}_k$$
 
 ## [Linear spline](https://web.archive.org/web/20200226044201/http://people.stat.sfu.ca/~cschwarz/Consulting/Trinity/Phase2/TrinityWorkshop/Workshop-handouts/TW-04-Intro-splines.pdf)
 
@@ -121,14 +122,14 @@ segments between knots here are lines. As with RCS, the choice of knot
 locations is very important.
 
 One definition of terms for a linear spline for a spline with $n$ knots at
-$T_1<T_2<...<T_n$ is:
-    
-$$f(T_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} T_{p i t}$$
-$$f(T_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}-T_k)_+$$
+$X_1 < X_2 < ... < X_n$ is:
+
+$$f(X_{it})_0=\sum_{p \in \Theta(i)} \psi_{p} X_{p i t}$$
+$$f(X_{it})_k=\sum_{p \in \Theta(i)} \psi_{p} (X_{p i t}-X_k)_+$$
 
 where, $\psi_{p}$ is the weight assigned to the $p$ gridcell.  
 
-And, each spline term in the parentheses $(\nabla)_+$ e.g. $(T_{p i t} - T_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
+And, each spline term in the parentheses $(\nabla)_+$ e.g. $(X_{p i t} - X_2)_+$ is called a truncated polynomial of degree 1, which is defined as follows:  
 
 $\nabla_+=\nabla_+$ if $\nabla_+>0$ 
 
@@ -163,4 +164,4 @@ predicts the excluded data. To fix a metric for making this decision,
 we can rely on root-mean-square-error (RMSE) statistics. So, the
 specification with the lowest RMSE will be the most preferred
 specification here. Having said that, we usually employ a combination of
-techniques, like eye-balling and RMSE, to make a decision on the most preferred specification.
+techniques, such as interpretability and RMSE, to make a decision on the most preferred specification.
