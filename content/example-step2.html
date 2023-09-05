@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Hands-On Exercise, Step 2: Understanding the outcomes</title>
+    <title>Hands-On Exercise, Step 2: Prepping the Demographic Data</title>
   
   
   
@@ -171,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 2: Understanding the outcomes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hands-On Exercise, Step 2: Prepping the Demographic Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
 <ul class="nav bd-sidenav">
@@ -389,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hands-On Exercise, Step 2: Understanding the outcomes</h1>
+    <h1>Hands-On Exercise, Step 2: Prepping the Demographic Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,8 +414,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-2-understanding-the-outcomes">
-<h1>Hands-On Exercise, Step 2: Understanding the outcomes<a class="headerlink" href="#hands-on-exercise-step-2-understanding-the-outcomes" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-2-prepping-the-demographic-data">
+<h1>Hands-On Exercise, Step 2: Prepping the Demographic Data<a class="headerlink" href="#hands-on-exercise-step-2-prepping-the-demographic-data" title="Permalink to this heading">#</a></h1>
 <section id="thinking-about-the-data-generating-process">
 <h2>Thinking about the data-generating process<a class="headerlink" href="#thinking-about-the-data-generating-process" title="Permalink to this heading">#</a></h2>
 <p>First, let us think about the process that relates mortality to
@@ -450,12 +450,18 @@ variables, for the linear and quadratic terms relative to 20 C.</p>
 World, since the weather data is not very high resolution. Download it
 from
 <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count">https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count</a>.</p>
-<p>The code below assumes that you download the global population count
-grid as a <code class="docutils literal notranslate"><span class="pre">.bil</span></code> format at 2.5’ resolution for 1990.</p>
-<p>This is global data, so it will be useful to clip it to the US and
-aggregate it to the scale of the weather. We also need it in NetCDF
-format, for the aggregation step. Again, this code assumes that it is
-being run from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p>The code below assumes that you download the USA population count grid
+as a <code class="docutils literal notranslate"><span class="pre">.bil</span></code> format at 2.5’ resolution for 1990 (these are all options
+on the Gridded Population of the World download form). The zip file
+produced will contain a <code class="docutils literal notranslate"><span class="pre">usap90ag.bil</span></code> file, along with other
+associated files that are required for this file to be loaded. For the
+code below to work, the contents of the zip file should be placed in a
+<code class="docutils literal notranslate"><span class="pre">data/pcount</span></code> directory.</p>
+<p>Although this is US-specific data, the coverage extends far beyond the
+contiguous US. It will be useful to clip it more tightly and aggregate
+it to the scale of the weather. We also need it in NetCDF format, for
+the aggregation step. Again, this code assumes that it is being run
+from a directory <code class="docutils literal notranslate"><span class="pre">code</span></code>, sister to the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
@@ -475,9 +481,9 @@ R</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install rasterio # will work in Jupyter Notebook</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="n">rr</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
+<p>You will need to install the <code class="docutils literal notranslate"><span class="pre">rioxarray</span></code> package, using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rioxarray</span></code>, to <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="n">rr</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Crop to US bounding box</span>
@@ -499,6 +505,7 @@ Python</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
+<p>Further details on the use of geographic data are discussed in the next chapter.</p>
 </section>
 <section id="downloading-the-mortality-data">
 <h2>Downloading the mortality data<a class="headerlink" href="#downloading-the-mortality-data" title="Permalink to this heading">#</a></h2>
@@ -529,6 +536,11 @@ each of 12 age groups is reported with 8 characters per age group
 number (so, the first age group, 1 - 4 year-olds, is characters 19 -
 26; then 5 - 9 year-olds is reported in characters 27 - 34; and so
 on).</p>
+<p>The population file also contains US-wide population numbers,
+state-wide numbers, and county-level numbers. These are identified by
+a column in the data with a 1 (US), 2 (state), or 3 (county). In the
+code below, we label this the <code class="docutils literal notranslate"><span class="pre">type</span></code> column and only include type = 3
+data.</p>
 </section>
 <section id="preparing-the-mortality-data">
 <h2>Preparing the mortality data<a class="headerlink" href="#preparing-the-mortality-data" title="Permalink to this heading">#</a></h2>
@@ -576,30 +588,36 @@ Python</label><div class="sd-tab-content docutils">
 
 <span class="n">df_mort3</span> <span class="o">=</span> <span class="n">df_mort2</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 
-<span class="n">df_mort4</span> <span class="o">=</span> <span class="n">df_mort3</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fips&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">df_mort4</span> <span class="o">=</span> <span class="n">df_mort3</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fips&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_mort4</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>fips, year</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips</p></th>
+<th class="head"><p>year</p></th>
 <th class="head text-right"><p>deaths</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>(1001, 1979)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1979</p></td>
 <td class="text-right"><p>225</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1980)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1980</p></td>
 <td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1981)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1981</p></td>
 <td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1982)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1982</p></td>
 <td class="text-right"><p>223</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1983)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1983</p></td>
 <td class="text-right"><p>267</p></td>
 </tr>
 </tbody>
@@ -620,7 +638,7 @@ Python</label><div class="sd-tab-content docutils">
 <span class="n">df_pop3</span> <span class="o">=</span> <span class="n">df_pop2</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 <span class="n">df_pop4</span> <span class="o">=</span> <span class="n">df_pop3</span><span class="p">[</span><span class="n">df_pop3</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">]</span>
 
-<span class="n">df_pop5</span> <span class="o">=</span> <span class="n">df_pop4</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fips&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">df_pop5</span> <span class="o">=</span> <span class="n">df_pop4</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fips&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_pop5</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop1</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop2</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop3</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop4</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop5</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop6</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop7</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop8</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop9</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop10</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop11</span> <span class="o">+</span> <span class="n">df_pop5</span><span class="o">.</span><span class="n">pop12</span>
 
 <span class="n">df_pop5</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -628,7 +646,9 @@ Python</label><div class="sd-tab-content docutils">
 </div>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>fips, year, type</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips</p></th>
+<th class="head"><p>year</p></th>
+<th class="head"><p>type</p></th>
 <th class="head text-right"><p>pop1</p></th>
 <th class="head text-right"><p>pop2</p></th>
 <th class="head text-right"><p>pop3</p></th>
@@ -645,7 +665,9 @@ Python</label><div class="sd-tab-content docutils">
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>(1001, 1979, 3)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1979</p></td>
+<td><p>3</p></td>
 <td class="text-right"><p>2022</p></td>
 <td class="text-right"><p>2982</p></td>
 <td class="text-right"><p>3248</p></td>
@@ -660,7 +682,9 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>178</p></td>
 <td class="text-right"><p>31545</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1980, 3)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1980</p></td>
+<td><p>3</p></td>
 <td class="text-right"><p>2021</p></td>
 <td class="text-right"><p>2952</p></td>
 <td class="text-right"><p>3184</p></td>
@@ -675,7 +699,9 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>181</p></td>
 <td class="text-right"><p>31755</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1981, 3)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1981</p></td>
+<td><p>3</p></td>
 <td class="text-right"><p>2037</p></td>
 <td class="text-right"><p>2776</p></td>
 <td class="text-right"><p>3132</p></td>
@@ -690,7 +716,9 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>192</p></td>
 <td class="text-right"><p>31476</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1982, 3)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1982</p></td>
+<td><p>3</p></td>
 <td class="text-right"><p>2042</p></td>
 <td class="text-right"><p>2707</p></td>
 <td class="text-right"><p>3098</p></td>
@@ -705,7 +733,9 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>201</p></td>
 <td class="text-right"><p>31529</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1983, 3)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1983</p></td>
+<td><p>3</p></td>
 <td class="text-right"><p>2044</p></td>
 <td class="text-right"><p>2670</p></td>
 <td class="text-right"><p>3054</p></td>
@@ -731,7 +761,8 @@ Python</label><div class="sd-tab-content docutils">
 <p>The final dataset (<code class="docutils literal notranslate"><span class="pre">merged.csv</span></code>) should look like:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>fips, year</p></th>
+<tr class="row-odd"><th class="head text-left"><p>fips</p></th>
+<th class="head"><p>year</p></th>
 <th class="head text-right"><p>pop1</p></th>
 <th class="head text-right"><p>pop2</p></th>
 <th class="head text-right"><p>pop3</p></th>
@@ -749,7 +780,8 @@ Python</label><div class="sd-tab-content docutils">
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>(1001, 1979)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1979</p></td>
 <td class="text-right"><p>2022</p></td>
 <td class="text-right"><p>2982</p></td>
 <td class="text-right"><p>3248</p></td>
@@ -765,7 +797,8 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>31545</p></td>
 <td class="text-right"><p>225</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1980)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1980</p></td>
 <td class="text-right"><p>2021</p></td>
 <td class="text-right"><p>2952</p></td>
 <td class="text-right"><p>3184</p></td>
@@ -781,7 +814,8 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>31755</p></td>
 <td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1981)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1981</p></td>
 <td class="text-right"><p>2037</p></td>
 <td class="text-right"><p>2776</p></td>
 <td class="text-right"><p>3132</p></td>
@@ -797,7 +831,8 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>31476</p></td>
 <td class="text-right"><p>221</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>(1001, 1982)</p></td>
+<tr class="row-odd"><td class="text-left"><p>1001</p></td>
+<td><p>1982</p></td>
 <td class="text-right"><p>2042</p></td>
 <td class="text-right"><p>2707</p></td>
 <td class="text-right"><p>3098</p></td>
@@ -813,7 +848,8 @@ Python</label><div class="sd-tab-content docutils">
 <td class="text-right"><p>31529</p></td>
 <td class="text-right"><p>223</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>(1001, 1983)</p></td>
+<tr class="row-even"><td class="text-left"><p>1001</p></td>
+<td><p>1983</p></td>
 <td class="text-right"><p>2044</p></td>
 <td class="text-right"><p>2670</p></td>
 <td class="text-right"><p>3054</p></td>
@@ -831,6 +867,7 @@ Python</label><div class="sd-tab-content docutils">
 </tr>
 </tbody>
 </table>
+<p>You may also have a <code class="docutils literal notranslate"><span class="pre">type</span></code> column, if you used the python code.</p>
 </section>
 </section>
 

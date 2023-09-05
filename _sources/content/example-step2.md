@@ -1,4 +1,4 @@
-# Hands-On Exercise, Step 2: Understanding the outcomes
+# Hands-On Exercise, Step 2: Prepping the Demographic Data
 
 ## Thinking about the data-generating process
 
@@ -39,13 +39,19 @@ World, since the weather data is not very high resolution. Download it
 from
 <https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count>.
 
-The code below assumes that you download the global population count
-grid as a `.bil` format at 2.5' resolution for 1990.
+The code below assumes that you download the USA population count grid
+as a `.bil` format at 2.5' resolution for 1990 (these are all options
+on the Gridded Population of the World download form). The zip file
+produced will contain a `usap90ag.bil` file, along with other
+associated files that are required for this file to be loaded. For the
+code below to work, the contents of the zip file should be placed in a
+`data/pcount` directory.
 
-This is global data, so it will be useful to clip it to the US and
-aggregate it to the scale of the weather. We also need it in NetCDF
-format, for the aggregation step. Again, this code assumes that it is
-being run from a directory `code`, sister to the `data` directory.
+Although this is US-specific data, the coverage extends far beyond the
+contiguous US. It will be useful to clip it more tightly and aggregate
+it to the scale of the weather. We also need it in NetCDF format, for
+the aggregation step. Again, this code assumes that it is being run
+from a directory `code`, sister to the `data` directory.
 
 `````{tab-set}
 ````{tab-item} R
@@ -63,10 +69,12 @@ writeRaster(rr3, "../data/pcount/usap90ag.nc4",
 ````
  
 ````{tab-item} Python
+You will need to install the `rioxarray` package, using `pip install
+rioxarray`, to `.bil` files.
+
 ```{code-block} python
-#!pip install rasterio # will work in Jupyter Notebook
-import xarray as xr
-rr = xr.open_rasterio("../data/pcount/usap90ag.bil")
+import rioxarray
+rr = rioxarray.open_rasterio("../data/pcount/usap90ag.bil")
 rr = rr.sel(band=1, drop=True)
 
 # Crop to US bounding box
@@ -87,6 +95,8 @@ rr3.to_dataset(name="Population").to_netcdf("../data/pcount/usap90ag.nc4")
 ```
 ````
 `````
+
+Further details on the use of geographic data are discussed in the next chapter.
 
 ## Downloading the mortality data
 
@@ -119,6 +129,12 @@ each of 12 age groups is reported with 8 characters per age group
 number (so, the first age group, 1 - 4 year-olds, is characters 19 -
 26; then 5 - 9 year-olds is reported in characters 27 - 34; and so
 on).
+
+The population file also contains US-wide population numbers,
+state-wide numbers, and county-level numbers. These are identified by
+a column in the data with a 1 (US), 2 (state), or 3 (county). In the
+code below, we label this the `type` column and only include type = 3
+data.
 
 ## Preparing the mortality data
 
@@ -165,16 +181,16 @@ df_mort2 = pd.DataFrame(df_mort.input.apply(
 
 df_mort3 = df_mort2.apply(pd.to_numeric, errors='coerce')
 
-df_mort4 = df_mort3.groupby(['fips', 'year']).sum()
+df_mort4 = df_mort3.groupby(['fips', 'year']).sum().reset_index()
 df_mort4.head()
 ```
-| fips, year   |   deaths |
-|:-------------|---------:|
-| (1001, 1979) |      225 |
-| (1001, 1980) |      221 |
-| (1001, 1981) |      221 |
-| (1001, 1982) |      223 |
-| (1001, 1983) |      267 |
+| fips | year  |   deaths |
+|:-----|-------|---------:|
+| 1001 |  1979 |      225 |
+| 1001 |  1980 |      221 |
+| 1001 |  1981 |      221 |
+| 1001 |  1982 |      223 |
+| 1001 |  1983 |      267 |
 
 ```{code-block} python
 df_pop = pd.read_csv("../data/cmf/Pop7988.txt", names = ['input'])
@@ -193,18 +209,18 @@ cols = ['fips', 'year'] + ["pop" + str(i) for i in range(1,13)] + ['type']
 df_pop3 = df_pop2[cols].apply(pd.to_numeric, errors='coerce')
 df_pop4 = df_pop3[df_pop3.type == 3]
 
-df_pop5 = df_pop4.groupby(['fips', 'year', 'type']).sum()
+df_pop5 = df_pop4.groupby(['fips', 'year', 'type']).sum().reset_index()
 df_pop5['pop'] = df_pop5.pop1 + df_pop5.pop2 + df_pop5.pop3 + df_pop5.pop4 + df_pop5.pop5 + df_pop5.pop6 + df_pop5.pop7 + df_pop5.pop8 + df_pop5.pop9 + df_pop5.pop10 + df_pop5.pop11 + df_pop5.pop12
 
 df_pop5.head()
 ```
-| fips, year, type |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   pop |
-|:----------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|------:|
-| (1001, 1979, 3) |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 | 31545 |
-| (1001, 1980, 3) |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 | 31755 |
-| (1001, 1981, 3) |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 | 31476 |
-| (1001, 1982, 3) |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 | 31529 |
-| (1001, 1983, 3) |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 | 31547 |
+| fips | year | type |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   pop |
+|:-----|------|------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|------:|
+| 1001 | 1979 |    3 |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 | 31545 |
+| 1001 | 1980 |    3 |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 | 31755 |
+| 1001 | 1981 |    3 |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 | 31476 |
+| 1001 | 1982 |    3 |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 | 31529 |
+| 1001 | 1983 |    3 |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 | 31547 |
 
 
 ```{code-block} python
@@ -216,11 +232,12 @@ df.to_csv("../data/cmf/merged.csv", header=True)
 
 The final dataset (`merged.csv`) should look like:
 		
-| fips, year |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   pop |   deaths |
-|:-------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|------:|---------:|
-| (1001, 1979) |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 | 31545 |      225 |
-| (1001, 1980) |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 | 31755 |      221 |
-| (1001, 1981) |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 | 31476 |      221 |
-| (1001, 1982) |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 | 31529 |      223 |
-| (1001, 1983) |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 | 31547 |      267 |
+| fips | year |   pop1 |   pop2 |   pop3 |   pop4 |   pop5 |   pop6 |   pop7 |   pop8 |   pop9 |   pop10 |   pop11 |   pop12 |   pop |   deaths |
+|:-----|------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|--------:|--------:|--------:|------:|---------:|
+| 1001 | 1979 |   2022 |   2982 |   3248 |   3491 |   2640 |   4414 |   4211 |   3310 |   2457 |    1813 |     779 |     178 | 31545 |      225 |
+| 1001 | 1980 |   2021 |   2952 |   3184 |   3495 |   2663 |   4463 |   4293 |   3373 |   2487 |    1848 |     795 |     181 | 31755 |      221 |
+| 1001 | 1981 |   2037 |   2776 |   3132 |   3320 |   2664 |   4646 |   4210 |   3330 |   2516 |    1829 |     824 |     192 | 31476 |      221 |
+| 1001 | 1982 |   2042 |   2707 |   3098 |   3190 |   2651 |   4714 |   4343 |   3327 |   2565 |    1835 |     856 |     201 | 31529 |      223 |
+| 1001 | 1983 |   2044 |   2670 |   3054 |   3063 |   2625 |   4815 |   4408 |   3325 |   2613 |    1833 |     882 |     215 | 31547 |      267 |
 
+You may also have a `type` column, if you used the python code.
