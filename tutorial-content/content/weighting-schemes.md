@@ -68,9 +68,9 @@ CSV, spaces for ASC).
 
 ### The spatial gridding scheme
 
-The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, a horizontal and vertical cell lengths, and a number of rows and columns.
+The spatial gridding scheme is determined by 6 numbers: a latitude and longitude of an origin point, meridional (north-south) and zonal (east-west) cell lengths, and a number of rows and columns.
     - The most common origin point is the location of the lower-left corner of the lower-left grid cell. For example, for a global dataset, that might be 90°S, 180°W, which is represented in x, y coordinates as (-180, -90). Sometimes (particularly with NetCDF files), grid cell center locations will be used instead.
-    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as $0.0083333333333 = 1 / 120$ of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually the horizontal and vertical grid cell lengths are the same, and reported as a single number.
+    - Grid cell sizes are often given as decimal representation of fractions of a degree, such as $0.0083333333333 = 1 / 120$ of a degree. This is the grid cell size needed globally to ensure a km-scale resolution. Usually, the meridional and zonal grid cell lengths are the same and are reported as a single number.
     - The number of grid cells is the most common way to describe the spatial coverage of the dataset. A global dataset will have 180 / cellsize rows and 360 / cellsize columns.
 
 
@@ -121,7 +121,7 @@ which has some extensive examples of working with geospatial raster data.
 ```
 ````
 ````{tab-item} Python
-Take a look at <https://github.com/jrising/research-common/tree/master/python/geogrid>.
+Take a look at the Python package [`rasterio`](https://rasterio.readthedocs.io/en/stable/). GeoGrid may also be useful: <https://github.com/jrising/research-common/tree/master/python/geogrid>.
 ````
 `````
 
@@ -142,13 +142,20 @@ the corner.
 
 If your datasets cover the same geographic extent, and if the
 resolution of your weighting dataset is an even multiple of the
-resolution of your weather dataset, your job is easy. Just either
-aggregate or disaggregate grid cells so that they have the same
-resolution as the weather data, using the code below. In other cases,
-you will need to follow three steps, and generally require
-upsampling, downsampling, and cropping.
+resolution of your weather dataset, your job is easy. 
+You'll simply aggregate or disaggregate grid cells so that they have the 
+same resolution as the weather data. 
+
+In situations that don't meet these conditions, you will need to follow 
+the three methods illustrated below: upsampling, downsampling, and cropping.
 
 ### Upsampling - increasing data resolution
+
+The variable `rr` represents the data on the grid, or a matrix or 2D array where each 
+element corresponds to a value (like temperature, elevation, or some other measurement) 
+at a particular grid cell. The structure of this matrix (`rr` in this case) essentially 
+overlays a spatial grid, where the row and column indices of the matrix can be mapped to 
+spatial coordinates.
 
 To increase the resolution of a grid `rr` by a factor of `N` without increasing the
 sum of grid cells:
@@ -244,6 +251,17 @@ prism
 ## extent      : -125.0208, -66.47917, 24.0625, 49.9375  (xmin, xmax, ymin, ymax)
 ```
 ````
+````{tab-item} Python
+```Python
+import rasterio
+
+with rasterio.open("../w001001.adf") as src:
+    landscan = src.read(1)  # This reads the first band of the raster into a 2D numpy array
+
+print(landscan)
+
+```
+````
 `````
 
 Start by throwing away extraneous data, by cropping the LandScan to, say,
@@ -253,6 +271,19 @@ Start by throwing away extraneous data, by cropping the LandScan to, say,
 ````{tab-item} R
 ```R
 landscan <- crop(landscan, extent(-126, -66, 24, 50))
+```
+````
+````{tab-item} Python
+```Python
+from rasterio.windows import from_bounds
+
+xmin, xmax, ymin, ymax = -126, -66, 24, 50
+
+# Calculate the window to crop
+window = from_bounds(xmin, ymin, xmax, ymax, src.transform)
+
+# Read the data from this window
+landscan = src.read(1, window=window)
 ```
 ````
 `````
@@ -267,6 +298,19 @@ Now, note that the edge of the PRISM data is in the middle of the LandScan grid 
 landscan <- disaggregate(landscan, fact=2) / 4
 ```
 ````
+````{tab-item} Python
+```Python
+import numpy as np
+
+# Disaggregate
+fact = 2
+landscan_disaggregated = np.repeat(np.repeat(landscan, fact, axis=0), fact, axis=1) / (fact**2)
+
+# Optionally, you can save the disaggregated raster to a new file
+landscan = rasterio.Affine(src.transform.a / fact, src.transform.b, src.transform.c,
+                                src.transform.d, src.transform.e / fact, src.transform.f)
+```
+````
 `````
 
 We divide by 4 so that the total population remains the same.
@@ -279,6 +323,17 @@ After increasing the resolution of the LandScan data, we clip it again.
 landscan <- crop(landscan, extent(-125.0208, -66.47917, 24.0625, 49.9375))
 ```
 ````
+````{tab-item} Python
+```Python
+xmin, xmax, ymin, ymax = -125.0208, -66.47917, 24.0625, 49.9375
+
+# Calculate the window to crop
+window = from_bounds(xmin, ymin, xmax, ymax, landscan.transform)
+
+# Extract data from this window
+landscan_cropped_data = landscan.read(1, window=window)
+```
+````
 `````
 
 Now, the resolution of the dataset has become 1/240th, and we can
@@ -288,6 +343,16 @@ write aggregate by a factor of $10$ for it to match the PRISM data:
 ````{tab-item} R
 ```R
 landscan <- aggregate(landscan, fact=10, fun=sum)
+```
+````
+````{tab-item} Python
+```Python
+# Dimensions for the aggregated data
+new_shape = (landscan.shape[0] // 10, landscan.shape[1] // 10)
+
+# Use numpy to reshape and aggregate by summing
+reshaped = landscan.reshape((new_shape[0], 10, new_shape[1], 10))
+aggregated_landscan = reshaped.sum(axis=1).sum(axis=2)
 ```
 ````
 `````
@@ -322,13 +387,28 @@ image(rr)
 
 ![Result of `image(rr)`.](images/examples/image-gpw.png)
 ````
+````{tab-item} Python
+```Python
+import rasterio
+import matplotlib.pyplot as plt
+
+# Load the raster data
+with rasterio.open("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_2pt5_min.asc") as src:
+    rr = src.read(1)
+
+# Display the raster data
+plt.imshow(rr, cmap='gray')  # You can change the colormap (cmap) as needed
+plt.colorbar()
+plt.show()
+```
+````
 `````
 
 But that wasn't any fun. Let's try again with something more
 complicated.
 
 First, we'll download [historical maximum temperature](https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.pc6190/.Diagnostic/.above_ground/.maximum/.temp/[T+]average/) data from the
-easy-to-use IRI data library.
+easy-to-use IRI data library. Click on "Data Files" tab and then click the "netCDF" file format option.
 
 `````{tab-set}
 ````{tab-item} R
@@ -344,6 +424,21 @@ image(temp)
 ```
 
 ![Result of `image(temp)`.](images/examples/image-tmax.png)
+````
+````{tab-item} Python
+```Python
+import netCDF4 as nc
+import matplotlib.pyplot as plt
+
+# Load the netCDF data
+dataset = nc.Dataset("data.nc")
+temp = dataset.variables['temp'][:]
+
+# Display the data
+plt.imshow(temp, cmap='viridis')  
+plt.colorbar()
+plt.show()
+```
 ````
 `````
 
@@ -378,6 +473,23 @@ map("world", add=T)
 
 ![Result after `map(world)`.](images/examples/image-tmax-flip.png)
 ````
+````{tab-item} Python
+```Python
+import netCDF4 as nc
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load the netCDF data
+dataset = nc.Dataset("data.nc")
+temp = dataset.variables['temp'][:]
+lon = dataset.variables['X'][:]
+lat = dataset.variables['Y'][:]
+
+# Rearrange longitude and temperature data
+lon2 = np.where(lon >= 180, lon - 360, lon)
+temp2 = temp[np.argsort(lon2)]
+```
+````
 `````
 
 Now, for our production-ready map, we're going to switch to
@@ -405,6 +517,23 @@ ggplot() +
 ```
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax.png)
+````
+````{tab-item} Python
+```Python
+# Convert temp2 to a dataframe
+df_temp = pd.DataFrame(temp2, index=lon2, columns=lat).stack().reset_index()
+df_temp.columns = ['lon', 'lat', 'value']
+
+# Convert world map to a GeoDataFrame
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+# Plot everything
+fig, ax = plt.subplots(figsize=(10, 6))
+world.boundary.plot(ax=ax, linewidth=1)
+ax.pcolormesh(df_temp['lon'], df_temp['lat'], df_temp['value'], shading='auto')
+plt.colorbar()
+plt.show()
+```
 ````
 `````
 
@@ -446,6 +575,33 @@ ggplot() +
 ```
 
 ![Result after `ggplot`.](images/examples/ggplot-tmax-final.png)
+````
+````{tab-item} Python
+```Python
+# Create the plot with mollweide projection
+fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.Mollweide()})
+divider = make_axes_locatable(ax)
+
+# Set the temperature data to Celsius
+c = ax.pcolormesh(df_temp['lon'], df_temp['lat'], df_temp['value'] - 273.15, 
+                  transform=ccrs.PlateCarree(), shading='auto', 
+                  cmap=mcolors.LinearSegmentedColormap.from_list("", ["white", "yellow", "red"]))
+
+# Plot the world boundaries
+world.boundary.plot(ax=ax, transform=ccrs.PlateCarree(), linewidth=0.2)
+
+# Styling
+ax.set_global()
+ax.set_title("Average Max T.")
+ax.outline_patch.set_visible(False)
+ax.background_patch.set_visible(False)
+
+# Colorbar styling
+cax = divider.append_axes("right", size="5%", pad=0.1, axes_class=plt.Axes)
+fig.colorbar(c, cax=cax, label="Average Max T. (°C)")
+
+plt.show()
+```
 ````
 `````
 
