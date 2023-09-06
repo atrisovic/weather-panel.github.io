@@ -129,7 +129,7 @@ weightmap = xa.pixel_overlaps(ds_tas, gdf_counties, weights=ds_pop.Population, s
 ```
 ````
 
-````{tab-set} R
+````{tab-item} R
 ```R
 grid.weights <- secondary_weights(secondary_raster=rr.pop.padded, grid=rr.tas.padded)
 county.weights <- overlay_weights(polygons=counties, polygon_id_col="FIPS", grid=rr.tas.padded, secondary_weights=grid.weights)
