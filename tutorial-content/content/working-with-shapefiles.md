@@ -57,7 +57,7 @@ to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
-As an example, in R, you generate these points like so:
+As an example, you generate these points like so:
 
 `````{tab-set}
 ````{tab-item} R

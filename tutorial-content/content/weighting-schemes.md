@@ -274,16 +274,23 @@ landscan <- crop(landscan, extent(-126, -66, 24, 50))
 ```
 ````
 ````{tab-item} Python
+
+In Python, you can impose the window when you read the raster file. We will open the raster file again here, for completeness.
+
 ```Python
+import rasterio
 from rasterio.windows import from_bounds
 
-xmin, xmax, ymin, ymax = -126, -66, 24, 50
+with rasterio.open("../w001001.adf") as src:
+    xmin, xmax, ymin, ymax = -126, -66, 24, 50
 
-# Calculate the window to crop
-window = from_bounds(xmin, ymin, xmax, ymax, src.transform)
+    # Calculate the window to crop
+    window = from_bounds(xmin, ymin, xmax, ymax, src.transform)
 
-# Read the data from this window
-landscan = src.read(1, window=window)
+    # Read the data from this window
+    landscan = src.read(1, window=window)
+
+print(landscan)
 ```
 ````
 `````
@@ -304,11 +311,8 @@ import numpy as np
 
 # Disaggregate
 fact = 2
-landscan_disaggregated = np.repeat(np.repeat(landscan, fact, axis=0), fact, axis=1) / (fact**2)
+landscan = np.repeat(np.repeat(landscan, fact, axis=0), fact, axis=1) / (fact**2)
 
-# Optionally, you can save the disaggregated raster to a new file
-landscan = rasterio.Affine(src.transform.a / fact, src.transform.b, src.transform.c,
-                                src.transform.d, src.transform.e / fact, src.transform.f)
 ```
 ````
 `````
@@ -331,7 +335,7 @@ xmin, xmax, ymin, ymax = -125.0208, -66.47917, 24.0625, 49.9375
 window = from_bounds(xmin, ymin, xmax, ymax, landscan.transform)
 
 # Extract data from this window
-landscan_cropped_data = landscan.read(1, window=window)
+landscan = landscan.read(1, window=window)
 ```
 ````
 `````
@@ -352,7 +356,8 @@ new_shape = (landscan.shape[0] // 10, landscan.shape[1] // 10)
 
 # Use numpy to reshape and aggregate by summing
 reshaped = landscan.reshape((new_shape[0], 10, new_shape[1], 10))
-aggregated_landscan = reshaped.sum(axis=1).sum(axis=2)
+
+landscan = reshaped.sum(axis=1).sum(axis=2)
 ```
 ````
 `````
