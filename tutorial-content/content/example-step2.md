@@ -27,10 +27,10 @@ death data, which is what we have.
 Then, we want to transform the weather data by creating two predictor
 variables, for the linear and quadratic terms relative to 20 C.
 
-$$X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t} - 20)$$
-$$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}^2 - 20^2)$$
+$$X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t} - 20)$$
+$$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t}^2 - 20^2)$$
 
-where $\psi_{p}$ is the population in gridcell $p$.
+where $w_p$ is the population in gridcell $p$.
 
 ## Download the population data
 

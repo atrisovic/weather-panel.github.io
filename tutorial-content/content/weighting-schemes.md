@@ -121,7 +121,7 @@ which has some extensive examples of working with geospatial raster data.
 ```
 ````
 ````{tab-item} Python
-Take a look at the Python package [`rasterio`](https://rasterio.readthedocs.io/en/stable/). GeoGrid may also be useful: <https://github.com/jrising/research-common/tree/master/python/geogrid>.
+Take a look at the Python package [`rasterio`](https://rasterio.readthedocs.io/en/stable/).
 ````
 `````
 
