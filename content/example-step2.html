@@ -439,10 +439,10 @@ death data, which is what we have.</p>
 <p>Then, we want to transform the weather data by creating two predictor
 variables, for the linear and quadratic terms relative to 20 C.</p>
 <div class="math notranslate nohighlight">
-\[X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t} - 20)\]</div>
+\[X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t} - 20)\]</div>
 <div class="math notranslate nohighlight">
-\[X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}^2 - 20^2)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\psi_{p}\)</span> is the population in gridcell <span class="math notranslate nohighlight">\(p\)</span>.</p>
+\[X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t}^2 - 20^2)\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_p\)</span> is the population in gridcell <span class="math notranslate nohighlight">\(p\)</span>.</p>
 </section>
 <section id="download-the-population-data">
 <h2>Download the population data<a class="headerlink" href="#download-the-population-data" title="Permalink to this heading">#</a></h2>
@@ -450,6 +450,19 @@ variables, for the linear and quadratic terms relative to 20 C.</p>
 World, since the weather data is not very high resolution. Download it
 from
 <a class="reference external" href="https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count">https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Raster data is a type of digital image represented by reducible and
+enlargeable grids. Each cell (often referred to as a pixel) within this
+grid contains a value representing information, such as temperature,
+elevation, or a color value for image data. Each pixel stores a single
+value, and when visualized collectively, these pixels can represent
+complex images or spatial information. See more
+<a class="reference external" href="https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/what-is-raster-data.htm">here</a>
+and <a class="reference external" href="https://datacarpentry.org/organization-geospatial/01-intro-raster-data">here</a>.</p>
+<p>Common file formats for raster data include GeoTIFF, NetCDF, HDF, JPEG2000,
+and BIL, among others.</p>
+</div>
 <p>The code below assumes that you download the USA population count grid
 as a <code class="docutils literal notranslate"><span class="pre">.bil</span></code> format at 2.5’ resolution for 1990 (these are all options
 on the Gridded Population of the World download form). The zip file
@@ -466,6 +479,8 @@ from a directory <code class="docutils literal notranslate"><span class="pre">co
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
 R</label><div class="sd-tab-content docutils">
+<p>The R library <code class="docutils literal notranslate"><span class="pre">raster</span></code> is used for reading, writing, manipulating, analyzing
+and modeling of spatial data.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span>
 <span class="n">rr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">raster</span><span class="p">(</span><span class="s">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
 
@@ -481,7 +496,7 @@ R</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
 Python</label><div class="sd-tab-content docutils">
-<p>You will need to install the <code class="docutils literal notranslate"><span class="pre">rioxarray</span></code> package, using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rioxarray</span></code>, to <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files.</p>
+<p>You will need to install the <code class="docutils literal notranslate"><span class="pre">rioxarray</span></code> package, using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rioxarray</span></code>, to open the <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rioxarray</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

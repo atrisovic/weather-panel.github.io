@@ -27,10 +27,10 @@ death data, which is what we have.
 Then, we want to transform the weather data by creating two predictor
 variables, for the linear and quadratic terms relative to 20 C.
 
-$$X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t} - 20)$$
-$$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} \psi_{p} (T_{p i t}^2 - 20^2)$$
+$$X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t} - 20)$$
+$$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t}^2 - 20^2)$$
 
-where $\psi_{p}$ is the population in gridcell $p$.
+where $w_p$ is the population in gridcell $p$.
 
 ## Download the population data
 
@@ -38,6 +38,20 @@ We can use the gridded population data from Gridded Population of the
 World, since the weather data is not very high resolution. Download it
 from
 <https://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-count>.
+
+```{note}
+Raster data is a type of digital image represented by reducible and 
+enlargeable grids. Each cell (often referred to as a pixel) within this 
+grid contains a value representing information, such as temperature, 
+elevation, or a color value for image data. Each pixel stores a single 
+value, and when visualized collectively, these pixels can represent 
+complex images or spatial information. See more 
+[here](https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/what-is-raster-data.htm) 
+and [here](https://datacarpentry.org/organization-geospatial/01-intro-raster-data).
+
+Common file formats for raster data include GeoTIFF, NetCDF, HDF, JPEG2000, 
+and BIL, among others.
+```
 
 The code below assumes that you download the USA population count grid
 as a `.bil` format at 2.5' resolution for 1990 (these are all options
@@ -55,6 +69,10 @@ from a directory `code`, sister to the `data` directory.
 
 `````{tab-set}
 ````{tab-item} R
+
+The R library `raster` is used for reading, writing, manipulating, analyzing 
+and modeling of spatial data. 
+
 ```{code-block} R
 library(raster)
 rr <- raster("../data/pcount/usap90ag.bil")
@@ -70,7 +88,7 @@ writeRaster(rr3, "../data/pcount/usap90ag.nc4",
  
 ````{tab-item} Python
 You will need to install the `rioxarray` package, using `pip install
-rioxarray`, to `.bil` files.
+rioxarray`, to open the `.bil` files.
 
 ```{code-block} python
 import rioxarray

@@ -469,7 +469,7 @@ on to the next column.</p>
 to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an <span class="math notranslate nohighlight">\(A\)</span> matrix,
 but the matrix method improves efficiency.</p>
-<p>As an example, in R, you generate these points like so:</p>
+<p>As an example, you generate these points like so:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-3">
@@ -480,17 +480,42 @@ R</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+Python</label><div class="sd-tab-content docutils">
+<p>We use Python libraries <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for spatial
+analysis and data manipulation.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">longitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">longitude0</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
+<span class="n">latitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">latitude0</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">gridwidth</span><span class="p">)</span>
+<span class="n">pts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">longitudes</span><span class="p">,</span> <span class="n">latitudes</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now, you can iterate through each region, and get a list of all of the
 points within each region. Here’s how you would do that with the
 <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code> library in R:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
 R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">EID</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span><span class="w"> </span><span class="n">X</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="o">=</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="p">)</span>
 <span class="n">events</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.EventData</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="o">=</span><span class="nf">attributes</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="o">$</span><span class="n">projection</span><span class="p">)</span>
 <span class="n">eids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">findPolys</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="n">polys</span><span class="p">,</span><span class="w"> </span><span class="n">maxRows</span><span class="o">=</span><span class="m">6e5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+<span class="c1"># Assuming polys is a GeoDataFrame with the regions</span>
+<span class="n">points_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">pts</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pts</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+<span class="n">events_in_polys</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">points_gdf</span><span class="p">,</span> <span class="n">polys</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s1">&#39;within&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -500,13 +525,29 @@ R</label><div class="sd-tab-content docutils">
 regions that do not contain any cell centers. In this case, you need
 to find whichever grid cell is closest.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
 R</label><div class="sd-tab-content docutils">
 <p>For example, in R, using <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code>:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">centroid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">calcCentroid</span><span class="p">(</span><span class="n">polys</span><span class="p">,</span><span class="w"> </span><span class="n">rollup</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
 <span class="n">dists</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">((</span><span class="n">pts</span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">centroid</span><span class="o">$</span><span class="n">X</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">pts</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">centroid</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
 <span class="n">closest</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which.min</span><span class="p">(</span><span class="n">dists</span><span class="p">)[</span><span class="m">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-8" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">centroids</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">centroid</span>
+<span class="c1"># For each centroid, find the closest point from pts</span>
+<span class="n">closest_points</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">centroids</span><span class="p">:</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">centroid</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">closest</span> <span class="o">=</span> <span class="n">dists</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+    <span class="n">closest_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">closest</span><span class="p">])</span>
+
+<span class="c1"># closest_points now contains the closest grid points to the centroids of the regions</span>
 </pre></div>
 </div>
 </div>
@@ -517,13 +558,19 @@ R</label><div class="sd-tab-content docutils">
 <p>Just using the grid cell centers can result in a poor representation
 of the weather that overlaps each region, particularly when the
 regions are of a similar size to the grid cells. In this case, you
-need to determine how much each grid cell overlaps with each region.</p>
+need to determine how much each grid cell overlaps with each region (see <a class="reference internal" href="#grid-cells-overlap"><span class="std std-numref">Fig. 7</span></a>).</p>
 <p>There are different ways of doing this, but one is to use QGIS.
 Within QGIS, you can create a shapefile with a rectangle for each grid
 cell. Then intersect those with the region shapefile, producing a
 separate polygon for each region-by-grid cell combination. Then have
 QGIS compute the area of each of those regions: these will give you
 the portion of grid cells to use.</p>
+<figure class="align-default" id="grid-cells-overlap">
+<img alt="https://www.esri.com/arcgis-blog/wp-content/uploads/2019/06/pic4.png" src="https://www.esri.com/arcgis-blog/wp-content/uploads/2019/06/pic4.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">See more <a class="reference external" href="https://www.esri.com/arcgis-blog/products/spatial-analyst/analytics/getting-the-most-out-of-zonal-statistics/">here</a>.</span><a class="headerlink" href="#grid-cells-overlap" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="matching-geographical-unit-observations">
 <h2>Matching geographical unit observations<a class="headerlink" href="#matching-geographical-unit-observations" title="Permalink to this heading">#</a></h2>

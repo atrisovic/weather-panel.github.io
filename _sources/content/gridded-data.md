@@ -33,18 +33,19 @@ Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (a
 - Observations (from weather stations, satellites, etc.) are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)
 - Products generally differ by which stations or other data sources are included and excluded
 
-```{panels}
-Strengths
-^^^
+````{grid}
+ :gutter: 2
+
+ ```{grid-item-card} Strengths
 - Simple, biases well-understood
 - High correlation with source station data in areas with strong station coverage
----
-Weaknesses
-^^^
+ ```
+ ```{grid-item-card} Weaknesses
 - Less realistic outside areas with strong station coverage
 - Statistical interpolation means data not bound by physicality
 - Often only available at lower temporal resolution (e.g., monthly)
-```
+ ```
+ ````
 
 ```{seealso}
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table) on temperature datasets.
@@ -57,19 +58,22 @@ Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 - Observational data are combined with climate models to produce a full set of atmospheric variables
 - Products differ by what data is included (as with interpolated datasets), how that data is assimilated, but now also differ by which underlying models are used
 
-```{panels}
-Strengths
-^^^
+````{grid}
+ :gutter: 2
+
+ ```{grid-item-card} Strengths
+
 - Large extant literature on most major reanalysis products; limitations are generally well-understood (though not always well-estimated; and biases are often tested against interpolated datasets)
 - Coverage in areas with low station coverage (generally poorer or less populated areas) is more physically reasonable
 - Covers a large number of variables (though uncertainties differ between them)
----
-Weaknesses
-^^^
+ ```
+ ```{grid-item-card} Weaknesses
+
 - Limited by often significant biases in underlying models that may or may not be well understood
 - Accuracy in areas of high station density may be lower than in interpolated products
 - Not fully physical either - laws of conservation, e.g., are often relaxed
-```
+ ```
+ ````
 
 ```{seealso}
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) on reanalyses.

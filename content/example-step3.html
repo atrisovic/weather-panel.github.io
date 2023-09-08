@@ -545,10 +545,12 @@ Python</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
-</input><label for="sd-tab-item-7">
-R</label><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">grid.weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">secondary_weights</span><span class="p">(</span><span class="n">secondary_raster</span><span class="o">=</span><span class="n">rr.pop.padded</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="n">rr.tas.padded</span><span class="p">)</span>
+</input><label class="sd-tab-label" for="sd-tab-item-7">
+R</label><div class="sd-tab-content docutils">
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">grid.weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">secondary_weights</span><span class="p">(</span><span class="n">secondary_raster</span><span class="o">=</span><span class="n">rr.pop.padded</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="n">rr.tas.padded</span><span class="p">)</span>
 <span class="n">county.weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">overlay_weights</span><span class="p">(</span><span class="n">polygons</span><span class="o">=</span><span class="n">counties</span><span class="p">,</span><span class="w"> </span><span class="n">polygon_id_col</span><span class="o">=</span><span class="s">&quot;FIPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="n">rr.tas.padded</span><span class="p">,</span><span class="w"> </span><span class="n">secondary_weights</span><span class="o">=</span><span class="n">grid.weights</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </section>

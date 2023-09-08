@@ -57,7 +57,7 @@ to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
-As an example, in R, you generate these points like so:
+As an example, you generate these points like so:
 
 `````{tab-set}
 ````{tab-item} R
@@ -65,6 +65,21 @@ As an example, in R, you generate these points like so:
 longitudes <- seq(longitude0, longitude1, gridwidth)
 latitudes <- seq(latitude0, latitude1, gridwidth)
 pts <- expand.grid(x=longitudes, y=latitudes)
+```
+````
+
+````{tab-item} Python
+
+We use Python libraries `geopandas`, `pandas`, and `numpy` for spatial 
+analysis and data manipulation.
+
+```Python
+import numpy as np
+import pandas as pd
+
+longitudes = np.arange(longitude0, longitude1, gridwidth)
+latitudes = np.arange(latitude0, latitude1, gridwidth)
+pts = pd.DataFrame(np.array(np.meshgrid(longitudes, latitudes)).T.reshape(-1, 2), columns=['x', 'y'])
 ```
 ````
 `````
@@ -79,6 +94,17 @@ points within each region. Here's how you would do that with the
 events <- data.frame(EID=1:nrow(pts), X=pts$x, Y=pts$y)
 events <- as.EventData(events, projection=attributes(polys)$projection)
 eids <- findPolys(events, polys, maxRows=6e5)
+```
+````
+
+````{tab-item} Python
+```Python
+import geopandas as gpd
+
+# Assuming polys is a GeoDataFrame with the regions
+points_gdf = gpd.GeoDataFrame(pts, geometry=gpd.points_from_xy(pts.x, pts.y))
+events_in_polys = gpd.sjoin(points_gdf, polys, how='inner', op='within')
+
 ```
 ````
 `````
@@ -98,6 +124,21 @@ dists <- sqrt((pts$x - centroid$X)^2 + (pts$y - centroid$Y)^2)
 closest <- which.min(dists)[1]
 ```
 ````
+````{tab-item} Python
+```Python
+centroids = polys.centroid
+# For each centroid, find the closest point from pts
+closest_points = []
+
+for centroid in centroids:
+    dists = pts.apply(lambda row: centroid.distance(gpd.Point(row['x'], row['y'])), axis=1)
+    closest = dists.idxmin()
+    closest_points.append(pts.iloc[closest])
+
+# closest_points now contains the closest grid points to the centroids of the regions
+
+```
+````
 `````
  
 ## Approach 2. Allowing for partial grid cells
@@ -105,7 +146,7 @@ closest <- which.min(dists)[1]
 Just using the grid cell centers can result in a poor representation
 of the weather that overlaps each region, particularly when the
 regions are of a similar size to the grid cells. In this case, you
-need to determine how much each grid cell overlaps with each region.
+need to determine how much each grid cell overlaps with each region (see {numref}`grid-cells-overlap`).
  
 There are different ways of doing this, but one is to use QGIS.
 Within QGIS, you can create a shapefile with a rectangle for each grid
@@ -113,7 +154,15 @@ cell. Then intersect those with the region shapefile, producing a
 separate polygon for each region-by-grid cell combination. Then have
 QGIS compute the area of each of those regions: these will give you
 the portion of grid cells to use.
- 
+
+
+```{figure} https://www.esri.com/arcgis-blog/wp-content/uploads/2019/06/pic4.png
+---
+name: grid-cells-overlap
+---
+See more [here](https://www.esri.com/arcgis-blog/products/spatial-analyst/analytics/getting-the-most-out-of-zonal-statistics/).
+```
+
 ## Matching geographical unit observations
  
 It is often necessary to match names within two datasets with geographical unit observations. For example, a country’s statistics ministry may report values by administrative unit, but to find out the actual spatial extent of those units, you may need to use the **GADM** shapefiles.
