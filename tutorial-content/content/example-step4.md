@@ -89,9 +89,22 @@ For fixed effects, we use county fixed effects, to account for unobserved consta
 
 In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.
 
-Here is our specification: $$M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t$$ for mortality in state $$s$$, county $$i$$, year $$t$$.
+Here is our specification:
+$$M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s
+t$$
+for mortality in state $s$, county $i$, year $t$.
 
-Note that since we do not control for precipitation, temperature in this case includes correlated effects of rainfall. As a result, it is not ideal for future projections.
+Note that since we do not control for precipitation, temperature in
+this case includes correlated effects of rainfall. As a result, it is
+not ideal for future projections.
+
+For academic work, it would be essential to consider a much wider
+range of robustness checks, based on the considerations above. This
+would include precipitation and other weather variables (such as
+wet-bulb temperature), alternative fixed effects and flexible trends,
+allowing for heterogeneity effects, and using a subset of the data
+(e.g., only recent years). Alternative specifications should also be
+explored, such as bins and cubic splines.
 
 `````{tab-set}
 ````{tab-item} Python
