@@ -1,4 +1,17 @@
 # Hands-On Exercise, Step 1: Preparing the Weather Data
+
+## Introduction
+
+The Hands-On Exercise is a simple, real-life example of climate
+econometrics. Our goal is to estimate a relationship between mortality
+and temperature, building on all of the advice from this tutorial. In
+the first three steps, we will prepare the combined weather and
+mortality dataset, while thinking about the right structure for the
+econometric model. The final step performs the regression and graphs
+the result.
+
+## Preparing to prepare the weather data
+
 This section will walk you through downloading and pre-processing an example dataset, the BEST data we mentioned in the [previous section](content:best-and-chirps). "Pre-processing" data is the process through which data is standardized into a format that's easy to interpret and use in your analysis. It generally includes adapting the data into filesystem and file formats that work for your project requirements and code workflows, and, crucially, quality control and verification. 
 
 We strongly recommend that you homogenize all your weather and climate data into the same filename and file structure system whenever possible. That way, any code you write will easily be generalizable to all the data you work with. Extra time spent pre-processing will therefore make your projects more robust and save you time later. In this section, we will save data in the CMIP format introduced in a [previous section](content:netcdf-org) on file organization (one file = one variable, coupled with a set of variable and filename conventions), which we believe works well for many common applications. 
