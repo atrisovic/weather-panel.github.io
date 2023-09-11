@@ -502,8 +502,20 @@ R</label><div class="sd-tab-content docutils">
 <li><p>Where reasonably researchers can disagree about the right trend specification, generate tables that show several specifications.  Typical sensitivity tests include more flexible fixed effects and functional forms and the inclusion of other weather variables. The R^2 values will help you understand how much of the variation you are capturing, but it is important to look at the resulting fit to decide if the regression is doing what you expect.</p></li>
 </ul>
 <p>In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.</p>
-<p>Here is our specification: $<span class="math notranslate nohighlight">\(M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t\)</span><span class="math notranslate nohighlight">\( for mortality in state \)</span><span class="math notranslate nohighlight">\(s\)</span><span class="math notranslate nohighlight">\(, county \)</span><span class="math notranslate nohighlight">\(i\)</span><span class="math notranslate nohighlight">\(, year \)</span><span class="math notranslate nohighlight">\(t\)</span>$.</p>
-<p>Note that since we do not control for precipitation, temperature in this case includes correlated effects of rainfall. As a result, it is not ideal for future projections.</p>
+<p>Here is our specification:
+$<span class="math notranslate nohighlight">\(M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s
+t\)</span><span class="math notranslate nohighlight">\(
+for mortality in state \)</span>s<span class="math notranslate nohighlight">\(, county \)</span>i<span class="math notranslate nohighlight">\(, year \)</span>t$.</p>
+<p>Note that since we do not control for precipitation, temperature in
+this case includes correlated effects of rainfall. As a result, it is
+not ideal for future projections.</p>
+<p>For academic work, it would be essential to consider a much wider
+range of robustness checks, based on the considerations above. This
+would include precipitation and other weather variables (such as
+wet-bulb temperature), alternative fixed effects and flexible trends,
+allowing for heterogeneity effects, and using a subset of the data
+(e.g., only recent years). Alternative specifications should also be
+explored, such as bins and cubic splines.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-4">
