@@ -10,6 +10,25 @@ mortality dataset, while thinking about the right structure for the
 econometric model. The final step performs the regression and graphs
 the result.
 
+The potential for excess mortality driven by higher temperatures is
+one of the most significant risks of climate change. When we use the
+value of a stastical life (VSL) to monitize it, mortality can also be
+one of the most economically costly channels of climate risk.
+
+Several approaches are available to quantify this risk. Controlled
+experiments can help us understand the response of people to heat, but
+they lose the effect of real-life responses to heat (such as turning
+on air-conditioning). Causes of death can be used to identify
+heat-related impacts, but they may miss important indirect effects,
+such as a heat weakening the immune system. We analyze reported "all
+cause" mortality to get a full picture of the effects of temperature.
+
+One consequence of this choice is that the effects of extreme cold
+will also appear. In fact, in some areas, higher temperatures might
+result in fewer deaths as winters become more mild. We will need to
+estimate an econometric relationship that accounts for both of these
+effects.
+
 ## Preparing to prepare the weather data
 
 This section will walk you through downloading and pre-processing an example dataset, the BEST data we mentioned in the [previous section](content:best-and-chirps). "Pre-processing" data is the process through which data is standardized into a format that's easy to interpret and use in your analysis. It generally includes adapting the data into filesystem and file formats that work for your project requirements and code workflows, and, crucially, quality control and verification. 
