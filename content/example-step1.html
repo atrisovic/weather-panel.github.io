@@ -171,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Prepping the Demographic Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Preparing the Demographic Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
 <ul class="nav bd-sidenav">
@@ -399,6 +399,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-to-prepare-the-weather-data">Preparing to prepare the weather data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filesystem-organization">Filesystem organization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
@@ -419,8 +421,37 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hands-on-exercise-step-1-preparing-the-weather-data">
 <h1>Hands-On Exercise, Step 1: Preparing the Weather Data<a class="headerlink" href="#hands-on-exercise-step-1-preparing-the-weather-data" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The Hands-On Exercise is a simple, real-life example of climate
+econometrics. Our goal is to estimate a relationship between mortality
+and temperature, building on all of the advice from this tutorial. In
+the first three steps, we will prepare the combined weather and
+mortality dataset, while thinking about the right structure for the
+econometric model. The final step performs the regression and graphs
+the result.</p>
+<p>The potential for excess mortality driven by higher temperatures is
+one of the most significant risks of climate change. When we use the
+value of a stastical life (VSL) to monitize it, mortality can also be
+one of the most economically costly channels of climate risk.</p>
+<p>Several approaches are available to quantify this risk. Controlled
+experiments can help us understand the response of people to heat, but
+they lose the effect of real-life responses to heat (such as turning
+on air-conditioning). Causes of death can be used to identify
+heat-related impacts, but they may miss important indirect effects,
+such as a heat weakening the immune system. We analyze reported “all
+cause” mortality to get a full picture of the effects of temperature.</p>
+<p>One consequence of this choice is that the effects of extreme cold
+will also appear. In fact, in some areas, higher temperatures might
+result in fewer deaths as winters become more mild. We will need to
+estimate an econometric relationship that accounts for both of these
+effects.</p>
+</section>
+<section id="preparing-to-prepare-the-weather-data">
+<h2>Preparing to prepare the weather data<a class="headerlink" href="#preparing-to-prepare-the-weather-data" title="Permalink to this heading">#</a></h2>
 <p>This section will walk you through downloading and pre-processing an example dataset, the BEST data we mentioned in the <a class="reference internal" href="working-with-data-product.html#content-best-and-chirps"><span class="std std-ref">previous section</span></a>. “Pre-processing” data is the process through which data is standardized into a format that’s easy to interpret and use in your analysis. It generally includes adapting the data into filesystem and file formats that work for your project requirements and code workflows, and, crucially, quality control and verification.</p>
 <p>We strongly recommend that you homogenize all your weather and climate data into the same filename and file structure system whenever possible. That way, any code you write will easily be generalizable to all the data you work with. Extra time spent pre-processing will therefore make your projects more robust and save you time later. In this section, we will save data in the CMIP format introduced in a <a class="reference internal" href="netcdfs-and-basic-coding.html#content-netcdf-org"><span class="std std-ref">previous section</span></a> on file organization (one file = one variable, coupled with a set of variable and filename conventions), which we believe works well for many common applications.</p>
+</section>
 <section id="filesystem-organization">
 <h2>Filesystem organization<a class="headerlink" href="#filesystem-organization" title="Permalink to this heading">#</a></h2>
 <p>Please skim through the section on <a class="reference internal" href="suggestions.html#content-code-organization"><span class="std std-ref">code and data organization</span></a> before beginning the hands-on exercise.</p>
@@ -869,6 +900,8 @@ Matlab</label><div class="sd-tab-content docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-to-prepare-the-weather-data">Preparing to prepare the weather data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filesystem-organization">Filesystem organization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-the-data">Downloading the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-data">Loading the data</a></li>
