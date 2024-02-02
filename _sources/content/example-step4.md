@@ -76,6 +76,14 @@ df2$deathrate[df2$deathrate == Inf] <- NA
 ````
 `````
 
+If you have had problems in previous steps, you can download
+ready-made copies of the aggregated climate data
+([agg_vars.csv](https://raw.githubusercontent.com/atrisovic/weather-panel.github.io/master/example/data/climate_data/agg_vars.csv))
+and the merged socioeconomic data
+([merged.csv](https://raw.githubusercontent.com/atrisovic/weather-panel.github.io/master/example/data/cmf/merged.csv)). Note
+that these may not match your results exactly, and in particular the
+order of rows differs between python and R.
+
 ## Running the regression
 
 Let's run our central regression, relating death rate to temperature. In keeping with the literature, we will assume that weather-related mortality is a u-shaped function. That is, both cold and hot temperatures cause increased mortality. We also assume that these effects are convex, so that more extreme cold and heat will produce a more-than-linear increase in mortality. The simplest relationship that has these features is a quadratic. Refer to the functional forms section for further considerations.
