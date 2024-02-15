@@ -471,7 +471,7 @@ effects.</p>
 <section id="filesystem-organization">
 <h2>Filesystem organization<a class="headerlink" href="#filesystem-organization" title="Permalink to this heading">#</a></h2>
 <p>Please skim through the section on <a class="reference internal" href="suggestions.html#content-code-organization"><span class="std std-ref">code and data organization</span></a> before beginning the hands-on exercise.</p>
-<p>For the rest of this section, we will assume you are working from a directory structure similar to what is introduced there. Specifically, we assume you will have created a folder called <code class="docutils literal notranslate"><span class="pre">../sources/climate_data/</span></code>, relative to your working directory, in which to store raw climate data.</p>
+<p>For the rest of this section, we will assume you are working from a directory structure similar to what is introduced there. Specifically, we assume you will have created a folder called <code class="docutils literal notranslate"><span class="pre">../data/climate_data/</span></code>, relative to your working directory, in which to store raw climate data.</p>
 </section>
 <section id="downloading-the-data">
 <h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this heading">#</a></h2>
@@ -529,6 +529,9 @@ Python</label><div class="sd-tab-content docutils">
 <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">),</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 
+<span class="c1"># Rename longitude/latitude to be a little spiffier to work with, and better</span>
+<span class="c1"># match standard naming practices in climate data</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="s1">&#39;lat&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -565,7 +568,9 @@ Matlab</label><div class="sd-tab-content docutils">
 accounts for days 1:365 of the year, and ignores leap days (which the
 <code class="docutils literal notranslate"><span class="pre">temperature</span></code> variable does not). This section doubles the climatology
 for Feb 28th to also work on Feb 29th, and creates a <code class="docutils literal notranslate"><span class="pre">tas</span></code> variable
-that’s the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> + <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
+that’s the <code class="docutils literal notranslate"><span class="pre">climatology</span></code> + <code class="docutils literal notranslate"><span class="pre">temperature</span></code>. (<code class="docutils literal notranslate"><span class="pre">tas</span></code> as a variable name
+refers to “near-Surface Air Temperature”, or temperature at
+some reference height, usually 2 meters above the surface.)</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-3">
@@ -627,13 +632,13 @@ the process.</p>
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-6">
 R</label><div class="sd-tab-content docutils">
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
-<span class="n">latitude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitude&#39;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
+<span class="n">lat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncvar_get</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitude&#39;</span><span class="p">)</span>
 
 <span class="n">latlims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">23</span><span class="p">,</span><span class="w"> </span><span class="m">51</span><span class="p">)</span>
 <span class="n">lonlims</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-126</span><span class="p">,</span><span class="m">-65</span><span class="p">)</span>
 
-<span class="n">tas2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tas</span><span class="p">[</span><span class="n">longitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">latitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">latitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">2</span><span class="p">],]</span>
+<span class="n">tas2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tas</span><span class="p">[</span><span class="n">lon</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">lon</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">latlims</span><span class="p">[</span><span class="m">2</span><span class="p">],]</span>
 </pre></div>
 </div>
 </div>
@@ -692,20 +697,22 @@ python</label><div class="sd-tab-content docutils">
 <span class="c1"># commonly-used projection for continental USA maps</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">AlbersEqualArea</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=-</span><span class="mi">96</span><span class="p">))</span>
 
-<span class="c1"># Get average summer temperatures</span>
-<span class="n">ds_summer</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span><span class="o">==</span><span class="s1">&#39;JJA&#39;</span><span class="p">))</span>
+<span class="c1"># Get average summer temperatures, by using boolean subsetting to </span>
+<span class="c1"># subset time to just the months June, July, and August, and then </span>
+<span class="c1"># taking the average over all JJAs </span>
+<span class="n">ds_summer</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">season</span><span class="o">==</span><span class="s1">&#39;JJA&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 
 <span class="c1"># Plot contour map of summer temperatures, making sure to set the </span>
 <span class="c1"># transform of the data itself (PlateCarree() tells the code to intepret</span>
 <span class="c1"># x values as longitude, y values as latitude, so it can transform </span>
 <span class="c1"># the data to the AlbersEqualArea projection)</span>
-<span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span><span class="n">levels</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+<span class="n">ds_summer</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span><span class="n">levels</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
 
 <span class="c1"># Add coastlines, for reference</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly?</p>
+<p>Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly? Why do you think there are a few ‘missing’ pixels in the northern USA (remember, this dataset is land-only)?</p>
 </div>
 <input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-10">
@@ -751,7 +758,7 @@ the CMIP file system standards, for ease of future processing.</p>
 </input><label class="sd-tab-label" for="sd-tab-item-11">
 R</label><div class="sd-tab-content docutils">
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set output filename of your pre-processed file</span>
-<span class="n">output_fn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&quot;</span>
+<span class="n">output_fn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&quot;</span>
 
 <span class="c1"># Define dimensions</span>
 <span class="n">dimlon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ncdim_def</span><span class="p">(</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;degrees_east&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="p">[</span><span class="n">longitude</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">longitude</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">lonlims</span><span class="p">[</span><span class="m">2</span><span class="p">]],</span><span class="w"> </span><span class="n">longname</span><span class="o">=</span><span class="s">&#39;longitude&#39;</span><span class="p">)</span>
@@ -781,7 +788,7 @@ R</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" for="sd-tab-item-12">
 Python</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set output filename of your pre-processed file</span>
-<span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
+<span class="n">output_fn</span> <span class="o">=</span> <span class="s1">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span>
 
 <span class="c1"># Add an attribute mentioning how this file was created</span>
 <span class="c1"># This is good practice, especially for NetCDF files, </span>
@@ -799,7 +806,7 @@ Python</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" for="sd-tab-item-13">
 Matlab</label><div class="sd-tab-content docutils">
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set output filename of your pre-processed file</span>
-<span class="n">fn_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
+<span class="n">fn_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc&#39;</span><span class="p">;</span>
 
 <span class="c">% Write temperature data to netcdf </span>
 <span class="nb">nccreate</span><span class="p">(</span><span class="n">fn_out</span><span class="p">,</span><span class="s">&#39;tas&#39;</span><span class="p">,</span><span class="s">&#39;Dimensions&#39;</span><span class="p">,{</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="nb">size</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span><span class="mi">3</span><span class="p">)})</span>

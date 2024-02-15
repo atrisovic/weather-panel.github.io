@@ -531,8 +531,8 @@ Python</label><div class="sd-tab-content docutils">
 <span class="c1"># xagg aggregates every gridded variable in ds_tas - however, we don&#39;t need</span>
 <span class="c1"># every variable currently in tas. Let&#39;ss drop &quot;tas&quot; (the un-adjusted temperature)</span>
 <span class="c1"># and &quot;land_mask&quot; which is included, but not necessary for our further analysis.</span>
-<span class="n">ds_tas</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;tas&#39;</span><span class="p">)</span>
-<span class="n">ds_tas</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;land_mask&#39;</span><span class="p">)</span>
+<span class="n">ds_tas</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">drop_vars</span><span class="p">(</span><span class="s1">&#39;tas&#39;</span><span class="p">)</span>
+<span class="n">ds_tas</span> <span class="o">=</span> <span class="n">ds_tas</span><span class="o">.</span><span class="n">drop_vars</span><span class="p">(</span><span class="s1">&#39;land_mask&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
