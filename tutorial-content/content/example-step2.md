@@ -80,7 +80,7 @@ rr <- raster("../data/pcount/usap90ag.bil")
 rr2 <- aggregate(rr, fact=24, fun=sum)
 rr3 <- crop(rr2, extent(-126, -65, 23, 51))
 
-writeRaster(rr3, "../data/pcount/usap90ag.nc4",
+writeRaster(rr3, "../data/pcount/usap90ag.nc",
  overwrite=TRUE, format="CDF", varname="Population", varunit="people",
  xname="lon", yname="lat")
 ```
