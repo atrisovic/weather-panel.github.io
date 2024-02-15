@@ -64,8 +64,8 @@ ds_tas['tas_sq'] = ds_tas.tas**2 - 20**2
 # xagg aggregates every gridded variable in ds_tas - however, we don't need
 # every variable currently in tas. Let'ss drop "tas" (the un-adjusted temperature)
 # and "land_mask" which is included, but not necessary for our further analysis.
-ds_tas = ds_tas.drop('tas')
-ds_tas = ds_tas.drop('land_mask')
+ds_tas = ds_tas.drop_vars('tas')
+ds_tas = ds_tas.drop_vars('land_mask')
 ```
 ````
 `````
