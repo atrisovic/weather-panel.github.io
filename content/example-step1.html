@@ -528,10 +528,6 @@ Python</label><div class="sd-tab-content docutils">
 <span class="c1"># due to BEST&#39;s ambiguous timing</span>
 <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">),</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ds</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="c1"># Rename longitude/latitude to be a little spiffier to work with, and better</span>
-<span class="c1"># match standard naming practices in climate data</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="s1">&#39;lat&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -645,7 +641,7 @@ R</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-7">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">),</span><span class="s1">&#39;lon&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">)}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_lims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;latitude&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="mi">51</span><span class="p">),</span><span class="s1">&#39;longitude&#39;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">126</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">)}</span>
 
 <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="o">**</span><span class="n">geo_lims</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </pre></div>
@@ -678,13 +674,13 @@ Matlab</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" for="sd-tab-item-9">
 python</label><div class="sd-tab-content docutils">
 <p>Let’s plot a time series of the closest grid cell to Los Angeles, CA:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">latitude</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Does the time series look reasonable (for example, do the temperatures match up with what you expect temperatures in LA to look like)? Are there any missing data? Is there a trend?</p>
 <p>Let’s also look at the seasonal cycle of temperature as well:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the day-of-year average</span>
-<span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">lon</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span>
+<span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">tas</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=-</span><span class="mf">118.2</span><span class="p">,</span><span class="n">latitude</span><span class="o">=</span><span class="mf">34.1</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span>
  <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time.dayofyear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>

@@ -94,11 +94,6 @@ ds
 # due to BEST's ambiguous timing
 ds['time'] = (
     ('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
-
-# Rename longitude/latitude to be a little spiffier to work with, and better
-# match standard naming practices in climate data
-ds = ds.rename({'longitude':'lon','latitude':'lat'})
-
 ```
 ````
 
@@ -207,7 +202,7 @@ tas2 <- tas[lon >= lonlims[1] & lon <= lonlims[2], lat >= latlims[1] & lat <= la
 
 ````{tab-item} Python
 ```{code-block} python
-geo_lims = {'lat':slice(23,51),'lon':slice(-126,-65)}
+geo_lims = {'latitude':slice(23,51),'longitude':slice(-126,-65)}
 
 ds = ds.sel(**geo_lims).load()
 ```
@@ -238,14 +233,14 @@ From the section on [Basic Visualization of Climate and Weather Data](content:ba
 ````{tab-item} python
 Let's plot a time series of the closest grid cell to Los Angeles, CA:
 ```{code-block} python
-ds.tas.sel(lon=-118.2,lat=34.1,method='nearest').plot()
+ds.tas.sel(longitude=-118.2,latitude=34.1,method='nearest').plot()
 ```
 Does the time series look reasonable (for example, do the temperatures match up with what you expect temperatures in LA to look like)? Are there any missing data? Is there a trend? 
 
 Let's also look at the seasonal cycle of temperature as well: 
 ```{code-block} python
 # Plot the day-of-year average
-(ds.tas.sel(lon=-118.2,lat=34.1,method='nearest').
+(ds.tas.sel(longitude=-118.2,latitude=34.1,method='nearest').
  groupby('time.dayofyear').mean()).plot()
 ```
 What can you say about the seasonality of your data? 
