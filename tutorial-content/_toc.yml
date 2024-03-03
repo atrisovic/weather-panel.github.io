@@ -2,7 +2,7 @@ format: jb-book
 root: content/getting-started
 title: Introduction
 parts:
-- caption: Weather and Climate Data
+- caption: Weather and climate data
   chapters:
   - file: content/weather-and-climate-data
   - file: content/netcdfs-and-basic-coding

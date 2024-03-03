@@ -1,4 +1,4 @@
-# Introduction to Weather and Climate Data
+# Introduction to weather and climate data
 
 ```{admonition} Key objectives and decision points
 :class: note

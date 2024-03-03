@@ -1,4 +1,4 @@
-# Hands-On Exercise, Step 1: Preparing the Weather Data
+# Hands-on exercise, step 1: preparing the weather data
 
 ## Introduction
 

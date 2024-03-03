@@ -155,7 +155,7 @@ An absolute or full path points to a location on the filesystem from the root, o
 A relative path, on the other hand, only assumes a local relationship between folders (for example: `../data/input.csv`, where ".." refers to the "parent" directory). You should specify relative paths whenever that is possible.
 ```
 
- ## Research dissemination
+## Research dissemination
 
 
 Research data repositories are a primary venue for data dissemination. Use [the Registry of Research Data Repositories (re3data.org)](https://www.re3data.org) to find the right repository for your research data. Alternatively, general-purpose repositories such as [Dataverse](https://dataverse.harvard.edu/), [Figshare](https://figshare.com/), or [Zenodo](https://zenodo.org/) are a good and freely-available option. However, before sharing or opening your data, make sure that there are no privacy, security, or license constraints. 

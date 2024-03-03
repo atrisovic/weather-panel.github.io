@@ -1,8 +1,8 @@
 (content:netcdfs-and-basic-coding)=
-# Weather and Climate Data Basics
+# Weather and climate data basics
 Before we get into how to choose, download, and work with specific weather and climate data, in this section, we will introduce a commonly-used data format for weather and climate data, and cover basic data loading and plotting skills. 
 
-## The NetCDF Data Format
+## The NetCDF data format
 
 We start this section with a guide to the [NetCDF](https://climatedataguide.ucar.edu/climate-tools/NetCDF) format, a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It's efficient, self-describing, and supported in major programming languages (though some software packages commonly used in economics, such as STATA, may require pre-processing the data into another format - `.csv`, etc.). If you get familiar with the commands to read the [header](content:netcdf-header) and access data in the language you’re most comfortable with, you will be able to work with most existing climate or weather datasets.
 
@@ -65,7 +65,7 @@ If you know several of the languages referred to in this tutorial and just want 
 - MATLAB: if you like a simple, bare-bones treatment of data where you are in explicit control of everything that happens, at the expense of having to be more careful with pre-processing and backend management.
 ```
 
-### NetCDF Contents
+### NetCDF contents
 
 The core function of NetCDF files is to store arrays. These arrays may have one dimension (e.g., time), two dimensions (e.g., latitude and longitude), three dimensions (e.g., latitude, longitude, and time), or more. The other contents of the file help you to interpret these arrays.
 
@@ -78,7 +78,7 @@ NetCDF files have three kinds of information:
 Typically, dimensions will have their own variables (generally with the same name). These variables give you the value of each index in the dimension. For example, if there is a `lon` dimension with length 360, there will usually be a `lon` variable, which is a 1-dimensional array. Its contents would look something like `[-179.5, -178.5, -177.5, ..., 179.5]`.
 
 (content:netcdf-org)=
-### NetCDF File Organization
+### NetCDF file organization
 
 The NetCDF file structure is self-describing, meaning all the information you need to understand the data is contained within the file as well (in theory).  *However*, the format doesn’t *require* any specific information to be included apart from variables and dimensions (see, e.g., the data structure model of the file format [here](https://docs.unidata.ucar.edu/netcdf-c/current/netcdf_data_model.html)). The names of attributes, which attributes are included, etc., may vary between files.
 
@@ -118,7 +118,7 @@ Weather and climate variables in NetCDF files may be organized in a few differen
 To figure out which file saving convention your NetCDF file uses and what is contained, you'll need to check the header of the file.
 ```
 (content:netcdf-header)=
-### The NetCDF Header
+### The NetCDF header
 
 NetCDF files are self-describing, meaning that the file itself contains descriptive information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, what the variables are named, etc. Here are the commands to print the header for NetCDF filename `fn`: 
 
@@ -274,7 +274,7 @@ The `time` variable can also be listed in a few different formats. An integer re
 Now that you have loaded your weather and climate data, a good practice is to double-check that it is downloaded and processed correctly. Common red flags include suspiciously many `NA` / `NaN` values, suspiciously high or low values, or variables that unexpectedly don't line up with geographic features. Plotting your data, the basics of which we'll cover next, can be a good first-order check.
 
 (content:basic-visualization)=
-## Basic Visualization of Climate and Weather Data
+## Basic visualization of climate and weather data
 
 To diagnose your data or to illustrate the weather and climate data used in your model, you will likely want to create plots and maps. The following is a very high-level overview; more detailed guides include:
 
@@ -285,7 +285,7 @@ To diagnose your data or to illustrate the weather and climate data used in your
 : A guide to plotting climate data using MATLAB, created by the institute that publishes [ERA5](content:working-with-era5)
 
 
-#### 2-Dimensional Plotting
+#### 2-dimensional plotting
 
 Assuming that your data is loaded and named as it is in the [section above](content:loading-netcdf), the following example shows how to plot the time series of a single-pixel of your variable "`variable`", or an average across all pixels.  
 
