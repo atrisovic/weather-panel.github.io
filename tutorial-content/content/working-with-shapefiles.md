@@ -57,7 +57,10 @@ to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an $A$ matrix,
 but the matrix method improves efficiency.
  
-As an example, you generate these points like so:
+As an example, suppose that you have a grid with a longitudinal (zonal)
+dimension from `longitude0` to `longitude1` and a latitudinal (meridional) dimension
+from `latitude0` to `latitude1`, with equal spacing of `gridwidth` for
+both dimensions. You can generate a full list of grid cell points like so:
 
 `````{tab-set}
 ````{tab-item} R
@@ -83,6 +86,11 @@ pts = pd.DataFrame(np.array(np.meshgrid(longitudes, latitudes)).T.reshape(-1, 2)
 ```
 ````
 `````
+ 
+Often you can get the longitude and latitude values for the grid cells
+directly from your weather dataset. In this case, replace the steps to
+generate `longitudes` and `latitudes` variables by hand with directly
+loading those values.
  
 Now, you can iterate through each region, and get a list of all of the
 points within each region. Here's how you would do that with the
