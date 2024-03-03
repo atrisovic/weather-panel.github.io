@@ -104,7 +104,7 @@ need to project these back to latitude-longitude and regrid them.
 
 All of these allow missing data to be handled. Typically, a specific numerical representation, like -9999, will be used. This is specified the same way that the gridding scheme is.
 
-### Implementation Notes: Reading gridded data.
+### Implementation notes: Reading gridded data.
 
 `````{tab-set}
 ````{tab-item} R

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Weather and Climate Data Basics</title>
+    <title>Weather and climate data basics</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Working with Gridded Data" href="gridded-data.html" />
-    <link rel="prev" title="Introduction to Weather and Climate Data" href="weather-and-climate-data.html" />
+    <link rel="next" title="Working with gridded data" href="gridded-data.html" />
+    <link rel="prev" title="Introduction to weather and climate data" href="weather-and-climate-data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,31 +173,31 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and climate data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to Weather and Climate Data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Weather and Climate Data Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gridded-data.html">Working with Gridded Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">Choosing and Downloading Weather and Climate Data Products</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to weather and climate data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Weather and climate data basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridded-data.html">Working with gridded data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">Choosing and downloading weather and climate data products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-on exercise, step 1: preparing the weather data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Preparing the Demographic Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-on exercise, step 2: preparing the demographic data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="geographical-unit-data.html">Generating geographical unit data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working-with-shapefiles.html">Constructing weather averages within spatial units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weighting-schemes.html">Weighting schemes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-On Exercise, Step 3: Aggregating the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-on exercise, step 3: aggregating the data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="regression-pointers.html">Some pointers when performing regressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Regression results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-on exercise, step 4: regression results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
@@ -405,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Weather and Climate Data Basics</h1>
+    <h1>Weather and climate data basics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -415,11 +415,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-data-format">The NetCDF Data Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-data-format">The NetCDF data format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-code-environment">Your code environment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-contents">NetCDF Contents</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-organization">NetCDF File Organization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-header">The NetCDF Header</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-contents">NetCDF contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-organization">NetCDF file organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-header">The NetCDF header</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">Attributes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-netcdf-data">Reading NetCDF data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-subset-of-a-netcdf-file">Loading a subset of a NetCDF file</a></li>
@@ -427,8 +427,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualization-of-climate-and-weather-data">Basic Visualization of Climate and Weather Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-plotting">2-Dimensional Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualization-of-climate-and-weather-data">Basic visualization of climate and weather data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-plotting">2-dimensional plotting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a></li>
 </ul>
 </li>
@@ -445,10 +445,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="weather-and-climate-data-basics">
-<span id="content-netcdfs-and-basic-coding"></span><h1>Weather and Climate Data Basics<a class="headerlink" href="#weather-and-climate-data-basics" title="Permalink to this heading">#</a></h1>
+<span id="content-netcdfs-and-basic-coding"></span><h1>Weather and climate data basics<a class="headerlink" href="#weather-and-climate-data-basics" title="Permalink to this heading">#</a></h1>
 <p>Before we get into how to choose, download, and work with specific weather and climate data, in this section, we will introduce a commonly-used data format for weather and climate data, and cover basic data loading and plotting skills.</p>
 <section id="the-netcdf-data-format">
-<h2>The NetCDF Data Format<a class="headerlink" href="#the-netcdf-data-format" title="Permalink to this heading">#</a></h2>
+<h2>The NetCDF data format<a class="headerlink" href="#the-netcdf-data-format" title="Permalink to this heading">#</a></h2>
 <p>We start this section with a guide to the <a class="reference external" href="https://climatedataguide.ucar.edu/climate-tools/NetCDF">NetCDF</a> format, a common data format used for weather and climate data. Most weather and climate datasets will be published primarily or additionally in the NetCDF format. It’s efficient, self-describing, and supported in major programming languages (though some software packages commonly used in economics, such as STATA, may require pre-processing the data into another format - <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, etc.). If you get familiar with the commands to read the <a class="reference internal" href="#content-netcdf-header"><span class="std std-ref">header</span></a> and access data in the language you’re most comfortable with, you will be able to work with most existing climate or weather datasets.</p>
 <p>We’ll walk you through downloading specific weather data in the next section, but to follow along with the interactive portions of this section, feel free to download sample NetCDF files, such as any on <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/examples/files.html">this</a> page.</p>
 <section id="your-code-environment">
@@ -510,7 +510,7 @@ nco</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="netcdf-contents">
-<h3>NetCDF Contents<a class="headerlink" href="#netcdf-contents" title="Permalink to this heading">#</a></h3>
+<h3>NetCDF contents<a class="headerlink" href="#netcdf-contents" title="Permalink to this heading">#</a></h3>
 <p>The core function of NetCDF files is to store arrays. These arrays may have one dimension (e.g., time), two dimensions (e.g., latitude and longitude), three dimensions (e.g., latitude, longitude, and time), or more. The other contents of the file help you to interpret these arrays.</p>
 <p>NetCDF files have three kinds of information:</p>
 <ul class="simple">
@@ -521,7 +521,7 @@ nco</label><div class="sd-tab-content docutils">
 <p>Typically, dimensions will have their own variables (generally with the same name). These variables give you the value of each index in the dimension. For example, if there is a <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension with length 360, there will usually be a <code class="docutils literal notranslate"><span class="pre">lon</span></code> variable, which is a 1-dimensional array. Its contents would look something like <code class="docutils literal notranslate"><span class="pre">[-179.5,</span> <span class="pre">-178.5,</span> <span class="pre">-177.5,</span> <span class="pre">...,</span> <span class="pre">179.5]</span></code>.</p>
 </section>
 <section id="netcdf-file-organization">
-<span id="content-netcdf-org"></span><h3>NetCDF File Organization<a class="headerlink" href="#netcdf-file-organization" title="Permalink to this heading">#</a></h3>
+<span id="content-netcdf-org"></span><h3>NetCDF file organization<a class="headerlink" href="#netcdf-file-organization" title="Permalink to this heading">#</a></h3>
 <p>The NetCDF file structure is self-describing, meaning all the information you need to understand the data is contained within the file as well (in theory).  <em>However</em>, the format doesn’t <em>require</em> any specific information to be included apart from variables and dimensions (see, e.g., the data structure model of the file format <a class="reference external" href="https://docs.unidata.ucar.edu/netcdf-c/current/netcdf_data_model.html">here</a>). The names of attributes, which attributes are included, etc., may vary between files.</p>
 <p>There are, unfortunately, few general filesystem standards used when publishing historical <em>weather</em> observations. Though this guide generally focuses on choosing weather products, we will briefly introduce a situation in which filesystem standards are more generally used, namely in <em>climate model</em> ouptut. These data will often be standardized to the format used by CMIP (the “Coupled Model Intercomparison Project,” a <a class="reference external" href="https://www.wcrp-climate.org/wgcm-cmip">‘model intercomparison project’</a> in which different modeling groups agree to run their climate models on identical climate ‘experiments’ and publish their data in a uniform format). CMIP6 is the latest generation of the largest ‘MIP’, analysis of which makes up a substantial portion of IPCC reports. As we will cover later, we recommend preprocessing weather data to follow these file characteristics as well, which will make it easier to apply code across data products.</p>
 <div class="admonition note">
@@ -561,7 +561,7 @@ nco</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="the-netcdf-header">
-<span id="content-netcdf-header"></span><h3>The NetCDF Header<a class="headerlink" href="#the-netcdf-header" title="Permalink to this heading">#</a></h3>
+<span id="content-netcdf-header"></span><h3>The NetCDF header<a class="headerlink" href="#the-netcdf-header" title="Permalink to this heading">#</a></h3>
 <p>NetCDF files are self-describing, meaning that the file itself contains descriptive information about the data contained within. Every NetCDF file has a header that describes these contents. This will often be the first aspect of the file you look at, to verify the file has the variables you need, in what order the dimensions of the variables are stored, what the variables are named, etc. Here are the commands to print the header for NetCDF filename <code class="docutils literal notranslate"><span class="pre">fn</span></code>:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
@@ -726,7 +726,7 @@ R</label><div class="sd-tab-content docutils">
 </section>
 </section>
 <section id="basic-visualization-of-climate-and-weather-data">
-<span id="content-basic-visualization"></span><h2>Basic Visualization of Climate and Weather Data<a class="headerlink" href="#basic-visualization-of-climate-and-weather-data" title="Permalink to this heading">#</a></h2>
+<span id="content-basic-visualization"></span><h2>Basic visualization of climate and weather data<a class="headerlink" href="#basic-visualization-of-climate-and-weather-data" title="Permalink to this heading">#</a></h2>
 <p>To diagnose your data or to illustrate the weather and climate data used in your model, you will likely want to create plots and maps. The following is a very high-level overview; more detailed guides include:</p>
 <dl class="simple myst">
 <dt>📚 <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">An Introduction to Earth and Environmental Data Science</a></dt><dd><p>A great guide to working with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> in general, but also to plotting geographic data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, especially the section on <a class="reference external" href="https://earth-env-data-science.github.io/lectures/mapping_cartopy.html">“Maps in Scientific Python”</a></p>
@@ -735,7 +735,7 @@ R</label><div class="sd-tab-content docutils">
 </dd>
 </dl>
 <section id="dimensional-plotting">
-<h3>2-Dimensional Plotting<a class="headerlink" href="#dimensional-plotting" title="Permalink to this heading">#</a></h3>
+<h3>2-dimensional plotting<a class="headerlink" href="#dimensional-plotting" title="Permalink to this heading">#</a></h3>
 <p>Assuming that your data is loaded and named as it is in the <a class="reference internal" href="#content-loading-netcdf"><span class="std std-ref">section above</span></a>, the following example shows how to plot the time series of a single-pixel of your variable “<code class="docutils literal notranslate"><span class="pre">variable</span></code>”, or an average across all pixels.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-17" name="sd-tab-set-4" type="radio">
@@ -875,7 +875,7 @@ Matlab</label><div class="sd-tab-content docutils">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Weather and Climate Data</p>
+        <p class="prev-next-title">Introduction to weather and climate data</p>
       </div>
     </a>
     <a class="right-next"
@@ -883,7 +883,7 @@ Matlab</label><div class="sd-tab-content docutils">
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Working with Gridded Data</p>
+        <p class="prev-next-title">Working with gridded data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -903,11 +903,11 @@ Matlab</label><div class="sd-tab-content docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-data-format">The NetCDF Data Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-data-format">The NetCDF data format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-code-environment">Your code environment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-contents">NetCDF Contents</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-organization">NetCDF File Organization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-header">The NetCDF Header</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-contents">NetCDF contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netcdf-file-organization">NetCDF file organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-netcdf-header">The NetCDF header</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">Attributes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-netcdf-data">Reading NetCDF data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-subset-of-a-netcdf-file">Loading a subset of a NetCDF file</a></li>
@@ -915,8 +915,8 @@ Matlab</label><div class="sd-tab-content docutils">
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualization-of-climate-and-weather-data">Basic Visualization of Climate and Weather Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-plotting">2-Dimensional Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualization-of-climate-and-weather-data">Basic visualization of climate and weather data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-plotting">2-dimensional plotting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a></li>
 </ul>
 </li>

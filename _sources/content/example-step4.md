@@ -1,4 +1,4 @@
-# Hands-On Exercise, Step 4: Regression results
+# Hands-on exercise, step 4: regression results
 
 ## Necessary libraries
 

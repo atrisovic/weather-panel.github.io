@@ -1,6 +1,6 @@
 (content:gridded-data)=
-# Working with Gridded Data
-## Gridded Data
+# Working with gridded data
+## Gridded data
 
 Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather readings may be biased - for example, rain gauges tend to [underestimate](https://journals.ametsoc.org/view/journals/apme/58/10/jamc-d-19-0049.1.xml) peak rainfall, and air temperature sensors often become [more inaccurate](https://journals.ametsoc.org/view/journals/atot/21/7/1520-0426_2004_021_1025_saeeia_2_0_co_2.xml) at extreme temperatures.
 
@@ -20,14 +20,14 @@ Keep in mind that just because a dataset exists at a certain resolution does not
 
 The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.
 
-## Gridded Weather Data Products
+## Gridded weather data products
 
 **The Interpolation - Reanalysis Spectrum:**
 Historical data products differ by how they ["assimilate"](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) (join observational with model data) or combine data, and how much “additional” information is added beyond (pre-processed) station data. They can be thought of as a rough spectrum ranging from ‘observational’ data products that merely statistically interpolate data into a grid to ‘reanalysis’ products that feed data products into a sort of climate model to produce a more complete set of variables. Some datasets are observational but include topographic and other physical information in their statistical methods, while some reanalysis datasets use pure model output for only some variables.
 
 Both ends of their spectrum have tradeoffs, and generalizable statements about these tradeoffs are hard to make because of differences in methodologies. The following are a few simplified rules of thumb:
 
-### “Observational” / Interpolated Datasets
+### “Observational” / interpolated datasets
 Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”), HadCrut4, PRISM, CHIRPS etc.
 
 - Observations (from weather stations, satellites, etc.) are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)
@@ -51,7 +51,7 @@ Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (a
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/global-temperature-data-sets-overview-comparison-table) on temperature datasets.
 ```
 
-### Reanalysis Datasets
+### Reanalysis datasets
 
 Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 
@@ -79,21 +79,21 @@ Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.
 See also UCAR's Model Data Guide [summary](https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables) on reanalyses.
 ```
 
-### Regional Datasets
+### Regional datasets
 Observational datasets exist with both global coverage (e.g., GISTEMP, HadCRUT, etc.) or regional coverage (e.g., PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g., the discussion in [Dinku et al. 2019](http://www.sciencedirect.com/science/article/pii/B9780128159989000075)). 
 
-### Satellite Data
+### Satellite data
 Much of our observations for entire classes of variables (clouds, land surface characteristics such as NDVI, etc.), or over regions with sparse data coverage, comes from satellites. In their raw form, these data often are complex to work with; their spatiotemporal coverage is limited to when satellites pass overhead, their grids are often unconventional, and much preprocessing needs to be done to translate sensor outputs to usable data. When new satellites come online to replace older instruments, data need to be recalibrated, and spurious jumps may occur. However, oftentimes these data are pre-processed and assimilated into gridded datasets - for example, the CHIRPS rainfall dataset uses the TRMM satellite dataset as an input. Note that even for variables such as [NDVI](https://climatedataguide.ucar.edu/climate-data/ndvi-normalized-difference-vegetation-index-noaa-avhrr) or [cloud cover](https://climatedataguide.ucar.edu/climate-data/cloud-observations-modis) there are gridded datasets that have reprocessed satellite data to be consistent and gridded. If you really need access to raw satellite output, we recommend reaching out to atmopsheric or land researchers with experience working with these data. 
 
 
-### Temporal and Spatial Homogeneity
+### Temporal and spatial homogeneity
 The number and locations of weather stations, the technologies used to collect data, and the methods for processing data change over time. The creators of gridded datasets will have chosen a strategy for dealing with these differences. Some datasets, such as the [IMERG](https://climatedataguide.ucar.edu/climate-data/gpm-global-precipitation-measurement-mission) rainfall dataset, provide high resolution data but at the expense of an inhomogenous data record, by using all satellites they can get data from at a given time. Other datasets (such as the temperature uncertainty ensemble of [GISTEMP](https://climatedataguide.ucar.edu/climate-data/global-surface-temperature-data-gistemp-nasa-goddard-institute-space-studies-giss)) emphasize temporal homogeneity to better study long-term trends. 
 
 
 Next, we will get into how to [choose and work with weather data products](content:working-with-data) - but before that, we'd like to leave you with two warnings on using [hydrological variables](content:warning-on-hydrological) and using [station data](content:station-data).
 
 (content:warning-on-hydrological)=
-## A Warning on Hydrological Variables (Precipitation, Humidity, etc.)
+## A Warning on hydrological variables (precipitation, humidity, etc.)
 
 Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately. Unfortunately, since rain (or lack thereof) can have tremendous impacts on humans, we often have to find ways to work with rain observations.
 
@@ -124,7 +124,7 @@ A useful [Google Scholar](https://scholar.google.com/) search for any product co
 ```
 
 (content:station-data)=
-## A Warning on Using Station Data
+## A warning on using station data
 
 Station data (e.g., [Global Historical Climatology Network (GHCN)](https://climatedataguide.ucar.edu/climate-data/ghcn-global-historical-climatology-network-related-gridded-products) and the Global Summary of the Day) *can* be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. Especially if you are working with urban areas, station data will likely capture the urban heat island effect more accurately than any gridded product. 
 

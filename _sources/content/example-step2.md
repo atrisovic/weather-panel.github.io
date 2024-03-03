@@ -1,4 +1,4 @@
-# Hands-On Exercise, Step 2: Preparing the Demographic Data
+# Hands-on exercise, step 2: preparing the demographic data
 
 ## Thinking about the data-generating process
 

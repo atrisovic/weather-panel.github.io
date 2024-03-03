@@ -1,5 +1,5 @@
 (content:hands-on3)=
-# Hands-On Exercise, Step 3: Aggregating the data
+# Hands-on exercise, step 3: aggregating the data
 
 ## Aggregating the weather data
 

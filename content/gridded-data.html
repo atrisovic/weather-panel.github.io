@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Working with Gridded Data</title>
+    <title>Working with gridded data</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Choosing and Downloading Weather and Climate Data Products" href="working-with-data-product.html" />
-    <link rel="prev" title="Weather and Climate Data Basics" href="netcdfs-and-basic-coding.html" />
+    <link rel="next" title="Choosing and downloading weather and climate data products" href="working-with-data-product.html" />
+    <link rel="prev" title="Weather and climate data basics" href="netcdfs-and-basic-coding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,31 +171,31 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and Climate Data</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Weather and climate data</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to Weather and Climate Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="netcdfs-and-basic-coding.html">Weather and Climate Data Basics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with Gridded Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">Choosing and Downloading Weather and Climate Data Products</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-On Exercise, Step 1: Preparing the Weather Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather-and-climate-data.html">Introduction to weather and climate data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdfs-and-basic-coding.html">Weather and climate data basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with gridded data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working-with-data-product.html">Choosing and downloading weather and climate data products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step1.html">Hands-on exercise, step 1: preparing the weather data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developing a reduced-form specification</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="reduced-form-specification.html">Developing a reduced-form specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functional-forms.html">Functional forms: pros, cons, and methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-On Exercise, Step 2: Preparing the Demographic Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step2.html">Hands-on exercise, step 2: preparing the demographic data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geographical unit data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="geographical-unit-data.html">Generating geographical unit data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working-with-shapefiles.html">Constructing weather averages within spatial units</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weighting-schemes.html">Weighting schemes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-On Exercise, Step 3: Aggregating the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step3.html">Hands-on exercise, step 3: aggregating the data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bringing it all together</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="regression-pointers.html">Some pointers when performing regressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-On Exercise, Step 4: Regression results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-step4.html">Hands-on exercise, step 4: regression results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="suggestions.html">Suggestions for work organization</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
@@ -403,7 +403,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Working with Gridded Data</h1>
+    <h1>Working with gridded data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -413,17 +413,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-data">Gridded Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-weather-data-products">Gridded Weather Data Products</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-interpolated-datasets">“Observational” / Interpolated Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-datasets">Reanalysis Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-datasets">Regional Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellite-data">Satellite Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-spatial-homogeneity">Temporal and Spatial Homogeneity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-data">Gridded data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-weather-data-products">Gridded weather data products</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-interpolated-datasets">“Observational” / interpolated datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-datasets">Reanalysis datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-datasets">Regional datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellite-data">Satellite data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-spatial-homogeneity">Temporal and spatial homogeneity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc">A Warning on Hydrological Variables (Precipitation, Humidity, etc.)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-using-station-data">A Warning on Using Station Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc">A Warning on hydrological variables (precipitation, humidity, etc.)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-using-station-data">A warning on using station data</a></li>
 </ul>
             </nav>
         </div>
@@ -436,9 +436,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="working-with-gridded-data">
-<span id="content-gridded-data"></span><h1>Working with Gridded Data<a class="headerlink" href="#working-with-gridded-data" title="Permalink to this heading">#</a></h1>
+<span id="content-gridded-data"></span><h1>Working with gridded data<a class="headerlink" href="#working-with-gridded-data" title="Permalink to this heading">#</a></h1>
 <section id="gridded-data">
-<h2>Gridded Data<a class="headerlink" href="#gridded-data" title="Permalink to this heading">#</a></h2>
+<h2>Gridded data<a class="headerlink" href="#gridded-data" title="Permalink to this heading">#</a></h2>
 <p>Weather data is traditionally collected at weather stations. Weather stations are imperfect, unevenly distributed point sources of data whose raw output may not be suitable for economic and policy applications. Weather readings may be biased - for example, rain gauges tend to <a class="reference external" href="https://journals.ametsoc.org/view/journals/apme/58/10/jamc-d-19-0049.1.xml">underestimate</a> peak rainfall, and air temperature sensors often become <a class="reference external" href="https://journals.ametsoc.org/view/journals/atot/21/7/1520-0426_2004_021_1025_saeeia_2_0_co_2.xml">more inaccurate</a> at extreme temperatures.</p>
 <p>Weather stations are more likely to be located in wealthier and more populated areas, which makes them less useful for work in developing countries or for non-human variables such as agriculture. Their number and coverage constantly change, making it difficult to compare across regions or time ranges. Despite being the most accurate tool for measuring the current weather at their location, they may hide microclimates nearby.</p>
 <p>Thankfully, a large suite of data products has been developed to mitigate these issues. These generally consist of combining or ‘assimilating’ many data sources and analysis method into a ‘gridded dataset’ - the earth is divided into a latitude x longitude (x height) grid, and one value for a variable (temperature, precipitation, etc.) is provided at each gridpoint and timestep. These data products generally cover either the whole globe (or all global land), or are specialized to a certain region, and provide consistent coverage at each grid point location.</p>
@@ -454,12 +454,12 @@ document.write(`
 <p>The next section will briefly introduce how these products are generated, how to choose between them, and best practices for using “historical” data.</p>
 </section>
 <section id="gridded-weather-data-products">
-<h2>Gridded Weather Data Products<a class="headerlink" href="#gridded-weather-data-products" title="Permalink to this heading">#</a></h2>
+<h2>Gridded weather data products<a class="headerlink" href="#gridded-weather-data-products" title="Permalink to this heading">#</a></h2>
 <p><strong>The Interpolation - Reanalysis Spectrum:</strong>
 Historical data products differ by how they <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables">“assimilate”</a> (join observational with model data) or combine data, and how much “additional” information is added beyond (pre-processed) station data. They can be thought of as a rough spectrum ranging from ‘observational’ data products that merely statistically interpolate data into a grid to ‘reanalysis’ products that feed data products into a sort of climate model to produce a more complete set of variables. Some datasets are observational but include topographic and other physical information in their statistical methods, while some reanalysis datasets use pure model output for only some variables.</p>
 <p>Both ends of their spectrum have tradeoffs, and generalizable statements about these tradeoffs are hard to make because of differences in methodologies. The following are a few simplified rules of thumb:</p>
 <section id="observational-interpolated-datasets">
-<h3>“Observational” / Interpolated Datasets<a class="headerlink" href="#observational-interpolated-datasets" title="Permalink to this heading">#</a></h3>
+<h3>“Observational” / interpolated datasets<a class="headerlink" href="#observational-interpolated-datasets" title="Permalink to this heading">#</a></h3>
 <p>Examples: GISTEMP, GHCN, Wilmot and Matsuura (aka “UDel”), Berkeley Earth (aka “BEST”), HadCrut4, PRISM, CHIRPS etc.</p>
 <ul class="simple">
 <li><p>Observations (from weather stations, satellites, etc.) are statistically interpolated into a grid with little or no physical information added (though topography and - less commonly - wind speed are occasionally included)</p></li>
@@ -500,7 +500,7 @@ Weaknesses</div>
 </div>
 </section>
 <section id="reanalysis-datasets">
-<h3>Reanalysis Datasets<a class="headerlink" href="#reanalysis-datasets" title="Permalink to this heading">#</a></h3>
+<h3>Reanalysis datasets<a class="headerlink" href="#reanalysis-datasets" title="Permalink to this heading">#</a></h3>
 <p>Examples: ERA-INTERIM, ERA5, JRA-55, MERRA-2, NCEP2 (outdated), etc.</p>
 <ul class="simple">
 <li><p>Observational data are combined with climate models to produce a full set of atmospheric variables</p></li>
@@ -542,21 +542,21 @@ Weaknesses</div>
 </div>
 </section>
 <section id="regional-datasets">
-<h3>Regional Datasets<a class="headerlink" href="#regional-datasets" title="Permalink to this heading">#</a></h3>
+<h3>Regional datasets<a class="headerlink" href="#regional-datasets" title="Permalink to this heading">#</a></h3>
 <p>Observational datasets exist with both global coverage (e.g., GISTEMP, HadCRUT, etc.) or regional coverage (e.g., PRISM in North America, TRMM in the tropics, etc.). Global datasets attempt to build a self-consistent database spanning the whole globe, and are therefore more likely to have sparser data coverage in specific regions - both as a logistical limitation, but also to ensure data pre-processing is as standardized as possible. Regional datasets may provide higher-resolution coverage and more specialized methodologies by incorporating local climatological knowledge or data sources that are not publicly available or parsable by global datasets (see e.g., the discussion in <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/B9780128159989000075">Dinku et al. 2019</a>).</p>
 </section>
 <section id="satellite-data">
-<h3>Satellite Data<a class="headerlink" href="#satellite-data" title="Permalink to this heading">#</a></h3>
+<h3>Satellite data<a class="headerlink" href="#satellite-data" title="Permalink to this heading">#</a></h3>
 <p>Much of our observations for entire classes of variables (clouds, land surface characteristics such as NDVI, etc.), or over regions with sparse data coverage, comes from satellites. In their raw form, these data often are complex to work with; their spatiotemporal coverage is limited to when satellites pass overhead, their grids are often unconventional, and much preprocessing needs to be done to translate sensor outputs to usable data. When new satellites come online to replace older instruments, data need to be recalibrated, and spurious jumps may occur. However, oftentimes these data are pre-processed and assimilated into gridded datasets - for example, the CHIRPS rainfall dataset uses the TRMM satellite dataset as an input. Note that even for variables such as <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/ndvi-normalized-difference-vegetation-index-noaa-avhrr">NDVI</a> or <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/cloud-observations-modis">cloud cover</a> there are gridded datasets that have reprocessed satellite data to be consistent and gridded. If you really need access to raw satellite output, we recommend reaching out to atmopsheric or land researchers with experience working with these data.</p>
 </section>
 <section id="temporal-and-spatial-homogeneity">
-<h3>Temporal and Spatial Homogeneity<a class="headerlink" href="#temporal-and-spatial-homogeneity" title="Permalink to this heading">#</a></h3>
+<h3>Temporal and spatial homogeneity<a class="headerlink" href="#temporal-and-spatial-homogeneity" title="Permalink to this heading">#</a></h3>
 <p>The number and locations of weather stations, the technologies used to collect data, and the methods for processing data change over time. The creators of gridded datasets will have chosen a strategy for dealing with these differences. Some datasets, such as the <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/gpm-global-precipitation-measurement-mission">IMERG</a> rainfall dataset, provide high resolution data but at the expense of an inhomogenous data record, by using all satellites they can get data from at a given time. Other datasets (such as the temperature uncertainty ensemble of <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/global-surface-temperature-data-gistemp-nasa-goddard-institute-space-studies-giss">GISTEMP</a>) emphasize temporal homogeneity to better study long-term trends.</p>
 <p>Next, we will get into how to <a class="reference internal" href="working-with-data-product.html#content-working-with-data"><span class="std std-ref">choose and work with weather data products</span></a> - but before that, we’d like to leave you with two warnings on using <a class="reference internal" href="#content-warning-on-hydrological"><span class="std std-ref">hydrological variables</span></a> and using <a class="reference internal" href="#content-station-data"><span class="std std-ref">station data</span></a>.</p>
 </section>
 </section>
 <section id="a-warning-on-hydrological-variables-precipitation-humidity-etc">
-<span id="content-warning-on-hydrological"></span><h2>A Warning on Hydrological Variables (Precipitation, Humidity, etc.)<a class="headerlink" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc" title="Permalink to this heading">#</a></h2>
+<span id="content-warning-on-hydrological"></span><h2>A Warning on hydrological variables (precipitation, humidity, etc.)<a class="headerlink" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc" title="Permalink to this heading">#</a></h2>
 <p>Precipitation is a special beast. It is spatiotemporally highly heterogeneous (it can rain a lot in one place, and not rain at all on the other side of the hill, or an hour or a minute later) and difficult to measure accurately. Unfortunately, since rain (or lack thereof) can have tremendous impacts on humans, we often have to find ways to work with rain observations.</p>
 <p>Unlike temperature, which is relatively uniform spatiotemporally and can be interpolated with a relatively high degree of confidence, precipitation data is very difficult to interpolate and requires a more sophisticated understanding of regional precipitation patterns to assimilate into gridded products. Consequently, gridded precipitation data should be used with <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/atmospheric-reanalysis-overview-comparison-tables">“extreme caution”</a>, and its uncertainties should not be underestimated.</p>
 <p>Even ‘raw’ precipitation data from weather stations and rain gauges are problematic. Developing a reliable, easily scaled rain gauge network is a difficult task. For example, a common type of rain gauge, the ‘tipping bucket’, only records rain in discrete intervals (when the bucket fills and subsequently ‘tips’), and therefore could record a rainstorm if a drizzle tips an already-full bucket. In rare cases, tipping buckets stationed in remote areas may be stuck in the “tipped” position for some time before anyone notices or can repair them.</p>
@@ -581,7 +581,7 @@ Weaknesses</div>
 </div>
 </section>
 <section id="a-warning-on-using-station-data">
-<span id="content-station-data"></span><h2>A Warning on Using Station Data<a class="headerlink" href="#a-warning-on-using-station-data" title="Permalink to this heading">#</a></h2>
+<span id="content-station-data"></span><h2>A warning on using station data<a class="headerlink" href="#a-warning-on-using-station-data" title="Permalink to this heading">#</a></h2>
 <p>Station data (e.g., <a class="reference external" href="https://climatedataguide.ucar.edu/climate-data/ghcn-global-historical-climatology-network-related-gridded-products">Global Historical Climatology Network (GHCN)</a> and the Global Summary of the Day) <em>can</em> be useful in policy and economic applications, and has been frequently used by especially older studies in the field. It provides a high degree of accuracy in areas of high station density, which generally corresponds to areas with a higher population density and a higher income level. Especially if you are working with urban areas, station data will likely capture the urban heat island effect more accurately than any gridded product.</p>
 <p>However, station data can’t be seen as the ‘true’ weather either; assumptions and calibration methodologies affect data here as well (see e.g., <a class="reference external" href="https://journals.ametsoc.org/doi/full/10.1175/BAMS-D-14-00226.1">Parker 2015</a>), some variables remain rather uncertain, and the influence of microclimates even in close proximity to stations shouldn’t be underestimated (think for example the Greater Los Angeles region, where temperature can vary up to 35 F between the inland valleys and the coast).</p>
 <div class="warning admonition">
@@ -627,7 +627,7 @@ Weaknesses</div>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Weather and Climate Data Basics</p>
+        <p class="prev-next-title">Weather and climate data basics</p>
       </div>
     </a>
     <a class="right-next"
@@ -635,7 +635,7 @@ Weaknesses</div>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Choosing and Downloading Weather and Climate Data Products</p>
+        <p class="prev-next-title">Choosing and downloading weather and climate data products</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -655,17 +655,17 @@ Weaknesses</div>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-data">Gridded Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-weather-data-products">Gridded Weather Data Products</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-interpolated-datasets">“Observational” / Interpolated Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-datasets">Reanalysis Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-datasets">Regional Datasets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellite-data">Satellite Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-spatial-homogeneity">Temporal and Spatial Homogeneity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-data">Gridded data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridded-weather-data-products">Gridded weather data products</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-interpolated-datasets">“Observational” / interpolated datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reanalysis-datasets">Reanalysis datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regional-datasets">Regional datasets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellite-data">Satellite data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-spatial-homogeneity">Temporal and spatial homogeneity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc">A Warning on Hydrological Variables (Precipitation, Humidity, etc.)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-using-station-data">A Warning on Using Station Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-hydrological-variables-precipitation-humidity-etc">A Warning on hydrological variables (precipitation, humidity, etc.)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-warning-on-using-station-data">A warning on using station data</a></li>
 </ul>
   </nav></div>
 

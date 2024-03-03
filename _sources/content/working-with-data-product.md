@@ -1,5 +1,5 @@
 (content:working-with-data)=
-# Choosing and Downloading Weather and Climate Data Products
+# Choosing and downloading weather and climate data products
 
 The following are incredibly useful resources to keep in mind while working with weather data:
 
@@ -24,7 +24,7 @@ Generally, it's good practice to first research which data products are appropri
 The answers to the first two questions above are easily found on the website of each dataset. The third question is more complex - the [UCAR Climate Data Guide](https://climatedataguide.ucar.edu) introduced above is a good first place to look. A [Google Scholar](https://scholar.google.com/) search of the form `[data product name] validation OR evaluation OR bias OR uncertainty` may be useful as well. 
 
 (content:best-and-chirps)=
-## Getting Started with an Observational Data Product: BEST and CHIRPS
+## Getting started with an observational data product: BEST and CHIRPS
 
 Say you're looking at agriculture in Ethiopia. You would like both temperature and precipitation data (remember the [warning on hydrological variables](content:warning-on-hydrological)), and would like to use observational datasets. You consider BEST for temperature due to their daily output and CHIRPS, a hybrid station-satellite data product, for precipitation because you found [literature](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/qj.3244) specifically examining its biases in your region of interest. 
 
@@ -56,7 +56,7 @@ Most weather products will require some bureaucracy (creating accounts, signing 
 These datasets are stored in different geographical grids and will need to be regridded to a common grid, using tools like `xesmf` in Python. See also [weighting schemes](weighting-schemes). 
 
 (content:working-with-era5)=
-## Getting Started with a Reanalysis Data Product: ERA-5
+## Getting started with a reanalysis data product: ERA-5
 
 Say you’re studying heat waves in the Sahel. Weather station data is low, so you need a gridded data product. You consider ERA5, the most advanced modern reanalysis data product as of 2019, recently released by the [European Centre for Medium-Range Weather Forecasting (ECMWF)](https://www.ecmwf.int/) (which incidentally also produces the world’s most respected hurricane forecast model).
 
@@ -96,7 +96,7 @@ Many datasets, especially those from smaller institutions, will not give up thei
 Climate and weather data can be massive. For example, the full, hourly, global record of a set of 9 commonly-used near-surface variables in ERA5 (including temperature and preciptiation) comes out to roughly 7 TB of disk space in total. Consequently, data products tend to be saved in smaller chunks, or allow for subsetting before downloading. Depending on the scale of your analysis, you will likely need additional storage beyond your personal machine, on external servers, for example. More recently, some datasets have also been made available on cloud servers such as [pangeo](https://pangeo-forge.org/catalog) or [Google Earth Engine](https://www.ecmwf.int/en/newsletter/162/news/era5-reanalysis-data-available-earth-engine). 
 ```
 
-## Thinking Ahead to Climate Projections
+## Thinking ahead to climate projections
 
 Research linking social outcomes to weather variations often aim to project results into the future to estimate the impact of climate change on their variable of interest. We have chosen (at least for now) not to expand this guide to include information on climate projection because of its immense complexity. Oftentimes a more sophisticated understanding of how models work and their uncertainties is needed to avoid underestimating propagated uncertainties in your final estimates. Even more so than with weather data products, there is no *right* or *correct* climate model, or group of models to use (see e.g., [Knutti 2010](https://doi.org/10.1007/s10584-010-9800-2) or [Collins 2017](https://doi.org/10.1002/2017GL073370). Emissions scenarios, the response of the models to emissions scenarios, intermodel variability, and *intra*-model variability all add to the uncertainty in your projection, and their relative strength may depend on the timescale and aims of your study. 
 
@@ -106,7 +106,7 @@ To get started thinking about incorporating changes in climate into your analysi
 
 However, if you plan to project results into the future, you can start thinking about its logistics now. Climate data comes from imperfect models whose raw output generally has to be "bias-corrected" before being used in econometric or policy research contexts. Bias-correction involves using information from a weather dataset to inform the output of a climate model, either by applying model changes to the weather data (so-called "delta-method" projection) or by adjusting the model output by applying a historical difference between the model and weather data to the future model output. We won't go into details about these methods (like everything in this field, they have their strengths and weaknesses), but you should generally use data that has been bias-corrected to the same weather data set you are using to inform your econometric model. Oftentimes this bias-correction is still conducted by the end user themselves, but some pre-bias-corrected climate projections exist. For example, NASA's [NEX-GDDP](https://doi.org/10.7917/OFSG3345) dataset is bias-corrected to the [Global Meteorological Forcing Dataset (GMFD) for Land Surface Modeling](https://doi.org/10.5065/JV89-AH11) historical dataset.
 
-## A Quick Summarizing Note
+## A quick summarizing note
 
 This process may seem overwhelming, especially given the large variety of data products that exist, and the sometimes rather opaque processes for figuring out what works best.
 
