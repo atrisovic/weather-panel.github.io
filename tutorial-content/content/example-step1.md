@@ -38,7 +38,7 @@ We strongly recommend that you homogenize all your weather and climate data into
 ## Filesystem organization
 Please skim through the section on [code and data organization](content:code-organization) before beginning the hands-on exercise. 
 
-For the rest of this section, we will assume you are working from a directory structure similar to what is introduced there. Specifically, we assume you will have created a folder called `../sources/climate_data/`, relative to your working directory, in which to store raw climate data. 
+For the rest of this section, we will assume you are working from a directory structure similar to what is introduced there. Specifically, we assume you will have created a folder called `../data/climate_data/`, relative to your working directory, in which to store raw climate data. 
 
 ## Downloading the data 
 
@@ -95,6 +95,9 @@ ds
 ds['time'] = (
     ('time'),dt.datetime(1980,1,1)+np.arange(0,ds.dims['time'])*dt.timedelta(days=1))
 
+# Rename longitude/latitude to be a little spiffier to work with, and better
+# match standard naming practices in climate data
+ds = ds.rename({'longitude':'lon','latitude':'lat'})
 
 ```
 ````
@@ -130,7 +133,9 @@ _anomaly_; the actual temperature is formed by adding it to the
 accounts for days 1:365 of the year, and ignores leap days (which the
 `temperature` variable does not). This section doubles the climatology
 for Feb 28th to also work on Feb 29th, and creates a `tas` variable
-that's the `climatology` + `temperature`.
+that's the `climatology` + `temperature`. (`tas` as a variable name 
+refers to "near-Surface Air Temperature", or temperature at
+some reference height, usually 2 meters above the surface.)
 
 `````{tab-set}
 ````{tab-item} R
@@ -190,13 +195,13 @@ Using the extreme points of the continental United States (see e.g., [here](http
 `````{tab-set}
 ````{tab-item} R
 ```{code-block} R
-longitude <- ncvar_get(nc, 'longitude')
-latitude <- ncvar_get(nc, 'latitude')
+lon <- ncvar_get(nc, 'longitude')
+lat <- ncvar_get(nc, 'latitude')
 
 latlims = c(23, 51)
 lonlims <- c(-126,-65)
 
-tas2 <- tas[longitude >= lonlims[1] & longitude <= lonlims[2], latitude >= latlims[1] & latitude <= latlims[2],]
+tas2 <- tas[lon >= lonlims[1] & lon <= lonlims[2], lat >= latlims[1] & lat <= latlims[2],]
 ```
 ````
 
@@ -254,19 +259,21 @@ from matplotlib import pyplot as plt
 # commonly-used projection for continental USA maps
 ax = plt.subplot(projection=ccrs.AlbersEqualArea(central_longitude=-96))
 
-# Get average summer temperatures
-ds_summer = ds.isel(time=(ds.time.dt.season=='JJA'))
+# Get average summer temperatures, by using boolean subsetting to 
+# subset time to just the months June, July, and August, and then 
+# taking the average over all JJAs 
+ds_summer = ds.isel(time=(ds.time.dt.season=='JJA')).mean('time')
 
 # Plot contour map of summer temperatures, making sure to set the 
 # transform of the data itself (PlateCarree() tells the code to intepret
 # x values as longitude, y values as latitude, so it can transform 
 # the data to the AlbersEqualArea projection)
-ds.tas.plot.contourf(transform=ccrs.PlateCarree(),levels=21) 
+ds_summer.tas.plot.contourf(transform=ccrs.PlateCarree(),levels=21) 
 
 # Add coastlines, for reference
 ax.coastlines()
 ```
-Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly? 
+Does the map look reasonable to you? For example, do you see temperatures change abruptly at the coasts? Did you subset the data correctly? Why do you think there are a few 'missing' pixels in the northern USA (remember, this dataset is land-only)? 
 ````
 
 ````{tab-item} Matlab
@@ -314,7 +321,7 @@ the CMIP file system standards, for ease of future processing.
 ````{tab-item} R
 ```{code-block} R
 # Set output filename of your pre-processed file
-output_fn <- "../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc"
+output_fn <- "../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc"
 
 # Define dimensions
 dimlon <- ncdim_def("lon", "degrees_east", longitude[longitude >= lonlims[1] & longitude <= lonlims[2]], longname='longitude')
@@ -343,7 +350,7 @@ nc_close(ncnew)
 ````{tab-item} Python
 ```{code-block} python
 # Set output filename of your pre-processed file
-output_fn = '../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc'
+output_fn = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc'
 
 # Add an attribute mentioning how this file was created
 # This is good practice, especially for NetCDF files, 
@@ -360,7 +367,7 @@ ds.to_netcdf(output_fn)
 ````{tab-item} Matlab
 ```{code-block} matlab
 % Set output filename of your pre-processed file
-fn_out = '../sources/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc';
+fn_out = '../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc';
 
 % Write temperature data to netcdf 
 nccreate(fn_out,'tas','Dimensions',{'lon',size(tas,1),'lat',size(tas,2),'time',size(tas,3)})
