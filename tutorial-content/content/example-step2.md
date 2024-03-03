@@ -11,8 +11,8 @@ It is also non-linear. Both cold and hot weather kills people,
 relative to deaths at moderate (pleasant) temperatures. We can model
 this with a quadratic relationship. We need to choose some baseline
 temperature for comparison purposes. For our example, we will use 20
-C. The dose-response function will describe excess mortality, relative
-to a day with an average temperature of 20 C.
+$^{\circ}$C. The dose-response function will describe excess mortality, relative
+to a day with an average temperature of 20 $^{\circ}$C.
 
 We also need to weight our pixel data. We want the dose-response
 function to be representative of a random individual, not a random
@@ -25,7 +25,7 @@ weather and outcome data. The sum over daily death data is annual
 death data, which is what we have.
 
 Then, we want to transform the weather data by creating two predictor
-variables, for the linear and quadratic terms relative to 20 C.
+variables, for the linear and quadratic terms relative to 20 $^{\circ}$C.
 
 $$X_{1, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t} - 20)$$
 $$X_{2, i, y} = \sum_{t \in \text{Year}(y)} \sum_{p \in \Theta(i)} w_p (T_{p i t}^2 - 20^2)$$
