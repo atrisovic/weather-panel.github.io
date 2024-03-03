@@ -485,7 +485,10 @@ on to the next column.</p>
 to generate a collection of points at the center of each grid
 cell. This approach can be used without generating an <span class="math notranslate nohighlight">\(A\)</span> matrix,
 but the matrix method improves efficiency.</p>
-<p>As an example, you generate these points like so:</p>
+<p>As an example, suppose that you have a grid with a longitudinal (zonal)
+dimension from <code class="docutils literal notranslate"><span class="pre">longitude0</span></code> to <code class="docutils literal notranslate"><span class="pre">longitude1</span></code> and a latitudinal (meridional) dimension
+from <code class="docutils literal notranslate"><span class="pre">latitude0</span></code> to <code class="docutils literal notranslate"><span class="pre">latitude1</span></code>, with equal spacing of <code class="docutils literal notranslate"><span class="pre">gridwidth</span></code> for
+both dimensions. You can generate a full list of grid cell points like so:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-3">
@@ -511,6 +514,10 @@ analysis and data manipulation.</p>
 </div>
 </div>
 </div>
+<p>Often you can get the longitude and latitude values for the grid cells
+directly from your weather dataset. In this case, replace the steps to
+generate <code class="docutils literal notranslate"><span class="pre">longitudes</span></code> and <code class="docutils literal notranslate"><span class="pre">latitudes</span></code> variables by hand with directly
+loading those values.</p>
 <p>Now, you can iterate through each region, and get a list of all of the
 points within each region. Here’s how you would do that with the
 <code class="docutils literal notranslate"><span class="pre">PBSmapping</span></code> library in R:</p>
