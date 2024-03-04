@@ -525,9 +525,10 @@ order of rows differs between python and R.</p>
 <li><p>Where reasonably researchers can disagree about the right trend specification, generate tables that show several specifications.  Typical sensitivity tests include more flexible fixed effects and functional forms and the inclusion of other weather variables. The R^2 values will help you understand how much of the variation you are capturing, but it is important to look at the resulting fit to decide if the regression is doing what you expect.</p></li>
 </ul>
 <p>In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.</p>
-<p>Here is our specification:
-$<span class="math notranslate nohighlight">\(M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t\)</span><span class="math notranslate nohighlight">\(
-for mortality in state \)</span>s<span class="math notranslate nohighlight">\(, county \)</span>i<span class="math notranslate nohighlight">\(, year \)</span>t$.</p>
+<p>Here is our specification:</p>
+<div class="math notranslate nohighlight">
+\[M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t\]</div>
+<p>for mortality in state <span class="math notranslate nohighlight">\(s\)</span>, county <span class="math notranslate nohighlight">\(i\)</span>, year <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Note that since we do not control for precipitation, temperature in
 this case includes correlated effects of rainfall. As a result, it is
 not ideal for future projections.</p>
