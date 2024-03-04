@@ -98,7 +98,9 @@ For fixed effects, we use county fixed effects, to account for unobserved consta
 In our case, we see gradual shifts which are captured fairly well by state-level trends. We also only have 10 years of data, but with more data, more saturated fixed effects should be explored.
 
 Here is our specification:
+
 $$M_{sit} = \beta_1 T_{it} + \beta_2 T_{it}^2 + \gamma_i + \delta_s t$$
+
 for mortality in state $s$, county $i$, year $t$.
 
 Note that since we do not control for precipitation, temperature in
