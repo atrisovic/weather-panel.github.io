@@ -319,8 +319,8 @@ the CMIP file system standards, for ease of future processing.
 output_fn <- "../data/climate_data/tas_day_BEST_historical_station_19800101-19891231.nc"
 
 # Define dimensions
-dimlon <- ncdim_def("lon", "degrees_east", longitude[longitude >= lonlims[1] & longitude <= lonlims[2]], longname='longitude')
-dimlat <- ncdim_def("lat", "degrees_north", latitude[latitude >= latlims[1] & latitude <= latlims[2]], longname='latitude')
+dimlon <- ncdim_def("lon", "degrees_east", lon[lon >= lonlims[1] & lon <= lonlims[2]], longname='longitude')
+dimlat <- ncdim_def("lat", "degrees_north", lat[lat >= latlims[1] & lat <= latlims[2]], longname='latitude')
 dimtime <- ncdim_def("time", "days since 1980-01-01 00:00:00", as.numeric(time - as.Date("1980-01-01")),
                      unlim=T, calendar="proleptic_gregorian")
 
@@ -331,11 +331,6 @@ vartas <- ncvar_def("tas", "C", list(dimlon, dimlat, dimtime), NA, longname="tem
 ncnew <- nc_create(output_fn, vartas)
 # Add the variable data
 ncvar_put(ncnew, vartas, tas2)
-
-# Add an attribute mentioning how this file was created
-# This is good practice, especially for NetCDF files, 
-# whose metadata can help you keep track of your workflow. 
-ncvar_put(ncnew,0,'origin_script','preprocess_best.R')
 
 # Close file
 nc_close(ncnew)
