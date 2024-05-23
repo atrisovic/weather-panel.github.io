@@ -16,6 +16,13 @@ html:
   use_issues_button: true
   use_edit_page_button: true
   favicon: content/images/favicon.png
+  extra_footer: |
+    <p>
+    &copy; 2020 - This work is licensed under CC-BY-SA-4.0 <br>
+    </p>
+sphinx:
+  config:
+    html_show_copyright: false
 
 parse:
   myst_enable_extensions:
