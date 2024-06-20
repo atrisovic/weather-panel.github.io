@@ -49,6 +49,15 @@ Below are some common data sources for various weighting schemes.
     - Also consider [gridded land use datasets](https://www.atmos.illinois.edu/~meiyapp2/datasets.htm)
 - 📚  Look at the [IRI Data Library](https://iridl.ldeo.columbia.edu/) for a large variety of datasets, available in any format.
 
+You can get ADM0 and ADM1 pre-aggregated data, weighted according to a
+number of schemes (e.g., population, nightlights, cropland), from the
+[Weighted Climate Data
+Repository](https://weightedclimatedata.streamlit.app/).
+
+If you need to generate your own aggregations, either of different
+weather variables/sources or other weighting schemes, the steps below
+provide a template.
+
 (content:working-with-gridded-data)=
 ## Working with gridded weighting data
 
