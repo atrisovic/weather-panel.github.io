@@ -24,6 +24,11 @@ jobs:
       run: |
         jupyter-book build tutorial-content/ 
 
+    - name: Add Redirect
+      run: |
+        cd ./tutorial-content/_build/html
+        echo '<html><head><meta http-equiv="Refresh" content="0; url=https://climateestimate.net/content/getting-started.html"></head><body><p>Page has moved to <a href="https://climateestimate.net/content/getting-started.html">https://climateestimate.net/content/getting-started.html</a></p></body></html>' > getting-started.html
+
     - name: Push to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with: 
