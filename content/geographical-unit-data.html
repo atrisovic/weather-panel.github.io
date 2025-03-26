@@ -536,7 +536,7 @@ R</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
 Python</label><div class="sd-tab-content docutils">
 <p>Shapefiles can be opened with Python packages in a few different ways:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fiona</span>
 <span class="n">shape</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="n">shape</span><span class="o">.</span><span class="n">schema</span>
 <span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="s1">&#39;LineString&#39;</span><span class="p">,</span> \
@@ -544,12 +544,12 @@ Python</label><div class="sd-tab-content docutils">
  
 <span class="c1"># or</span>
  
-<span class="kn">import</span> <span class="nn">shapefile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapefile</span>
 <span class="n">shape</span> <span class="o">=</span> <span class="n">shapefile</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
  
 <span class="c1"># or</span>
  
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="n">shapefile</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;my_shapefile.shp&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">shapefile</span><span class="p">)</span>
 </pre></div>

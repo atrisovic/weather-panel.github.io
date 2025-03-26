@@ -516,7 +516,7 @@ and modeling of spatial data.</p>
 </input><label class="sd-tab-label" for="sd-tab-item-1">
 Python</label><div class="sd-tab-content docutils">
 <p>You will need to install the <code class="docutils literal notranslate"><span class="pre">rioxarray</span></code> package, using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rioxarray</span></code>, to open the <code class="docutils literal notranslate"><span class="pre">.bil</span></code> files.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rioxarray</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;../data/pcount/usap90ag.bil&quot;</span><span class="p">)</span>
 <span class="n">rr</span> <span class="o">=</span> <span class="n">rr</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -545,10 +545,11 @@ Python</label><div class="sd-tab-content docutils">
 <h2>Downloading the mortality data<a class="headerlink" href="#downloading-the-mortality-data" title="Permalink to this heading">#</a></h2>
 <p>The Compressed Mortality File (CMF) provides comprehensive,
 county-scale mortality data for the United States. The data through
-1988 is publically available, so we will use this for our analysis.</p>
+1988 is publically available, now on the CDC archive, so we will use
+this for our analysis.</p>
 <ol class="arabic simple">
 <li><p>Go to the CMF information page,
-<a class="reference external" href="https://www.cdc.gov/nchs/data_access/cmf.htm">https://www.cdc.gov/nchs/data_access/cmf.htm</a>.</p></li>
+<a class="reference external" href="https://archive.cdc.gov/#/details?url=https://www.cdc.gov/nchs/data_access/cmf.htm">https://archive.cdc.gov/#/details?url=https://www.cdc.gov/nchs/data_access/cmf.htm</a>.</p></li>
 <li><p>Under “Data Availability”, find the mortality and population files
 for 1979 - 1988, and download these.</p></li>
 <li><p>Unzip these files, and place the resulting text files,
@@ -611,7 +612,7 @@ R</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-3">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="n">df_mort</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/cmf/Mort7988.txt&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>
 
 <span class="c1"># parse input</span>
