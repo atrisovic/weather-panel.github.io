@@ -120,10 +120,11 @@ Further details on the use of geographic data are discussed in the next chapter.
 
 The Compressed Mortality File (CMF) provides comprehensive,
 county-scale mortality data for the United States. The data through
-1988 is publically available, so we will use this for our analysis.
+1988 is publically available, now on the CDC archive, so we will use
+this for our analysis.
 
 1. Go to the CMF information page,
-   <https://www.cdc.gov/nchs/data_access/cmf.htm>.
+   <https://archive.cdc.gov/#/details?url=https://www.cdc.gov/nchs/data_access/cmf.htm>.
 2. Under "Data Availability", find the mortality and population files
    for 1979 - 1988, and download these.
 3. Unzip these files, and place the resulting text files,
